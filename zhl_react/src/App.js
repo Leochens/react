@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import MsgItemView from './MsgItem.js'
+import MsgItemView from './MsgItem'
+import WxHeaderView from './WxHeader'
+import TabsView from './Tabs'
+import DialogView from './Dialag'
+
 
 const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
@@ -64,11 +68,14 @@ class App extends Component {
   render() {
     return (
       <div>     
-        <section className="main">·
+        <WxHeaderView></WxHeaderView>
+        <section className="main">
           <ul className="list">
               {this.renderMsgs()}
           </ul>
         </section>
+        <DialogView msg="hello zhl"></DialogView>
+        <TabsView></TabsView>
       </div>
     );
   }
