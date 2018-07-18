@@ -1,28 +1,139 @@
-.App {
+
+
+/**************************************************/
+/**
+    Leochens 2018.7.16
+*/
+
+
+/*General Begin*/
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+ul,li,ol{
+  margin: 0;padding: 0;
+  list-style: none;
+}
+/*General End*/
+
+/*Head Begin*/
+header{
+  padding: 0; 
+  width: 100%;
+  margin: 0;
+  height: 55px;
+  background-color: #303030;
+  position: fixed;
+  top: 0;
+}
+header .title{
+  color: #fff;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 15px;
+}
+.wraper{
+  float: right;
+  margin: 15px;
+}
+header .search,
+header .more{
+  
+  margin-left: 12px;;
+}
+header img{
+  width: 20px;
+  height: 20px;
+}
+/*Head End*/
+
+
+/*Message List Begin*/
+section.main{
+  width: 100%;
+  margin-top: 55px;
+}
+ul.list{
+width: 100%;
+
+}
+
+li.list_item{
+  margin: 0 ;
+  width: 100%;
+  border-bottom: 1px solid #ddd;      /*just set this side of border ENOUGH*/
+  display: flex;
+  align-items: center;
+  height: 65px;
+ 
+}
+li.list_item:hover{
+  background-color: #eee;
+}
+li.list_item span.photo{
+  display: inline-block;
+  width: 65px;
+
+  overflow: hidden;
+  margin: 10px;
+}
+.photo img{
+  width: 100%;height:100%;
+  margin-top: 3px;
+}
+li.list_item span.time{
+  float: right;
+  width:32px;
+  margin:0 20px 0 0;
+  color: #888;
+  font-size: 12px;
+}
+ul.info{
+  display: inline-block;
+  width:90%;
+}
+li.user_name{
+  font-size: 15px;
+  margin-bottom: 5px;
+  font-weight: 520;
+}
+li.content{
+  font-size: 13px;
+  margin-top: 10px;;
+  color: #888;
+}   
+/*Message List End*/
+
+
+/*Tabs Begin*/
+footer{
+  position: fixed;
+  border-top:  1px solid #ddd;
+  width: 100%;
+  height: 60px;
+  bottom: -1px;               /*hack*/
+  background-color: #fff;
+}
+ul.tab{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+}
+li.tab_item{
+ flex: 1;
   text-align: center;
+  color: #888;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.tab_item:hover{
+ 
+  color: green;
 }
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+/*Tabs End*/
+/******************************************************/
