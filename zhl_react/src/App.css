@@ -142,38 +142,47 @@ li.tab_item{
 
 /*Dia Begin*/
 .showPanel{
+
   display: block;
-  position: fixed;
-  bottom: 0;
-
-  width:100%;
-  height: 30%;
-  background-color: #eee;
-
-  z-index: 100;
+  width: 100%;height: 100%;
 
 }
 .hidePanel{
   display: none;
 }
+
 .panel{
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 101;
+
+}
+.panel-item{
   position: absolute;
   bottom: 0;
 
   width:100%;
   height: 30%;
   background-color: #eee;
-
   z-index: 100;
-
 }
-.showPanel .btn{
+
+.btn{
   border: none;
+  font-size: 15px;
+  font-weight: 500;
   width: 100%;
-  height: 25%;
+  height:25%;
 
   background-color: #eee;
   padding: 0;
   margin: 0;
-  
+  outline:none;
+}
+.btn:hover{
+  background-color: #ddd;
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+
 import './App.css';
 
 import MsgItemView from './MsgItem'
 import WxHeaderView from './WxHeader'
 import TabsView from './Tabs'
 import DialogView from './Dialag'
-import TestView from './Test'
+
 
 
 const dyh = require('./img/dyh.png')
@@ -16,74 +17,105 @@ const icon3 = require('./img/u3.jpg')
 
 class App extends Component {
 
-  constructor(props){//Note
-    super(props)  //Note
+  constructor(props) {
+    super(props)  
 
-    this.state = {   //Note
-      messages : [
-        { 
+    this.state = {   
+      messages: [
+        {
           icon: dyh,
-          title:"订阅号",
-          description:"this is a test",
-          time:"11:15",
+          title: "订阅号",
+          description: "this is a test",
+          time: "11:15",
         },
-       { 
-        icon: icon1,
-        title:"Leochens",
-        description:"this is a test",
-        time:"11:15",
-      },
-        { 
-        icon: icon2,
-        title:"Bob",
-        description:"this is a test",
-        time:"11:15"
-      },
-        { 
-        icon: icon3,
-        title:"tee",
-        description:"this is a test",
-        time:"11:15"
-      }
-      ],
-      d_show:true
+        {
+          icon: icon1,
+          title: "Leochens",
+          description: "this is a test",
+          time: "11:15",
+        },
+        {
+          icon: icon2,
+          title: "Bob",
+          description: "this is a test",
+          time: "11:15"
+        },
+        {
+          icon: icon3,
+          title: "tee",
+          description: "this is a test",
+          time: "11:15"
+        },
+        {
+          icon: dyh,
+          title: "订阅号",
+          description: "this is a test",
+          time: "11:15",
+        },
+        {
+          icon: icon1,
+          title: "Leochens",
+          description: "this is a test",
+          time: "11:15",
+        },
+        {
+          icon: icon2,
+          title: "Bob",
+          description: "this is a test",
+          time: "11:15"
+        },
+        {
+          icon: icon3,
+          title: "tee",
+          description: "this is a test",
+          time: "11:15"
+        }
+      ], show: "hidePanel"
     }
-    
-
   }
 
-  renderDialog =()=>{
-    console.log("jjjjj")
-    if(this.state.d_show)
-    {
-      this.state.d_show=false
-      return <DialogView></DialogView>
+  renderDialog = () => {
 
-    }else{
-      this.state.d_show=true
+    if (this.state.show === 'hidePanel') {
+      console.log(this.state.show)
 
+      // this.state.show=false;    区别
+      this.setState({ show: 'showPanel' })
+
+
+    } else {
+      console.log(this.state.show)
+      // this.state.show=true;
+      this.setState({ show: "hidePanel" })
     }
-
   }
-  renderMsgs=()=>{
-   const messageViews =  this.state.messages.map((item,id)=>{
-          return <MsgItemView key={id} item={item} onClick={this.renderDialog}/>
+
+  renderMsgs = () => {
+    const messageViews = this.state.messages.map((item, id) => {
+      return <MsgItemView  key={id} item={item} />
     })
     return messageViews
+
   }
-
-
   render() {
     return (
-      <div onClick={this.renderDialog}>     
+      <div>
         <WxHeaderView></WxHeaderView>
+
         <section className="main">
           <ul className="list">
+            <div onClick={this.renderDialog}>
               {this.renderMsgs()}
+            </div>
           </ul>
         </section>
-      
-        {this.renderDialog}
+
+        <div className={this.state.show}>
+          <div className="panel" onClick={this.renderDialog}>
+            <DialogView ></DialogView>
+          </div>
+        </div>
+
         <TabsView></TabsView>
 
       </div>
