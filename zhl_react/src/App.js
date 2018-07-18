@@ -92,7 +92,10 @@ class App extends Component {
 
   renderMsgs = () => {
     const messageViews = this.state.messages.map((item, id) => {
-      return <MsgItemView  key={id} item={item} />
+      return (
+      <div key={id} onClick={this.renderDialog}>
+        <MsgItemView key={id} item={item}/>
+      </div>)
     })
     return messageViews
 
@@ -104,12 +107,9 @@ class App extends Component {
 
         <section className="main">
           <ul className="list">
-            <div onClick={this.renderDialog}>
               {this.renderMsgs()}
-            </div>
           </ul>
         </section>
-
         <div className={this.state.show}>
           <div className="panel" onClick={this.renderDialog}>
             <DialogView ></DialogView>

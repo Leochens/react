@@ -8,7 +8,6 @@ export default class MsgItem extends Component{   //defualt  just only one
     onMsgClick=()=>{
         const {item} = this.props
         console.log(item)
-        console.log('子')
     }
     render(){
         const {item} = this.props

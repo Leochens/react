@@ -148,6 +148,7 @@ li.tab_item{
 
 }
 .hidePanel{
+  /* animation: fadeOutDown 1s forwards; */
   display: none;
 }
 
