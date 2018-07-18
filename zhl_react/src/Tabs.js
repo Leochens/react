@@ -11,7 +11,7 @@ export default class Tabs extends Component {
     render() {
 
         return (
-            <footer>
+            <footer> 
                 <ul className="tab">
                     <li  className="tab_item">
                         <div>
