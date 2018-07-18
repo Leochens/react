@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
 import MsgItemView from './MsgItem'
 import WxHeaderView from './WxHeader'
 import TabsView from './Tabs'
 import DialogView from './Dialag'
+import TestView from './Test'
 
 
 const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
 const icon2 = require('./img/u2.jpg')
 const icon3 = require('./img/u3.jpg')
+
 
 class App extends Component {
 
@@ -42,40 +44,48 @@ class App extends Component {
         title:"tee",
         description:"this is a test",
         time:"11:15"
-      },
-      ]
+      }
+      ],
+      d_show:true
     }
-  }
-  onItemClick=(message)=>{  //箭头函数  只作用于这个类
-      console.log(message)
-      this.setState({
-        show : true
-      })
-  }
-  // renderDia = ()=>{
-  //   if(this.state.show)
-  //   {
-  //     return <DialogView />                   ///HW
-  //   }
-  // }
+    
 
+  }
+
+  renderDialog =()=>{
+    console.log("jjjjj")
+    if(this.state.d_show)
+    {
+      this.state.d_show=false
+      return <DialogView></DialogView>
+
+    }else{
+      this.state.d_show=true
+
+    }
+
+  }
   renderMsgs=()=>{
    const messageViews =  this.state.messages.map((item,id)=>{
-          return <MsgItemView key={id} item={item} onClick={this.onItemClick}/>
+          return <MsgItemView key={id} item={item} onClick={this.renderDialog}/>
     })
     return messageViews
   }
+
+
   render() {
     return (
-      <div>     
+      <div onClick={this.renderDialog}>     
         <WxHeaderView></WxHeaderView>
         <section className="main">
           <ul className="list">
               {this.renderMsgs()}
           </ul>
         </section>
-        <DialogView msg="hello zhl"></DialogView>
+      
+        {this.renderDialog}
         <TabsView></TabsView>
+
       </div>
     );
   }

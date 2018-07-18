@@ -4,16 +4,11 @@ import './App.css';
 
 
 export default class MsgItem extends Component{   //defualt  just only one
-    onMsgClick=()=>{
-        // const onClick=this.props.onClick
-        // const item = this.props.item
-        const {onClick,item} = this.props   //解构赋值  取值
-        if(onClick)
-        {
-            //if(typeof(onClick)==='function')
-              onClick(item)
-        }
 
+    onMsgClick=()=>{
+        const {item} = this.props
+        console.log(item)
+        console.log('子')
     }
     render(){
         const {item} = this.props

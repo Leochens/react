@@ -137,3 +137,43 @@ li.tab_item{
 }
 /*Tabs End*/
 /******************************************************/
+
+
+
+/*Dia Begin*/
+.showPanel{
+  display: block;
+  position: fixed;
+  bottom: 0;
+
+  width:100%;
+  height: 30%;
+  background-color: #eee;
+
+  z-index: 100;
+
+}
+.hidePanel{
+  display: none;
+}
+.panel{
+  position: absolute;
+  bottom: 0;
+
+  width:100%;
+  height: 30%;
+  background-color: #eee;
+
+  z-index: 100;
+
+}
+.showPanel .btn{
+  border: none;
+  width: 100%;
+  height: 25%;
+
+  background-color: #eee;
+  padding: 0;
+  margin: 0;
+  
+}
