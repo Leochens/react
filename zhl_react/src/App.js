@@ -50,7 +50,13 @@ class App extends Component {
       isActive:false
     }
   }
-
+  unshiftMsg=(newTitle,newDescription)=>{
+    const newMsgs = this.state.messages.slice();
+    newMsgs.unshift({icon:icon2,title:newTitle,description:newDescription,time:"123456"})
+    this.setState({
+      messages:newMsgs
+    })
+  }
   showPanel=()=>{
     this.setState({isActive:!this.state.isActive})
   }
@@ -77,7 +83,7 @@ class App extends Component {
         </section>
 
        <button className="btn">show Panel</button>
-        <PanelView isActive={this.state.isActive} onClick={this.showPanel}></PanelView>
+        <PanelView isActive={this.state.isActive} onClick={this.showPanel} unshiftMsg={this.unshiftMsg}></PanelView>
         <TabsView></TabsView>
 
       </div>
