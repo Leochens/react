@@ -18,6 +18,14 @@ export default class ItemControlPanel extends Component{   //defualt  just only 
         if(upMsg)  upMsg();  //传递给父组件MsgItems 
         this.close();
     }
+    
+    selectDel=()=>{
+        const {delSelectMsg} = this.props;
+        console.log("selectDel in ItemControlPanel")
+        if(delSelectMsg)
+        { delSelectMsg() }
+        this.close();
+    }
     close=()=>{
         const { onClick } = this.props;
         if (onClick) {
@@ -33,7 +41,7 @@ export default class ItemControlPanel extends Component{   //defualt  just only 
             <div className="panel-content">
                <button className="btn panel-btn" onClick={this.upMsg}>置顶</button>
                <button className="btn panel-btn" onClick={this.delMsg}>删除</button>
-               <button className="btn panel-btn">多选删除</button>
+               <button className="btn panel-btn" onClick={this.selectDel}>多选删除</button>
             </div>
             
         </div>

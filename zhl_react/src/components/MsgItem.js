@@ -10,7 +10,8 @@ export default class MsgItem extends Component{   //defualt  just only one
     {
         super(props);
         this.state={
-            itemCtrlIsActive:false
+            itemCtrlIsActive:false,
+          
         }
         const {isUp,item} = this.props
 
@@ -38,6 +39,20 @@ export default class MsgItem extends Component{   //defualt  just only one
         if(upMsg)  upMsg(item.id);  //传递给父组件App
     }
 
+    getRadio(id){
+        const {delectDelIsActive} = this.props;
+        if(delectDelIsActive)  return (
+            <span className="radioFlag-t"><input type="radio" value={id}/></span>
+        )
+    }
+    //多级调用
+
+    delSelectMsg=(id)=>{
+        console.log("delSelectMsg in MsgItem");
+        const {delectDelIsActive,showRadios} = this.props;
+        if(showRadios) showRadios();
+    }
+
     render(){
         const {isUp,item} = this.props
         let upClass ='';
@@ -46,6 +61,7 @@ export default class MsgItem extends Component{   //defualt  just only one
         console.log(this.isUp)
         return  (
                 <li className={"list_item "+upClass} onClick={this.onMsgClick}>
+                {this.getRadio(item.id)}
                   <span className="photo">
                       <img className="pic" src={item.icon} alt=""/>
                   </span>
@@ -59,7 +75,9 @@ export default class MsgItem extends Component{   //defualt  just only one
                     isActive={this.state.itemCtrlIsActive} 
                     onClick={this.showItemCtrlPanel} 
                     delMsg={this.delMsg}
-                    upMsg={this.upMsg}> </ItemControlPanleView>
+                    upMsg={this.upMsg}  
+                    delSelectMsg = {this.delSelectMsg}> 
+                   </ItemControlPanleView>
                 </li>
 
         )

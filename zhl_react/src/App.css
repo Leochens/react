@@ -251,3 +251,24 @@ li.tab_item{
 .panel-input:focus{
   border:1px solid #999;
 }
+
+
+.select-del{
+  width: 100%;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.select-del .btn{
+  background-color: red;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+}
+.radioFlag-t{
+  display: inline-block;
+}
+.radioFlag-f
+{
+  display: none;
+}

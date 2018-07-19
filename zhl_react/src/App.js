@@ -57,14 +57,15 @@ class App extends Component {
           time: "11:15"
         }
       ], 
-      addIsActive:false,
       willUpMsgs:[{
         id:5,
         icon: icon3,
         title: "teesdd",
         description: "this is a test",
         time: "11:15"
-      }]
+      }],
+      addIsActive:false,
+      delectDelIsActive:false
     }
   }
   unshiftMsg=(newTitle,newDescription,newTime)=>{
@@ -82,7 +83,11 @@ class App extends Component {
     const messageViews = this.state.messages.map((item, id) => {
       return (
       <div key={id} onClick={this.renderDialog}>  
-        <MsgItemView key={id} item={item} delMsg={this.delMsg} upMsg={this.upMsg}/>
+        <MsgItemView key={id}  delectDelIsActive={this.state.delectDelIsActive}
+        item={item} 
+        delMsg={this.delMsg} 
+        upMsg={this.upMsg}
+        showRadios={this.showRadios}/>
       </div>)
     })
     return messageViews
@@ -92,7 +97,12 @@ class App extends Component {
     const upMsgs = this.state.willUpMsgs.map((item, id) => {
       return (
       <div key={id} onClick={this.renderDialog}>  
-        <MsgItemView isUp={true} key={id} item={item} delMsg={this.delMsg} upMsg={this.upMsg}/>
+        <MsgItemView isUp={true} delectDelIsActive={this.state.delectDelIsActive}
+        key={id} 
+        item={item} 
+        delMsg={this.delMsg} 
+        upMsg={this.upMsg}
+        showRadios={this.showRadios}/>
       </div>)
     })
     return upMsgs;
@@ -126,7 +136,7 @@ class App extends Component {
     console.log("放入待置顶数组");
 
     let oldUpItems = this.state.willUpMsgs.slice();
-    const newUpItems=oldUpItems.concat(willUpMsgItem);
+    const newUpItems=willUpMsgItem.concat(oldUpItems);  //连接
     this.setState({
       willUpMsgs:newUpItems
     })
@@ -134,7 +144,31 @@ class App extends Component {
     console.log("删除原来数组中的他")
     this.delMsg(id);
   }
+  delSelectMsgs=()=>{
 
+    //
+    
+    this.showRadios();  
+  }
+
+  renderDel=()=>{
+    if(this.state.delectDelIsActive)
+    {
+      return(
+        <div className="select-del">
+          <button className="btn" onClick={this.delSelectMsgs}>select del button</button>
+          &nbsp;
+          <button className="btn" onClick={this.showRadios}>cancle</button>
+        </div>
+      );
+    }else return null;
+  }
+
+  showRadios=()=>{
+    this.setState({
+      delectDelIsActive:!this.state.delectDelIsActive
+    })
+  }
   render() {
     return (
       <div>
@@ -149,8 +183,10 @@ class App extends Component {
 
      
         <PanelView isActive={this.state.addIsActive} onClick={this.showAddPanel} unshiftMsg={this.unshiftMsg}></PanelView>
-        <TabsView></TabsView>
 
+        {this.renderDel()}
+
+        <TabsView></TabsView>
       </div>
     );
   }
