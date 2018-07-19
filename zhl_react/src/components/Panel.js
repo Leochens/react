@@ -13,13 +13,32 @@ export default class Panel extends Component {
     addMsgOnClick=()=>{
         const newTitle = this.refs.title.value;   //取得值
         const newDescript = this.refs.decription.value;
-        const {unshiftMsg} = this.props;
+        const newTime = this.refs.time.defaultValue;
+        const {onClick,unshiftMsg} = this.props;
+        if(!newTitle||!newDescript||!newTime)
+        {
+            alert("数据输入错误,请各数据段是否填写");
+            if(onClick)
+            {
+                onClick();
+            }
+            return null;
+        }
         // console.log(newTitle+' '+newDescript)
         if(unshiftMsg)
         {
-            unshiftMsg(newTitle,newDescript)
+            unshiftMsg(newTitle,newDescript,newTime);
         }
-        
+        if(onClick)
+        {
+            onClick();
+        }
+    }
+    getTime=()=>{
+        const date = new Date();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        return h+":"+m;
     }
     render() {
         const { isActive } = this.props
@@ -30,6 +49,7 @@ export default class Panel extends Component {
                 <div className="panel-content">
                     <input ref="title" className="panel-input" placeholder="Title"></input>
                     <input ref="decription" className="panel-input" placeholder="Description"></input>
+                    <input ref="time" className="panel-input" defaultValue={this.getTime()} ></input>
                     <input ref="sub" type="submit" className=" panel-input" value="OK" onClick={this.addMsgOnClick}></input>
                 </div>
                 

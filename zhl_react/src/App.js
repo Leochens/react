@@ -50,9 +50,9 @@ class App extends Component {
       isActive:false
     }
   }
-  unshiftMsg=(newTitle,newDescription)=>{
+  unshiftMsg=(newTitle,newDescription,newTime)=>{
     const newMsgs = this.state.messages.slice();
-    newMsgs.unshift({icon:icon2,title:newTitle,description:newDescription,time:"123456"})
+    newMsgs.unshift({icon:icon2,title:newTitle,description:newDescription,time:newTime})
     this.setState({
       messages:newMsgs
     })
