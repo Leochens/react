@@ -76,7 +76,7 @@ class App extends Component {
           </ul>
         </section>
 
-       <button >show Panel</button>
+       <button className="btn">show Panel</button>
         <PanelView isActive={this.state.isActive} onClick={this.showPanel}></PanelView>
         <TabsView></TabsView>
 
