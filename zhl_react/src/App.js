@@ -5,7 +5,6 @@ import './App.css';
 import MsgItemView from './components/MsgItem'
 import WxHeaderView from './components/WxHeader'
 import TabsView from './components/Tabs'
-import DialogView from './components/Dialag'
 import TestView from './components/Test'
 import PanelView from './components/Panel'
 
@@ -47,7 +46,9 @@ class App extends Component {
           time: "11:15"
         }
       ], 
-      isActive:false
+      addIsActive:false,
+      willDelMsgs:[],
+      willUpMsgs:[]
     }
   }
   unshiftMsg=(newTitle,newDescription,newTime)=>{
@@ -57,15 +58,15 @@ class App extends Component {
       messages:newMsgs
     })
   }
-  showPanel=()=>{
-    this.setState({isActive:!this.state.isActive})
+  showAddPanel=()=>{
+    this.setState({addIsActive:!this.state.addIsActive})
   }
 
   renderMsgs = () => {
     const messageViews = this.state.messages.map((item, id) => {
       return (
-      <div key={id} onClick={this.renderDialog}>
-        <MsgItemView key={id} item={item}/>
+      <div key={id} onClick={this.renderDialog}>  
+        <MsgItemView key={id} item={item} itemControl={this.showItemCtrlPanel}/>
       </div>)
     })
     return messageViews
@@ -74,7 +75,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <WxHeaderView onClick={this.showPanel}> </WxHeaderView>
+        <WxHeaderView onClick={this.showAddPanel}> </WxHeaderView>
 
         <section className="main">
           <ul className="list">
@@ -82,8 +83,8 @@ class App extends Component {
           </ul>
         </section>
 
-       <button className="btn">show Panel</button>
-        <PanelView isActive={this.state.isActive} onClick={this.showPanel} unshiftMsg={this.unshiftMsg}></PanelView>
+
+        <PanelView isActive={this.state.addIsActive} onClick={this.showAddPanel} unshiftMsg={this.unshiftMsg}></PanelView>
         <TabsView></TabsView>
 
       </div>

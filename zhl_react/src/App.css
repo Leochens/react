@@ -107,6 +107,14 @@ li.content{
   margin-top: 10px;;
   color: #888;
 }   
+.msg-more{
+  background-color: #ddd;
+  font-size: 11px;
+  border-radius: 6px;
+  margin-right:  10px;;
+  padding: 2px;
+}
+
 /*Message List End*/
 
 
@@ -209,7 +217,7 @@ li.tab_item{
 }
 .btn-close{
   position: absolute;
-  right: 10px;
+  right: 100px;
   top: 10px;
   background-color: transparent;
   color: #fff;

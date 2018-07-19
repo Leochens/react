@@ -6,6 +6,7 @@ export default class Panel extends Component {
 
     onClick = () => {
         const { onClick } = this.props;
+        // console.log("edjb");
         if (onClick) {
             onClick();
         }
