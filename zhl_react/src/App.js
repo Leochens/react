@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import './App.css';
 
-import MsgItemView from './MsgItem'
-import WxHeaderView from './WxHeader'
-import TabsView from './Tabs'
-import DialogView from './Dialag'
-
-
+import MsgItemView from './components/MsgItem'
+import WxHeaderView from './components/WxHeader'
+import TabsView from './components/Tabs'
+import DialogView from './components/Dialag'
+import TestView from './components/Test'
+import PanelView from './components/Panel'
 
 const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
@@ -45,49 +45,14 @@ class App extends Component {
           title: "tee",
           description: "this is a test",
           time: "11:15"
-        },
-        {
-          icon: dyh,
-          title: "订阅号",
-          description: "this is a test",
-          time: "11:15",
-        },
-        {
-          icon: icon1,
-          title: "Leochens",
-          description: "this is a test",
-          time: "11:15",
-        },
-        {
-          icon: icon2,
-          title: "Bob",
-          description: "this is a test",
-          time: "11:15"
-        },
-        {
-          icon: icon3,
-          title: "tee",
-          description: "this is a test",
-          time: "11:15"
         }
-      ], show: "hidePanel"
+      ], 
+      isActive:false
     }
   }
 
-  renderDialog = () => {
-
-    if (this.state.show === 'hidePanel') {
-      console.log(this.state.show)
-
-      // this.state.show=false;    区别
-      this.setState({ show: 'showPanel' })
-
-
-    } else {
-      console.log(this.state.show)
-      // this.state.show=true;
-      this.setState({ show: "hidePanel" })
-    }
+  showPanel=()=>{
+    this.setState({isActive:!this.state.isActive})
   }
 
   renderMsgs = () => {
@@ -110,12 +75,9 @@ class App extends Component {
               {this.renderMsgs()}
           </ul>
         </section>
-        <div className={this.state.show}>
-          <div className="panel" onClick={this.renderDialog}>
-            <DialogView ></DialogView>
-          </div>
-        </div>
 
+       <button onClick={this.showPanel}>show Panel</button>
+        <PanelView isActive={this.state.isActive} onClick={this.showPanel}></PanelView>
         <TabsView></TabsView>
 
       </div>

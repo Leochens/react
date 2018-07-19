@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 
-const search = require('./img/search.png')
-const more = require('./img/Add.png')
+const search = require('../img/search.png')
+const more = require('../img/Add.png')
 
 export default class WxHeader extends Component {
     render() {
