@@ -5,7 +5,20 @@ import '../App.css';
 
 export default class ItemControlPanel extends Component{   //defualt  just only one
 
-    onClick = () => {
+    
+    delMsg=()=>{
+        console.log("delMsg in ItemControlPanel");
+        const {delMsg} = this.props;
+        if(delMsg)  delMsg();  //传递给父组件MsgItems 
+        this.close();
+    }
+    upMsg=()=>{
+        console.log("upMsg in ItemControlPanel");
+        const {upMsg} = this.props;
+        if(upMsg)  upMsg();  //传递给父组件MsgItems 
+        this.close();
+    }
+    close=()=>{
         const { onClick } = this.props;
         if (onClick) {
             onClick();
@@ -16,10 +29,10 @@ export default class ItemControlPanel extends Component{   //defualt  just only 
         if(!isActive)   return null; 
         return  (
             <div className="panel" >
-            <button className="btn btn-close" onClick={this.onClick}>close</button>
+            <button className="btn btn-close" onClick={this.close}>close</button>
             <div className="panel-content">
-               <button className="btn panel-btn">置顶</button>
-               <button className="btn panel-btn">删除</button>
+               <button className="btn panel-btn" onClick={this.upMsg}>置顶</button>
+               <button className="btn panel-btn" onClick={this.delMsg}>删除</button>
                <button className="btn panel-btn">多选删除</button>
             </div>
             
