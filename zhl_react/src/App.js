@@ -68,7 +68,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <WxHeaderView></WxHeaderView>
+        <WxHeaderView onClick={this.showPanel}> </WxHeaderView>
 
         <section className="main">
           <ul className="list">
@@ -76,7 +76,7 @@ class App extends Component {
           </ul>
         </section>
 
-       <button onClick={this.showPanel}>show Panel</button>
+       <button >show Panel</button>
         <PanelView isActive={this.state.isActive} onClick={this.showPanel}></PanelView>
         <TabsView></TabsView>
 

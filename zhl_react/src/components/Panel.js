@@ -13,7 +13,10 @@ export default class Panel extends Component {
         const { isActive } = this.props
         if (!isActive) { return null }
         return (
-            <div onClick={this.onClick}>This is Panel</div>
+            <div className="panel" >This is Panel
+                <button onClick={this.onClick}>close</button>
+                
+            </div>
         );
     }
 

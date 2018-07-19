@@ -9,7 +9,7 @@ const me = require('../img/me.png')
 export default class Tabs extends Component {
 
     render() {
-
+      
         return (
             <footer> 
                 <ul className="tab">
