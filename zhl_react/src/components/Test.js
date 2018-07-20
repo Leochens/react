@@ -3,24 +3,18 @@ import '../App.css'
 
 
 export default class Test extends Component{
-    getT=(e)=>{
-        console.log(e.target.innerText)
+    
+    p=()=>{
+        console.log("我是父亲")
     }
-
-    Child=()=>{
-        const testStr = "我是子组件的值";
-        const {Parent}=this.props;
-        if(Parent)
-        {
-            Parent(testStr)
-        }
+    c=(e)=>{
+        console.log("我是孩子")
+       // e.stopPropagation();
     }
-
     render(){
-
         return (
-            <div>
-                <div onClick={this.Child}>TTTTTT</div>
+            <div onClick={this.p} className="test">
+                <div onClick={this.c}>hahahahahahaha</div>
             </div>
         )
     }
