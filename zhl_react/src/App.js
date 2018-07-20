@@ -84,7 +84,7 @@ class App extends Component {
       return (
       <div key={id} onClick={this.renderDialog}>  
         <MsgItemView key={id}  delectDelIsActive={this.state.delectDelIsActive}
-        item={item} 
+        item={item}  ref="msg"
         delMsg={this.delMsg} 
         upMsg={this.upMsg}
         showRadios={this.showRadios}/>
@@ -96,9 +96,9 @@ class App extends Component {
   renderUpMsg=()=>{
     const upMsgs = this.state.willUpMsgs.map((item, id) => {
       return (
-      <div key={id} onClick={this.renderDialog}>  
+      <div key={id} onClick={this.renderDialog}>   
         <MsgItemView isUp={true} delectDelIsActive={this.state.delectDelIsActive}
-        key={id} 
+        key={id}  ref="msg"
         item={item} 
         delMsg={this.delMsg} 
         upMsg={this.upMsg}
@@ -111,7 +111,7 @@ class App extends Component {
     console.log("delMsg in App"); 
     let newMsgs = this.state.messages;
     newMsgs = newMsgs.filter((item,idx)=>{
-        // console.log("调用filter 删除id="+idx);
+        // console.log("调用filter 删除id="+id);
         return item.id!=id;
     })
     // console.log("------------------------------");
@@ -120,8 +120,6 @@ class App extends Component {
 
     this.setState({messages:newMsgs})
     console.log("delete complited"); 
-
-
   }
   upMsg=(id)=>{
     console.log("upMsg in App");
@@ -141,13 +139,33 @@ class App extends Component {
       willUpMsgs:newUpItems
     })
     // this.state.willUpMsgs.push(willUpMsgItem);
-    console.log("删除原来数组中的他")
+    console.log("删除原来数组中的它")
     this.delMsg(id);
   }
-  delSelectMsgs=()=>{
+  delSelectItems=(ids)=>{
+    let oldMsgs = this.state.messages;
+    let newMsgs = oldMsgs.filter((item,idx)=>{
+      return !(item.id in ids)
+    });
+    this.setState({messages:newMsgs});
+  }
+  delSelectMsgs=(e)=>{
 
     //
-    
+    let ids= [];
+    const x = this.refs.msgList.getElementsByClassName("m_radio");
+    for(let i=0;i<x.length;i++)
+    {
+      // console.log(x[i].checked)
+      if(x[i].checked)
+      {
+        console.log(x[i].id)
+        ids.push(x[i].id)
+      }else continue;
+    }
+    console.log(ids)
+    this.delSelectItems(ids);
+   
     this.showRadios();  
   }
 
@@ -175,7 +193,7 @@ class App extends Component {
         <WxHeaderView onClick={this.showAddPanel}> </WxHeaderView>
 
         <section className="main">
-          <ul className="list">
+          <ul className="list" ref="msgList">
               {this.renderUpMsg()}
               {this.renderMsgs()}
           </ul>

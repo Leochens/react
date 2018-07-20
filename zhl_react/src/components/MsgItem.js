@@ -21,7 +21,6 @@ export default class MsgItem extends Component{   //defualt  just only one
         console.log(item)
     }
     itemControl=()=>{
-
         this.showItemCtrlPanel();
     }
     showItemCtrlPanel=()=>{
@@ -42,7 +41,7 @@ export default class MsgItem extends Component{   //defualt  just only one
     getRadio(id){
         const {delectDelIsActive} = this.props;
         if(delectDelIsActive)  return (
-            <span className="radioFlag-t"><input type="radio" value={id}/></span>
+            <input className="m_radio" id={id}  type="radio" />
         )
     }
     //多级调用
