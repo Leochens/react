@@ -1,7 +1,7 @@
 张鹤麟 第一周答辩 
 ---
 
-###本周最大收获 React的Virtual DOM 机制
+### 本周最大收获 React的`Virtual DOM` 机制
 
 ### 真实DOM操作的缺点
 
