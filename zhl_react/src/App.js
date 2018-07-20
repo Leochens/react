@@ -56,14 +56,7 @@ class App extends Component {
           description: "this is a test",
           time: "11:15"
         }
-      ], 
-      willUpMsgs:[{
-        id:5,
-        icon: icon3,
-        title: "teesdd",
-        description: "this is a test",
-        time: "11:15"
-      }],
+      ],
       addIsActive:false,
       delectDelIsActive:false
     }
@@ -125,6 +118,8 @@ class App extends Component {
     console.log("upMsg in App");
     console.log(id) ;
     console.log("找到id="+id+"的item ");
+
+    // const willUpMsgItem = this.state.messages.slice(id,1);
     const willUpMsgItem = this.state.messages.filter((item,idx)=>{
       return id===item.id;
     });
@@ -133,14 +128,21 @@ class App extends Component {
     console.log(willUpMsgItem);
     console.log("放入待置顶数组");
 
-    let oldUpItems = this.state.willUpMsgs.slice();
-    const newUpItems=willUpMsgItem.concat(oldUpItems);  //连接
+    let oldMsgs = this.state.messages.slice();
+
+    oldMsgs = oldMsgs.filter((item,idx)=>{
+      return id!=item.id;
+    });
+    const newMsgs = willUpMsgItem.concat(oldMsgs);
+    // let oldUpItems = this.state.willUpMsgs.slice();
+    console.log(newMsgs);
+    // const newUpItems=willUpMsgItem.concat(oldUpItems);  //连接
     this.setState({
-      willUpMsgs:newUpItems
+      messages:newMsgs
     })
     // this.state.willUpMsgs.push(willUpMsgItem);
     console.log("删除原来数组中的它")
-    this.delMsg(id);
+    //this.delMsg(id);
   }
   delSelectItems=(ids)=>{
     let oldMsgs = this.state.messages;
@@ -194,7 +196,7 @@ class App extends Component {
 
         <section className="main">
           <ul className="list" ref="msgList">
-              {this.renderUpMsg()}
+
               {this.renderMsgs()}
           </ul>
         </section>
