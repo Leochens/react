@@ -182,7 +182,7 @@ class App extends Component {
             {this.renderMsgs()}
           </ul>
         </section>
-        {/* <TestView>  </TestView> */}
+        <TestView>  </TestView>
         <PanelView isActive={this.state.addIsActive} onClick={this.showAddPanel} unshiftMsg={this.unshiftMsg}></PanelView>
 
         {this.renderDel()}

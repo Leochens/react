@@ -12,9 +12,19 @@ export default class Test extends Component{
        // e.stopPropagation();
     }
     render(){
+
+        const flag = 0;
         return (
             <div onClick={this.p} className="test">
-                <div onClick={this.c}>hahahahahahaha</div>
+             
+             {
+                flag===1 && <div onClick={this.c}>hahahahahahaha</div> 
+
+             }
+             {
+                 
+                 <h1>我出现啦！</h1>
+             }
             </div>
         )
     }
