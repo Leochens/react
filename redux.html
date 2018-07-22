@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <title>Redux Example</title>
+</head>
+
+<body>
+
+
+    <h1 id="value"></h1>
+    <button id="add">add</button>
+    <button id="sub">sub</button>
+    <script>
+        const add = (state, action) => {
+            if (typeof state === "undefined") return 0;
+
+            switch (action.type) {
+                case 'ADD': {
+                    console.log("before : " + state);
+                    console.log("exa : " + action.exa);
+                    return state + 1;
+                }
+                case 'SUB': {
+                    console.log("before : " + state);
+                    console.log("exa : " + action.exa);
+                    return state - 1;
+                }
+                default: return state;
+            }
+        }
+        let store = Redux.createStore(add);
+        let value = document.getElementById("value");
+
+        const render = () => {
+            value.innerHTML = store.getState().toString();
+        }
+
+        render();
+
+        store.subscribe(render);
+
+        document.getElementById('add').addEventListener('click', () => {
+            const add = {
+                type: "ADD",
+                exa: "hello"
+            };
+            store.dispatch(add);
+        })
+        document.getElementById('sub').addEventListener('click', () => {
+            const sub = {
+                type: "SUB",
+                exa: "world"
+            };
+            store.dispatch(sub);
+        })
+    </script>
+</body>
+
+</html>

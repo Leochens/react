@@ -8,6 +8,11 @@ import TabsView from './components/Tabs'
 import TestView from './components/Test'
 import PanelView from './components/Panel'
 
+import { createStore } from 'redux'
+const store = createStore(()=>{})
+
+
+
 const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
 const icon2 = require('./img/u2.jpg')
