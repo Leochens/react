@@ -1,59 +1,55 @@
 import React, { Component } from 'react'
-// import ReactDOM from 'react-dom'
 import '../App.css'
+import ACTIONS from '../actions';
 
 export default class Panel extends Component {
 
-    onClick = () => {
-        const { onClick } = this.props;
-        // console.log("edjb");
-        if (onClick) {
-            onClick();
-        }
+
+    //关闭面板
+    handleClosePanel = () => {
+        const { close } = this.props
+        close && close()
     }
-    addMsgOnClick=()=>{
-        const newTitle = this.refs.title.value;   //取得值
-        const newDescript = this.refs.decription.value;
-        const newTime = this.refs.time.defaultValue;
-        const {onClick,unshiftMsg} = this.props;
-        if(!newTitle||!newDescript||!newTime)
-        {
+    //添加新item
+    handleAddNewItem = () => {
+        const { handleAddNewItem } = this.props;
+
+        const newItem = {
+            title: this.refs.title.value,
+            description: this.refs.decription.value,
+            time: this.refs.time.defaultValue
+        }
+        if (!newItem.title || !newItem.description || !newItem.time) {
             alert("数据输入错误,请各数据段是否填写");
-            if(onClick)
-            {
-                onClick();
-            }
+            this.handleClosePanel()
             return null;
         }
-        // console.log(newTitle+' '+newDescript)
-        if(unshiftMsg)
-        {
-            unshiftMsg(newTitle,newDescript,newTime);
-        }
-        if(onClick)
-        {
-            onClick();
-        }
+        handleAddNewItem && handleAddNewItem(newItem);
+
+        this.handleClosePanel()
     }
-    getTime=()=>{
+    
+    //获得当前时间
+    getTime = () => {
         const date = new Date();
         const h = date.getHours();
         const m = date.getMinutes();
-        return h+":"+m;
+        return h + ":" + m;
     }
+
     render() {
         const { isActive } = this.props
-        if (!isActive) { return null }
+        if (isActive !== ACTIONS.SHOW_ADD_PANEL) { return null }
         return (
             <div className="panel" >
-                <button className="btn btn-close" onClick={this.onClick}>close</button>
+                <button className="btn btn-close" onClick={this.handleClosePanel}>close</button>
                 <div className="panel-content">
                     <input ref="title" className="panel-input" placeholder="Title"></input>
                     <input ref="decription" className="panel-input" placeholder="Description"></input>
                     <input ref="time" className="panel-input" defaultValue={this.getTime()} ></input>
-                    <input ref="sub" type="submit" className=" panel-input" value="OK" onClick={this.addMsgOnClick}></input>
+                    <input ref="sub" type="submit" className=" panel-input" value="OK" onClick={this.handleAddNewItem}></input>
                 </div>
-                
+
             </div>
         );
     }

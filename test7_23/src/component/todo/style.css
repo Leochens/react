@@ -1,0 +1,10 @@
+.add-todo{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 30px;
+    width: 60px;
+}
+.add-icon{
+    width: 20px;
+}

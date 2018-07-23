@@ -1,22 +1,20 @@
 import React ,{ Component } from 'react';
 import ItemControlPanleView from '../components/ItemControlPanel'
 import '../App.css';
+import ACTIONS from '../actions';
 
 
 
 export default class MsgItem extends Component{   //defualt  just only one
 
-    constructor(props)
+    constructor()
     {
-        super(props);
+        super();
         this.state={
-            itemCtrlIsActive:false,
-          
+            itemCtrlIsActive:ACTIONS.HIDE_ALL_PANEL,
         }
-        const {isUp,item} = this.props
-
     }
-    onMsgClick=()=>{
+    handleClickMsg=()=>{
         const {item} = this.props;
         console.log(item)
     }
@@ -24,18 +22,18 @@ export default class MsgItem extends Component{   //defualt  just only one
         this.showItemCtrlPanel();
     }
     showItemCtrlPanel=()=>{
-        this.setState({itemCtrlIsActive:!this.state.itemCtrlIsActive})
+        this.setState({itemCtrlIsActive:ACTIONS.SHOW_ITEM_CTRL})
       }
-
-    delMsg=()=>{
-        console.log("delMsg in MsgItem");
-        const {item,delMsg} = this.props;
-        if(delMsg)  delMsg(item.id);       //传递给父组件App 调用App的删除函数删除 state里 
+    handleClosePanel=()=>{
+        this.setState({itemCtrlIsActive:ACTIONS.HIDE_ALL_PANEL})
     }
-    upMsg=()=>{
-        console.log("upMsg in MsgItem");
-        const {item,upMsg} = this.props;
-        if(upMsg)  upMsg(item.id);  //传递给父组件App
+    handleDelMsg=()=>{
+        const {id,handleDelMsg} = this.props;
+        if(handleDelMsg)  handleDelMsg(id);       //传递给父组件App 调用App的删除函数删除 state里 
+    }
+    handleUpMsg=()=>{
+        const {item,handleUpMsg,id} = this.props;
+        if(handleUpMsg)  handleUpMsg(item,id);  //传递给父组件App
     }
 
     getRadio(id){
@@ -46,20 +44,16 @@ export default class MsgItem extends Component{   //defualt  just only one
     }
     //多级调用
 
-    delSelectMsg=(id)=>{
-        console.log("delSelectMsg in MsgItem");
-        const {delectDelIsActive,showRadios} = this.props;
+    handleDelSelectMsg=(id)=>{
+        const {showRadios} = this.props;
         if(showRadios) showRadios();
     }
 
     render(){
-        const {isUp,item} = this.props
-        let upClass ='';
-        if(isUp)
-            upClass = 'isUp '
-        console.log(this.isUp)
+        const {item} = this.props
+
         return  (
-                <li className={"list_item "+upClass} onClick={this.onMsgClick}>
+                <li className={"list_item "} onClick={this.handleClickMsg}>
                 {this.getRadio(item.id)}
                   <span className="photo">
                       <img className="pic" src={item.icon} alt=""/>
@@ -70,12 +64,13 @@ export default class MsgItem extends Component{   //defualt  just only one
                   </ul>
                   <span className="msg-more" onClick={this.itemControl}>more</span>
                   <span className="time">{item.time}</span>
+
                   <ItemControlPanleView 
                     isActive={this.state.itemCtrlIsActive} 
-                    onClick={this.showItemCtrlPanel} 
-                    delMsg={this.delMsg}
-                    upMsg={this.upMsg}  
-                    delSelectMsg = {this.delSelectMsg}> 
+                    close={this.handleClosePanel} 
+                    handleDelMsg={this.handleDelMsg}
+                    handleUpMsg={this.handleUpMsg}  
+                    handleDelSelectMsg = {this.handleDelSelectMsg}> 
                    </ItemControlPanleView>
                 </li>
 
