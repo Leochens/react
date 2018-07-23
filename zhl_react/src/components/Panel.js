@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../App.css'
-import ACTIONS from '../actions';
+import ACTIONS from '../constants';
 
 export default class Panel extends Component {
 

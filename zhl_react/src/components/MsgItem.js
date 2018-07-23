@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react';
 import ItemControlPanleView from '../components/ItemControlPanel'
 import '../App.css';
-import ACTIONS from '../actions';
+import ACTIONS from '../constants';
 
 
 

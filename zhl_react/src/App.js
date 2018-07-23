@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import ACTIONS from './actions'
+import ACTIONS from './constants'
 import MsgItemView from './components/MsgItem'
 import WxHeaderView from './components/WxHeader'
 import TabsView from './components/Tabs'
-import TestView from './components/Test'
+import TestContainer from './container/TestContainer'
 import PanelView from './components/Panel'
+
 
 const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
@@ -154,7 +155,7 @@ class App extends Component {
             {this.renderMsgs()}
           </ul>
         </section>
-
+        <TestContainer />
         <PanelView
           isActive={this.state.addIsActive}
           close={this.handleClose}

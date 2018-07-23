@@ -3,24 +3,17 @@ import '../App.css'
 
 
 export default class Test extends Component{
-    getT=(e)=>{
-        console.log(e.target.innerText)
-    }
+    ChangeText=()=>{
+        const {changeText} = this.props;
+        // console.log(changeText("pppp"))
 
-    Child=()=>{
-        const testStr = "我是子组件的值";
-        const {Parent}=this.props;
-        if(Parent)
-        {
-            Parent(testStr)
-        }
+        changeText && changeText("我是redux测试");
     }
-
     render(){
 
         return (
             <div>
-                <div onClick={this.Child}>TTTTTT</div>
+                <h1 onClick={this.ChangeText}>{this.props.text}</h1>
             </div>
         )
     }
