@@ -7,12 +7,7 @@ import WxHeaderView from './components/WxHeader'
 import TabsView from './components/Tabs'
 import TestView from './components/Test'
 import PanelView from './components/Panel'
-
-import { createStore } from 'redux'
-const store = createStore(()=>{})
-
-
-
+import ListView from './components/List'
 const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
 const icon2 = require('./img/u2.jpg')
@@ -27,41 +22,42 @@ class App extends Component {
     this.state = {
       messages: [
         {
-
+          id: 0,
           icon: dyh,
           title: "订阅号",
           description: "this is a test",
           time: "11:15",
         },
         {
-
+          id: 1,
           icon: icon2,
           title: "小王",
           description: "this is a test",
           time: "11:15",
         },
         {
-
+          id: 2,
           icon: icon1,
           title: "Leochens",
           description: "this is a test",
           time: "11:15",
         },
         {
-
+          id: 3,
           icon: icon2,
           title: "Bob",
           description: "this is a test",
           time: "11:15"
         },
         {
-
+          id: 4,
           icon: icon3,
           title: "tee",
           description: "this is a test",
           time: "11:15"
         }
       ],
+      willUpMsgs: [],
       addIsActive: false,
       delectDelIsActive: false
     }
@@ -77,28 +73,17 @@ class App extends Component {
     this.setState({ addIsActive: !this.state.addIsActive })
   }
 
-  renderMsgs = () => {
-    const messageViews = this.state.messages.map((item, id) => {
-      console.log(id)
-
-      return (
-        <div key={id} onClick={this.renderDialog}>
-          <MsgItemView key={id} idx={id} delectDelIsActive={this.state.delectDelIsActive}
-            item={item} ref="msg"
-            delMsg={this.delMsg}
-            upMsg={this.upMsg}
-            showRadios={this.showRadios} />
-        </div>)
-    })
-    return messageViews
-
-  }
 
   delMsg = (id) => {
-    console.log("delMsg in App " + id);
-    let newMsgs = this.state.messages.slice();
-
-    newMsgs.splice(id, 1);
+    console.log("delMsg in App");
+    let newMsgs = this.state.messages;
+    newMsgs = newMsgs.filter((item, idx) => {
+      // console.log("调用filter 删除id="+id);
+      return item.id != id;
+    })
+    // console.log("------------------------------");
+    // console.log(newMsgs);
+    // console.log("------------------------------");
 
     this.setState({ messages: newMsgs })
     console.log("delete complited");
@@ -107,9 +92,6 @@ class App extends Component {
     console.log("upMsg in App");
     console.log(id);
     console.log("找到id=" + id + "的item ");
-
-
-    //找到待置顶元素
     const willUpMsgItem = this.state.messages.filter((item, idx) => {
       return id === item.id;
     });
@@ -118,21 +100,14 @@ class App extends Component {
     console.log(willUpMsgItem);
     console.log("放入待置顶数组");
 
-    let oldMsgs = this.state.messages.slice();
-
-    oldMsgs = oldMsgs.filter((item, idx) => {
-      return id != item.id;
-    });
-    const newMsgs = willUpMsgItem.concat(oldMsgs);
-    // let oldUpItems = this.state.willUpMsgs.slice();
-    console.log(newMsgs);
-    // const newUpItems=willUpMsgItem.concat(oldUpItems);  //连接
+    let oldUpItems = this.state.willUpMsgs.slice();
+    const newUpItems = willUpMsgItem.concat(oldUpItems);  //连接
     this.setState({
-      messages: newMsgs
+      willUpMsgs: newUpItems
     })
     // this.state.willUpMsgs.push(willUpMsgItem);
     console.log("删除原来数组中的它")
-    //this.delMsg(id);
+    this.delMsg(id);
   }
   delSelectItems = (ids) => {
     let oldMsgs = this.state.messages;
@@ -176,23 +151,31 @@ class App extends Component {
       delectDelIsActive: !this.state.delectDelIsActive
     })
   }
+  //组件化思想
   render() {
     return (
       <div>
-        <WxHeaderView onClick={this.showAddPanel}> </WxHeaderView>
+        <WxHeaderView
+          onClick={this.showAddPanel} />
 
-        <section className="main">
-          <ul className="list" ref="msgList">
+        <ListView
+          messages={this.state.messages}
+          delectDelIsActive={this.state.delectDelIsActive}
+          upMsg={this.upMsg}
+          delMsg={this.delMsg}
+          onClick={this.renderDialog}
+          upMsgs={this.state.willUpMsgs}
+        />
 
-            {this.renderMsgs()}
-          </ul>
-        </section>
-        <TestView>  </TestView>
-        <PanelView isActive={this.state.addIsActive} onClick={this.showAddPanel} unshiftMsg={this.unshiftMsg}></PanelView>
 
-        {this.renderDel()}
+        <PanelView
+          isActive={this.state.addIsActive}
+          onClick={this.showAddPanel}
+          unshiftMsg={this.unshiftMsg} />
 
-        <TabsView></TabsView>
+        {/* {this.renderDel()} */}
+
+        <TabsView />
       </div>
     );
   }
