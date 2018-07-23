@@ -15,7 +15,7 @@ const icon3 = require('./img/u3.jpg')
 
 
 class App extends Component {
-
+ 
   constructor(props) {
     super(props)
     this.state = {
@@ -52,7 +52,7 @@ class App extends Component {
         }
       ],
       addIsActive: ACTIONS.HIDE_ALL_PANEL,
-      
+
       delectDelIsActive: false
     }
   }
