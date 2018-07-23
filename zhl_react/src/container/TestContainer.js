@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Test from '../components/Test'
-import {changeText} from '../actions'
+import {changeText} from '../actions/actions'
 
 const mapStateToProps = state=>{
 

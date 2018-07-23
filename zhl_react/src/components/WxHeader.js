@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
-
+import {connect} from 'react-redux'
+import ITEM from '../actions/itemControlAction';
 const search = require('../img/search.png')
 const more = require('../img/Add.png')
 
-export default class WxHeader extends Component {
+ class WxHeader extends Component {
 
-    onClick=()=>{
-        const {onClick}=this.props;
-        if(onClick)
-        {
-            onClick();
-        }
-    }
+
     render() {
         
         return (
@@ -24,7 +19,7 @@ export default class WxHeader extends Component {
                 <span className="search">
                     <img src={search} alt="" />
                 </span>
-                <span className="more" onClick={this.onClick}>
+                <span className="more" onClick={this.props.showAddPanel}>
                     <img src={more} alt="" />
                 </span>
             </div>
@@ -32,3 +27,11 @@ export default class WxHeader extends Component {
         )
     }
 }
+const mapStateToProps=()=>{
+    return {}
+}   
+const mapDispatchToProps=(dispatch)=>{
+    
+    return {showAddPanel:()=>dispatch({type:ITEM.TYPE.showAddPanel})}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(WxHeader)
