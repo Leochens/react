@@ -5,37 +5,35 @@ import { connect } from 'react-redux'
 import '../App.css'
 
 
-class MsgList extends Component{
-    _renderMsgs=()=>{
-        console.log("hello")
-        const {messages}=this.props;
-        console.log(Array.isArray(messages))
-        return  messages.map((item,idx)=>{
-           return  <MsgItem id={idx} item={item} key={idx} />
+class MsgList extends Component {
+    _renderMsgs = () => {
+        const { messages } = this.props;
+        return messages.map((item, idx) => {            //渲染输出列表项
+            return <MsgItem id={idx} item={item} key={idx} />
         })
     }
-    render(){
+    render() {
         return (
             <section className="main">
-            <ul className="list" ref="msgList">
-              {this._renderMsgs()}
-            </ul>
-          </section>
+                <ul className="list" ref="msgList">
+                    {this._renderMsgs()}
+                </ul>
+            </section>
         )
     }
 }
 
 
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
     return {
-        messages:state.itemControl.messages
+        messages: state.itemControl.messages
     }
 }
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return {
 
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(MsgList)
- 
+export default connect(mapStateToProps, mapDispatchToProps)(MsgList)
+

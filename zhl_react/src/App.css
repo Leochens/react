@@ -203,10 +203,12 @@ li.tab_item{
     top: 50%;
     left: 50%;
     width: 300px;
-    height: 400px;
+    height: 300px;
     margin-left: -150px;
     margin-top: -200px;
     background-color: #fff;
+    border-radius: 6px;
+
 }
 .btn{
   border: 0;
@@ -219,10 +221,17 @@ li.tab_item{
 }
 .btn-close{
   position: absolute;
-  right: 100px;
-  top: 10px;
-  background-color: transparent;
-  color: #fff;
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  right: 50%;
+  margin-right: -50px;
+
+  bottom: 30%;
+  background-color: #fff;
+  border-radius: 6px;
+  color: #000;
+  font-weight: 600;
 }
 .panel-btn{
   width: 80%;
