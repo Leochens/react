@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { WX, TXL, FX, ME } from '../../constants'
 import './Tabs.css'
 const _wx = require('./img/wx.png')
 const phone = require('./img/phone-number.png')
@@ -6,58 +7,57 @@ const find = require('./img/find.png')
 const _me = require('./img/me.png')
 
 
-export default class  Tabs extends Component{
-    
-    constructor(props){
-        super(props);
-    }
 
-    render(){
-        const {titlesOrder} = this.props;
 
-        const wx = titlesOrder.filter((item,idx)=>{
-            return item.title==='微信'
-        })[0].colorsOrder[0]+"-tab";
-        const txl = titlesOrder.filter((item,idx)=>{
-            return item.title==='通讯录'
-        })[0].colorsOrder[0]+"-tab";
-        const fx = titlesOrder.filter((item,idx)=>{
-            return item.title==='发现'
-        })[0].colorsOrder[0]+"-tab";
-        const me = titlesOrder.filter((item,idx)=>{
-            return item.title==='我'
-        })[0].colorsOrder[0]+"-tab";
+export default class Tabs extends Component {
+
+
+    render() {
+        const { titlesOrder } = this.props;
+
+        const wx = titlesOrder.filter((item, idx) => {
+            return item.title === WX
+        })[0].colorsOrder[0] + "-tab";
+        const txl = titlesOrder.filter((item, idx) => {
+            return item.title === TXL
+        })[0].colorsOrder[0] + "-tab";
+        const fx = titlesOrder.filter((item, idx) => {
+            return item.title === FX
+        })[0].colorsOrder[0] + "-tab";
+        const me = titlesOrder.filter((item, idx) => {
+            return item.title === ME
+        })[0].colorsOrder[0] + "-tab";
 
         // console.log(wx+txl+fx+me)
-        return(
-            <footer> 
-            <ul className="tab">
-                <li  className={"tab_item "+wx}>
-                    <div>
-                        <img src={_wx} alt="" />
-                    </div>
-                    微信
+        return (
+            <footer>
+                <ul className="tab">
+                    <li className={"tab_item " + wx}>
+                        <div>
+                            <img src={_wx} alt="" />
+                        </div>
+                        {WX}
         </li>
-                <li className={"tab_item "+txl}>
-                    <div>
-                        <img src={phone} alt="" />
-                    </div>
-                    通讯录
+                    <li className={"tab_item " + txl}>
+                        <div>
+                            <img src={phone} alt="" />
+                        </div>
+                        {TXL}
         </li>
-                <li className={"tab_item "+fx}>
-                    <div>
-                        <img src={find} alt="" />
-                    </div>
-                    发现
+                    <li className={"tab_item " + fx}>
+                        <div>
+                            <img src={find} alt="" />
+                        </div>
+                        {FX}
         </li>
-                <li className={"tab_item "+me}>
-                    <div>
-                        <img src={_me} alt="" />
-                    </div>
-                    我
+                    <li className={"tab_item " + me}>
+                        <div>
+                            <img src={_me} alt="" />
+                        </div>
+                        {ME}
         </li>
-            </ul>
-        </footer>
+                </ul>
+            </footer>
         )
     }
 }

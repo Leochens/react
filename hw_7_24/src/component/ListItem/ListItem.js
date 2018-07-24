@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ListItem.css'
-
+import './animate.css'
 import ok from './img/ok.png'
 
 export default class ListItem extends Component {
@@ -20,17 +20,17 @@ export default class ListItem extends Component {
 
     renderSpot = () => {
         const { colorsOrder } = this.props;
-
+        const animate = "animated swing "
         return colorsOrder.map((item, id) => {
             if (id === 0)
 
                 return <span
                     key={id}
                     id={id}
-                    className={item}
+                    className={ animate+ item}
                     itemidx={this.props.idx}
                     onClick={this.onSetToFront.bind(this, id, this.props.idx)}>
-                    <img src={ok} />
+                    <img src={ok} alt="" />
                 </span>
 
             else
@@ -38,7 +38,7 @@ export default class ListItem extends Component {
                 return <span
                     key={id}
                     id={id}
-                    className={item}
+                    className={animate + item}
                     itemidx={this.props.idx}
                     onClick={this.onSetToFront.bind(this, id, this.props.idx)}></span>
         })
@@ -48,7 +48,7 @@ export default class ListItem extends Component {
         // console.log(this.props.title)
 
         return (
-            <li className="list-item"
+            <li className="list-item "
                 onClick={this.onSetTopItem}
             >
                 <span className="list-item-title">{this.props.title}</span>

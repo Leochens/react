@@ -1,44 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import Header from './component/Header/Header'
 import List from './component/List/List'
 import Tabs from './component/Tabs/Tabs'
+import { WX, TXL, FX, ME, DEFAULT_COLOR } from './constants'
+
 
 
 class App extends Component {
   constructor() {
     super();
+    console.log("2018.7.24作业")
     this.state = {
       titlesOrder: [
         {
-          title: '微信',
-          colorsOrder: ["red-spot",
-            "blue-spot",
-            "yellow-spot",
-            "orange-spot"]
+          title: WX,
+          colorsOrder: DEFAULT_COLOR
         },
         {
-          title: '通讯录',
-          colorsOrder: ["red-spot",
-            "blue-spot",
-            "yellow-spot",
-            "orange-spot"]
+          title: TXL,
+          colorsOrder: DEFAULT_COLOR
         },
         {
-          title: '发现',
-          colorsOrder: ["red-spot",
-            "blue-spot",
-            "yellow-spot",
-            "orange-spot"]
+          title: FX,
+          colorsOrder: DEFAULT_COLOR
         },
         {
-          title: '我',
-          colorsOrder: ["red-spot",
-            "blue-spot",
-            "yellow-spot",
-            "orange-spot"]
+          title: ME,
+          colorsOrder: DEFAULT_COLOR
         },
       ]
     }
@@ -55,24 +45,25 @@ class App extends Component {
     })
   }
   handleSetTopItem = (id) => {
-    console.log("list : " + id)
     let titlesOrder = this.state.titlesOrder.slice();
     const itemWillToTop = titlesOrder.splice(id, 1);
     titlesOrder.unshift(itemWillToTop[0]);
-    console.log(titlesOrder)
     this.setState({ titlesOrder })
   }
   render() {
     return (
       <div>
         <Header />
+
+
         <List
           handleSetSpotfront={this.handleSetSpotfront}
           handleSetTopItem={this.handleSetTopItem}
           titlesOrder={this.state.titlesOrder} />
-        <Tabs 
-          titlesOrder={this.state.titlesOrder}
-        />
+
+        <Tabs
+          titlesOrder={this.state.titlesOrder}/>
+
       </div>
     );
   }
