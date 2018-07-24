@@ -1,8 +1,61 @@
 import { combineReducers } from 'redux'
 import ITEM from '../actions/itemControlAction'
-import initState from '../store'
+
 
 import ACTION from '../constants'
+
+
+const dyh = require('../img/dyh.png')
+const icon1 = require('../img/u1.jpg')
+const icon2 = require('../img/u2.jpg')
+const icon3 = require('../img/u3.jpg')
+
+
+
+const initState = {
+  icons: {
+    dyh,
+    icon1,
+    icon2,
+    icon3,
+  },
+  messages: [
+    {
+      icon: dyh,
+      title: "订阅号",
+      description: "this is a test",
+      time: "11:15",
+    },
+    {
+      icon: icon2,
+      title: "小王",
+      description: "this is a test",
+      time: "11:15",
+    },
+    {
+      icon: icon1,
+      title: "Leochens",
+      description: "this is a test",
+      time: "11:15",
+    },
+    {
+      icon: icon2,
+      title: "Bob",
+      description: "this is a test",
+      time: "11:15"
+    },
+    {
+      icon: icon3,
+      title: "tee",
+      description: "this is a test",
+      time: "11:15"
+    }
+  ],
+  addIsActive: ACTION.HIDE_ALL_PANEL,
+  itemPanelIsActive: ACTION.HIDE_ALL_PANEL,
+  delectDelIsActive: false
+}
+
 
 const itemControl = (state = initState, action) => {
     switch (action.type) {
@@ -15,7 +68,7 @@ const itemControl = (state = initState, action) => {
             const item = newMsg.splice(id,1);
             newMsg.unshift(item[0]);
             console.log(newMsg)
-            return Object.assign({},state,{messages:newMsg})
+            return {messages:newMsg}                //直接覆盖state
         }       
         case ITEM.TYPE.handleDeleteMsg: {           //删除
             const {id} = action;
