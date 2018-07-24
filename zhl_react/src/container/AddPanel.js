@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css'
 import ACTIONS from '../constants';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import ITEM from '../actions/itemControlAction';
 class AddPanel extends Component {
 
@@ -26,10 +26,13 @@ class AddPanel extends Component {
             this.handleClosePanel()
             return null;
         }
+        console.log(newItem)
+        console.log(this.props)
         handleAddMsg && handleAddMsg(newItem);
+
         this.handleClosePanel()
     }
-
+    
     //获得当前时间
     getTime = () => {
         const date = new Date();
@@ -55,16 +58,16 @@ class AddPanel extends Component {
         );
     }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps=(state)=>{
     return {
-        isActive: state.panelControl.addIsActive
+        isActive:state.panelControl.addIsActive
     }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps=(dispatch)=>{
     return {
-        handleAddMsg: (item) => dispatch(ITEM.ACTION.addMsg(item)),
-        close: () => dispatch({ type: ITEM.TYPE.hideAllPanel })
+        handleAddMsg:(item)=>dispatch(ITEM.ACTION.addMsg(item)),
+        close:()=>dispatch({type:ITEM.TYPE.hideAllPanel})
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPanel)
+export default connect(mapStateToProps,mapDispatchToProps)(AddPanel)

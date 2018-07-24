@@ -6,15 +6,20 @@ import ACTIONS from '../constants';
 
 export default class ItemControlPanel extends Component {
 
+    constructor(props)
+    {
+        super(props);
+        console.log(props)
+    }
     handleDelMsg = () => {
         const { handleDelMsg } = this.props;
-        handleDelMsg && handleDelMsg();   
+        handleDelMsg && handleDelMsg();  //传递给父组件MsgItems 
         this.close();
     }
 
     handleUpMsg = () => {
         const { handleUpMsg } = this.props;
-        handleUpMsg && handleUpMsg();  
+        handleUpMsg && handleUpMsg();  //传递给父组件MsgItems 
         this.close();
     }
 
