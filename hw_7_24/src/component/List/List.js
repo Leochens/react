@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ListItem from '../ListItem/ListItem'
+import ListItem from '../ListItem/ListItem';
 
-import './List.css'
+import './List.css';
 
 export default class List extends Component {
 
+    //...props 直接传给下一级
     renderListItem = () => {
-
         const { titlesOrder } = this.props;
         return titlesOrder.map((item, idx) => {
             return <ListItem
@@ -14,19 +14,9 @@ export default class List extends Component {
                 key={idx}
                 title={item.title}
                 colorsOrder={item.colorsOrder}
-                onSetTopItem={this.onSetTopItem}
-                onChangeItemColorOrder={this.onChangeItemColorOrder}
-                onSetSpotfront={this.onSetSpotfront} />
+                {...this.props}
+                />
         })
-    }
-    onSetSpotfront = (itemid, spotid) => {
-        const { handleSetSpotfront } = this.props;
-        handleSetSpotfront && handleSetSpotfront(itemid, spotid);
-
-    }
-    onSetTopItem = (id) => {
-        const { handleSetTopItem } = this.props;
-        handleSetTopItem && handleSetTopItem(id)
     }
 
     render() {

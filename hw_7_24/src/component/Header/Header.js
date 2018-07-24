@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Header.css'
-const search = require('./img/search.png')
-const more = require('./img/Add.png')
+import './Header.css';
+const search = require('./img/search.png');
+const more = require('./img/Add.png');
 
 export default class  Header extends Component{
 
