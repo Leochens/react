@@ -1,7 +1,6 @@
 /**
  * 数据仓库
  */
-import ACTIONS from './constants'
 
 
 const dyh = require('./img/dyh.png')
@@ -54,11 +53,11 @@ const state ={
           isTop:false
         }
       ],
-      topItemsCount:0,
       currentItemId:null,
       addPanelIsActive: false,
       itemPanelIsActive:false,
-      delectDelIsActive: false
+      delectDelIsActive: false,
+      testStr:"哈哈哈哈啊"
 }
 
 export default state

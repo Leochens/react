@@ -30,7 +30,7 @@ const itemControl = (state = initState, action) => {
             })
         }
         case ITEM.TYPE.handleDeleteSelectMsg: {     //多选删除
-
+                return state
         }
         case ITEM.TYPE.handleAddMsg: {               //添加新item
             console.log("Add new msg")
@@ -68,6 +68,15 @@ const itemControl = (state = initState, action) => {
         case ITEM.TYPE.setCurentItemId: {
             console.log("Set Cur id : " + action.cur_id);
             return Object.assign({ ...state }, { currentItemId: action.cur_id })
+        }
+
+        case ITEM.TYPE.ChangeText:{
+
+            const {str} =action;
+            return Object.assign({...state},{
+                testStr:str
+            })
+
         }
         default:
             {

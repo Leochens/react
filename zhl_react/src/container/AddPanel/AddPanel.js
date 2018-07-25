@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './AddPanel'
-import ACTIONS from '../../constants';
+import './AddPanel.css'
 import { connect } from 'react-redux'
 import ITEM from '../../actions/itemControlAction';
 const icon4 = require('../../img/u4.jpg')
@@ -40,8 +40,8 @@ class AddPanel extends Component {
         if (!addPanelIsActive) { return null }
         return (
             <div className="panel" >
-                <button className="btn btn-close" onClick={this.props.onToggleAddPanel}>close</button>
-                <div className="panel-content">
+                <button className="btn btn-close" onClick={this.props.onToggleAddPanel}>X</button>
+                <div className="add-panel-content">
                     <input ref="title" className="panel-input" placeholder="Title"></input>
                     <input ref="decription" className="panel-input" placeholder="Description"></input>
                     <input ref="time" className="panel-input" defaultValue={this.getTime()} ></input>
@@ -52,6 +52,9 @@ class AddPanel extends Component {
         );
     }
 }
+
+
+
 const mapStateToProps = (state) => {
     return {
         addPanelIsActive: state.itemControl.addPanelIsActive

@@ -28,6 +28,7 @@ class MsgList extends Component{
 }
 
 
+//in
 const mapStateToProps=(state)=>{
     return {
         messages:state.itemControl.messages,
@@ -35,6 +36,8 @@ const mapStateToProps=(state)=>{
         itemPanelIsActive:state.itemControl.itemPanelIsActive
     }
 }
+
+//out
 const mapDispatchToProps=(dispatch)=>{
     return {
 
@@ -44,4 +47,4 @@ const mapDispatchToProps=(dispatch)=>{
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(MsgList)
- 
+

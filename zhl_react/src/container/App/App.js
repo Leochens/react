@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import './App.css';
 
 import MsgList from '../MsgList/MsgList'
 import WxHeader from '../WxHeader/WxHeader'
 import AddPanel from '../AddPanel/AddPanel'
 import ItemPanel from '../ItemPanel/ItemPanel'
-
 import Tabs from '../../components/Tabs/Tabs'
-import './App.css';
 
 class App extends Component {
  

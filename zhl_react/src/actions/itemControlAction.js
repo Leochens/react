@@ -4,13 +4,12 @@ const handleDeleteMsg = 'handleDeleteMsg';
 const handleDeleteSelectMsg='handleDeleteSelectMsg';
 const handleAddMsg = 'handleAddMsg';
 
-const hideAllPanel = 'hideAllPanel';
 const toggleAddPanel = 'toggleAddPanel';
 const toggleItemPanel = 'toggleItemPanel' 
 
 const setCurentItemId = 'setCurentItemId'
 
-
+const ChangeText = 'ChangeText'
 
 const actionSetTopMsg=(id)=>{
     return {
@@ -55,10 +54,13 @@ const ITEM={
         handleDeleteMsg,
         handleDeleteSelectMsg,
         handleAddMsg,
-        hideAllPanel,
         toggleAddPanel,
         toggleItemPanel,
-        setCurentItemId
+        setCurentItemId,
+
+
+        ChangeText
+
     },
     ACTION:{
         actionSetTopMsg,
@@ -68,16 +70,9 @@ const ITEM={
         actionToggleItemPanel,
         actionToggleAddPanel,
         actionSetCurrentItemId
-
     }
 
 }
-
-
-
-
-
-
 
 
 export default ITEM
