@@ -1,84 +1,45 @@
+import { SET_TOP_MSG, CANCEL_SET_TOP_MSG, DEL_MSG, DEL_SELECT_MSG, ADD_MSG, TOGGLE_ADD_PANEL, TOGGLE_ITEM_PANEL, SET_CURRENT_ITEM } from '../const/ActionTypes'
 
-const handleSetTopMsg = 'handleSetTopMsg';
-const handleCancelSetTopMsg = 'handleCancelSetTopMsg'
-
-const handleDeleteMsg = 'handleDeleteMsg';
-const handleDeleteSelectMsg = 'handleDeleteSelectMsg';
-const handleAddMsg = 'handleAddMsg';
-
-const toggleAddPanel = 'toggleAddPanel';
-const toggleItemPanel = 'toggleItemPanel'
-
-const setCurrentItem = 'setCurrentItem'
-
-const actionSetTopMsg = (id) => {
+export const actionSetTopMsg = (id) => {
     return {
-        type: handleSetTopMsg, id
+        type: SET_TOP_MSG, id
     }
 }
-const actionCancelSetTopMsg = () => {
+export const actionCancelSetTopMsg = () => {
     return {
-        type: handleCancelSetTopMsg
+        type: CANCEL_SET_TOP_MSG
     }
 }
-const actionDeleteMsg = (id) => {
+export const actionDeleteMsg = (id) => {
     return {
-        type: handleDeleteMsg, id
+        type: DEL_MSG, id
     }
 }
-const actionDeleteSelectMsg = (ids) => {
+export const actionDeleteSelectMsg = (ids) => {
     return {
-        type: handleDeleteSelectMsg, ids
+        type: DEL_SELECT_MSG, ids
     }
 }
-const actionAddMsg = (item) => {
+export const actionAddMsg = (item) => {
     return {
-        type: handleAddMsg, item
+        type: ADD_MSG, item
     }
 }
 
-const actionToggleItemPanel = () => {
+export const actionToggleItemPanel = () => {
     return {
-        type: toggleItemPanel
+        type: TOGGLE_ITEM_PANEL
     }
 }
-const actionToggleAddPanel = () => {
+export const actionToggleAddPanel = () => {
     return {
-        type: toggleAddPanel
+        type: TOGGLE_ADD_PANEL
     }
 }
 
-const actionSetCurrentItem = (currentItem) => {
+export const actionSetCurrentItem = (currentItem) => {
     return {
-        type: setCurrentItem, currentItem
+        type: SET_CURRENT_ITEM, currentItem
     }
 }
-const ITEM = {
-    TYPE: {
-        handleSetTopMsg,
-        handleCancelSetTopMsg,
-        handleDeleteMsg,
-        handleDeleteSelectMsg,
-        handleAddMsg,
-        toggleAddPanel,
-        toggleItemPanel,
-        setCurrentItem,
 
-
-
-    },
-    ACTION: {
-        actionSetTopMsg,
-        actionCancelSetTopMsg,
-        actionDeleteMsg,
-        actionDeleteSelectMsg,
-        actionAddMsg,
-        actionToggleItemPanel,
-        actionToggleAddPanel,
-        actionSetCurrentItem
-    }
-
-}
-
-
-export default ITEM

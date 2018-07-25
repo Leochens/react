@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './MsgList.css'
 import MsgItem from '../../components/MsgItem/MsgItem'
 import { connect } from 'react-redux'
-import ITEM from '../../actions/itemControlAction';
+import {
+    actionToggleItemPanel, actionSetCurrentItem
+} from '../../actions/itemControlAction';
 
 
 
@@ -41,8 +43,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        onToggleItemPanel: () => dispatch(ITEM.ACTION.actionToggleItemPanel()),
-        onSetCurrentItem: (currentItem) => dispatch(ITEM.ACTION.actionSetCurrentItem(currentItem))
+        onToggleitemPanel: () => dispatch(actionToggleItemPanel()),
+        onSetCurrentItem: (currentItem) => dispatch(actionSetCurrentItem(currentItem))
     }
 }
 

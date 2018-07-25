@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './AddPanel'
 import './AddPanel.css'
 import { connect } from 'react-redux'
-import ITEM from '../../actions/itemControlAction';
+import { actionAddMsg, actionToggleAddPanel} from '../../actions/itemControlAction';
 const icon4 = require('../../img/u4.jpg')
 
 class AddPanel extends Component {
@@ -59,8 +59,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddMsg: (item) => dispatch(ITEM.ACTION.actionAddMsg(item)),
-        onToggleAddPanel: () => dispatch(ITEM.ACTION.actionToggleAddPanel())
+        onAddMsg: (item) => dispatch(actionAddMsg(item)),
+        onToggleAddPanel: () => dispatch(actionToggleAddPanel())
     }
 }
 

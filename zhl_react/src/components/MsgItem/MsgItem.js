@@ -6,11 +6,11 @@ import './MsgItem.css';
 export default class MsgItem extends Component{   //defualt  just only one
 
     handleMoreBtnOnClick=()=>{
-        const {item,onToggleItemPanel,id,onSetCurrentItem} = this.props;
+        const {item,onToggleitemPanel,id,onSetCurrentItem} = this.props;
         const currentItem = {
             id,item
         }
-        onToggleItemPanel && onToggleItemPanel();           //item控制面板
+        onToggleitemPanel && onToggleitemPanel();           //item控制面板
         onSetCurrentItem && onSetCurrentItem(currentItem);       //获取到是哪个item被操作
     }
 
