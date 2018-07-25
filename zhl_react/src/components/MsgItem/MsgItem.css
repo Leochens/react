@@ -1,0 +1,54 @@
+.list_item{
+    margin: 0 ;
+    width: 100%;
+    border-bottom: 1px solid #ddd;      /*just set this side of border ENOUGH*/
+    display: flex;
+    align-items: center;
+    height: 65px;
+   
+  }
+  .list_item:hover{
+    background-color: #eee;
+  }
+  .list_item span.photo{
+    display: inline-block;
+    width: 65px;
+  
+    overflow: hidden;
+    margin: 10px;
+  }
+  .photo img{
+    width: 100%;height:100%;
+    margin-top: 3px;
+  }
+  .list_item span.time{
+    float: right;
+    width:32px;
+    margin:0 20px 0 0;
+    color: #888;
+    font-size: 12px;
+  }
+  ul.info{
+    display: inline-block;
+    width:90%;
+  }
+  li.user_name{
+    font-size: 15px;
+    margin-bottom: 5px;
+    font-weight: 520;
+  }
+  li.content{
+    font-size: 13px;
+    margin-top: 10px;;
+    color: #888;
+  }   
+  .msg-more{
+    background-color: #ddd;
+    font-size: 11px;
+    border-radius: 6px;
+    margin-right:  10px;;
+    padding: 2px;
+  }
+  .isUp{
+    background-color: #ddd;
+  }

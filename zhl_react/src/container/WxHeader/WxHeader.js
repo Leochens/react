@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './WxHeader.css';
 import {connect} from 'react-redux'
-import ITEM from '../actions/itemControlAction';
-const search = require('../img/search.png')
-const more = require('../img/Add.png')
+import ITEM from '../../actions/itemControlAction';
+const search = require('./img/search.png')
+const more = require('./img/Add.png')
 
  class WxHeader extends Component {
 
@@ -19,7 +19,7 @@ const more = require('../img/Add.png')
                 <span className="search">
                     <img src={search} alt="" />
                 </span>
-                <span className="more" onClick={this.props.showAddPanel}>
+                <span className="more" onClick={this.props.onToggleAddPanel}>
                     <img src={more} alt="" />
                 </span>
             </div>
@@ -32,6 +32,6 @@ const mapStateToProps=()=>{
 }   
 const mapDispatchToProps=(dispatch)=>{
     
-    return {showAddPanel:()=>dispatch({type:ITEM.TYPE.showAddPanel})}
+    return {onToggleAddPanel:()=>dispatch(ITEM.ACTION.actionToggleAddPanel())}
 }
 export default connect(mapStateToProps,mapDispatchToProps)(WxHeader)

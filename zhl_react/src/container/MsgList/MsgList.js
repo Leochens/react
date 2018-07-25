@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import MsgItem from '../components/MsgItem'
+import './MsgList.css'
+import MsgItem from '../../components/MsgItem/MsgItem'
 import { connect } from 'react-redux'
+import ITEM from '../../actions/itemControlAction';
 
-import '../App.css'
 
 
 class MsgList extends Component{
+
     _renderMsgs=()=>{
-        console.log("hello")
         const {messages}=this.props;
-        console.log(Array.isArray(messages))
         return  messages.map((item,idx)=>{
-           return  <MsgItem id={idx} item={item} key={idx} />
+           return  <MsgItem 
+            {...this.props}
+           id={idx} item={item} key={idx} />
         })
     }
     render(){
@@ -28,12 +30,16 @@ class MsgList extends Component{
 
 const mapStateToProps=(state)=>{
     return {
-        messages:state.itemControl.messages
+        messages:state.itemControl.messages,
+        currentItemId:state.itemControl.currentItemId,
+        itemPanelIsActive:state.itemControl.itemPanelIsActive
     }
 }
 const mapDispatchToProps=(dispatch)=>{
     return {
 
+        onToggleItemPanel:()=>dispatch(ITEM.ACTION.actionToggleItemPanel()),
+        onSetCurrentItemId:id=>dispatch(ITEM.ACTION.actionSetCurrentItemId(id))
     }
 }
 

@@ -1,52 +1,46 @@
 import React, { Component } from 'react'
-import '../App.css'
-import ACTIONS from '../constants';
-import {connect} from 'react-redux'
-import ITEM from '../actions/itemControlAction';
+import './AddPanel'
+import ACTIONS from '../../constants';
+import { connect } from 'react-redux'
+import ITEM from '../../actions/itemControlAction';
+const icon4 = require('../../img/u4.jpg')
+
 class AddPanel extends Component {
 
-
-    //关闭面板
-    handleClosePanel = () => {
-        const { close } = this.props
-        close && close()
-    }
     //添加新item
     handleAddNewItem = () => {
-        const { handleAddMsg } = this.props;
+        const { onAddMsg } = this.props;
 
         const newItem = {
+            icon: icon4,
             title: this.refs.title.value,
             description: this.refs.decription.value,
-            time: this.refs.time.defaultValue
+            time: this.refs.time.defaultValue,
+            isTop: false
         }
 
         if (!newItem.title || !newItem.description || !newItem.time) {
             alert("数据输入错误,请各数据段是否填写");
-            this.handleClosePanel()
             return null;
         }
         console.log(newItem)
         console.log(this.props)
-        handleAddMsg && handleAddMsg(newItem);
-
-        this.handleClosePanel()
+        onAddMsg && onAddMsg(newItem);
     }
-    
+
     //获得当前时间
     getTime = () => {
         const date = new Date();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        return h + ":" + m;
+        return date.getHours() + ":" + date.getMinutes();
     }
 
     render() {
-        const { isActive } = this.props
-        if (isActive !== ACTIONS.SHOW_ADD_PANEL) { return null }
+        const { addPanelIsActive } = this.props;
+        console.log("in add panel addPanelIsActive : " + addPanelIsActive)
+        if (!addPanelIsActive) { return null }
         return (
             <div className="panel" >
-                <button className="btn btn-close" onClick={this.handleClosePanel}>close</button>
+                <button className="btn btn-close" onClick={this.props.onToggleAddPanel}>close</button>
                 <div className="panel-content">
                     <input ref="title" className="panel-input" placeholder="Title"></input>
                     <input ref="decription" className="panel-input" placeholder="Description"></input>
@@ -58,16 +52,16 @@ class AddPanel extends Component {
         );
     }
 }
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
     return {
-        isActive:state.panelControl.addIsActive
+        addPanelIsActive: state.itemControl.addPanelIsActive
     }
 }
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return {
-        handleAddMsg:(item)=>dispatch(ITEM.ACTION.addMsg(item)),
-        close:()=>dispatch({type:ITEM.TYPE.hideAllPanel})
+        onAddMsg: (item) => dispatch(ITEM.ACTION.actionAddMsg(item)),
+        onToggleAddPanel: () => dispatch(ITEM.ACTION.actionToggleAddPanel())
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(AddPanel)

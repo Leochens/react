@@ -1,33 +1,52 @@
-import ItemControlPanel from "../components/ItemControlPanel";
 
 const handleSetTopMsg = 'handleSetTopMsg';
 const handleDeleteMsg = 'handleDeleteMsg';
 const handleDeleteSelectMsg='handleDeleteSelectMsg';
-
-const hideAllPanel = 'hideAllPanel';
-const showAddPanel = 'showAddPanel';
-const showItemPanel = 'showItemPanel' 
-
 const handleAddMsg = 'handleAddMsg';
 
-const setTopMsg=(id)=>{
+const hideAllPanel = 'hideAllPanel';
+const toggleAddPanel = 'toggleAddPanel';
+const toggleItemPanel = 'toggleItemPanel' 
+
+const setCurentItemId = 'setCurentItemId'
+
+
+
+const actionSetTopMsg=(id)=>{
     return {
         type:handleSetTopMsg,id
     }
 }
-const deleteMsg=(id)=>{
+const actionDeleteMsg=(id)=>{
     return {
         type:handleDeleteMsg,id
     }
 }
-const deleteSelectMsg=(ids)=>{
+const actionDeleteSelectMsg=(ids)=>{
     return {
         type:handleDeleteSelectMsg,ids
     }
 }
-const addMsg=(item)=>{
+const actionAddMsg=(item)=>{
     return {
         type:handleAddMsg,item
+    }
+}
+
+const actionToggleItemPanel=()=>{
+    return {
+        type:toggleItemPanel
+    }
+}
+const actionToggleAddPanel=()=>{
+    return {
+        type:toggleAddPanel
+    }
+}
+
+const actionSetCurrentItemId=(cur_id)=>{
+    return {
+        type:setCurentItemId,cur_id
     }
 }
 const ITEM={
@@ -37,14 +56,19 @@ const ITEM={
         handleDeleteSelectMsg,
         handleAddMsg,
         hideAllPanel,
-        showAddPanel,
-        showItemPanel
+        toggleAddPanel,
+        toggleItemPanel,
+        setCurentItemId
     },
     ACTION:{
-        setTopMsg,
-        deleteMsg,
-        deleteSelectMsg,
-        addMsg
+        actionSetTopMsg,
+        actionDeleteMsg,
+        actionDeleteSelectMsg,
+        actionAddMsg,
+        actionToggleItemPanel,
+        actionToggleAddPanel,
+        actionSetCurrentItemId
+
     }
 
 }

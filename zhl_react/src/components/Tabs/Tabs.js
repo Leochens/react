@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import '../App.css'
+import './Tabs.css'
 
-const wx = require('../img/wx.png')
-const phone = require('../img/phone-number.png')
-const find = require('../img/find.png')
-const me = require('../img/me.png')
+const wx = require('./img/wx.png')
+const phone = require('./img/phone-number.png')
+const find = require('./img/find.png')
+const me = require('./img/me.png')
 
 export default class Tabs extends Component {
 
