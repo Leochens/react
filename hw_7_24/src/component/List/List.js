@@ -12,7 +12,7 @@ export default class List extends Component {
             return <ListItem
                 idx={idx}
                 key={idx}
-                title={item.title}
+                id={item.id}
                 colorsOrder={item.colorsOrder}
                 {...this.props}
                 />

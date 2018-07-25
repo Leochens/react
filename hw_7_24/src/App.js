@@ -4,7 +4,7 @@ import './App.css';
 import Header from './component/Header/Header';
 import List from './component/List/List';
 import Tabs from './component/Tabs/Tabs';
-import { WX, TXL, FX, ME, DEFAULT_COLOR } from './constants'; //导入常量
+import { DEFAULT_COLOR } from './constants'; //导入常量
 
 
 
@@ -15,22 +15,28 @@ class App extends Component {
     this.state = {
       titlesOrder: [
         {
-          title: WX,
+          id:"wx",
           colorsOrder: DEFAULT_COLOR
         },
         {
-          title: TXL,
+          id:"txl",
           colorsOrder: DEFAULT_COLOR
         },
         {
-          title: FX,
+          id:"fx",
           colorsOrder: DEFAULT_COLOR
         },
         {
-          title: ME,
+          id:"me",
           colorsOrder: DEFAULT_COLOR
         },
-      ]
+      ],
+      tabbarMap:{
+        wx:DEFAULT_COLOR[0],
+        txl:DEFAULT_COLOR[0],
+        fx:DEFAULT_COLOR[0],
+        me:DEFAULT_COLOR[0]
+      }
     }
   }
 
@@ -42,19 +48,17 @@ class App extends Component {
     newOrder.unshift(front);
 
     titlesOrder[itemid].colorsOrder = newOrder;
-    this.setState({
-      titlesOrder
-    });
-  }
-  handleSetTopItem = (id) => {
-
-    let titlesOrder = this.state.titlesOrder.slice();
-    const itemWillToTop = titlesOrder.splice(id, 1);
+    const itemWillToTop = titlesOrder.splice(itemid, 1);
     titlesOrder.unshift(itemWillToTop[0]);
+    
+    const tabbarMap ={};
+    titlesOrder.forEach(item=>{
+      tabbarMap[item.id]=item.colorsOrder[0];
+    })
 
-
-    this.setState({ titlesOrder });
-
+    this.setState({
+      titlesOrder,tabbarMap
+    });
   }
   render() {
     return (
@@ -63,12 +67,11 @@ class App extends Component {
 
 
         <List
-          handleSetSpotfront={this.handleSetSpotfront}
-          handleSetTopItem={this.handleSetTopItem}
+          onSetSpotfront={this.handleSetSpotfront}
           titlesOrder={this.state.titlesOrder} />
 
         <Tabs
-          titlesOrder={this.state.titlesOrder} />
+          tabbarMap={this.state.tabbarMap} />
 
       </div>
     );

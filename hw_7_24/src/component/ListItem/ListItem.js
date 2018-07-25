@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ListItem.css';
 import './animate.css';
+import {TAB_BAR} from '../../constants';
 import ok from './img/ok.png';
 
 export default class ListItem extends Component {
@@ -8,15 +9,10 @@ export default class ListItem extends Component {
 
     onSetToFront = (spotid, itemidx) => {
 
-        const { handleSetSpotfront } = this.props;
-        handleSetSpotfront && handleSetSpotfront(itemidx, spotid);
+        const { onSetSpotfront } = this.props;
+        onSetSpotfront && onSetSpotfront(itemidx, spotid);
     }
-    onSetTopItem = (e) => {
-        const { handleSetTopItem } = this.props;
-        const idx = e.target.getAttribute('itemidx');
-        handleSetTopItem && handleSetTopItem(idx);
 
-    }
 
     renderSpot = () => {
         const { colorsOrder } = this.props;
@@ -49,7 +45,7 @@ export default class ListItem extends Component {
             <li className="list-item "
                 onClick={this.onSetTopItem} >
 
-                <span className="list-item-title">{this.props.title}</span>
+                <span className="list-item-title">{TAB_BAR[this.props.id]}</span>
                 <ul className="list-item-colors-list">
                     <li className="color-item">
                         {this.renderSpot()}
