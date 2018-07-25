@@ -7,7 +7,7 @@ const dyh = require('./img/dyh.png')
 const icon1 = require('./img/u1.jpg')
 const icon2 = require('./img/u2.jpg')
 const icon3 = require('./img/u3.jpg')
-const icon4 = require('./img/u4.jpg')
+// const icon4 = require('./img/u4.jpg')
 
 const state ={
     icons:{
@@ -53,11 +53,13 @@ const state ={
           isTop:false
         }
       ],
-      currentItemId:null,
+      currentItem:{
+        id:'',
+        item:''
+      },
       addPanelIsActive: false,
       itemPanelIsActive:false,
       delectDelIsActive: false,
-      testStr:"哈哈哈哈啊"
 }
 
 export default state

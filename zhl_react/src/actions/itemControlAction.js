@@ -1,75 +1,81 @@
 
 const handleSetTopMsg = 'handleSetTopMsg';
+const handleCancelSetTopMsg = 'handleCancelSetTopMsg'
+
 const handleDeleteMsg = 'handleDeleteMsg';
-const handleDeleteSelectMsg='handleDeleteSelectMsg';
+const handleDeleteSelectMsg = 'handleDeleteSelectMsg';
 const handleAddMsg = 'handleAddMsg';
 
 const toggleAddPanel = 'toggleAddPanel';
-const toggleItemPanel = 'toggleItemPanel' 
+const toggleItemPanel = 'toggleItemPanel'
 
-const setCurentItemId = 'setCurentItemId'
+const setCurrentItem = 'setCurrentItem'
 
-const ChangeText = 'ChangeText'
-
-const actionSetTopMsg=(id)=>{
+const actionSetTopMsg = (id) => {
     return {
-        type:handleSetTopMsg,id
+        type: handleSetTopMsg, id
     }
 }
-const actionDeleteMsg=(id)=>{
+const actionCancelSetTopMsg = () => {
     return {
-        type:handleDeleteMsg,id
+        type: handleCancelSetTopMsg
     }
 }
-const actionDeleteSelectMsg=(ids)=>{
+const actionDeleteMsg = (id) => {
     return {
-        type:handleDeleteSelectMsg,ids
+        type: handleDeleteMsg, id
     }
 }
-const actionAddMsg=(item)=>{
+const actionDeleteSelectMsg = (ids) => {
     return {
-        type:handleAddMsg,item
+        type: handleDeleteSelectMsg, ids
     }
 }
-
-const actionToggleItemPanel=()=>{
+const actionAddMsg = (item) => {
     return {
-        type:toggleItemPanel
-    }
-}
-const actionToggleAddPanel=()=>{
-    return {
-        type:toggleAddPanel
+        type: handleAddMsg, item
     }
 }
 
-const actionSetCurrentItemId=(cur_id)=>{
+const actionToggleItemPanel = () => {
     return {
-        type:setCurentItemId,cur_id
+        type: toggleItemPanel
     }
 }
-const ITEM={
-    TYPE:{
+const actionToggleAddPanel = () => {
+    return {
+        type: toggleAddPanel
+    }
+}
+
+const actionSetCurrentItem = (currentItem) => {
+    return {
+        type: setCurrentItem, currentItem
+    }
+}
+const ITEM = {
+    TYPE: {
         handleSetTopMsg,
+        handleCancelSetTopMsg,
         handleDeleteMsg,
         handleDeleteSelectMsg,
         handleAddMsg,
         toggleAddPanel,
         toggleItemPanel,
-        setCurentItemId,
+        setCurrentItem,
 
 
-        ChangeText
 
     },
-    ACTION:{
+    ACTION: {
         actionSetTopMsg,
+        actionCancelSetTopMsg,
         actionDeleteMsg,
         actionDeleteSelectMsg,
         actionAddMsg,
         actionToggleItemPanel,
         actionToggleAddPanel,
-        actionSetCurrentItemId
+        actionSetCurrentItem
     }
 
 }

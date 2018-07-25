@@ -6,45 +6,45 @@ import ITEM from '../../actions/itemControlAction';
 
 
 
-class MsgList extends Component{
+class MsgList extends Component {
 
-    _renderMsgs=()=>{
-        const {messages}=this.props;
-        return  messages.map((item,idx)=>{
-           return  <MsgItem 
-            {...this.props}
-           id={idx} item={item} key={idx} />
+    _renderMsgs = () => {
+        const { messages } = this.props;
+        return messages.map((item, idx) => {
+            return <MsgItem
+                {...this.props}
+                id={idx} item={item} key={idx} />
         })
     }
-    render(){
+    render() {
         return (
             <section className="main">
-            <ul className="list" ref="msgList">
-              {this._renderMsgs()}
-            </ul>
-          </section>
+                <ul className="list" ref="msgList">
+                    {this._renderMsgs()}
+                </ul>
+            </section>
         )
     }
 }
 
 
 //in
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
     return {
-        messages:state.itemControl.messages,
-        currentItemId:state.itemControl.currentItemId,
-        itemPanelIsActive:state.itemControl.itemPanelIsActive
+        messages: state.itemControl.messages,
+        currentItem: state.itemControl.currentItem,
+        itemPanelIsActive: state.itemControl.itemPanelIsActive
     }
 }
 
 //out
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return {
 
-        onToggleItemPanel:()=>dispatch(ITEM.ACTION.actionToggleItemPanel()),
-        onSetCurrentItemId:id=>dispatch(ITEM.ACTION.actionSetCurrentItemId(id))
+        onToggleItemPanel: () => dispatch(ITEM.ACTION.actionToggleItemPanel()),
+        onSetCurrentItem: (currentItem) => dispatch(ITEM.ACTION.actionSetCurrentItem(currentItem))
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(MsgList)
+export default connect(mapStateToProps, mapDispatchToProps)(MsgList)
 

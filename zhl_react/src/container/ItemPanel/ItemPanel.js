@@ -7,16 +7,22 @@ import ITEM from '../../actions/itemControlAction';
 class ItemPanel extends Component {
 
 
+    renderSetTop=()=>{
+        const {currentItem,onSetTopMsg,onCancelSetTopMsg} = this.props;
+        const {item} = currentItem;
 
+        if(item.isTop)
+        {
+            return(<button className="panel-btn" onClick={onCancelSetTopMsg}>取消置顶</button>)
+        }else{
+            return(<button className="panel-btn" onClick={onSetTopMsg}>置顶</button>)
+        }
+    }
     render() {
         const { itemPanelIsActive,
                 onToggleItemPanel,
-                onSetTopMsg,
                 onDeleteMsg,
                 onDeleteSelectMsg } = this.props;
-
-        console.log("ITEM_APNEL");
-        console.log(itemPanelIsActive)
 
         if (!itemPanelIsActive) {return null}
 
@@ -24,7 +30,7 @@ class ItemPanel extends Component {
             <div className="panel" >
                 <button className="item-panel-btn-close" onClick={onToggleItemPanel}>close</button>
                 <div className="panel-content">
-                    <button className="panel-btn" onClick={onSetTopMsg}>置顶</button>
+                {this.renderSetTop()}
                     <button className="panel-btn" onClick={onDeleteMsg}>删除</button>
                     <button className="panel-btn" onClick={onDeleteSelectMsg}>多选删除</button>
                 </div>
@@ -34,7 +40,8 @@ class ItemPanel extends Component {
 }
 const mapStateToProp = state => {
     return {
-        itemPanelIsActive: state.itemControl.itemPanelIsActive
+        itemPanelIsActive: state.itemControl.itemPanelIsActive,
+        currentItem:state.itemControl.currentItem
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -42,7 +49,8 @@ const mapDispatchToProps = dispatch => {
         onToggleItemPanel: () => dispatch(ITEM.ACTION.actionToggleItemPanel()),
         onSetTopMsg: () => dispatch(ITEM.ACTION.actionSetTopMsg()),
         onDeleteMsg: () => dispatch(ITEM.ACTION.actionDeleteMsg()),
-        onDeleteSelectMsg: () => dispatch(ITEM.ACTION.actionDeleteSelectMsg())
+        onDeleteSelectMsg: () => dispatch(ITEM.ACTION.actionDeleteSelectMsg()),
+        onCancelSetTopMsg:()=>dispatch(ITEM.ACTION.actionCancelSetTopMsg())
     }
 }
 export default connect(mapStateToProp, mapDispatchToProps)(ItemPanel)

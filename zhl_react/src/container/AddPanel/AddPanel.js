@@ -23,8 +23,6 @@ class AddPanel extends Component {
             alert("数据输入错误,请各数据段是否填写");
             return null;
         }
-        console.log(newItem)
-        console.log(this.props)
         onAddMsg && onAddMsg(newItem);
     }
 
@@ -36,7 +34,6 @@ class AddPanel extends Component {
 
     render() {
         const { addPanelIsActive } = this.props;
-        console.log("in add panel addPanelIsActive : " + addPanelIsActive)
         if (!addPanelIsActive) { return null }
         return (
             <div className="panel" >
