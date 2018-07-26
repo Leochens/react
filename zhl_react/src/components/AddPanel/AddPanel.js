@@ -33,7 +33,6 @@ export default class AddPanel extends Component {
 
     render() {
         const { addPanelIsActive, allActions} = this.props;
-        console.log(allActions);
         if (!addPanelIsActive) { return null }
         return (
             <div className="panel" >

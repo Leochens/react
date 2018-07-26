@@ -55,7 +55,7 @@ const Messagereducer = (state = INIT_STATE, action) => {
             });     //倒序排序
 
             deleteQueue.map((id) => {
-                messages.splice(id, 1)
+                return messages.splice(id, 1)
             });
             return Object.assign({}, { ...state }, {
                 messages,
@@ -84,7 +84,6 @@ const Messagereducer = (state = INIT_STATE, action) => {
             newMsg.unshift(newItem);
 
             const _newMsgs = topItems.concat(newMsg);
-            console.log(state);
             return Object.assign({ ...state }, { messages: _newMsgs })
         }
         case SET_CURRENT_ITEM: {
