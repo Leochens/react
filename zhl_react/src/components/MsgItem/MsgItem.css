@@ -13,16 +13,15 @@
   .list_item span.photo{
     display: inline-block;
     width: 65px;
-  
     overflow: hidden;
-    margin: 10px;
+    margin-left: 5px;;
   }
   .photo img{
-    width: 100%;height:100%;
+    width: 50px;height:50px;
     margin-top: 3px;
   }
-  .list_item span.time{
-    float: right;
+span.time{
+
     width:32px;
     margin:0 20px 0 0;
     color: #888;
@@ -30,7 +29,7 @@
   }
   ul.info{
     display: inline-block;
-    width:90%;
+    width:60%;
   }
   li.user_name{
     font-size: 15px;
@@ -42,6 +41,9 @@
     margin-top: 10px;;
     color: #888;
   }   
+  .more-wraper{
+    float: right;
+  }
   .msg-more{
     background-color: #ddd;
     font-size: 11px;

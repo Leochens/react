@@ -13,16 +13,16 @@ export default class MultiDeleteButton extends Component {
 
         return (
             multiDeleteIsActive &&
-            <div>
+            <div className="delete-wraper">
                 <button
                     className="multi-delete-button"
                     onClick={this.handleDeleteButtonClick}>
-                    delete
+                    删除
                 </button>
                 <button
-                    className="multi-delete-button"
+                    className="cancel-button"
                     onClick={allActions.actionToggleMultiDelButton}>
-                    cancel
+                    取消
                 </button>
             </div>
         )

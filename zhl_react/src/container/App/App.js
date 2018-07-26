@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as allActionCreators from '../../actions/itemControlAction';
+import * as allActionCreators from '../../actions/Actions';
 import MsgList from '../../components/MsgList/MsgList'
 import WxHeader from '../../components/WxHeader/WxHeader'
 import AddPanel from '../../components/AddPanel/AddPanel'
@@ -22,8 +22,8 @@ class App extends Component {
           currentItem={this.props.currentItem}
           itemPanelIsActive={this.props.itemPanelIsActive}
           multiDeleteIsActive={this.props.multiDeleteIsActive}
-          allActions={this.props.allActions} 
-          deleteQueue= {this.props.deleteQueue}/>
+          allActions={this.props.allActions}
+          deleteQueue={this.props.deleteQueue} />
         <AddPanel
           addPanelIsActive={this.props.addPanelIsActive}
           allActions={this.props.allActions} />
@@ -50,7 +50,6 @@ const mapStateToProps = state => {
     messages: state.MessageReducer.messages,
     currentItem: state.MessageReducer.currentItem,
     deleteQueue: state.MessageReducer.deleteQueue
-
   }
 }
 const mapDispatchToProps = dispatch => {

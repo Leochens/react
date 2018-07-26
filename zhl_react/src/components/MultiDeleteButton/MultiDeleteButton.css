@@ -1,0 +1,23 @@
+.delete-wraper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55px;
+    background-color: #3f3f3f;
+    z-index: 666;
+    line-height: 55px;
+}
+.multi-delete-button,
+.cancel-button{
+    background-color: #eee;
+    margin: 10px 10px ;
+    border: none;
+    display: inline-block;
+    height: 25px;
+    border-radius: 6px;
+    float: right;
+}
+.cancel-button{
+
+}

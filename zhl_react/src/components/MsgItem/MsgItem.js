@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './animate.css';
 import './MsgItem.css';
 export default class MsgItem extends Component {   //defualt  just only one
 
@@ -48,14 +49,14 @@ export default class MsgItem extends Component {   //defualt  just only one
             if (!deleteQueue.includes(id)) {    //检测当前项是否在删除列表 不在就不渲染红点
                 return (
                     <span
-                        className='check-box'
+                        className='check-box animated headShake'
                         onClick={this.toggleCheck}
                     ></span>
                 )
             } else {
                 return (
                     <span
-                        className={'check-box ' + this.state.extraClass}
+                        className={'check-box animated headShake ' + this.state.extraClass}
                         onClick={this.toggleCheck}
                     ></span>
                 )
@@ -78,8 +79,10 @@ export default class MsgItem extends Component {   //defualt  just only one
                     <li className="user_name">{item.title}</li>
                     <li className="content">{item.description}</li>
                 </ul>
-                <span className="msg-more" onClick={this.handleMoreBtnOnClick}>more</span>
-                <span className="time">{item.time}</span>
+                <div className="more-wraper">
+                    <span className="msg-more" onClick={this.handleMoreBtnOnClick}>more</span>
+                    <span className="time">{item.time}</span>
+                </div>
             </li>
 
         )
