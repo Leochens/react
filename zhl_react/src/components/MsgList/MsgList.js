@@ -8,9 +8,14 @@ export default class MsgList extends Component {
         const { messages, allActions } = this.props;
         return messages.map((item, idx) => {
             return <MsgItem
-            onToggleItemPanel = {allActions.actionToggleItemPanel}
-            onSetCurrentItem = {allActions.actionSetCurrentItem}
-                id={idx} item={item} key={idx} />
+                onToggleItemPanel={allActions.actionToggleItemPanel}
+                onSetCurrentItem={allActions.actionSetCurrentItem}
+                allActions={allActions}
+                multiDeleteIsActive = {this.props.multiDeleteIsActive}
+                deleteQueue = {this.props.deleteQueue}
+                id={idx} 
+                item={item} 
+                key={idx} />
         })
     }
     render() {

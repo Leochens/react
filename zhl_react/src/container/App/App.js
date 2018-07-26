@@ -7,6 +7,8 @@ import WxHeader from '../../components/WxHeader/WxHeader'
 import AddPanel from '../../components/AddPanel/AddPanel'
 import ItemPanel from '../../components/ItemPanel/ItemPanel'
 import Tabs from '../../components/Tabs/Tabs'
+import MultiDeleteButton from '../../components/MultiDeleteButton/MultiDeleteButton';
+
 import './App.css';
 
 class App extends Component {
@@ -19,14 +21,21 @@ class App extends Component {
           messages={this.props.messages}
           currentItem={this.props.currentItem}
           itemPanelIsActive={this.props.itemPanelIsActive}
-          allActions={this.props.allActions} />
+          multiDeleteIsActive={this.props.multiDeleteIsActive}
+          allActions={this.props.allActions} 
+          deleteQueue= {this.props.deleteQueue}/>
         <AddPanel
           addPanelIsActive={this.props.addPanelIsActive}
           allActions={this.props.allActions} />
         <ItemPanel
           itemPanelIsActive={this.props.itemPanelIsActive}
           currentItem={this.props.currentItem}
-          allActions={this.props.allActions} /> 
+          allActions={this.props.allActions} />
+
+        <MultiDeleteButton
+          multiDeleteIsActive={this.props.multiDeleteIsActive}
+          allActions={this.props.allActions}
+        />
         <Tabs />
       </div>
     );
@@ -37,9 +46,11 @@ const mapStateToProps = state => {
   return {
     addPanelIsActive: state.PanelReducer.addPanelIsActive,
     itemPanelIsActive: state.PanelReducer.itemPanelIsActive,
-    delectDelIsActive: state.PanelReducer.delectDelIsActive,
+    multiDeleteIsActive: state.PanelReducer.multiDeleteIsActive,
     messages: state.itemControl.messages,
-    currentItem: state.itemControl.currentItem
+    currentItem: state.itemControl.currentItem,
+    deleteQueue: state.itemControl.deleteQueue
+
   }
 }
 const mapDispatchToProps = dispatch => {

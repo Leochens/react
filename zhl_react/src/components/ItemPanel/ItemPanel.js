@@ -23,7 +23,7 @@ export default class ItemPanel extends Component {
                     <button className="panel-btn"
                         onClick={allActions.actionDeleteMsg}>删除</button>
                     <button className="panel-btn"
-                        onClick={allActions.actionDeleteSelectMsg}>多选删除</button>
+                        onClick={allActions.actionToggleMultiDelButton}>多选删除</button>
                 </div>
             </div>
         )

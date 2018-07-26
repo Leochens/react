@@ -52,3 +52,12 @@
   .isTop{
     background-color: #eee;
   }
+  .check-box{
+    width: 25px;
+    height: 25px;
+    border:1px solid #aaa;
+    border-radius: 50%;
+  }
+  .ischecked{
+    background-color: #DC143C;
+  }

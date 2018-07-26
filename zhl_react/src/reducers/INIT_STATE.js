@@ -56,9 +56,11 @@ const INIT_STATE = {
         id: '',
         item: ''
     },
+    deleteQueue: [],
     addPanelIsActive: false,
     itemPanelIsActive: false,
-    delectDelIsActive: false,
+    multiDeleteIsActive: false,
+    test:""
 }
 
 export default INIT_STATE;
