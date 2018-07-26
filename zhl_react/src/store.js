@@ -1,9 +1,9 @@
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
-import MainReducer from './reducers/reducers';
+import RootReducer from './reducers/index.js';
 const logger = createLogger();
 const store = createStore(
-    MainReducer,
+    RootReducer,
     applyMiddleware(logger)
 );
 

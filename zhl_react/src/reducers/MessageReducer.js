@@ -1,8 +1,17 @@
-import { combineReducers } from 'redux'
-import { SET_TOP_MSG, CANCEL_SET_TOP_MSG, DEL_MSG, DEL_SELECT_MSG, ADD_MSG, TOGGLE_ADD_PANEL, TOGGLE_ITEM_PANEL, SET_CURRENT_ITEM, TOGGLE_MULTI_DEL_BUTTON, ADD_TO_DELETE_QUEUE, DEL_FROM_DELETE_QUEUE } from '../const/ActionTypes'
+import {
+    SET_TOP_MSG,
+    CANCEL_SET_TOP_MSG,
+    DEL_MSG,
+    DEL_SELECT_MSG,
+    ADD_MSG,
+    SET_CURRENT_ITEM,
+    ADD_TO_DELETE_QUEUE,
+    DEL_FROM_DELETE_QUEUE
+} from '../const/ActionTypes';
+
 import INIT_STATE from './INIT_STATE'
 
-const itemControl = (state = INIT_STATE, action) => {
+const Messagereducer = (state = INIT_STATE, action) => {
     switch (action.type) {
 
         case SET_TOP_MSG: {           //置顶
@@ -48,9 +57,9 @@ const itemControl = (state = INIT_STATE, action) => {
             deleteQueue.map((id) => {
                 messages.splice(id, 1)
             });
-            return Object.assign({}, { ...state }, { 
+            return Object.assign({}, { ...state }, {
                 messages,
-                deleteQueue:[]
+                deleteQueue: []
             });
 
         }
@@ -66,15 +75,11 @@ const itemControl = (state = INIT_STATE, action) => {
                     break;
                 }
             }
-            
-            if(cnt === newMsg.length)       // 检测都是置顶的情况
+            if (cnt === newMsg.length)       // 检测都是置顶的情况
             {
                 newMsg.push(newItem);
-                return Object.assign({},{...state},{messages:newMsg});
+                return Object.assign({}, { ...state }, { messages: newMsg });
             }
-            
-
-
             const topItems = newMsg.splice(0, insertId)
             newMsg.unshift(newItem);
 
@@ -89,8 +94,7 @@ const itemControl = (state = INIT_STATE, action) => {
             const id = action.id;
             const { deleteQueue } = state;
             // console.log('add to del queue');
-            if(deleteQueue.includes(id))
-            {
+            if (deleteQueue.includes(id)) {
                 return state;
             }
             deleteQueue.push(id);
@@ -108,41 +112,15 @@ const itemControl = (state = INIT_STATE, action) => {
             for (let i = 0; i < deleteQueue.length; i++) {
                 if (deleteQueue[i] === id) {
                     splice_id = i;      //找到起始点
-                    break;     
+                    break;
                 }
             }
-            deleteQueue.splice(splice_id,1);        //删除所选的id
-            return Object.assign({},{...state},{
+            deleteQueue.splice(splice_id, 1);        //删除所选的id
+            return Object.assign({}, { ...state }, {
                 deleteQueue
             })
         }
         default: return state
     }
 }
-
-
-const PanelReducer = (state = INIT_STATE, action) => {
-    switch (action.type) {
-        case TOGGLE_ITEM_PANEL: {
-            return Object.assign({ ...state },
-                { itemPanelIsActive: !state.itemPanelIsActive })
-
-        }
-        case TOGGLE_ADD_PANEL: {
-            return Object.assign({ ...state },
-                { addPanelIsActive: !state.addPanelIsActive })
-
-        }
-        case TOGGLE_MULTI_DEL_BUTTON: {
-            return Object.assign({ ...state },
-                { multiDeleteIsActive: !state.multiDeleteIsActive })
-        }
-        default: return state
-    }
-}
-
-const MainReducers = combineReducers({
-    itemControl,
-    PanelReducer
-})
-export default MainReducers
+export default Messagereducer;

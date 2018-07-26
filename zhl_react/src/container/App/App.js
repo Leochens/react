@@ -44,12 +44,12 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    addPanelIsActive: state.PanelReducer.addPanelIsActive,
-    itemPanelIsActive: state.PanelReducer.itemPanelIsActive,
-    multiDeleteIsActive: state.PanelReducer.multiDeleteIsActive,
-    messages: state.itemControl.messages,
-    currentItem: state.itemControl.currentItem,
-    deleteQueue: state.itemControl.deleteQueue
+    addPanelIsActive: state.UIReducer.addPanelIsActive,
+    itemPanelIsActive: state.UIReducer.itemPanelIsActive,
+    multiDeleteIsActive: state.UIReducer.multiDeleteIsActive,
+    messages: state.MessageReducer.messages,
+    currentItem: state.MessageReducer.currentItem,
+    deleteQueue: state.MessageReducer.deleteQueue
 
   }
 }
