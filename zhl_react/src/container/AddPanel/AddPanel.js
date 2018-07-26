@@ -3,7 +3,8 @@ import './AddPanel'
 import './AddPanel.css'
 import { connect } from 'react-redux'
 import { actionAddMsg, actionToggleAddPanel} from '../../actions/itemControlAction';
-const icon4 = require('../../img/u4.jpg')
+// import * as action from '../../actions/itemControlAction'
+const icon4 = require('../../img/u2.jpg')
 
 class AddPanel extends Component {
 
@@ -15,7 +16,7 @@ class AddPanel extends Component {
             icon: icon4,
             title: this.refs.title.value,
             description: this.refs.decription.value,
-            time: this.refs.time.defaultValue,
+            time: this.refs.time.value,
             isTop: false
         }
 
