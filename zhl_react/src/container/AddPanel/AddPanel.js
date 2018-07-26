@@ -3,8 +3,7 @@ import './AddPanel'
 import './AddPanel.css'
 import { connect } from 'react-redux'
 import * as allActionsCreator from '../../actions/itemControlAction';
-import {bindActionCreators} from 'redux'
-// import * as action from '../../actions/itemControlAction'
+import { bindActionCreators } from 'redux'      // 绑定所有action 会自动执行dispatch
 const icon4 = require('../../img/u2.jpg')
 
 class AddPanel extends Component {
@@ -61,9 +60,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // onAddMsg: (item) => dispatch(actionAddMsg(item)),
-        // onToggleAddPanel: () => dispatch(actionToggleAddPanel())
-        allActions:bindActionCreators(allActionsCreator,dispatch)
+        allActions: bindActionCreators(allActionsCreator, dispatch)
     }
 }
 
