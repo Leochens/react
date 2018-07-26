@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './AddPanel'
 import './AddPanel.css'
 import { connect } from 'react-redux'
-import { actionAddMsg, actionToggleAddPanel} from '../../actions/itemControlAction';
+import * as allActionsCreator from '../../actions/itemControlAction';
+import {bindActionCreators} from 'redux'
 // import * as action from '../../actions/itemControlAction'
 const icon4 = require('../../img/u2.jpg')
 
@@ -10,7 +11,7 @@ class AddPanel extends Component {
 
     //添加新item
     handleAddNewItem = () => {
-        const { onAddMsg } = this.props;
+        const { allActions } = this.props;
 
         const newItem = {
             icon: icon4,
@@ -24,7 +25,7 @@ class AddPanel extends Component {
             alert("数据输入错误,请各数据段是否填写");
             return null;
         }
-        onAddMsg && onAddMsg(newItem);
+        allActions.onAddMsg && allActions.onAddMsg(newItem);
     }
 
     //获得当前时间
@@ -60,8 +61,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddMsg: (item) => dispatch(actionAddMsg(item)),
-        onToggleAddPanel: () => dispatch(actionToggleAddPanel())
+        // onAddMsg: (item) => dispatch(actionAddMsg(item)),
+        // onToggleAddPanel: () => dispatch(actionToggleAddPanel())
+        allActions:bindActionCreators(allActionsCreator,dispatch)
     }
 }
 
