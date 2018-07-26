@@ -1,8 +1,8 @@
 import { SET_TOP_MSG, CANCEL_SET_TOP_MSG, DEL_MSG, DEL_SELECT_MSG, ADD_MSG, TOGGLE_ADD_PANEL, TOGGLE_ITEM_PANEL, SET_CURRENT_ITEM } from '../const/ActionTypes'
 
-export const actionSetTopMsg = (id) => {
+export const actionSetTopMsg = () => {
     return {
-        type: SET_TOP_MSG, id
+        type: SET_TOP_MSG
     }
 }
 export const actionCancelSetTopMsg = () => {
@@ -10,14 +10,14 @@ export const actionCancelSetTopMsg = () => {
         type: CANCEL_SET_TOP_MSG
     }
 }
-export const actionDeleteMsg = (id) => {
+export const actionDeleteMsg = () => {
     return {
-        type: DEL_MSG, id
+        type: DEL_MSG
     }
 }
 export const actionDeleteSelectMsg = (ids) => {
     return {
-        type: DEL_SELECT_MSG, ids
+        type: DEL_SELECT_MSG
     }
 }
 export const actionAddMsg = (item) => {

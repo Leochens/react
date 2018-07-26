@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './WxHeader.css';
-import {connect} from 'react-redux'
-import { actionToggleAddPanel } from '../../actions/itemControlAction';
+
 const search = require('./img/search.png')
 const more = require('./img/Add.png')
 
@@ -9,7 +8,7 @@ const more = require('./img/Add.png')
 
 
     render() {
-        
+        const { allActions } = this.props;
         return (
         <header>
             <span className="title">
@@ -19,7 +18,7 @@ const more = require('./img/Add.png')
                 <span className="search">
                     <img src={search} alt="" />
                 </span>
-                <span className="more" onClick={this.props.onToggleAddPanel}>
+                <span className="more" onClick={allActions.actionToggleAddPanel}>
                     <img src={more} alt="" />
                 </span>
             </div>
@@ -27,11 +26,5 @@ const more = require('./img/Add.png')
         )
     }
 }
-const mapStateToProps=()=>{
-    return {}
-}   
-const mapDispatchToProps=(dispatch)=>{
-    
-    return {onToggleAddPanel:()=>dispatch(actionToggleAddPanel())}
-}
-export default connect(mapStateToProps,mapDispatchToProps)(WxHeader)
+
+export default WxHeader;

@@ -7,7 +7,6 @@ const dyh = require('../img/dyh.png')
 const icon1 = require('../img/u1.jpg')
 const icon2 = require('../img/u2.jpg')
 const icon3 = require('../img/u3.jpg')
-// const icon4 = require('../img/u4.jpg')
 
 const INIT_STATE = {
     icons: {

@@ -16,7 +16,7 @@ const itemControl = (state = INIT_STATE, action) => {
 
             newMsg.unshift(item[0]);
             return Object.assign({}, state, {
-                messages: newMsg, itemPanelIsActive: !state.itemPanelIsActive
+                messages: newMsg
             })
         }
         case CANCEL_SET_TOP_MSG: {
@@ -26,7 +26,7 @@ const itemControl = (state = INIT_STATE, action) => {
             item_down[0].isTop = false;
             newMsg.push(item_down[0]);
             return Object.assign({ ...state }, {
-                messages: newMsg, itemPanelIsActive: !state.itemPanelIsActive
+                messages: newMsg
             })
         }
         case DEL_MSG: {           //删除
@@ -34,7 +34,7 @@ const itemControl = (state = INIT_STATE, action) => {
             const newMsg = state.messages.slice();
             newMsg.splice(id, 1);
             return Object.assign({ ...state }, {
-                messages: newMsg, itemPanelIsActive: !state.itemPanelIsActive
+                messages: newMsg
             })
         }
         case DEL_SELECT_MSG: {     //多选删除
@@ -55,15 +55,8 @@ const itemControl = (state = INIT_STATE, action) => {
             newMsg.unshift(newItem);
 
             const _newMsgs = topItems.concat(newMsg);
-            return Object.assign({ ...state }, { messages: _newMsgs, addPanelIsActive: !state.addPanelIsActive })
-        }
-        case TOGGLE_ITEM_PANEL: {
-            return Object.assign({ ...state }, { itemPanelIsActive: !state.itemPanelIsActive })
-
-        }
-        case TOGGLE_ADD_PANEL: {
-            return Object.assign({ ...state }, { addPanelIsActive: !state.addPanelIsActive })
-
+            console.log(state);
+            return Object.assign({ ...state }, { messages: _newMsgs})
         }
         case SET_CURRENT_ITEM: {
             return Object.assign({ ...state }, { currentItem: action.currentItem })
@@ -73,7 +66,22 @@ const itemControl = (state = INIT_STATE, action) => {
 }
 
 
+const PanelReducer = (state = INIT_STATE, action) => {
+    switch (action.type) {
+        case TOGGLE_ITEM_PANEL: {
+            return Object.assign({ ...state }, { itemPanelIsActive: !state.itemPanelIsActive })
+
+        }
+        case TOGGLE_ADD_PANEL: {
+            return Object.assign({ ...state }, { addPanelIsActive: !state.addPanelIsActive })
+
+        }
+
+        default: return state
+    }
+}
+
 const MainReducers = combineReducers({
-    itemControl
+    itemControl, PanelReducer
 })
 export default MainReducers

@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import './AddPanel'
 import './AddPanel.css'
-import { connect } from 'react-redux'
-import * as allActionsCreator from '../../actions/itemControlAction';
-import { bindActionCreators } from 'redux'      // 绑定所有action 会自动执行dispatch
 const icon4 = require('../../img/u2.jpg')
 
-class AddPanel extends Component {
+export default class AddPanel extends Component {
 
     //添加新item
     handleAddNewItem = () => {
         const { allActions } = this.props;
-
+        console.log(allActions);
         const newItem = {
             icon: icon4,
             title: this.refs.title.value,
@@ -24,7 +21,8 @@ class AddPanel extends Component {
             alert("数据输入错误,请各数据段是否填写");
             return null;
         }
-        allActions.onAddMsg && allActions.onAddMsg(newItem);
+        allActions.actionAddMsg && allActions.actionAddMsg(newItem);    //添加
+        allActions.actionToggleAddPanel && allActions.actionToggleAddPanel(); //关闭面板
     }
 
     //获得当前时间
@@ -34,11 +32,12 @@ class AddPanel extends Component {
     }
 
     render() {
-        const { addPanelIsActive } = this.props;
+        const { addPanelIsActive, allActions} = this.props;
+        console.log(allActions);
         if (!addPanelIsActive) { return null }
         return (
             <div className="panel" >
-                <button className="btn btn-close" onClick={this.props.onToggleAddPanel}>X</button>
+                <button className="btn btn-close" onClick={allActions.actionToggleAddPanel}>X</button>
                 <div className="add-panel-content">
                     <input ref="title" className="panel-input" placeholder="Title"></input>
                     <input ref="decription" className="panel-input" placeholder="Description"></input>
@@ -53,15 +52,3 @@ class AddPanel extends Component {
 
 
 
-const mapStateToProps = (state) => {
-    return {
-        addPanelIsActive: state.itemControl.addPanelIsActive
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        allActions: bindActionCreators(allActionsCreator, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddPanel)
