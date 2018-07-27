@@ -1,5 +1,4 @@
 ## 张鹤麟 第二周答辩
----
 
 ### Redux的出现原因(解决了什么样的问题)
 > 主要现在单页面(spa)开发的复杂度越来越高，**数据的管理变得越来越困难**，不同的组件可能会有很高的数据耦合。
@@ -8,11 +7,16 @@
 
 ### Redux的思想
 > **State的变化时可预测的。**
-> 因为store里数据操纵函数是纯函数
+* 因为store里数据操纵函数是纯函数
 
 > **流水线通信**
-首先数据都统一的存放到store里，store里会有许多Reducer去分管不同的state数据。组件可以通过mapStateToProps函数来告知store它需要哪些数据，并通过connect函数与store建立连接最终把数据在渲染组件的时候注入到组件的props里。当组件要修改store的数据时需要通过dispatch函数发起一个action，这个action必须有一个type属性，而且可以携带负载的参数。之后dispatch函数会带着这个action去交个store里的reducers，管理该区域数据的reducer可以根据action的type类型来执行不同的操作，最终store里数据进行更新并重新渲染组件。如果是异步请求的话，还需要引入中间件。
-    > ![Redux][1]
+* 首先数据都统一的存放到store里，store里会有许多Reducer去分管不同的state数据。
+* 组件可以通过mapStateToProps函数来告知store它需要哪些数据，并通过connect函数与store建立连接最终把数据在渲染组件的时候注入到组件的props里。
+* 当组件要修改store的数据时需要通过dispatch函数发起一个action，这个action必须有一个type属性，而且可以携带负载的参数。
+* 之后dispatch函数会带着这个action去交个store里的reducers，管理该区域数据的reducer可以根据action的type类型来执行不同的操作。
+* 最终store里数据进行更新并重新渲染组件。
+* 如果是异步请求的话，还需要引入中间件。
+![Redux][1]
 ### Redux的三大准则
 
 > **单一状态源**
@@ -20,7 +24,7 @@
 * Redux秉持单一状态，把所有的状态(State)存到store里。
 
 > **只读状态**
- store里的数据时只读的，外界只能去获取它的值但是却不能进行改变。如果要改变store里的数据，则必须通过发起action去调用store里的reducer，因为只有reducer才有权利去改变store里数据。
+store里的数据时只读的，外界只能去获取它的值但是却不能进行改变。如果要改变store里的数据，则必须通过发起action去调用store里的reducer，因为只有reducer才有权利去改变store里数据。
  
 > **纯函数reducer去修改状态**
 * React里面其实自带了一个Context的属性，也就意味着所有的组件只要得到了Context都有可能直接去操作最顶层的数据。这是极不安全的。
