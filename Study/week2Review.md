@@ -24,7 +24,8 @@
 * Redux秉持单一状态，把所有的状态(State)存到store里。
 
 > **只读状态**
-store里的数据时只读的，外界只能去获取它的值但是却不能进行改变。如果要改变store里的数据，则必须通过发起action去调用store里的reducer，因为只有reducer才有权利去改变store里数据。
+* store里的数据时只读的，外界只能去获取它的值但是却不能进行改变。如果要改变store里的数据，则必须通过发起action去调用store里的reducer
+* 只有reducer才有权利去改变store里数据。
  
 > **纯函数reducer去修改状态**
 * React里面其实自带了一个Context的属性，也就意味着所有的组件只要得到了Context都有可能直接去操作最顶层的数据。这是极不安全的。
