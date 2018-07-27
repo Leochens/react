@@ -89,6 +89,7 @@ const Messagereducer = (state = INIT_STATE, action) => {
         case SET_CURRENT_ITEM: {
             return Object.assign({ ...state }, { currentItem: action.currentItem })
         }
+        
         case ADD_TO_DELETE_QUEUE: {
             const id = action.id;
             const { deleteQueue } = state;

@@ -11,10 +11,10 @@ export default class MsgList extends Component {
                 onToggleItemPanel={allActions.actionToggleItemPanel}
                 onSetCurrentItem={allActions.actionSetCurrentItem}
                 allActions={allActions}
-                multiDeleteIsActive = {this.props.multiDeleteIsActive}
-                deleteQueue = {this.props.deleteQueue}
-                id={idx} 
-                item={item} 
+                multiDeleteIsActive={this.props.multiDeleteIsActive}
+                deleteQueue={this.props.deleteQueue}
+                id={idx}
+                item={item}
                 key={idx} />
         })
     }

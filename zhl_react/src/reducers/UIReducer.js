@@ -1,7 +1,12 @@
 import { TOGGLE_ADD_PANEL, TOGGLE_ITEM_PANEL, TOGGLE_MULTI_DEL_BUTTON } from '../const/ActionTypes'
 import INIT_STATE from './INIT_STATE'
-
-const UIReducer = (state = INIT_STATE, action) => {
+const initState = {
+    addPanelIsActive: false,
+    itemPanelIsActive: false,
+    multiDeleteIsActive: false,
+    test:""
+}
+const UIReducer = (state = initState, action) => {
     switch (action.type) {
         case TOGGLE_ITEM_PANEL: {
             return Object.assign({ ...state },
