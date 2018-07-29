@@ -19,7 +19,7 @@ class Todo extends Component {
                 <TodoList
                     list={this.props.list}
                     toggleComplete={allActions.actionToggleComplete} />
-                {/* <TabBar /> */}
+                <TabBar />
             </div>
         )
     }
