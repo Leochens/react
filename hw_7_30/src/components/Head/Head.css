@@ -1,0 +1,16 @@
+.head{
+  padding: 30px ;
+  padding-bottom: 0;
+}
+.head-photo{
+
+}
+.user-profile{
+ 
+}
+.user-info-item{
+    /* display: inline-block; */
+    float: left;
+    margin:  3px 0;
+    width: 200px;;    
+}
