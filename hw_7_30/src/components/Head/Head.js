@@ -4,13 +4,12 @@ import { Avatar, Row, Col, Icon } from 'antd';
 import { Input } from 'antd';
 import head_pic from './img/head_pic.jpg'
 export default class Head extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         this.tmp = '';
     }
     onInputChange = e => {
-        this.tmp= e.target.value;
+        this.tmp = e.target.value;
     }
     renderStaticInfos = () => {
         const { staticInfos, staticInfosMap } = this.props.headData;
@@ -23,34 +22,35 @@ export default class Head extends Component {
             </Col>
         })
     }
-    handleChangeDynamicData = (item) =>{
+    handleChangeDynamicData = (item) => {
         const { inputAction } = this.props;
         inputAction.actionChangeDynamicData &&
-        inputAction.actionChangeDynamicData(item,this.tmp);
+            inputAction.actionChangeDynamicData(item, this.tmp);
         this.tmp = '';
 
-        // inputAction.actionToggleDynamicEdit &&
-        // inputAction.actionToggleDynamicEdit(item); 
+
     }
     renderDynamicInfos = () => {
         const { dynamicInfos, dynamicInfosMap } = this.props.headData;
         const { inputAction } = this.props;
         const dkeys = Object.keys(dynamicInfos);
         return dkeys.map((item, id) => {
-            console.log(dynamicInfosMap[item].edit);
             let res = null;
-            if (dynamicInfosMap[item].edit===true) {
-                console.log('fbj');
+            if (dynamicInfosMap[item].edit === true) {
                 res = <Col span={16}
                     key={id}
-                    className="user-info-item">
-                    <Input ref="zz" size='small' onChange={this.onInputChange}
-                        addonAfter={
-                            <span onClick={this.handleChangeDynamicData.bind(this,item)}>
-                                <Icon type="check" />
-                            </span>
-                        }
-                        placeholder={dynamicInfosMap[item].content} />
+                >
+                    <div className="user-info-item">
+
+                        <span>{dynamicInfosMap[item].content}:</span> &nbsp;
+                        <span style={{ display: 'inline-block', width: 150 }}><Input size="small" className="inp" onChange={this.onInputChange}
+                            addonAfter={
+                                <span onClick={this.handleChangeDynamicData.bind(this, item)}>
+                                    <Icon type="check" />
+                                </span>
+                            }
+                            placeholder={dynamicInfosMap[item].content} /></span>
+                    </div>
                 </Col>
             } else {
                 res = <Col span={16}
@@ -67,15 +67,14 @@ export default class Head extends Component {
     }
     render() {
 
-        console.log(this.refs.zz);
         return (
             <div className="head">
                 <Row>
                     <Col span={4} >
-                        <Avatar 
-                        src={head_pic}
-                        style={{ width: 100, height: 100 }} 
-                        shape='square'></Avatar>
+                        <Avatar
+                            src={head_pic}
+                            style={{ width: 130, height: 110 }}
+                            shape='square'></Avatar>
                     </Col>
                     <Col span={20}>
                         <div className="user-profile">

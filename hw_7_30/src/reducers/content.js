@@ -4,8 +4,8 @@ import ACTION_TYPES from '../const';
 
 const calcColor = (text) => {
     const x = text.split('/');
-    const a = parseInt(x[0]);
-    const b = parseInt(x[1]);
+    const a = parseInt(x[0],2);
+    const b = parseInt(x[1],2);
     const res = a/b;
     if(res>0.95){
         return <div style={{color:'orange',fontWeight:600}}>{text}</div>
@@ -205,7 +205,6 @@ const contentReducer = (state = initState, action) => {
             const headData = {...state.headData};
             
             headData.dynamicInfosMap[action.id].edit = !headData.dynamicInfosMap[action.id].edit;
-            // _state.flag=!_state.flag;
             return Object.assign({},state,{
                 headData
             });

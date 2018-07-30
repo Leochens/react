@@ -9,9 +9,9 @@ export default class ButtonBox extends Component {
         return (
             <div className="button-box-wrapper">
                 <div className="left-buttons">
-                    <Button>汇总</Button>
-                    <Button className="grey-button" style={{backgroundColor:'grey',color:'white'}}>摄影课</Button>
-                    <Button>绘画课</Button>
+                    <Button style={{marginRight:20}}>汇总</Button>
+                    <Button style={{backgroundColor:'grey',color:'white',marginRight:20}}>摄影课</Button>
+                    <Button  style={{marginRight:20}}>绘画课</Button>
                 </div>
                 <div className="right-buttons">
                     <Button>返回</Button>

@@ -10,7 +10,6 @@ export default class _Tabs extends Component {
 
     render() {
         const { headList,dataList,historyList } = this.props.tableData;
-        // console.log(this.props);
         return (
             <div className="Tabs">
                 <Tabs

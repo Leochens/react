@@ -1,6 +1,7 @@
 .head{
   padding: 30px ;
   padding-bottom: 0;
+
 }
 .head-photo{
 
@@ -9,8 +10,18 @@
  
 }
 .user-info-item{
-    /* display: inline-block; */
-    float: left;
+   
+    width: 300px;
+    
     margin:  3px 0;
-    width: 200px;;    
+    font-weight: 450;
+    
+}
+.user-name{
+  font-weight: 600;
+  font-size: 15px;
+  color: rgb(96, 125, 139);
+}
+.inp{
+  width:100px;
 }
