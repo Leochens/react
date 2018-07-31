@@ -1,8 +1,8 @@
 import React from 'react';
 import { Icon } from 'antd';
 import ACTION_TYPES from '../const';
-import { TABLE_HEAD } from '../const/config'
-
+import { TABLE_HEAD, USER_INFO } from '../const/config'
+import { ColorText } from '../tools/colorTools';
 //type 1 —> 分数 2 -> 百分数 
 const calcColor = (text, type) => {
     switch (type) {
@@ -11,25 +11,17 @@ const calcColor = (text, type) => {
             const a = parseInt(x[0], 10);
             const b = parseInt(x[1], 10);
             const res = a / b;
-            if (res > 0.95) {
-                return <div style={{ color: 'orange', fontWeight: 600 }}>{text}</div>
-            } else if (res < 0.80) {
-                return <div style={{ color: 'red', fontWeight: 600 }}>{text}</div>
-            } else {
-                return <div>{text}</div>
-            }
+
+            const type = (res > 0.95) ? 'great' : res < 0.80 ? 'warning' : 'default';
+            return (<ColorText type={type} text={text} />)
         }
         case 2: {
             const percent = (parseFloat(text) * 100).toFixed(2);
-            if (percent > 95) {
-                return <div style={{ color: 'orange', fontWeight: 600 }}>{percent + '%'}</div>
-            } else if (percent < 80) {
-                return <div style={{ color: 'red', fontWeight: 600 }}>{percent + '%'}</div>
-            } else {
-                return <div>{percent + '%'}</div>
-            }
+            const type = (percent > 95) ? 'great' : percent < 80 ? 'warning' : 'default';
+            return (<ColorText type={type} text={`${percent}%`} />)
         }
         default: return null;
+
     }
 }
 
@@ -50,24 +42,10 @@ const initState = {
             totalLearningDays: '',
             weiChatCode: ''
         },
-        dynamicInfosMap: {
-            phoneNumber: {
-                content: '手机号码',
-                edit: false
-            },
-            wxId: {
-                content: '微信号码',
-                edit: false
-            },
-            remarks: {
-                content: '备注',
-                edit: false
-            },
-        },
-        dynamicInfos: {
-            phoneNumber: '18332518328',
-            wxId: 'zhllc999',
-            remarks: '暂无备注',
+        dynamicInfoEditMap:{
+            tel:false,
+            weiChatCode:false,
+            remark:false
         }
     },
     tableData: {
@@ -82,7 +60,7 @@ const initState = {
                 title: TABLE_HEAD.LESSON_STATUS,
                 dataIndex: 'status',
                 key: 'status',
-                render: text => text?'进行中':'已结束'
+                render: text => text ? '进行中' : '已结束'
             },
             {
                 title: TABLE_HEAD.START_TIME,
@@ -99,53 +77,54 @@ const initState = {
                 title: TABLE_HEAD.ENTER_RATE,
                 dataIndex: 'enterRate',
                 key: 'enterRate',
-                render: text => calcColor(text,1)
+                render: text => calcColor(text, 1)
             },
             {
                 title: TABLE_HEAD.HOMEWORK_SUBMIT_RATE,
                 dataIndex: 'homeworkSubmitRate',
                 key: 'homeworkSubmitRate',
-                render: text => calcColor(text,2)
+                render: text => calcColor(text, 2)
 
             },
             {
                 title: TABLE_HEAD.BE_COMMENTED_RATE,
                 dataIndex: 'beCommenttedRate',
                 key: 'beCommenttedRate',
-                render: text => calcColor(text,2)
+                render: text => calcColor(text, 2)
 
             },
             {
                 title: TABLE_HEAD.SIGN_RATE,
                 dataIndex: 'signRate',
                 key: 'signRate',
-                render: text => calcColor(text,1)
+                render: text => calcColor(text, 1)
             },
             {
                 title: TABLE_HEAD.SATISFY_RATE,
                 dataIndex: 'satisfyRate',
                 key: 'satisfyRate',
-                render: text => calcColor(text,2)
+                render: text => calcColor(text, 2)
             }],
         dataList: [],
         historyList: []
     }
 }
 
+
 const contentReducer = (state = initState, action) => {
 
     switch (action.type) {
         case ACTION_TYPES.INPUT_ACTIONS.TOGGLE_DYNAMIC_EDIT: {
             const headData = { ...state.headData };
-            headData.dynamicInfosMap[action.id].edit = !headData.dynamicInfosMap[action.id].edit;
+            headData.dynamicInfoEditMap[action.id] = !headData.dynamicInfoEditMap[action.id];
             return Object.assign({}, state, {
                 headData
             });
         }
         case ACTION_TYPES.INPUT_ACTIONS.CHANGE_DYNAMIC_DATA: {
             const headData = { ...state.headData };
-            headData.dynamicInfos[action.item_id] = action.newContent;
-            headData.dynamicInfosMap[action.item_id].edit = false;
+            headData.userInfo[action.item_id] = action.newContent;
+            headData.dynamicInfoEditMap[action.item_id] = false;
             console.log(action.item_id);
             return Object.assign({}, state, {
                 headData
@@ -186,7 +165,7 @@ const contentReducer = (state = initState, action) => {
             console.log(res.data);
             const { tableData } = state;
             tableData.dataList = res.data.data.currentLessonsList;
-            tableData.historyList= res.data.data.historyLessonsList;
+            tableData.historyList = res.data.data.historyLessonsList;
             return Object.assign({}, state, {
                 tableData
             });

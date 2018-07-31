@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import './Head.css';
-import { Avatar, Row, Col, Icon } from 'antd';
-
+import { Avatar, Row, Col, Icon, Input, Spin, message } from 'antd';
+import { USER_INFO } from '../../const/config';
 
 export default class Head extends Component {
     constructor(props) {
         super(props);
         this.tmp = '';
+    }
+    onLoading = () => {
 
+        return <div className="loading"><Spin/></div>;
     }
     onInputChange = e => {
         this.tmp = e.target.value;
+        console.log(this.tmp);
     }
 
     handleChangeDynamicData = (item) => {
@@ -19,31 +23,52 @@ export default class Head extends Component {
             inputAction.actionChangeDynamicData(item, this.tmp);
         this.tmp = '';
     }
+    handleToggleInput = (name) => {
+        const { inputAction } = this.props;
+        inputAction.actionToggleDynamicEdit &&
+            inputAction.actionToggleDynamicEdit(name);
+    }
     renderDynamicInfos = () => {
         const { userInfo } = this.props.headData;
         return (
             <div>
-                <Col span={16}>
-                    手机号码 : {userInfo.tel}
-                    <span><Icon type="edit" /></span>
-                </Col>
-                <Col span={16}>
-                    微信号码 : {userInfo.weiChatCode}
-                    <span><Icon type="edit" /></span>
-                </Col>
-                <Col span={16}>
-                    备注 : {userInfo.remark}
-                    <span><Icon type="edit" /></span>
-                </Col>
+                {this.renderDynamicInfoItem(USER_INFO.TEL, userInfo.tel, 'tel')}
+                {this.renderDynamicInfoItem(USER_INFO.WEICHAT_CODE, userInfo.weiChatCode, 'weiChatCode')}
+                {this.renderDynamicInfoItem(USER_INFO.REMARK, userInfo.remark, 'remark')}
             </div>
         )
     }
-
+    renderDynamicInfoItem = (title, text, name) => {
+        const { dynamicInfoEditMap } = this.props;
+        if (dynamicInfoEditMap[name]) {
+            return (
+                <span onChange={this.onInputChange}>
+                    <Input size="small"
+                        placeholder={title}
+                        addonAfter={
+                            <span onClick={this.handleChangeDynamicData.bind(this, name)}>
+                                <Icon type="check" />
+                            </span>}
+                    /></span>
+            )
+        } else {
+            return (
+                <Col span={16}>
+                    {title} : {text}
+                    <span onClick={this.handleToggleInput.bind(this, name)}><Icon type="edit" /></span>
+                </Col>
+            )
+        }
+    }
     render() {
-        const { userInfo } = this.props.headData;
+
+        const { userInfo, headLoading } = this.props.headData;
         return (
+
             <div className="head">
-                <Row>
+                {
+                    headLoading === true ? this.onLoading(): 
+                    <Row>
                     <Col span={4} >
                         <Avatar
                             src={userInfo.hurl}
@@ -58,22 +83,22 @@ export default class Head extends Component {
                                 <div className="static-infos">
                                     <Col span={12}>
                                         <Col span={12}>
-                                            学员编号:MID112335
-                                            </Col>
-                                        <Col span={12}>
-                                            历史付费额:{userInfo.history_pay}
+                                            {USER_INFO.ID}:{'MID112335'}
                                         </Col>
                                         <Col span={12}>
-                                            入学时间:{userInfo.enterDate}
+                                            {USER_INFO.HISTORY_PAY}:{userInfo.history_pay}
                                         </Col>
                                         <Col span={12}>
-                                            在学课程:{userInfo.learningLesson.toString()}
+                                            {USER_INFO.ENTER_DATE}:{userInfo.enterDate}
                                         </Col>
                                         <Col span={12}>
-                                            最后登录时间:{userInfo.lastLoginDate}
+                                            {USER_INFO.LEARNING_LESSON}:{userInfo.learningLesson.toString()}
                                         </Col>
                                         <Col span={12}>
-                                            累计学习天数:{userInfo.totalLearningDays}
+                                            {USER_INFO.LAST_LOGIN_DATE}:{userInfo.lastLoginDate}
+                                        </Col>
+                                        <Col span={12}>
+                                            {USER_INFO.TOTAL_LEARNING_DAYS}:{userInfo.totalLearningDays}
                                         </Col>
                                     </Col>
                                 </div>
@@ -89,6 +114,8 @@ export default class Head extends Component {
 
                     </Col>
                 </Row>
+                }
+                    
             </div>
         )
     }

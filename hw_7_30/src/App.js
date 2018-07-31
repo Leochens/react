@@ -25,6 +25,7 @@ class App extends Component {
               headData={this.props.headData}
               inputAction={this.props.inputAction}
               dispatch={this.props.dispatch}
+              dynamicInfoEditMap = {this.props.dynamicInfoEditMap}
             />
             <Tabs
               tableData={this.props.tableData}
@@ -41,6 +42,7 @@ const mapStateToProps = state => {
   return {
     tableData: state.contentReducer.tableData,
     headData: state.contentReducer.headData,
+    dynamicInfoEditMap:state.contentReducer.headData.dynamicInfoEditMap,
     state
   }
 }
