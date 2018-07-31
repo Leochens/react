@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import './Tables.css';
-import './Tables.less'
 import { Table } from 'antd';
-
+import TableList from './TableList';
 export default class Tables extends Component {
 
     render() {
-      const { headList,dataList } = this.props;
+      const { dataList } = this.props;
 
         return (
             <div >
                 <Table 
                     bordered={true}
                     dataSource={dataList}
-                    columns={headList}
+                    columns={TableList}
                     pagination={false}
                 />
             </div>

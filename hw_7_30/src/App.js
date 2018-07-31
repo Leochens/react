@@ -16,6 +16,9 @@ class App extends Component {
     api.actionFetchUserInfo('111',dispatch);
     api.actionFetchLessonInfo('111',dispatch);
   }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(nextProps === this.props);
+  // }
   render() {
     return (
       <div >
@@ -40,10 +43,9 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    tableData: state.contentReducer.tableData,
-    headData: state.contentReducer.headData,
-    dynamicInfoEditMap:state.contentReducer.headData.dynamicInfoEditMap,
-    state
+    tableData: state.tableReducer,
+    headData: state.headReducer,
+    dynamicInfoEditMap:state.headReducer.dynamicInfoEditMap,
   }
 }
 const mapDispatchToProps = dispatch => {

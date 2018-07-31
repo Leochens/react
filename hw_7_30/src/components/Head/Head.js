@@ -9,7 +9,6 @@ export default class Head extends Component {
         this.tmp = '';
     }
     onLoading = () => {
-
         return <div className="loading"><Spin /></div>;
     }
     onInputChange = e => {
@@ -83,7 +82,7 @@ export default class Head extends Component {
                                         <div className="static-infos">
                                             <Col span={12}>
                                                 <Col span={12}>
-                                                    {USER_INFO.ID}:{'MID112335'}
+                                                    {USER_INFO.ID}:{userInfo.mid}
                                                 </Col>
                                                 <Col span={12}>
                                                     {USER_INFO.HISTORY_PAY}:{userInfo.history_pay}

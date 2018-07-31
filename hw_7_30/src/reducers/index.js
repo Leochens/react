@@ -1,10 +1,11 @@
-import contentReducer from './content'
+import  {tableReducer,headReducer} from './content'
 // import apiReducer from './api'
 import { combineReducers } from 'redux'
 
 
 const RootRuducer = combineReducers({
-    contentReducer
+    tableReducer,
+    headReducer
 });
 
 export default RootRuducer;
