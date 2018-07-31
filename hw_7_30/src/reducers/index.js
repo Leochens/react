@@ -1,5 +1,5 @@
 import contentReducer from './content'
-import apiReducer from './api'
+// import apiReducer from './api'
 import { combineReducers } from 'redux'
 
 

@@ -12,7 +12,8 @@ export default class Tables extends Component {
             <div >
                 <Table 
                     bordered={true}
-                    dataSource={dataList} columns={headList}
+                    dataSource={dataList}
+                    columns={headList}
                     pagination={false}
                 />
             </div>
@@ -20,10 +21,3 @@ export default class Tables extends Component {
     }
 }
 
-
-/////////////////////////////
-const x = () => console.log('this is x');
-const y = () => console.log('this is y');
-
-const z = 15;
-(z>12?x:y)();

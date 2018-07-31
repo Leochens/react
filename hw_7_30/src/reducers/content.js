@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'antd';
 import ACTION_TYPES from '../const';
-import { TABLE_HEAD, USER_INFO } from '../const/config'
+import { TABLE_HEAD } from '../const/config'
 import { ColorText } from '../tools/colorTools';
 //type 1 —> 分数 2 -> 百分数 
 const calcColor = (text, type) => {
@@ -34,7 +34,6 @@ const initState = {
             hurl: "",
             history_pay: '',
             tel: '',
-            learningLesson: '',
             enterDate: '',
             lastLoginDate: '',
             learningLesson: [],
@@ -145,7 +144,6 @@ const contentReducer = (state = initState, action) => {
             const { res } = action;
             headData.headLoading = false;
             headData.userInfo = { ...res.data.data };
-            console.log('user data', headData.userInfo);
             return Object.assign({}, state, {
                 headData
             });
@@ -162,7 +160,6 @@ const contentReducer = (state = initState, action) => {
         case `${ACTION_TYPES.API_ACTIONS.FETCH_LESSON_INFO}_SUC`: {
             console.log('fetch LESSON info 请求成功');
             const { res } = action;
-            console.log(res.data);
             const { tableData } = state;
             tableData.dataList = res.data.data.currentLessonsList;
             tableData.historyList = res.data.data.historyLessonsList;
@@ -177,7 +174,6 @@ const contentReducer = (state = initState, action) => {
         case 'LOADING_DONE': {
             const { headData } = state;
             headData.headLoading = false;
-            console.log('dddd');
             return Object.assign({}, state, {
                 headData
             });

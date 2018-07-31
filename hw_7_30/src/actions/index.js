@@ -1,7 +1,4 @@
 import * as inputAction from './inputAction';
-
-
-
 const Actions = {
     inputAction
 }

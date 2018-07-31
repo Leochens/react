@@ -8,7 +8,6 @@ export class ColorText extends React.Component {
         let fontWeight = 600;
         switch (type) {
             case 'warning': {
-                console.log('waring in',COLORS.WARRING);
                 color = COLORS.WARRING;
                 break;
             }

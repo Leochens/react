@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Head.css';
-import { Avatar, Row, Col, Icon, Input, Spin, message } from 'antd';
+import { Avatar, Row, Col, Icon, Input, Spin } from 'antd';
 import { USER_INFO } from '../../const/config';
 
 export default class Head extends Component {
@@ -10,7 +10,7 @@ export default class Head extends Component {
     }
     onLoading = () => {
 
-        return <div className="loading"><Spin/></div>;
+        return <div className="loading"><Spin /></div>;
     }
     onInputChange = e => {
         this.tmp = e.target.value;
@@ -67,55 +67,55 @@ export default class Head extends Component {
 
             <div className="head">
                 {
-                    headLoading === true ? this.onLoading(): 
-                    <Row>
-                    <Col span={4} >
-                        <Avatar
-                            src={userInfo.hurl}
-                            style={{ width: 130, height: 110 }}
-                            shape='square'></Avatar>
-                    </Col>
-                    <Col span={20}>
+                    headLoading === true ? this.onLoading() :
+                        <Row>
+                            <Col span={4} >
+                                <Avatar
+                                    src={userInfo.hurl}
+                                    style={{ width: 130, height: 110 }}
+                                    shape='square'></Avatar>
+                            </Col>
+                            <Col span={20}>
 
-                        <div className="user-profile">
-                            <div className="user-name">{userInfo.nick}</div>
-                            <div className="user-info">
-                                <div className="static-infos">
-                                    <Col span={12}>
-                                        <Col span={12}>
-                                            {USER_INFO.ID}:{'MID112335'}
-                                        </Col>
-                                        <Col span={12}>
-                                            {USER_INFO.HISTORY_PAY}:{userInfo.history_pay}
-                                        </Col>
-                                        <Col span={12}>
-                                            {USER_INFO.ENTER_DATE}:{userInfo.enterDate}
-                                        </Col>
-                                        <Col span={12}>
-                                            {USER_INFO.LEARNING_LESSON}:{userInfo.learningLesson.toString()}
-                                        </Col>
-                                        <Col span={12}>
-                                            {USER_INFO.LAST_LOGIN_DATE}:{userInfo.lastLoginDate}
-                                        </Col>
-                                        <Col span={12}>
-                                            {USER_INFO.TOTAL_LEARNING_DAYS}:{userInfo.totalLearningDays}
-                                        </Col>
-                                    </Col>
+                                <div className="user-profile">
+                                    <div className="user-name">{userInfo.nick}</div>
+                                    <div className="user-info">
+                                        <div className="static-infos">
+                                            <Col span={12}>
+                                                <Col span={12}>
+                                                    {USER_INFO.ID}:{'MID112335'}
+                                                </Col>
+                                                <Col span={12}>
+                                                    {USER_INFO.HISTORY_PAY}:{userInfo.history_pay}
+                                                </Col>
+                                                <Col span={12}>
+                                                    {USER_INFO.ENTER_DATE}:{userInfo.enterDate}
+                                                </Col>
+                                                <Col span={12}>
+                                                    {USER_INFO.LEARNING_LESSON}:{userInfo.learningLesson.toString()}
+                                                </Col>
+                                                <Col span={12}>
+                                                    {USER_INFO.LAST_LOGIN_DATE}:{userInfo.lastLoginDate}
+                                                </Col>
+                                                <Col span={12}>
+                                                    {USER_INFO.TOTAL_LEARNING_DAYS}:{userInfo.totalLearningDays}
+                                                </Col>
+                                            </Col>
+                                        </div>
+                                        <div className="dynamic-infos">
+                                            <Col span={8}>
+                                                {this.renderDynamicInfos()}
+                                            </Col>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div className="dynamic-infos">
-                                    <Col span={8}>
-                                        {this.renderDynamicInfos()}
-                                    </Col>
-                                </div>
-                            </div>
-
-                        </div>
 
 
-                    </Col>
-                </Row>
+                            </Col>
+                        </Row>
                 }
-                    
+
             </div>
         )
     }
