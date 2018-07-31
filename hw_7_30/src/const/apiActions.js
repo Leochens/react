@@ -1,0 +1,3 @@
+
+export const FETCH_USER_INFO = 'FETCH_USER_INFO';
+export const FETCH_LESSON_INFO = 'FETCH_LESSON_INFO';

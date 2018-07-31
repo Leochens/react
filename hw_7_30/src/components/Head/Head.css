@@ -1,13 +1,15 @@
 .head{
   padding: 30px ;
   padding-bottom: 0;
-
+  display: flex;
+  justify-content: space-between
 }
 .head-photo{
-
+  flex: 1;
+  /* display: inline-block; */
 }
 .user-profile{
- 
+ /* flex: 1 */
 }
 .user-info-item{
    
@@ -24,4 +26,7 @@
 }
 .inp{
   width:100px;
+}
+.static-infos{
+  
 }

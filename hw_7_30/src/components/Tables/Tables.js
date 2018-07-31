@@ -7,7 +7,7 @@ export default class Tables extends Component {
 
     render() {
       const { headList,dataList } = this.props;
-    //   console.log(data);
+
         return (
             <div >
                 <Table 
@@ -19,3 +19,11 @@ export default class Tables extends Component {
         )
     }
 }
+
+
+/////////////////////////////
+const x = () => console.log('this is x');
+const y = () => console.log('this is y');
+
+const z = 15;
+(z>12?x:y)();

@@ -1,3 +1,5 @@
+@import '~/antd/dist/antd.css';
+
 .grey-button{
     background-color: grey;
 }
@@ -11,4 +13,7 @@
 }
 .right-buttons{
     float: right;
+}
+.test-button{
+    background-color: #f00;
 }
