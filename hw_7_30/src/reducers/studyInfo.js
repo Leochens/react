@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import ActionTypes from '../const/';
 const initState = {
     basic_info: {

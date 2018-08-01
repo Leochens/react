@@ -10,7 +10,6 @@ const callServerApi = (url, param) => {
             url: url,
             data: param
         }).then(res => {
-            // console.log('返回的数据',res);
             if (res.data.ret === 1){
                 return resolve(res);
             }
@@ -22,7 +21,7 @@ const callServerApi = (url, param) => {
 
 }
 export default store => next => action => {
-    console.log('hello midlleware');
+    // console.log('hello midlleware');
     console.log(action);
     if (!action.SERVER_API) {
         return next(action)
