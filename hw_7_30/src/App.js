@@ -5,7 +5,8 @@ import StudentList from './containers/StudentList/StudentList';
 import { Tabs } from 'antd';
 import 'antd/dist/antd.css';
 import './App.css';
-
+import { Router, Route, Switch } from 'react-router';
+import { Link } from 'react-router-dom'
 
 
 const TabPane = Tabs.TabPane;
@@ -14,18 +15,17 @@ class App extends Component {
   render() {
     return (
       <div >
-        <Tabs
-          defaultActiveKey="1">
-          <TabPane tab='课程信息' key="1">
-            <ClassInfo />
-          </TabPane>
-          <TabPane tab='上课详情' key="2">
-            <StudyInfo />
-          </TabPane>
-          <TabPane tab='学员档案' key="3">
-            <StudentList />
-          </TabPane>
-        </Tabs>
+
+        <ul className="Router">
+          <li><Link to="/classInfo">classInfo</Link></li>
+          <li><Link to="/studyInfo">studyInfo</Link></li>
+          <li><Link to="/studentList">studentList</Link></li>
+        </ul>
+        <Switch>
+          <Route path="/classInfo" component={ClassInfo} />
+          <Route path="/studyInfo" component={StudyInfo} />
+          <Route path="/studentList" component={StudentList} />
+        </Switch>
       </div>
     );
   }
