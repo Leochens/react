@@ -47,7 +47,7 @@ export const headReducer = (state = headState, action) => {
 
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_SUC`: {
-            console.log('fetch user info 请求成功 |');
+            console.log('fetch user info 请求成功');
             console.log(action.res);
             const headData = {...state};
             const { res } = action;

@@ -54,7 +54,6 @@ class StudentList extends Component {
         const renderList = isSearching ? searchResult : studentList;
         return (
             <div >
-
                 <Row >
                     <Col span={20} offset={2}>
                         <Row>{this.renderButtonBox()}</Row>

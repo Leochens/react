@@ -5,6 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './store'
+// 　console.error("这是error");
 ReactDOM.render(
     <Provider store={store}>
         <App />
