@@ -1,7 +1,7 @@
 import * as INPUT_ACTIONS from './inputActions';
-import * as API_ACTIONS from './apiActions';
+import * as SERVER_ACTIONS from './serverActions';
 const ACTION_TYPES = {
         INPUT_ACTIONS,
-        API_ACTIONS
+        SERVER_ACTIONS
 }
 export default ACTION_TYPES;

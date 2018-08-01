@@ -8,11 +8,18 @@ export const TABLE_HEAD = {
     SATISFY_RATE: "满意度",
     HOMEWORK_SUBMIT_RATE: "作业提交率",
     TEACHER_NAME: "老师",
-    BE_COMMENTED_RATE: "被点评情况"
+    BE_COMMENTED_RATE: "被点评情况",
+    COURSE_NAME:"课程内容",
+    SATISFIED_SCORE:"满意度评分",
+    CLOCK_IN_STATUS:"打卡情况",
+    ENTER_STATUS:"上课情况",
+    HOMEWORK_STATUS:"作业提交情况",
+    REVIEW_STATUS:"被点评情况",
+    TIME:"上课时间"
 }
 export const USER_INFO = {
     ID: "学员编号",
-    NICK: "用户名",
+    NICK: "学员名",
     HISTORY_PAY: "历史付费额",
     TEL: "手机号码",
     LEARNING_LESSON: "在学课程",
@@ -21,7 +28,17 @@ export const USER_INFO = {
     REMARK: "备注",
     TOTAL_LEARNING_DAYS: "累计学习天数",
     WEICHAT_CODE: "微信号",
+    START_TIME: "开课时间",
+    TEACHERS:"负责老师"
 
+}
+export const BASIC_INFO = {
+    ID:'班级ID',
+    NAME:"班级",
+    TEACHER:"老师",
+    STAFF:"负责员工",
+    WX_CODE:"微信",
+    PERSON_ID:"ID",
 }
 export const TABS = {
     LESSON_INFO: "课程信息",

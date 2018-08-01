@@ -1,58 +1,32 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-import { connect } from 'react-redux';
-import Head from './components/Head/Head';
-import Tabs from './components/Tabs/Tabs';
-import { bindActionCreators } from 'redux';
-import allActionsCreators from './actions'
-import { Row, Col } from 'antd';
+import ClassInfo from './containers/ClassInfo/ClassInfo';
+import StudyInfo from './containers/StudyInfo/StudyInfo';
+import StudentList from './containers/StudentList/StudentList';
+import { Tabs } from 'antd';
 import 'antd/dist/antd.css';
 import './App.css';
-import * as api from './api';
-
+const TabPane = Tabs.TabPane;
 class App extends Component {
-  componentDidMount(){
-    const { dispatch } = this.props;
-    api.actionFetchUserInfo('111',dispatch);
-    api.actionFetchLessonInfo('111',dispatch);
-  }
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps === this.props);
-  // }
+
   render() {
     return (
       <div >
-        <Row >
-          <Col className="op" span={20} offset={2}>
-            <Head
-              headData={this.props.headData}
-              inputAction={this.props.inputAction}
-              dispatch={this.props.dispatch}
-              dynamicInfoEditMap = {this.props.dynamicInfoEditMap}
-            />
-            <Tabs
-              tableData={this.props.tableData}
-              dispatch={this.props.dispatch}
-            />
-          </Col>
-        </Row>
+        <Tabs
+          defaultActiveKey="1">
+          <TabPane tab='课程信息' key="1">
+            <ClassInfo />
+          </TabPane>
+          <TabPane tab='上课详情' key="2">
+            <StudyInfo />
+          </TabPane>
+          <TabPane tab='学员档案' key="3">
+            <StudentList />
+          </TabPane>
+        </Tabs>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    tableData: state.tableReducer,
-    headData: state.headReducer,
-    dynamicInfoEditMap:state.headReducer.dynamicInfoEditMap,
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    inputAction: bindActionCreators(allActionsCreators.inputAction, dispatch),
-    dispatch
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

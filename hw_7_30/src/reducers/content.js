@@ -39,14 +39,14 @@ export const headReducer = (state = headState, action) => {
             console.log(action.item_id);
             return headData;
         }
-        case `${ACTION_TYPES.API_ACTIONS.FETCH_USER_INFO}_REQ`: {
+        case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_REQ`: {
             console.log('fetch user info 发起请求');
             const  headData  = {...state};
             headData.headLoading = true;
             return headData;
 
         }
-        case `${ACTION_TYPES.API_ACTIONS.FETCH_USER_INFO}_SUC`: {
+        case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_SUC`: {
             console.log('fetch user info 请求成功 |');
             console.log(action.res);
             const headData = {...state};
@@ -55,7 +55,7 @@ export const headReducer = (state = headState, action) => {
             headData.userInfo = { ...res.data.data };
             return headData;
         }
-        case `${ACTION_TYPES.API_ACTIONS.FETCH_USER_INFO}_FAI`: {
+        case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_FAI`: {
             console.log('fetch user info 请求失败');
             return state;
         }
@@ -70,11 +70,11 @@ export const tableReducer = (state = tableState, action) => {
 
     switch (action.type) {
       
-        case `${ACTION_TYPES.API_ACTIONS.FETCH_LESSON_INFO}_REQ`: {
+        case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_REQ`: {
             console.log('fetch LESSON info 发起请求');
             return state;
         }
-        case `${ACTION_TYPES.API_ACTIONS.FETCH_LESSON_INFO}_SUC`: {
+        case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_SUC`: {
             console.log('fetch LESSON info 请求成功');
             const tableData = {...state};
 
@@ -85,7 +85,7 @@ export const tableReducer = (state = tableState, action) => {
 
             return tableData;
         }
-        case `${ACTION_TYPES.API_ACTIONS.FETCH_LESSON_INFO}_FAI`: {
+        case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_FAI`: {
             console.log('fetch LESSON info 请求失败');
             return state;
         }

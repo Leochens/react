@@ -1,6 +1,8 @@
 import * as inputAction from './inputAction';
+import * as serverAction from './serverActions';
 const Actions = {
-    inputAction
+    inputAction,
+    serverAction
 }
 
 export default Actions;

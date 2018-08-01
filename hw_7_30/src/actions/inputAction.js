@@ -14,3 +14,5 @@ export const actionChangeDynamicData = (item_id, newContent) => {
         newContent
     }
 }
+
+
