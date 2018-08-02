@@ -40,6 +40,7 @@ class StudentList extends Component {
                     onSearch={this.handleSearch.bind(this)}
                     style={{ width: 200 }}
                 />
+                <Button onClick={this.props.router.goBack}>返回</Button>
             </div>
         )
     }

@@ -13,11 +13,11 @@ import StudentList from './containers/StudentList/StudentList';
 const routes = [{
     path: '/',
     component: App,
-    indexRoute: { component: ClassInfo },
+    indexRoute: { component: StudentList },
     childRoutes: [
-      { path: 'studyInfo', component: StudyInfo },
-      { path: 'studentList', component: StudentList },
-      { path: 'classInfo', component: ClassInfo }
+      { path: 'studyInfo(/:id)', component: StudyInfo},
+      { path: 'studentList(/:id)', component: StudentList },
+      { path: 'classInfo(/:id)', component: ClassInfo }
     ]
   }]
 ReactDOM.render(

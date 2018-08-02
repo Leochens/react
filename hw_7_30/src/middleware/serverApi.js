@@ -9,10 +9,10 @@ const callServerApi = (url, param) => {
             url: url,
             data: param
         }).then(res => {
-            if (res.data.ret === 1){
+            if (res.data.ret === 1 ){
                 return resolve(res);
             }
-            return reject(res.data.errMsg);
+            return reject(res);
         }).catch(err => {
             return reject(err);
         })
@@ -42,12 +42,14 @@ export default store => next => action => {
         type: `${type}_REQ`
     })
     return callServerApi(url,param).then(res => {
+        console.log(res);
         return next({
             type:`${type}_SUC`,
             res
         })
     }
     ).catch(err => {
+        console.log('请求错误',err);
         return next({
             type:`${type}_FAI`,
             err

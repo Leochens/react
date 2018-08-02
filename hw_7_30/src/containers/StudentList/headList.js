@@ -1,13 +1,14 @@
 import React from 'react';
 import { USER_INFO } from '../../const/config';
-import { Avatar } from 'antd'
+import { Avatar } from 'antd';
+import { Link } from 'react-router';
 const urlToAvatar = (url, shape, size) => {
     return <Avatar src={url} shape={shape} size={size} />
 }
 const arrayTransform = text => {
-    if (Array.isArray(text) && text.length === 0){
+    if (Array.isArray(text) && text.length === 0) {
         return <span>{'无'}</span>
-    }else{
+    } else {
         return <span>{text.toString()}</span>;
     }
 }
@@ -22,7 +23,14 @@ const headList = [
         title: USER_INFO.NICK,
         dataIndex: 'nick',
         key: 'nick',
-        // render: text => 
+        render: (text, record) => {
+            const data = { mid: record.mid, nick:text}
+            const path = {
+                pathname: "/classInfo",
+                state: data
+            }
+            return(<Link to={path}>{text}</Link>)
+        }
     },
     {
         title: USER_INFO.ID,
@@ -46,13 +54,13 @@ const headList = [
         title: USER_INFO.LEARNING_LESSON,
         dataIndex: 'learning_lessons',
         key: 'learning_lessons',
-        render: text => arrayTransform(text) 
+        render: text => arrayTransform(text)
     },
     {
         title: USER_INFO.TEACHERS,
         dataIndex: 'teachers',
         key: 'teachers',
-        render: text => arrayTransform(text) 
+        render: text => arrayTransform(text)
     },
 ]
 

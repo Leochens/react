@@ -11,8 +11,10 @@ class ClassInfo extends Component {
     const { serverAction } = this.props;
     serverAction.actionFetchUserInfo('111');
     serverAction.actionFetchLessonInfo('111');
+    serverAction.actionFetchSatisfiedList('111');
   }
   render() {
+    console.log('classInfo 查看参数',this.props.location.state);
     return (
       <div >
         <Row >
@@ -20,12 +22,14 @@ class ClassInfo extends Component {
             <Head
               headData={this.props.headData}
               inputAction={this.props.inputAction}
-              dispatch={this.props.dispatch}
               dynamicInfoEditMap = {this.props.dynamicInfoEditMap}
+              urlData={this.props.location.state}
             />
             <Tabs
               tableData={this.props.tableData}
-              dispatch={this.props.dispatch}
+              satisfiedList = {this.props.satisfiedList}
+              back={this.props.router.goBack}
+              tableAction={this.props.tableAction}
             />
           </Col>
         </Row>
@@ -37,6 +41,7 @@ const mapStateToProps = state => {
   return {
     tableData: state.tableReducer,
     headData: state.headReducer,
+    satisfiedList: state.satisfiedReducer,
     dynamicInfoEditMap:state.headReducer.dynamicInfoEditMap,
   }
 }
@@ -44,6 +49,7 @@ const mapDispatchToProps = dispatch => {
   return {
     inputAction: bindActionCreators(allActionsCreators.inputAction, dispatch),
     serverAction: bindActionCreators(allActionsCreators.serverAction, dispatch),
+    tableAction: bindActionCreators(allActionsCreators.tableAction,dispatch)
   }
 }
 

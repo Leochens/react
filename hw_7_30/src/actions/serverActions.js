@@ -44,3 +44,14 @@ export const actionFetchStudentList = (id) => {
         }
     }
 }
+export const actionFetchSatisfiedList = (mid) => {
+    return {
+        SERVER_API: {
+            type: ACTION_TYPES.SERVER_ACTIONS.FETCH_SATISFIED_LIST,
+            url: BASE_URL + '/getSatisfiledList',
+            param: {
+                mid
+            }
+        }
+    }
+}

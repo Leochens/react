@@ -60,8 +60,9 @@ export default class Head extends Component {
         }
     }
     render() {
-
         const { userInfo, headLoading } = this.props.headData;
+        const { urlData } = this.props;
+        console.log('urlData',this.props.urlData);
         return (
 
             <div className="head">
@@ -77,12 +78,16 @@ export default class Head extends Component {
                             <Col span={20}>
 
                                 <div className="user-profile">
-                                    <div className="user-name">{userInfo.nick}</div>
+                                    <div className="user-name">
+                                    {/* {userInfo.nick} */}
+                                    {urlData.nick}
+                                    </div>
                                     <div className="user-info">
                                         <div className="static-infos">
                                             <Col span={12}>
                                                 <Col span={12}>
-                                                    {USER_INFO.ID}:{userInfo.mid}
+                                                    {/* {USER_INFO.ID}:{userInfo.mid} */}
+                                                    {USER_INFO.ID}:{urlData.mid}
                                                 </Col>
                                                 <Col span={12}>
                                                     {USER_INFO.HISTORY_PAY}:{userInfo.history_pay}

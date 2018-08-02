@@ -15,7 +15,9 @@ export const TABLE_HEAD = {
     ENTER_STATUS:"上课情况",
     HOMEWORK_STATUS:"作业提交情况",
     REVIEW_STATUS:"被点评情况",
-    TIME:"上课时间"
+    TIME:"上课时间",
+    SATISFIED_DETAIL:"具体反馈",
+    OPERATE: "操作"
 }
 export const USER_INFO = {
     ID: "学员编号",

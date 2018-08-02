@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import './ButtonBox.css';
 import { Button } from 'antd';
 import { BUTTONS } from '../../const/config';
+import {Link,Router} from 'react-router'
 export default class ButtonBox extends Component {
+    
     render() {
+    // console.log('btn',this.props);
+
         return (
             <div className="button-box-wrapper">
                 <div className="left-buttons">
@@ -12,7 +16,7 @@ export default class ButtonBox extends Component {
                     <Button style={{ marginRight: 20 }}>{BUTTONS.PAINTING}</Button>
                 </div>
                 <div className="right-buttons">
-                    <Button>{BUTTONS.BACK}</Button>
+                    <Button onClick={this.props.back}>{BUTTONS.BACK}</Button>
                 </div>
             </div>
         )
