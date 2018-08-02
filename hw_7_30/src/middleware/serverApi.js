@@ -21,7 +21,7 @@ const callServerApi = (url, param) => {
 }
 export default store => next => action => {
     // console.log('hello midlleware');
-    console.log(action);
+    // console.log(action);
     if (!action.SERVER_API) {
         return next(action)
     }
@@ -42,14 +42,14 @@ export default store => next => action => {
         type: `${type}_REQ`
     })
     return callServerApi(url,param).then(res => {
-        console.log(res);
+        // console.log(res);
         return next({
             type:`${type}_SUC`,
             res
         })
     }
     ).catch(err => {
-        console.log('请求错误',err);
+        // console.log('请求错误',err);
         return next({
             type:`${type}_FAI`,
             err

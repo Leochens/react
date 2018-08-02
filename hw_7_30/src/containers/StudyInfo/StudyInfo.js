@@ -16,8 +16,6 @@ class StudyInfo extends Component {
         const { basic_info, list } = this.props;
         return (
             <div >
-                
-
                 <Row >
                     <Col span={20} offset={2}>
                         <Row>
