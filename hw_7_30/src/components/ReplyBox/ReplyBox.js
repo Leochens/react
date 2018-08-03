@@ -5,15 +5,15 @@ import './ReplyBox.css'
 export default class ReplyBox extends Component {
 
     callBack = (id) => {
-        const { action } = this.props;
+        const { action, editCLassId } = this.props;
         console.log('func?', action);
-        action(id);
+        action(editCLassId);
     }
     render() {
         const { text, editCLassId } = this.props;
         console.log('状态', text);
         return (
-            <div onClick={this.callBack.bind(this, editCLassId)}>
+            <div onClick={this.callBack}>
                 {text ?
                     <div>已回复</div> :
                     <div className="need-reply">待回复 <Icon type="mail" /> </div>

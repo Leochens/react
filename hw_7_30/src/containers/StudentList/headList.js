@@ -26,7 +26,7 @@ const headList = [
         render: (text, record) => {
             const data = { mid: record.mid, nick:text}
             const path = {
-                pathname: "/classInfo",
+                pathname: `/classInfo-${record.mid}-${text}`,
                 state: data
             }
             return(<Link to={path}>{text}</Link>)

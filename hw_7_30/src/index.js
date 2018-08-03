@@ -17,7 +17,7 @@ const routes = [{
     childRoutes: [
       { path: 'studyInfo(/:id)', component: StudyInfo},
       { path: 'studentList(/:id)', component: StudentList },
-      { path: 'classInfo(/:data)', component: ClassInfo }
+      { path: 'classInfo(-:mid-:nick)', component: ClassInfo }
     ]
   }]
 ReactDOM.render(

@@ -21,6 +21,7 @@ class ClassInfo extends Component {
   componentDidMount() {
     const { serverAction } = this.props;
     const mid = 1001;
+    console.log(this.props.params);
     serverAction.actionFetchUserInfo(mid);
     serverAction.actionFetchLessonInfo(mid);
     serverAction.actionFetchSatisfiedList(mid);

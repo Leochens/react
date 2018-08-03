@@ -1,4 +1,4 @@
-import { tableReducer, headReducer, satisfiedReducer } from './content'
+import { tableReducer, headReducer, satisfiedReducer } from './classInfo'
 import { studyInfoReducer } from './studyInfo'
 import { studentListReducer } from './studentList'
 import { combineReducers } from 'redux'
