@@ -6,7 +6,7 @@ export default class Tables extends Component {
 
     render() {
       const { dataList } = this.props;
-
+        
         return (
             <div >
                 <Table 

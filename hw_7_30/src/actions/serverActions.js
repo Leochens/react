@@ -1,4 +1,6 @@
-import ACTION_TYPES from '../const'
+import ACTION_TYPES from '../const';
+import { normalize } from 'normalizr';
+import Schemas from '../schema';
 const BASE_URL = 'http://xly-wkop.xiaoniangao.cn';
 export const actionFetchUserInfo = (mid) => {
     return {
@@ -18,6 +20,16 @@ export const actionFetchLessonInfo = (mid) => {
             url: BASE_URL + '/getLessonInfo',
             param: {
                 mid
+            },
+            normalizeFunc: json => {
+                console.log('json Here =>',json);
+                const currentLessonsList = normalize(json.currentLessonsList, Schemas.lessonListSchema);
+                const historyLessonsList = normalize(json.historyLessonsList, Schemas.lessonListSchema);
+                console.log('扁平化=>',currentLessonsList,historyLessonsList);
+                return {
+                    currentLessonsList,
+                    historyLessonsList
+                }
             }
         }
     }

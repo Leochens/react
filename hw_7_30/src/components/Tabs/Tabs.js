@@ -34,8 +34,8 @@ export default class _Tabs extends Component {
     render() {
         const {
             headList,
-            dataList,
-            historyList
+            currentLessonsList,
+            historyLessonsList
         } = this.props.tableData;
         const {
             satisfiedList,
@@ -89,11 +89,11 @@ export default class _Tabs extends Component {
                         <h3 className="tabs-title">在学课程</h3>
                         <Tables
                             headList={headList}
-                            dataList={dataList} />
+                            dataList={currentLessonsList} />
                         <h3 className="tabs-title">历史数据</h3>
                         <Tables
                             headList={headList}
-                            dataList={historyList} />
+                            dataList={historyLessonsList} />
                     </TabPane>
                     <TabPane tab={TABS.SATIFY_FEED} key="2">
                         <Table

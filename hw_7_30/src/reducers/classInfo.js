@@ -1,5 +1,6 @@
 import ACTION_TYPES from '../const';
-
+import { normalize } from 'normalizr';
+import Schemas from '../schema';
 const headState = {
     headLoading: false,
     userInfo: {
@@ -21,9 +22,10 @@ const headState = {
         remark: false
     }
 }
-const tableState = {
-    dataList: [],
-    historyList: []
+const LessonState = {
+    lessonEntities: {}, //对象
+    currentLessonIds: [],
+    historyLessonIds: []
 }
 
 export const headReducer = (state = headState, action) => {
@@ -67,7 +69,7 @@ export const headReducer = (state = headState, action) => {
 
 
 }
-export const tableReducer = (state = tableState, action) => {
+export const tableReducer = (state = LessonState, action) => {
 
     switch (action.type) {
 
@@ -77,14 +79,28 @@ export const tableReducer = (state = tableState, action) => {
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_SUC`: {
             // console.log('fetch LESSON info 请求成功');
-            const tableData = { ...state };
-
+            console.log('扁平化数据进入reducer:', action.res);
             const { res } = action;
+            const newState = {
+                ...state,
+                lessonEntities: {
+                    ...state.lessonEntities,
+                    ...res.currentLessonsList.entities.lesson,
+                    ...res.historyLessonsList.entities.lesson,
+                },
+                currentLessonIds: [
 
-            tableData.dataList = res.data.data.currentLessonsList;
-            tableData.historyList = res.data.data.historyLessonsList;
+                    ...state.currentLessonIds,
+                    ...res.currentLessonsList.result,
+                ],
+                historyLessonIds: [
+                    ...state.historyLessonIds,
+                    ...res.historyLessonsList.result,
 
-            return tableData;
+                ]
+            }
+            console.log('newState: ', newState);
+            return newState;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_FAI`: {
             // console.log('fetch LESSON info 请求失败');
@@ -103,10 +119,10 @@ export const satisfiedReducer = (state = satisfiedList, action) => {
         }
         case `${ACTION_TYPES.TABLE_ACTIONS.TOGGLE_REPLY}`: {
             console.log('进入处理reply函数', action.id);
-            const  list  = state.slice();
+            const list = state.slice();
             list.forEach(item => {
-                if(item.class_info.id == action.id){
-                    item.reply_status=!item.reply_status;
+                if (item.class_info.id == action.id) {
+                    item.reply_status = !item.reply_status;
                 }
             })
             return list

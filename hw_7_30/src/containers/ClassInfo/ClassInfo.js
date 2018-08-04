@@ -22,7 +22,7 @@ class ClassInfo extends Component {
     const { serverAction } = this.props;
     const mid = 1001;
     console.log(this.props.params);
-    serverAction.actionFetchUserInfo(mid);
+    // serverAction.actionFetchUserInfo(mid);
     serverAction.actionFetchLessonInfo(mid);
     serverAction.actionFetchSatisfiedList(mid);
   }
@@ -50,8 +50,19 @@ class ClassInfo extends Component {
   }
 }
 const mapStateToProps = state => {
+  const { tableReducer } = state;
+  const currentLessonsList = tableReducer.currentLessonIds.map(item => {
+      return tableReducer.lessonEntities[item]
+  })
+  const historyLessonsList = tableReducer.historyLessonIds.map(item => {
+    return tableReducer.lessonEntities[item]
+})
+  const tableData = {
+    currentLessonsList,
+    historyLessonsList
+  }
   return {
-    tableData: state.tableReducer,
+    tableData:tableData,
     headData: state.headReducer,
     satisfiedList: state.satisfiedReducer,
     dynamicInfoEditMap: state.headReducer.dynamicInfoEditMap,
