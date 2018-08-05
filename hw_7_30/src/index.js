@@ -10,25 +10,10 @@ import { Router, browserHistory } from 'react-router';
 import ClassInfo from './containers/ClassInfo/ClassInfo';
 import StudyInfo from './containers/StudyInfo/StudyInfo';
 import StudentList from './containers/StudentList/StudentList';
-import { normalize, schema } from 'normalizr';
-const data = [
-    {
-        H: {
-            id: 2
-        },
-        name: 'hhh'
-    },
-    {
-        H: {
-            id: 3
-        },
-        name: 'ppp'
-    }
-]
-const newSchema = new schema.Entity('test');
-const newSchemaList = normalize(data,newSchema);
-console.log('this is schema List ',newSchemaList);
 
+import test from './test.js'
+
+test();
 
 const routes = [{
     path: '/',
