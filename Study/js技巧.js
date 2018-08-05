@@ -24,4 +24,12 @@ function escapeHTML (s) {
     return new Option(s).innerHTML;
 }
 
+// 对象深拷贝还有一种骚操作
+// 使用JSON.stringify把对象转换为字符串赋值给临时变量tmp，
+// 然后使用JSON.parse转化临时变量并赋值给新变量就可以啦
 
+
+//数组去重
+const x = [1,1,1,1,2,3,3,2,3,23,5,65,8]
+const set = new Set(x)  //默认是对象形式 Set(7) {1, 2, 3, 23, 5, …}
+Array.from(set)  //(7) [1, 2, 3, 23, 5, 65, 8] 可以转成数组

@@ -1,6 +1,5 @@
 import ACTION_TYPES from '../const';
-import { normalize } from 'normalizr';
-import Schemas from '../schema';
+
 const headState = {
     headLoading: false,
     userInfo: {
