@@ -15,7 +15,7 @@ export const studentListReducer = (state = initState, action) => {
             // console.log('成功 到了FETCH_STUDENT_LIST的reducer里了，数据如下');
             // console.log(action.res);
             return Object.assign({}, state, {
-                studentList: action.res.data.data
+                studentList: action.res
             })
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_STUDENT_LIST}_FAI`: {

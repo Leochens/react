@@ -55,7 +55,7 @@ export const headReducer = (state = headState, action) => {
             const headData = { ...state };
             const { res } = action;
             headData.headLoading = false;
-            headData.userInfo = { ...res.data.data };
+            headData.userInfo = { ...res};
             return headData;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_FAI`: {
@@ -113,8 +113,8 @@ const satisfiedList = [];
 export const satisfiedReducer = (state = satisfiedList, action) => {
     switch (action.type) {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_SATISFIED_LIST}_SUC`: {
-            console.log('收到满意度列表', action.res.data.data.list);
-            const { list } = action.res.data.data;
+            console.log('收到满意度列表', action.res.list);
+            const { list } = action.res;
             return list
         }
         case `${ACTION_TYPES.TABLE_ACTIONS.TOGGLE_REPLY}`: {

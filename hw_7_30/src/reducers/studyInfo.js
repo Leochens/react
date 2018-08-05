@@ -19,7 +19,7 @@ export const studyInfoReducer = (state = initState, action) => {
             // console.log(action.res);
             return {
                 ...state,
-                ...action.res.data.data
+                ...action.res
             }
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_CLASS_INFO}_FAI`: {

@@ -5,7 +5,7 @@ import serverApi from './middleware/serverApi';
 const logger = createLogger();
 const store = createStore(
     RootReducer,
-    applyMiddleware(serverApi /*,logger*/),
+    applyMiddleware(serverApi ,logger),
 );
 
 export default store;
