@@ -81,11 +81,7 @@ class StudentList extends Component {
 const mapStateToProps = state => {
     const { studentListReducer } = state;
     return {
-        studentList: studentListReducer.studentIds.map(item => {
-            return {
-                ...studentListReducer.studentEntitis[item]
-            }
-        }),
+        studentList: studentListReducer.studentIds.map(item =>  studentListReducer.studentEntitis[item]),
         searchResult: studentListReducer.searchResult,
         isSearching: studentListReducer.isSearching
     };
