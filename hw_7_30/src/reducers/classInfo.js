@@ -58,11 +58,7 @@ export const headReducer = (state = headState, action) => {
             return state;
         }
         default: return state;
-
-
     }
-
-
 }
 const LessonState = {
     lessonEntities: {}, //对象
@@ -126,7 +122,6 @@ const satisfiedList = {
 export const satisfiedReducer = (state = satisfiedList, action) => {
     switch (action.type) {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_SATISFIED_LIST}_SUC`: {
-            console.log('收到满意度列表', action.res);
             const { entities,result } = action.res;
             return {
                 ...state,
@@ -149,14 +144,18 @@ export const satisfiedReducer = (state = satisfiedList, action) => {
             }
         }
         case `${ACTION_TYPES.TABLE_ACTIONS.TOGGLE_REPLY}`: {
-            console.log('进入处理reply函数', action.id);//time
-            // const list = state.slice();
-            // list.forEach(item => {
-            //     if (item.class_info.id == action.id) {
-            //         item.reply_status = !item.reply_status;
-            //     }
-            // })
-            return state
+            // console.log('进入处理reply函数', action.time);    //time
+            const { time } = action;
+            return {
+                ...state,
+                satisfiedEntities:{
+                    ...state.satisfiedEntities,
+                    [time]:{
+                        ...state.satisfiedEntities[time],
+                        reply_status:true
+                    }
+                }
+            }
         }
         default: return state;
     }

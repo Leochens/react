@@ -73,7 +73,7 @@ export default class _Tabs extends Component {
                 dataIndex: 'reply_status',
                 render: (text, record) => <ReplyBox
                     text={text}
-                    editCLassId={record.class_info.id}
+                    editCLassId={record.time}
                     action={tableAction.actionToggleReply} />
             },
         ]

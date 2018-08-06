@@ -5,7 +5,7 @@ import './ReplyBox.css'
 export default class ReplyBox extends Component {
 
     callBack = (id) => {
-        const { action, editCLassId } = this.props;
+        const { action, editCLassId } = this.props; 
         console.log('func?', action);
         action(editCLassId);
     }
