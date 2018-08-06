@@ -1,4 +1,4 @@
-import { schema, normalize } from 'normalizr'
+import { schema } from 'normalizr'
 
 const lessonSchema = new schema.Entity('lesson', {}, { idAttribute: 'id' })
 const lessonListSchema = [ lessonSchema ];
