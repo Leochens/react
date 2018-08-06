@@ -27,7 +27,7 @@ class StudyInfo extends Component {
                             <span> {BASIC_INFO.STAFF} : {basic_info.real_teacher.name} </span>
                             <span> {BASIC_INFO.PERSON_ID} : {basic_info.real_teacher.mid} </span>
                             <span> {BASIC_INFO.WX_CODE} : {basic_info.real_teacher.wx_code} </span>
-                            <Button  onClick={this.props.router.goBack}>返回</Button>
+                            <Button onClick={this.props.router.goBack}>返回</Button>
                         </Row>
                         <Row>
                             <Table
@@ -43,9 +43,15 @@ class StudyInfo extends Component {
     }
 }
 const mapStateToProps = state => {
+    const { studyInfoReducer } = state;
     return {
-        basic_info: state.studyInfoReducer.basic_info,
-        list: state.studyInfoReducer.list
+        basic_info: studyInfoReducer.basic_info,
+        list: studyInfoReducer.studyInfoIds.map(item => {
+            console.log('》》》',studyInfoReducer.studyInfoEntities[item]);
+            return {
+                ...studyInfoReducer.studyInfoEntities[item]
+            }
+        })
     }
 }
 const mapDispatchToProps = dispatch => {

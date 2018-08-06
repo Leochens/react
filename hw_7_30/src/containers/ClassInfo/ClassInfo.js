@@ -11,8 +11,7 @@ class ClassInfo extends Component {
     super(props);
     console.log(this.props);
     const { state } = this.props.location;
-    if(!state)
-    {
+    if (!state) {
       message.error("缺少必要的url参数");
       this.props.router.goBack();
     }
@@ -21,7 +20,6 @@ class ClassInfo extends Component {
   componentDidMount() {
     const { serverAction } = this.props;
     const mid = 1001;
-    console.log(this.props.params);
     serverAction.actionFetchUserInfo(mid);
     serverAction.actionFetchLessonInfo(mid);
     serverAction.actionFetchSatisfiedList(mid);
@@ -50,21 +48,42 @@ class ClassInfo extends Component {
   }
 }
 const mapStateToProps = state => {
-  const { tableReducer } = state;
+  const { tableReducer, satisfiedReducer } = state;
   const currentLessonsList = tableReducer.currentLessonIds.map(item => {
-      return tableReducer.lessonEntities[item]
+    const { teacherInfo, classInfo } = tableReducer.lessonEntities[item];
+    return {
+      ...tableReducer.lessonEntities[item],
+      teacherInfo: tableReducer.teacherEntities[teacherInfo],
+      classInfo: tableReducer.classEntities[classInfo]
+    }
   })
   const historyLessonsList = tableReducer.historyLessonIds.map(item => {
-    return tableReducer.lessonEntities[item]
-})
+
+    const { teacherInfo, classInfo } = tableReducer.lessonEntities[item];
+    const tmp = {
+      ...tableReducer.lessonEntities[item],
+      teacherInfo: tableReducer.teacherEntities[teacherInfo],
+      classInfo: tableReducer.classEntities[classInfo]
+    }
+    return tmp;
+  })
   const tableData = {
     currentLessonsList,
     historyLessonsList
   }
+  console.log('timeList ',satisfiedReducer.timeList);
+  const satisfiedList = satisfiedReducer.timeList.map(item => {
+    const { teacher_info, class_info } = satisfiedReducer.satisfiedEntities[item];
+    return {
+      ...satisfiedReducer.satisfiedEntities[item],
+      teacher_info: satisfiedReducer.teacherEntities[teacher_info],
+      class_info: satisfiedReducer.classEntities[class_info]
+    }
+  })
   return {
-    tableData:tableData,
+    tableData,
     headData: state.headReducer,
-    satisfiedList: state.satisfiedReducer,
+    satisfiedList,
     dynamicInfoEditMap: state.headReducer.dynamicInfoEditMap,
   }
 }

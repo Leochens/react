@@ -1,11 +1,16 @@
-import { schema } from 'normalizr'
+import lessonListSchema from './lessons';
+import satisfiedListSchema from './satisfied';
+import studyInfoListSchema from './studyInfo';
+import studentListSchema from './students';
 
-const lessonSchema = new schema.Entity('lesson', {}, { idAttribute: 'id' })
-const lessonListSchema = [ lessonSchema ];
 
 
 const Schemas = {
-    lessonListSchema
+    lessonListSchema,
+    satisfiedListSchema,
+    studyInfoListSchema,
+    studentListSchema
 }
+
 
 export default Schemas;

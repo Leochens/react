@@ -12,6 +12,7 @@ const RootRuducer = combineReducers({
     studentListReducer
 });
 
+
 export default RootRuducer;
 
 

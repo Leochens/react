@@ -21,11 +21,7 @@ const headState = {
         remark: false
     }
 }
-const LessonState = {
-    lessonEntities: {}, //对象
-    currentLessonIds: [],
-    historyLessonIds: []
-}
+
 
 export const headReducer = (state = headState, action) => {
     switch (action.type) {
@@ -68,17 +64,22 @@ export const headReducer = (state = headState, action) => {
 
 
 }
+const LessonState = {
+    lessonEntities: {}, //对象
+    classEntities: {}, 
+    teacherEntities: {}, 
+    currentLessonIds: [],
+    historyLessonIds: []
+}
 export const tableReducer = (state = LessonState, action) => {
-
     switch (action.type) {
-
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_REQ`: {
             // console.log('fetch LESSON info 发起请求');
             return state;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_SUC`: {
             // console.log('fetch LESSON info 请求成功');
-            console.log('扁平化数据进入reducer:', action.res);
+            // console.log('扁平化数据进入reducer:', action.res);
             const { res } = action;
             const newState = {
                 ...state,
@@ -88,17 +89,25 @@ export const tableReducer = (state = LessonState, action) => {
                     ...res.historyLessonsList.entities.lesson,
                 },
                 currentLessonIds: [
-
                     ...state.currentLessonIds,
                     ...res.currentLessonsList.result,
                 ],
                 historyLessonIds: [
                     ...state.historyLessonIds,
                     ...res.historyLessonsList.result,
-
-                ]
+                ],
+                classEntities: {
+                    ...state.classEntities,
+                    ...res.historyLessonsList.entities.classes,
+                    ...res.currentLessonsList.entities.classes,
+                },
+                teacherEntities: {
+                    ...state.teacherEntities,
+                    ...res.currentLessonsList.entities.teachers,
+                    ...res.historyLessonsList.entities.teachers,
+                }
             }
-            console.log('newState: ', newState);
+            // console.log('newState: ', newState);
             return newState;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_FAI`: {
@@ -108,23 +117,46 @@ export const tableReducer = (state = LessonState, action) => {
         default: return state;
     }
 }
-const satisfiedList = [];
+const satisfiedList = {
+    classEntities: {},
+    teacherEntities: {},
+    satisfiedEntities: {},
+    timeList: [] 
+};
 export const satisfiedReducer = (state = satisfiedList, action) => {
     switch (action.type) {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_SATISFIED_LIST}_SUC`: {
-            console.log('收到满意度列表', action.res.list);
-            const { list } = action.res;
-            return list
+            console.log('收到满意度列表', action.res);
+            const { entities,result } = action.res;
+            return {
+                ...state,
+                classEntities:{
+                    ...state.classEntities,
+                    ...entities.classes,
+                },
+                teacherEntities: {
+                    ...state.teacherEntities,
+                    ...entities.teachers
+                },
+                satisfiedEntities: {
+                    ...state.satisfiedEntities,
+                    ...entities.satisfied
+                },
+                timeList:[
+                    ...state.timeList,
+                    ...result
+                ]
+            }
         }
         case `${ACTION_TYPES.TABLE_ACTIONS.TOGGLE_REPLY}`: {
-            console.log('进入处理reply函数', action.id);
-            const list = state.slice();
-            list.forEach(item => {
-                if (item.class_info.id == action.id) {
-                    item.reply_status = !item.reply_status;
-                }
-            })
-            return list
+            console.log('进入处理reply函数', action.id);//time
+            // const list = state.slice();
+            // list.forEach(item => {
+            //     if (item.class_info.id == action.id) {
+            //         item.reply_status = !item.reply_status;
+            //     }
+            // })
+            return state
         }
         default: return state;
     }

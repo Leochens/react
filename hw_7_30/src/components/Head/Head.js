@@ -13,7 +13,6 @@ export default class Head extends Component {
     }
     onInputChange = e => {
         this.tmp = e.target.value;
-        console.log(this.tmp);
     }
 
     handleChangeDynamicData = (item) => {
@@ -62,7 +61,6 @@ export default class Head extends Component {
     render() {
         const { userInfo, headLoading } = this.props.headData;
         const { urlData } = this.props;
-        console.log('urlData',this.props.urlData);
         return (
 
             <div className="head">

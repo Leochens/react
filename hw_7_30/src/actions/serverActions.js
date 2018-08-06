@@ -22,10 +22,8 @@ export const actionFetchLessonInfo = (mid) => {
                 mid
             },
             normalizeFunc: json => {
-                console.log('json Here =>',json);
                 const currentLessonsList = normalize(json.currentLessonsList, Schemas.lessonListSchema);
                 const historyLessonsList = normalize(json.historyLessonsList, Schemas.lessonListSchema);
-                console.log('扁平化=>',currentLessonsList,historyLessonsList);
                 return {
                     currentLessonsList,
                     historyLessonsList
@@ -41,6 +39,13 @@ export const actionFetchStudyInfo = (id) => {
             url: BASE_URL + '/getClassInfo',
             param: {
                 id
+            },
+            normalizeFunc: json => {
+                const studyInfoList = normalize(json.list, Schemas.studyInfoListSchema);
+                return {
+                    studyInfoList,
+                    basic_info:json.basic_info
+                }
             }
         }
     }
@@ -52,6 +57,10 @@ export const actionFetchStudentList = (id) => {
             url: BASE_URL + '/getStudentList',
             param: {
                 id
+            },
+            normalizeFunc: json => {
+                const studentList = normalize(json, Schemas.studentListSchema);
+                return studentList;            
             }
         }
     }
@@ -63,6 +72,10 @@ export const actionFetchSatisfiedList = (mid) => {
             url: BASE_URL + '/getSatisfiledList',
             param: {
                 mid
+            },
+            normalizeFunc: json => {
+                const satisfiedList = normalize(json.list,Schemas.satisfiedListSchema);
+                return satisfiedList;
             }
         }
     }

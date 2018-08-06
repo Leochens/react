@@ -78,7 +78,6 @@ export default class _Tabs extends Component {
             },
         ]
 
-        console.log('tabs', this.props);
         return (
             <div className="Tabs">
                 <Tabs

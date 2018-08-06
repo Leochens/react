@@ -7,7 +7,7 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 //测试文件
 import Test from './test.js'
-const isTest = true;
+const isTest = false;
 
 ReactDOM.render(
     <Provider store={store}>

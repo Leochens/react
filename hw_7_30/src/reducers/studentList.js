@@ -2,8 +2,9 @@
 import ActionTypes from '../const/';
 const initState = {
     isSearching:false,
-    searchResult: [],
-    studentList: []
+    searchResultIds: [],
+    studentEntitis: {},
+    studentIds: []
 }
 export const studentListReducer = (state = initState, action) => {
     switch (action.type) {
@@ -13,10 +14,21 @@ export const studentListReducer = (state = initState, action) => {
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_STUDENT_LIST}_SUC`: {
             // console.log('成功 到了FETCH_STUDENT_LIST的reducer里了，数据如下');
-            // console.log(action.res);
-            return Object.assign({}, state, {
-                studentList: action.res
-            })
+            console.log('student List =>  ',action.res);
+            const { res } = action; 
+            const tmp =  {
+                ...state,
+                studentEntitis: {
+                    ...state.studentEntitis,
+                    ...res.entities.students
+                },
+                studentIds: [
+                    ...state.studentIds,
+                    ...res.result
+                ]
+            }
+            console.log('student tmp => ',tmp);
+            return tmp;
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_STUDENT_LIST}_FAI`: {
             // console.log('失败 到了FETCH_STUDENT_LIST的reducer里了，数据如下');
