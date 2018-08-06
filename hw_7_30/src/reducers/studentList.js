@@ -13,25 +13,24 @@ export const studentListReducer = (state = initState, action) => {
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_STUDENT_LIST}_SUC`: {
             const { res } = action;
-            const tmp = {
+            return {
                 ...state,
                 studentEntitis: {
                     ...state.studentEntitis,
                     ...res.entities.students
                 },
                 studentIds: [
-                    ...state.studentIds,
+                    // ...state.studentIds,
                     ...res.result
                 ]
-            }
-            return tmp;
+            };
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_STUDENT_LIST}_FAI`: {
             return state;
         }
         case ActionTypes.SEARCH_ACTIONS.SET_SEARCH_RESULT: {
             const { mid } = action;
-            if (!mid) {               //如果输入框为空 默认是不搜索 返回全部list
+            if (!mid) {                     //如果输入框为空 默认是不搜索 返回全部list
                 return {
                     ...state,
                     isSearching: false

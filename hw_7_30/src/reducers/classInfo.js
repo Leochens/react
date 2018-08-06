@@ -81,11 +81,11 @@ export const lessonReducer = (state = {
                     ...res.historyLessonsList.entities.lesson,
                 },
                 currentLessonIds: [
-                    ...state.currentLessonIds,
+                    // ...state.currentLessonIds,      
                     ...res.currentLessonsList.result,
                 ],
                 historyLessonIds: [
-                    ...state.historyLessonIds,
+                    // ...state.historyLessonIds,
                     ...res.historyLessonsList.result,
                 ],
                 classEntities: {
@@ -132,7 +132,7 @@ export const satisfiedReducer = (state = {
                     ...entities.satisfied
                 },
                 timeList: [
-                    ...state.timeList,
+                    // ...state.timeList,
                     ...result
                 ]
             }

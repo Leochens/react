@@ -77,15 +77,15 @@ export default class Head extends Component {
 
                                 <div className="user-profile">
                                     <div className="user-name">
-                                    {/* {userInfo.nick} */}
-                                    {urlData.nick}
+                                    {userInfo.nick}
+                                    {/* {urlData.nick} */}
                                     </div>
                                     <div className="user-info">
                                         <div className="static-infos">
                                             <Col span={12}>
                                                 <Col span={12}>
-                                                    {/* {USER_INFO.ID}:{userInfo.mid} */}
-                                                    {USER_INFO.ID}:{urlData.mid}
+                                                    {USER_INFO.ID}:{userInfo.mid}
+                                                    {/* {USER_INFO.ID}:{urlData.mid} */}
                                                 </Col>
                                                 <Col span={12}>
                                                     {USER_INFO.HISTORY_PAY}:{userInfo.history_pay}

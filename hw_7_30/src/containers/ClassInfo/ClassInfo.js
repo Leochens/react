@@ -52,26 +52,26 @@ const mapStateToProps = state => {
   const lessonList = classInfoReducer.lessonReducer;
   const satisfiedList = classInfoReducer.satisfiedReducer;
 
-  const currentLessonsList = lessonList.currentLessonIds.map(item => {
-    const { teacherInfo, classInfo } = lessonList.lessonEntities[item];
+  const currentLessonsList = lessonList.currentLessonIds.map(id => {
+    const { teacherInfo, classInfo } = lessonList.lessonEntities[id];
     return {
-      ...lessonList.lessonEntities[item],
+      ...lessonList.lessonEntities[id],
       teacherInfo: lessonList.teacherEntities[teacherInfo],
       classInfo: lessonList.classEntities[classInfo]
     }
   })
-  const historyLessonsList = lessonList.historyLessonIds.map(item => {
-    const { teacherInfo, classInfo } = lessonList.lessonEntities[item];
+  const historyLessonsList = lessonList.historyLessonIds.map(id => {
+    const { teacherInfo, classInfo } = lessonList.lessonEntities[id];
     return {
-      ...lessonList.lessonEntities[item],
+      ...lessonList.lessonEntities[id],
       teacherInfo: lessonList.teacherEntities[teacherInfo],
       classInfo: lessonList.classEntities[classInfo]
     }
   })
-  const _satisfiedList = satisfiedList.timeList.map(item => {
-    const { teacher_info, class_info } = satisfiedList.satisfiedEntities[item];
+  const _satisfiedList = satisfiedList.timeList.map(time => {
+    const { teacher_info, class_info } = satisfiedList.satisfiedEntities[time];
     return {
-      ...satisfiedList.satisfiedEntities[item],
+      ...satisfiedList.satisfiedEntities[time],
       teacher_info: satisfiedList.teacherEntities[teacher_info],
       class_info: satisfiedList.classEntities[class_info]
     }
