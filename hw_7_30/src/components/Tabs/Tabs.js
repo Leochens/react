@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Tabs, Table, Popover, Icon} from 'antd';
-import { TABS } from '../../const/config';
+import { TABS } from '../../config';
 import ButtonBox from '../ButtonBox/ButtonBox';
 import Tables from '../Tables/Tables';
 import './Tabs.css'
-import { TABLE_HEAD, BASIC_INFO } from '../../const/config';
+import { TABLE_HEAD, BASIC_INFO } from '../../config';
 import { ColorText } from '../../tools/colorTools';
 import ReplyBox from '../ReplyBox/ReplyBox';
 const TabPane = Tabs.TabPane;

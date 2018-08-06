@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import allActionsCreators from '../../actions'
 import { Row, Col, Table, Button } from 'antd';
-import { BASIC_INFO } from '../../const/config';
+import { BASIC_INFO } from '../../config';
 import headList from './headList';
 class StudyInfo extends Component {
     componentDidMount() {

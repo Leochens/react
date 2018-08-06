@@ -1,5 +1,5 @@
 import React from 'react';
-import { USER_INFO } from '../../const/config';
+import { USER_INFO } from '../../config';
 import { Avatar } from 'antd';
 import { Link } from 'react-router';
 const urlToAvatar = (url, shape, size) => {

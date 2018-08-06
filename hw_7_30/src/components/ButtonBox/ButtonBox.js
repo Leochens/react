@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import './ButtonBox.css';
 import { Button } from 'antd';
-import { BUTTONS } from '../../const/config';
-import {Link,Router} from 'react-router'
+import { BUTTONS } from '../../config';
 export default class ButtonBox extends Component {
     
     render() {
-    // console.log('btn',this.props);
-
         return (
             <div className="button-box-wrapper">
                 <div className="left-buttons">

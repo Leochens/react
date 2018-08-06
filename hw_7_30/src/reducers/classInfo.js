@@ -1,6 +1,8 @@
 import ACTION_TYPES from '../const';
+import message from '../tools/messageTools';
+import { combineReducers } from 'redux';
 
-const headState = {
+export const headReducer = (state = {
     headLoading: false,
     userInfo: {
         // nick: '',
@@ -20,10 +22,7 @@ const headState = {
         weiChatCode: false,
         remark: false
     }
-}
-
-
-export const headReducer = (state = headState, action) => {
+}, action) => {
     switch (action.type) {
         case ACTION_TYPES.INPUT_ACTIONS.TOGGLE_DYNAMIC_EDIT: {
             const headData = { ...state };
@@ -38,44 +37,41 @@ export const headReducer = (state = headState, action) => {
             return headData;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_REQ`: {
-            // console.log('fetch user info 发起请求');
+            message.info("发起拉取学生信息请求");
             const headData = { ...state };
             headData.headLoading = true;
             return headData;
 
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_SUC`: {
-            // console.log('fetch user info 请求成功');
-            // console.log(action.res);
+            message.success("拉取学生信息请求成功");
             const headData = { ...state };
             const { res } = action;
             headData.headLoading = false;
-            headData.userInfo = { ...res};
+            headData.userInfo = { ...res };
             return headData;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_FAI`: {
-            // console.log('fetch user info 请求失败');
+            message.error("拉取学生信息请求失败");
+
             return state;
         }
         default: return state;
     }
 }
-const LessonState = {
+export const tableReducer = (state = {
     lessonEntities: {}, //对象
-    classEntities: {}, 
-    teacherEntities: {}, 
+    classEntities: {},
+    teacherEntities: {},
     currentLessonIds: [],
     historyLessonIds: []
-}
-export const tableReducer = (state = LessonState, action) => {
+}, action) => {
     switch (action.type) {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_REQ`: {
-            // console.log('fetch LESSON info 发起请求');
             return state;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_SUC`: {
-            // console.log('fetch LESSON info 请求成功');
-            // console.log('扁平化数据进入reducer:', action.res);
+
             const { res } = action;
             const newState = {
                 ...state,
@@ -103,29 +99,27 @@ export const tableReducer = (state = LessonState, action) => {
                     ...res.historyLessonsList.entities.teachers,
                 }
             }
-            // console.log('newState: ', newState);
             return newState;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_FAI`: {
-            // console.log('fetch LESSON info 请求失败');
             return state;
         }
         default: return state;
     }
 }
-const satisfiedList = {
+
+export const satisfiedReducer = (state = {
     classEntities: {},
     teacherEntities: {},
     satisfiedEntities: {},
-    timeList: [] 
-};
-export const satisfiedReducer = (state = satisfiedList, action) => {
+    timeList: []
+}, action) => {
     switch (action.type) {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_SATISFIED_LIST}_SUC`: {
-            const { entities,result } = action.res;
+            const { entities, result } = action.res;
             return {
                 ...state,
-                classEntities:{
+                classEntities: {
                     ...state.classEntities,
                     ...entities.classes,
                 },
@@ -137,7 +131,7 @@ export const satisfiedReducer = (state = satisfiedList, action) => {
                     ...state.satisfiedEntities,
                     ...entities.satisfied
                 },
-                timeList:[
+                timeList: [
                     ...state.timeList,
                     ...result
                 ]
@@ -148,11 +142,11 @@ export const satisfiedReducer = (state = satisfiedList, action) => {
             const { time } = action;
             return {
                 ...state,
-                satisfiedEntities:{
+                satisfiedEntities: {
                     ...state.satisfiedEntities,
-                    [time]:{
+                    [time]: {
                         ...state.satisfiedEntities[time],
-                        reply_status:true
+                        reply_status: true
                     }
                 }
             }
@@ -160,3 +154,5 @@ export const satisfiedReducer = (state = satisfiedList, action) => {
         default: return state;
     }
 }
+
+

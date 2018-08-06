@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Head.css';
 import { Avatar, Row, Col, Icon, Input, Spin } from 'antd';
-import { USER_INFO } from '../../const/config';
+import { USER_INFO } from '../../config';
 
 export default class Head extends Component {
     constructor(props) {

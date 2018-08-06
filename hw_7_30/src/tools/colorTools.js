@@ -1,5 +1,5 @@
 import React from 'react';
-import { COLORS } from '../const/config';
+import { COLORS } from '../config';
 export class ColorText extends React.Component {
 
     render() {

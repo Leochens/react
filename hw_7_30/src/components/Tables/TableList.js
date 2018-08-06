@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, Popover } from 'antd';
-import { TABLE_HEAD, BASIC_INFO } from '../../const/config';
+import { TABLE_HEAD, BASIC_INFO } from '../../config';
 import { ColorText } from '../../tools/colorTools';
 import {Link} from 'react-router'
 //type 1 —> 分数 2 -> 百分数 

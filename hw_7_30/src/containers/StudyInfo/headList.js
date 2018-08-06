@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
-import { TABLE_HEAD } from '../../const/config';
+import { TABLE_HEAD } from '../../config';
 import { ColorText } from '../../tools/colorTools';
 const transformIcon = (text) => {
     switch (text) {
