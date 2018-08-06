@@ -1,6 +1,5 @@
 import axios from 'axios';
 //sna
-
 const callServerApi = (url, param, normalizeFunc) => {
     return new Promise((resolve, reject) => {
         axios({
@@ -10,19 +9,17 @@ const callServerApi = (url, param, normalizeFunc) => {
             data: param
         }).then(res => {
             console.log('网络请求结束的最原始数据',res);
+            const json = res.data.data;
             if (res.data.ret === 1 ){
-                return resolve( normalizeFunc ? normalizeFunc(res.data.data) : res.data.data);
+                return resolve( normalizeFunc ? normalizeFunc(json) : json);
             }
             return reject(res);
         }).catch(err => {
             return reject(err);
         })
     })
-
 }
 export default store => next => action => {
-    // console.log('hello midlleware');
-    // console.log(action);
     if (!action.SERVER_API) {
         return next(action)
     }
@@ -44,14 +41,12 @@ export default store => next => action => {
         type: `${type}_REQ`
     })
     return callServerApi(url,param,normalizeFunc).then(res => {
-        console.log('可能是normalize化的数据',res);
         return next({
             type:`${type}_SUC`,
             res
         })
     }
     ).catch(err => {
-        // console.log('请求错误',err);
         return next({
             type:`${type}_FAI`,
             err

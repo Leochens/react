@@ -44,13 +44,14 @@ class StudentList extends Component {
             </div>
         )
     }
+    rowKey = (record,i) => `${record.mid}_${i}`
     render() {
         const {
             studentList,
             searchResult,
             isSearching
         } = this.props;
-
+        
         //根据是否是搜索状态来判断渲染哪个列表
         const renderList = isSearching ? searchResult : studentList;
         return (
@@ -59,6 +60,7 @@ class StudentList extends Component {
                     <Col span={20} offset={2}>
                         <Row>{this.renderButtonBox()}</Row>
                         <Table
+                            rowKey={this.rowKey}
                             dataSource={renderList}
                             columns={headList}
                         />

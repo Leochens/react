@@ -30,7 +30,7 @@ const TeacherInfo = (teacher) => {
 }
 
 export default class _Tabs extends Component {
-
+    rowKey = (record,i) => i
     render() {
         const {
             headList,
@@ -88,11 +88,13 @@ export default class _Tabs extends Component {
                         <h3 className="tabs-title">在学课程</h3>
                         <Tables
                             headList={headList}
-                            dataList={currentLessonsList} />
+                            dataList={currentLessonsList} 
+                            rowKey={this.rowKey}/>
                         <h3 className="tabs-title">历史数据</h3>
                         <Tables
                             headList={headList}
-                            dataList={historyLessonsList} />
+                            dataList={historyLessonsList} 
+                            rowKey={this.rowKey}/>
                     </TabPane>
                     <TabPane tab={TABS.SATIFY_FEED} key="2">
                     <ButtonBox
@@ -100,6 +102,7 @@ export default class _Tabs extends Component {
                         <Table
                             columns={columns}
                             dataSource={satisfiedList}
+                            rowKey={this.rowKey}
                         />
                     </TabPane>
                 </Tabs>

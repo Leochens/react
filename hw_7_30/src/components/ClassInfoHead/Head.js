@@ -60,7 +60,6 @@ export default class Head extends Component {
     }
     render() {
         const { userInfo, headLoading } = this.props.headData;
-        const { urlData } = this.props;
         return (
 
             <div className="head">

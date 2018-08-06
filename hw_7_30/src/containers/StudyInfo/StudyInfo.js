@@ -11,8 +11,8 @@ class StudyInfo extends Component {
         const id = '111';
         serverAction.actionFetchStudyInfo(id);
     }
+    rowKey = (record,i) => i;
     render() {
-        console.log(this.props.basic_info, this.props.list);
         const { basic_info, list } = this.props;
         return (
             <div >
@@ -34,6 +34,7 @@ class StudyInfo extends Component {
                                 dataSource={list}
                                 columns={headList}
                                 bordered
+                                rowKey={this.rowKey}
                             />
                         </Row>
                     </Col>
@@ -47,10 +48,7 @@ const mapStateToProps = state => {
     return {
         basic_info: studyInfoReducer.basic_info,
         list: studyInfoReducer.studyInfoIds.map(item => {
-            console.log('》》》',studyInfoReducer.studyInfoEntities[item]);
-            return {
-                ...studyInfoReducer.studyInfoEntities[item]
-            }
+            return studyInfoReducer.studyInfoEntities[item]
         })
     }
 }

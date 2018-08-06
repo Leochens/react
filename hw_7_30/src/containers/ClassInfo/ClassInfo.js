@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Head from '../../components/Head/Head';
+import Head from '../../components/ClassInfoHead/Head';
 import Tabs from '../../components/ClassInfoTabs/ClassInfoTabs';
 import { bindActionCreators } from 'redux';
 import allActionsCreators from '../../actions'

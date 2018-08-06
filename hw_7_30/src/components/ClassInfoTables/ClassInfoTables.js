@@ -4,9 +4,9 @@ import { Table } from 'antd';
 import TableList from './TableList';
 export default class Tables extends Component {
 
+    rowKey = (record,i) => `${record.class_info && record.class_info.id}_${i}`
     render() {
       const { dataList } = this.props;
-        
         return (
             <div >
                 <Table 
@@ -14,6 +14,7 @@ export default class Tables extends Component {
                     dataSource={dataList}
                     columns={TableList}
                     pagination={false}
+                    rowKey={this.rowKey}
                 />
             </div>
         )

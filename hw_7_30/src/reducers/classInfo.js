@@ -33,7 +33,6 @@ export const headReducer = (state = {
             const headData = { ...state };
             headData.userInfo[action.item_id] = action.newContent;
             headData.dynamicInfoEditMap[action.item_id] = false;
-            // console.log(action.item_id);
             return headData;
         }
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_USER_INFO}_REQ`: {
