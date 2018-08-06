@@ -48,3 +48,5 @@ export const studentListReducer = (state = initState, action) => {
         default: return state;
     }
 }
+
+export default studentListReducer

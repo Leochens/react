@@ -59,7 +59,7 @@ export const headReducer = (state = {
         default: return state;
     }
 }
-export const tableReducer = (state = {
+export const lessonReducer = (state = {
     lessonEntities: {}, //对象
     classEntities: {},
     teacherEntities: {},
@@ -155,4 +155,10 @@ export const satisfiedReducer = (state = {
     }
 }
 
+const classInfoReducer = combineReducers({
+    headReducer,
+    lessonReducer,
+    satisfiedReducer
+})
 
+export default classInfoReducer

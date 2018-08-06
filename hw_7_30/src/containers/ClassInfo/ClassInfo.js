@@ -15,7 +15,6 @@ class ClassInfo extends Component {
       message.error("缺少必要的url参数");
       this.props.router.goBack();
     }
-
   }
   componentDidMount() {
     const { serverAction } = this.props;
@@ -48,43 +47,44 @@ class ClassInfo extends Component {
   }
 }
 const mapStateToProps = state => {
-  const { tableReducer, satisfiedReducer } = state;
-  const currentLessonsList = tableReducer.currentLessonIds.map(item => {
-    const { teacherInfo, classInfo } = tableReducer.lessonEntities[item];
-    return {
-      ...tableReducer.lessonEntities[item],
-      teacherInfo: tableReducer.teacherEntities[teacherInfo],
-      classInfo: tableReducer.classEntities[classInfo]
-    }
-  })
-  const historyLessonsList = tableReducer.historyLessonIds.map(item => {
 
-    const { teacherInfo, classInfo } = tableReducer.lessonEntities[item];
-    const tmp = {
-      ...tableReducer.lessonEntities[item],
-      teacherInfo: tableReducer.teacherEntities[teacherInfo],
-      classInfo: tableReducer.classEntities[classInfo]
-    }
-    return tmp;
-  })
-  const tableData = {
-    currentLessonsList,
-    historyLessonsList
-  }
-  console.log('timeList ',satisfiedReducer.timeList);
-  const satisfiedList = satisfiedReducer.timeList.map(item => {
-    const { teacher_info, class_info } = satisfiedReducer.satisfiedEntities[item];
+  const { classInfoReducer } = state;
+  const lessonList = classInfoReducer.lessonReducer;
+  const satisfiedList = classInfoReducer.satisfiedReducer;
+
+  const currentLessonsList = lessonList.currentLessonIds.map(item => {
+    const { teacherInfo, classInfo } = lessonList.lessonEntities[item];
     return {
-      ...satisfiedReducer.satisfiedEntities[item],
-      teacher_info: satisfiedReducer.teacherEntities[teacher_info],
-      class_info: satisfiedReducer.classEntities[class_info]
+      ...lessonList.lessonEntities[item],
+      teacherInfo: lessonList.teacherEntities[teacherInfo],
+      classInfo: lessonList.classEntities[classInfo]
     }
   })
+  const historyLessonsList = lessonList.historyLessonIds.map(item => {
+    const { teacherInfo, classInfo } = lessonList.lessonEntities[item];
+    return {
+      ...lessonList.lessonEntities[item],
+      teacherInfo: lessonList.teacherEntities[teacherInfo],
+      classInfo: lessonList.classEntities[classInfo]
+    }
+  })
+  const _satisfiedList = satisfiedList.timeList.map(item => {
+    const { teacher_info, class_info } = satisfiedList.satisfiedEntities[item];
+    return {
+      ...satisfiedList.satisfiedEntities[item],
+      teacher_info: satisfiedList.teacherEntities[teacher_info],
+      class_info: satisfiedList.classEntities[class_info]
+    }
+  })
+
   return {
-    tableData,
-    headData: state.headReducer,
-    satisfiedList,
-    dynamicInfoEditMap: state.headReducer.dynamicInfoEditMap,
+    tableData: {
+      currentLessonsList,
+      historyLessonsList
+    },
+    headData: state.classInfoReducer.headReducer,
+    satisfiedList: _satisfiedList,
+    dynamicInfoEditMap: state.classInfoReducer.headReducer.dynamicInfoEditMap,
   }
 }
 const mapDispatchToProps = dispatch => {

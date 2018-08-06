@@ -1,13 +1,11 @@
-import { tableReducer, headReducer, satisfiedReducer } from './classInfo'
-import { studyInfoReducer } from './studyInfo'
-import { studentListReducer } from './studentList'
 import { combineReducers } from 'redux'
+import classInfoReducer from './classInfo'
+import studyInfoReducer from './studyInfo'
+import studentListReducer from './studentList'
 
 
 const RootRuducer = combineReducers({
-    tableReducer,
-    headReducer,
-    satisfiedReducer,
+    classInfoReducer,
     studyInfoReducer,
     studentListReducer
 });

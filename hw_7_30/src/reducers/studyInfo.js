@@ -48,3 +48,5 @@ export const studyInfoReducer = (state = initState, action) => {
         default: return state;
     }
 }
+
+export default studyInfoReducer
