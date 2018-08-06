@@ -2,7 +2,7 @@
 import ActionTypes from '../const/';
 const initState = {
     isSearching: false,
-    searchResultIds: [],
+    searchResult: [],
     studentEntitis: {},
     studentIds: []
 }

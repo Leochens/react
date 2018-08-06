@@ -22,15 +22,7 @@ const headList = [
     {
         title: USER_INFO.NICK,
         dataIndex: 'nick',
-        key: 'nick',
-        render: (text, record) => {
-            const data = { mid: record.mid, nick:text}
-            const path = {
-                pathname: `/classInfo-${record.mid}-${text}`,
-                state: data
-            }
-            return(<Link to={path}>{text}</Link>)
-        }
+        key: 'nick'
     },
     {
         title: USER_INFO.ID,

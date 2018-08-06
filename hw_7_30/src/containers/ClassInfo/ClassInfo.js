@@ -24,7 +24,7 @@ class ClassInfo extends Component {
               headData={this.props.headData}
               inputAction={this.props.inputAction}
               dynamicInfoEditMap={this.props.dynamicInfoEditMap}
-              urlData={this.props.location.state}
+              urlData={this.props.params}
             />
             <Tabs
               tableData={this.props.tableData}

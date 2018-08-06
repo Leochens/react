@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import allActionsCreators from '../../actions'
 import { Row, Col, Table, Button, Input, Select } from 'antd';
+import { browserHistory as history} from 'react-router'
 import headList from './headList';
 
 
@@ -63,6 +64,13 @@ class StudentList extends Component {
                             rowKey={this.rowKey}
                             dataSource={renderList}
                             columns={headList}
+                            onRow={(record)=>{
+                                return {
+                                    onClick:()=>{
+                                        history.push( `/classInfo-${record.mid}-${record.nick}`)
+                                    }
+                                }
+                            }}
                         />
                     </Col>
                 </Row>

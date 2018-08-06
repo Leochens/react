@@ -34,7 +34,7 @@ const TeacherInfo = (teacher) => {
     return (
         <div>
             <Popover
-                trigger='click'
+                // trigger='click'
                 content={content}>
                 <Icon type="user" />
             </Popover>
@@ -51,9 +51,8 @@ export const TableList = [
             return (
                 <div>
                     <Icon type="exclamation-circle" />
-                    <Link to="/studyInfo">
+                   &nbsp;
                         {text.name}
-                    </Link>
                 </div >
             )
         }
