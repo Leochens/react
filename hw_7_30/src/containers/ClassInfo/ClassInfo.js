@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Head from '../../components/Head/Head';
-import Tabs from '../../components/Tabs/Tabs';
+import Tabs from '../../components/ClassInfoTabs/ClassInfoTabs';
 import { bindActionCreators } from 'redux';
 import allActionsCreators from '../../actions'
-import { Row, Col, message } from 'antd';
+import { Row, Col } from 'antd';
 
 class ClassInfo extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
-    const { state } = this.props.location;
-    if (!state) {
-      message.error("缺少必要的url参数");
-      this.props.router.goBack();
-    }
-  }
+
   componentDidMount() {
     const { serverAction } = this.props;
     const mid = 1001;

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Tabs, Table, Popover, Icon} from 'antd';
 import { TABS } from '../../config';
 import ButtonBox from '../ButtonBox/ButtonBox';
-import Tables from '../Tables/Tables';
-import './Tabs.css'
+import Tables from '../ClassInfoTables/ClassInfoTables';
+import './ClassInfoTabs.css'
 import { TABLE_HEAD, BASIC_INFO } from '../../config';
 import { ColorText } from '../../tools/colorTools';
 import ReplyBox from '../ReplyBox/ReplyBox';
@@ -95,6 +95,8 @@ export default class _Tabs extends Component {
                             dataList={historyLessonsList} />
                     </TabPane>
                     <TabPane tab={TABS.SATIFY_FEED} key="2">
+                    <ButtonBox
+                            back={this.props.back} />
                         <Table
                             columns={columns}
                             dataSource={satisfiedList}

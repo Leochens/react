@@ -3,7 +3,6 @@ import './ButtonBox.css';
 import { Button } from 'antd';
 import { BUTTONS } from '../../config';
 export default class ButtonBox extends Component {
-    
     render() {
         return (
             <div className="button-box-wrapper">

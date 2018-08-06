@@ -81,7 +81,7 @@ export const lessonReducer = (state = {
                     ...res.historyLessonsList.entities.lesson,
                 },
                 currentLessonIds: [
-                    // ...state.currentLessonIds,      
+                    // ...state.currentLessonIds,            
                     ...res.currentLessonsList.result,
                 ],
                 historyLessonIds: [
