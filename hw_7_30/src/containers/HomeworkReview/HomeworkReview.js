@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { Tabs, Row, Col, Input, Select, Icon, Badge } from 'antd'
+import { Tabs, Row, Col, Input, Select, Badge } from 'antd'
 import allActionCreators from '../../actions';
 import ReviewBoxList from '../../components/ReviewBoxList/ReviewBoxList';
 import { REVIEW } from '../../config';
@@ -24,7 +24,11 @@ const badge = (text, count) => {
     )
 }
 class HomeworkReview extends Component {
-
+    handleSearch = (id) => {
+        const { searchAction } = this.props;
+        // console.log('vvvvvv', v);
+        // searchAction.actionFilterHomeworkByMid(id);
+    }
     render() {
         console.log(this.props);
         const filterRules = {
@@ -52,7 +56,7 @@ class HomeworkReview extends Component {
                         <Search
                             addonBefore={select}
                             placeholder="input search text"
-                            // onSearch={this.handleSearch.bind(this)}
+                            onSearch={this.handleSearch}
                             style={{ width: 200 }}
                         />
                     </Col>
@@ -150,7 +154,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         serverActions: bindActionCreators(allActionCreators.serverAction, dispatch),
-        switchActions: bindActionCreators(allActionCreators.switchAction, dispatch)
+        switchActions: bindActionCreators(allActionCreators.switchAction, dispatch),
+        searchAction: bindActionCreators(allActionCreators.searchAction, dispatch),
+
     }
 }
 

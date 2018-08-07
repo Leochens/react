@@ -38,7 +38,10 @@ export const homeworkReviewReducer = (state = {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST}_FAI`: {
             return state;
         }
-
+        case ACTION_TYPES.SEARCH_ACTIONS.FILTER_HOMEWORK_BY_MID: {
+            const { mid } = action;
+            return state;
+        }
         default: return state;
 
     }
