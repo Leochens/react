@@ -42,8 +42,7 @@ export default class CommentList extends Component {
     render() {
 
         const { data } = this.props;
-        console.log('data here => ', this.props.data);
-        console.log(this.props.data[0].content);
+
         return (
             <div>
                 <List

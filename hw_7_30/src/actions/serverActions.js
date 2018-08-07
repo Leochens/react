@@ -44,7 +44,7 @@ export const actionFetchStudyInfo = (id) => {
                 const studyInfoList = normalize(json.list, Schemas.studyInfoListSchema);
                 return {
                     studyInfoList,
-                    basic_info:json.basic_info
+                    basic_info: json.basic_info
                 }
             }
         }
@@ -60,7 +60,7 @@ export const actionFetchStudentList = (id) => {
             },
             normalizeFunc: json => {
                 const studentList = normalize(json, Schemas.studentListSchema);
-                return studentList;            
+                return studentList;
             }
         }
     }
@@ -74,21 +74,32 @@ export const actionFetchSatisfiedList = (mid) => {
                 mid
             },
             normalizeFunc: json => {
-                const satisfiedList = normalize(json.list,Schemas.satisfiedListSchema);
+                const satisfiedList = normalize(json.list, Schemas.satisfiedListSchema);
                 return satisfiedList;
             }
         }
     }
 }
 export const actionFetchHomeworkList = (rules) => {
+    const { token, isReviewed } = rules;
+    let type = '';
+    if (token && !isReviewed) {
+        type = ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_USER_UNREVIEW;
+    } else if (token && isReviewed) {
+        type = ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_USER_REVIEWED;
+    } else if (!token && !isReviewed) {
+        type = ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_ALL_UNREVIEW;
+    } else {
+        type = ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_ALL_REVIEWED;
+    }
     return {
         SERVER_API: {
-            type: ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST,
+            type,
             url: BASE_URL + '/getHomeWork',
             param: rules,
             normalizeFunc: json => {
-                console.log('json here=>',json);
-                const homeworks = normalize(json,Schemas.homeworkListSchema);
+                console.log('json here=>', json);
+                const homeworks = normalize(json, Schemas.homeworkListSchema);
                 return homeworks;
             }
         }

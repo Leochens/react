@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { Tabs, Row, Col, Input, Select } from 'antd'
+import { Tabs, Row, Col, Input, Select, Icon, Badge } from 'antd'
 import allActionCreators from '../../actions';
 import ReviewBoxList from '../../components/ReviewBoxList/ReviewBoxList';
 import { REVIEW } from '../../config';
@@ -10,7 +10,7 @@ const TabPane = Tabs.TabPane;
 const Search = Input.Search;
 const Option = Select.Option;
 const select = (
-    <Select defaultValue="mid" style={{ width: 100}}
+    <Select defaultValue="mid" style={{ width: 100 }}
     // onChange={}
     >
         <Option value="mid">mid</Option>
@@ -18,6 +18,11 @@ const select = (
         <Option value="kay">关键词</Option>
     </Select>
 );
+const badge = (text, count) => {
+    return (
+        <Badge className="badge" count={count}>{text}</Badge>
+    )
+}
 class HomeworkReview extends Component {
 
     render() {
@@ -61,7 +66,7 @@ class HomeworkReview extends Component {
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
                                     filterRules={filterRules.user_unreview}
-                                    data={this.props.data}
+                                    data={this.props._userUnreview}
                                 />
                             </TabPane>
                             <TabPane key="2" tab={REVIEW.USER_REVIEWED}>
@@ -69,7 +74,7 @@ class HomeworkReview extends Component {
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
                                     filterRules={filterRules.user_reviewed}
-                                    data={this.props.data}
+                                    data={this.props._userReviewed}
                                 />
                             </TabPane>
                             <TabPane key="3" tab={REVIEW.ALL_UNREVIEW}>
@@ -77,7 +82,7 @@ class HomeworkReview extends Component {
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
                                     filterRules={filterRules.all_unreview}
-                                    data={this.props.data}
+                                    data={this.props._allUnreview}
                                 />
                             </TabPane>
                             <TabPane key="4" tab={REVIEW.ALL_REVIEWED}>
@@ -85,7 +90,7 @@ class HomeworkReview extends Component {
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
                                     filterRules={filterRules.all_reviewed}
-                                    data={this.props.data}
+                                    data={this.props._allReviewed}
                                 />
                             </TabPane>
                         </Tabs>
@@ -97,18 +102,14 @@ class HomeworkReview extends Component {
         )
     }
 }
-
-const mapStateToProps = state => {
+const mapEntities = (ids, entity) => {
     const {
-        entitiesReducer: {
-            classes,
-            teachers,
-            comments,
-            homeworks
-        },
-        homeworkReviewReducer: homeworkIds
-    } = state;
-    const data = homeworkIds.map(id => { //组装
+        classes,
+        teachers,
+        comments,
+        homeworks
+    } = entity;
+    const data = ids.map(id => { //组装
         const {
             classInfo: classId,
             teacherInfo: teacherId,
@@ -122,8 +123,28 @@ const mapStateToProps = state => {
             comments: _comments
         }
     })
+    return data;
+}
+const mapStateToProps = state => {
+    const {
+        entitiesReducer,
+        homeworkReviewReducer: {
+            userUnreview,
+            userReviewed,
+            allUnreview,
+            allReviewed
+        }
+    } = state;
+    const _userUnreview = mapEntities(userUnreview, entitiesReducer);
+    const _userReviewed = mapEntities(userReviewed, entitiesReducer);
+    const _allUnreview = mapEntities(allUnreview, entitiesReducer);
+    const _allReviewed = mapEntities(allReviewed, entitiesReducer);
+
     return {
-        data
+        _userUnreview,
+        _userReviewed,
+        _allUnreview,
+        _allReviewed
     }
 }
 const mapDispatchToProps = dispatch => {

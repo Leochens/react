@@ -19,7 +19,10 @@ const teachers = (state = {}, action)=>{
                 ...res.entities.teachers
             }
         }
-        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST}_SUC`: {
+        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_ALL_REVIEWED}_SUC`:
+        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_ALL_UNREVIEW}_SUC`:
+        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_USER_REVIEWED}_SUC`:
+        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_USER_UNREVIEW}_SUC`: {
             return {
                 ...state,
                 ...res.entities.teachers
