@@ -80,15 +80,12 @@ export const actionFetchSatisfiedList = (mid) => {
         }
     }
 }
-export const actionFetchHomeworkList = (token, isReviewed) => {
+export const actionFetchHomeworkList = (rules) => {
     return {
         SERVER_API: {
             type: ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST,
             url: BASE_URL + '/getHomeWork',
-            param: {
-                token,
-                isReviewed
-            },
+            param: rules,
             normalizeFunc: json => {
                 console.log('json here=>',json);
                 const homeworks = normalize(json,Schemas.homeworkListSchema);

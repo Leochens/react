@@ -59,3 +59,10 @@ export const COLORS = {
     GREAT: "orange",
     DEFAULT: "black"
 }
+
+export const REVIEW = {
+    USER_UNREVIEW: '我的未点评',
+    USER_REVIEWED:"我的点评历史",
+    ALL_REVIEWED:"全部已点评",
+    ALL_UNREVIEW:"全部未点评"
+}
