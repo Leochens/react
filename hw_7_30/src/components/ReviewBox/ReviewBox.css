@@ -1,0 +1,50 @@
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 50px;;
+    line-height: 100px;
+    /* background: #eee; */
+    overflow: hidden;
+
+  }
+  
+  .ant-carousel .slick-slide h3 {
+    color: #ddd;
+  }
+  .photo-wraper{
+    display: inline-block;
+    height: 200px;
+    margin: 20px;    
+  }
+  .photo-item{ 
+      height: 100%;;
+  }
+  .homework-photos{
+      padding: 0 10px;
+      text-align: center;
+      height: 278px;
+      /* background-color: #eee; */
+      overflow: auto;
+      line-height: 218px;
+      white-space: nowrap;
+
+  }
+  .studentInfo{
+      height: 50px;
+      font-size: 14px;
+      overflow: hidden;
+      /* background-color: #ddd; */
+      display: flex;
+      align-items: center;
+      /* margin: 10px 0; */
+  }
+  .review-box{
+      padding: 10px;
+  }
+
+  .homework-info{
+      display: inline-block;
+      flex: 1;
+  }
+  .excellent{
+
+  }

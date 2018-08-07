@@ -1,0 +1,1 @@
+export const TOGGLE_EXCELLENT = 'TOGGLE_EXCELLENT';

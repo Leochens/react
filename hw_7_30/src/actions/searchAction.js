@@ -6,3 +6,10 @@ export const actionSetSearchResult = (mid) => {
         mid
     }
 }
+
+export const actionFilterHomeworkByMid = (mid) => {
+    return {
+        type: ActionTypes.SEARCH_ACTIONS.FILTER_HOMEWORK_BY_MID,
+        mid
+    }
+}

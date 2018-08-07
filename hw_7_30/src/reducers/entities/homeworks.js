@@ -11,6 +11,15 @@ const homeworks = (state = {}, action)=>{
                 ...res.entities.homeworks
             }
         }
+        case ActionTypes.SWITCH_ACTIONS.TOGGLE_EXCELLENT: {
+            return {
+                ...state,
+                [action.id]:{
+                    ...state[action.id],
+                    isExcellent:!state[action.id].isExcellent
+                }
+            }
+        }
         default: return state;
     }
 }
