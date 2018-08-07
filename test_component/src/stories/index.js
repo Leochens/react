@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
-
+import ZhlButton from '../components/ZhlButton';
 storiesOf('Welcome', module).add('to Storybook', 
     () => <Welcome showApp={linkTo('Button')} />);
 
@@ -18,13 +18,5 @@ storiesOf('Button', module)
       </span>
     </Button>
   ));
-
-storiesOf('Leochens',module)
-.add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-.add('with some emoji', () => (
-  <Button onClick={action('clicked')}>
-    <span role="img" aria-label="so cool">
-      😀 😎 👍 💯 eeffewf
-    </span>
-  </Button>
-));
+storiesOf("ZhlButton",module)
+  .add('hello zhl',()=> <ZhlButton text={'heheheh'}/>)

@@ -103,6 +103,7 @@ export const lessonReducer = (state = {
         case `${ACTION_TYPES.SERVER_ACTIONS.FETCH_LESSON_INFO}_FAI`: {
             return state;
         }
+
         default: return state;
     }
 }
