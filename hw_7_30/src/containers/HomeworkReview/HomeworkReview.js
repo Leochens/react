@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { List, Tabs } from 'antd'
+import { Tabs } from 'antd'
 import allActionCreators from '../../actions';
-import ReviewBox from '../../components/ReviewBox/ReviewBox';
+import ReviewBoxList from '../../components/ReviewBoxList/ReviewBoxList';
 import { REVIEW } from '../../config';
 const TabPane = Tabs.TabPane;
-const Item = List.Item
 class HomeworkReview extends Component {
     // renderTabs = () => {
     //     return [1, 2, 3, 4].map(id => {
@@ -42,27 +41,31 @@ class HomeworkReview extends Component {
                 <Tabs
                     defaultActiveKey="1">
                     <TabPane key="1" tab={REVIEW.USER_UNREVIEW}>
-                        <ReviewBox
+                        <ReviewBoxList
                             serverActions={this.props.serverActions}
                             filterRules={filterRules.user_unreview}
+                            data={this.props.data}
                         />
                     </TabPane>
                     <TabPane key="2" tab={REVIEW.USER_REVIEWED}>
-                        <ReviewBox
+                        <ReviewBoxList
                             serverActions={this.props.serverActions}
                             filterRules={filterRules.user_reviewed}
+                            data={this.props.data}
                         />
                     </TabPane>
                     <TabPane key="3" tab={REVIEW.ALL_UNREVIEW}>
-                        <ReviewBox
+                        <ReviewBoxList
                             serverActions={this.props.serverActions}
                             filterRules={filterRules.all_unreview}
+                            data={this.props.data}
                         />
                     </TabPane>
                     <TabPane key="4" tab={REVIEW.ALL_REVIEWED}>
-                        <ReviewBox
+                        <ReviewBoxList
                             serverActions={this.props.serverActions}
                             filterRules={filterRules.all_reviewed}
+                            data={this.props.data}
                         />
                     </TabPane>
                 </Tabs>
@@ -73,8 +76,31 @@ class HomeworkReview extends Component {
 }
 
 const mapStateToProps = state => {
+    const {
+        entitiesReducer:{
+            classes,
+            teachers,
+            comments,
+            homeworks
+        },
+        homeworkReviewReducer: homeworkIds
+    } = state;
+    const data =  homeworkIds.map(id=>{ //组装
+        const { 
+            classInfo: classId,
+            teacherInfo: teacherId,
+            comments: commentIdList
+         } = homeworks[id];
+         const _comments = commentIdList.map(id=>comments[id]);//映射评论
+         return {
+             ...homeworks[id],
+             classInfo: classes[classId],
+             teacherInfo: teachers[teacherId],
+             comments: _comments
+         }
+    })
     return {
-
+        data
     }
 }
 const mapDispatchToProps = dispatch => {
