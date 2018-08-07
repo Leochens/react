@@ -40,32 +40,51 @@ class ClassInfo extends Component {
 }
 const mapStateToProps = state => {
 
-  const { classInfoReducer } = state;
-  const lessonList = classInfoReducer.lessonReducer;
-  const satisfiedList = classInfoReducer.satisfiedReducer;
+  const { 
+    classInfoReducer: {
+      lessonReducer: lessonIds,
+      satisfiedReducer: satisfiedIdsByTime
+    },
+    entitiesReducer: {
+      teachers,
+      lessons,
+      classes,
+      satisfied
+    }
+  } = state;
 
-  const currentLessonsList = lessonList.currentLessonIds.map(id => {
-    const { teacherInfo, classInfo } = lessonList.lessonEntities[id];
+  //在学课程
+  const currentLessonsList = lessonIds.currentLessonIds.map(id => {
+    const { 
+      teacherInfo: teacherId, 
+      classInfo: classId 
+    } = lessons[id];
     return {
-      ...lessonList.lessonEntities[id],
-      teacherInfo: lessonList.teacherEntities[teacherInfo],
-      classInfo: lessonList.classEntities[classInfo]
+      ...lessons[id],
+      teacherInfo: teachers[teacherId],
+      classInfo: classes[classId]
     }
   })
-  const historyLessonsList = lessonList.historyLessonIds.map(id => {
-    const { teacherInfo, classInfo } = lessonList.lessonEntities[id];
+  //历史课程
+  const historyLessonsList = lessonIds.historyLessonIds.map(id => {
+    const { 
+      teacherInfo: teacherId, 
+      classInfo: classId 
+    } = lessons[id];
     return {
-      ...lessonList.lessonEntities[id],
-      teacherInfo: lessonList.teacherEntities[teacherInfo],
-      classInfo: lessonList.classEntities[classInfo]
+      ...lessons[id],
+      teacherInfo: teachers[teacherId],
+      classInfo: classes[classId]
     }
   })
-  const _satisfiedList = satisfiedList.timeList.map(time => {
-    const { teacher_info, class_info } = satisfiedList.satisfiedEntities[time];
+
+  //满意度列表
+  const satisfiedList = satisfiedIdsByTime.timeList.map(time => {
+    const { teacher_info, class_info } = satisfied[time];
     return {
-      ...satisfiedList.satisfiedEntities[time],
-      teacher_info: satisfiedList.teacherEntities[teacher_info],
-      class_info: satisfiedList.classEntities[class_info]
+      ...satisfied[time],
+      teacher_info: teachers[teacher_info],
+      class_info: classes[class_info]
     }
   })
 
@@ -75,7 +94,7 @@ const mapStateToProps = state => {
       historyLessonsList
     },
     headData: state.classInfoReducer.headReducer,
-    satisfiedList: _satisfiedList,
+    satisfiedList,
     dynamicInfoEditMap: state.classInfoReducer.headReducer.dynamicInfoEditMap,
   }
 }

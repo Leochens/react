@@ -1,14 +1,20 @@
 import ActionTypes from '../../const';
 
 
-const students = (state = {}, action)=>{
+const students = (state = {
+    isSearching: false,
+    searchResult: [],
+    entities: {}
+}, action)=>{
 
     const { res } = action;
     switch(action.type){
         case `${ActionTypes.SERVER_ACTIONS.FETCH_STUDENT_LIST}_SUC`: {
             return {
                 ...state,
-                ...res.entities.students
+                entities: {
+                    ...res.entities.students
+                }
             }
         }       
         case ActionTypes.SEARCH_ACTIONS.SET_SEARCH_RESULT: {
@@ -19,8 +25,8 @@ const students = (state = {}, action)=>{
                     isSearching: false
                 };
             }
-            const { studentEntitis } = state;
-            const res = studentEntitis[mid];
+            const { entities } = state;
+            const res = entities[mid];
             return Object.assign({}, state, { //显示搜索列表
                 searchResult: res ? [res] : [],
                 isSearching: true
