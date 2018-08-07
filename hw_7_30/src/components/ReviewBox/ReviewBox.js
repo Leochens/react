@@ -34,10 +34,7 @@ export default class ReviewBox extends Component {
 
                         <Col span={16}>
                             <div className="homework-photos">
-                                {/* <Carousel
-                                autoplay> */}
                                 {this.renderPhotos()}
-                            {/* </Carousel> */}
                             </div>
                             <div className="studentInfo">
                                 <span>NO.{data.id}</span> <Avatar size="small" shape="square" />

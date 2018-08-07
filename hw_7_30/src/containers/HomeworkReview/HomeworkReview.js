@@ -19,15 +19,7 @@ const select = (
     </Select>
 );
 class HomeworkReview extends Component {
-    // renderTabs = () => {
-    //     return [1, 2, 3, 4].map(id => {
-    //         return (
-    //         <TabPane key={id}>
 
-    //         </TabPane>
-    //         )
-    //     })
-    // }
     render() {
         console.log(this.props);
         const filterRules = {

@@ -1,10 +1,12 @@
 import ActionTypes from '../../const';
 
 
-const homeworks = (state = {}, action)=>{
+const homeworks = (state = {
+
+}, action) => {
 
     const { res } = action;
-    switch(action.type){
+    switch (action.type) {
         case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST}_SUC`: {
             return {
                 ...state,
@@ -14,9 +16,9 @@ const homeworks = (state = {}, action)=>{
         case ActionTypes.SWITCH_ACTIONS.TOGGLE_EXCELLENT: {
             return {
                 ...state,
-                [action.id]:{
+                [action.id]: {
                     ...state[action.id],
-                    isExcellent:!state[action.id].isExcellent
+                    isExcellent: !state[action.id].isExcellent
                 }
             }
         }
