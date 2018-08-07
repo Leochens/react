@@ -19,6 +19,12 @@ const teachers = (state = {}, action)=>{
                 ...res.entities.teachers
             }
         }
+        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST}_SUC`: {
+            return {
+                ...state,
+                ...res.entities.teachers
+            }
+        }
         default: return state;
     }
 }

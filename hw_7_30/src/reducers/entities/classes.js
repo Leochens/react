@@ -19,6 +19,12 @@ const classes = (state = {}, action)=>{
                 ...res.entities.classes
             }
         }
+        case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST}_SUC`: {
+            return {
+                ...state,
+                ...res.entities.classes
+            }
+        }
         default: return state;
     }
 }

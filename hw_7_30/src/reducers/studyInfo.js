@@ -24,10 +24,7 @@ export const studyInfoReducer = (state = initState, action) => {
                     ...state.studyInfoEntities,
                     ...res.studyInfoList.entities.studyInfo
                 },
-                studyInfoIds: [
-                    // ...state.studyInfoIds,
-                    ...res.studyInfoList.result
-                ]
+                studyInfoIds: res.studyInfoList.result
             };
         }
         case `${ActionTypes.SERVER_ACTIONS.FETCH_CLASS_INFO}_FAI`: {

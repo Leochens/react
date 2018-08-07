@@ -80,3 +80,20 @@ export const actionFetchSatisfiedList = (mid) => {
         }
     }
 }
+export const actionFetchHomeworkList = (token, isReviewed) => {
+    return {
+        SERVER_API: {
+            type: ACTION_TYPES.SERVER_ACTIONS.FETCH_HOMEWORK_LIST,
+            url: BASE_URL + '/getHomeWork',
+            param: {
+                token,
+                isReviewed
+            },
+            normalizeFunc: json => {
+                console.log('json here=>',json);
+                const homeworks = normalize(json,Schemas.homeworkListSchema);
+                return homeworks;
+            }
+        }
+    }
+}
