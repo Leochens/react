@@ -1,0 +1,10 @@
+.butons-wrapper{
+    /* margin: 10px 0; */
+    margin-bottom: 20px;
+}
+.butons-wrapper button {
+    margin: 0 5px;
+}
+.student-list-search{
+    float: right;
+}

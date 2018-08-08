@@ -13,6 +13,7 @@ export default class _Sider extends Component {
                     defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}
                 >
+
                     <SubMenu key="sub1" title={<span><Icon type="user" />学员档案</span>}>
                         <Menu.Item key="1"><Link to="studentList">学员列表</Link></Menu.Item>
                     </SubMenu>
@@ -21,7 +22,6 @@ export default class _Sider extends Component {
                     </SubMenu>
                     <SubMenu key="sub3" title={<span><Icon type="laptop" />作业点评</span>}>
                         <Menu.Item key="3"><Link to="/homeworkReview">点评页面</Link></Menu.Item>
-
                     </SubMenu>
                 </Menu>
             </Sider>

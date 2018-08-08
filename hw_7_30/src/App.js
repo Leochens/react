@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './App.css';
 import OPSider from './containers/Sider/Sider';
-
-import { Layout, Menu, Icon, Breadcrumb } from 'antd';
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+import { Link } from 'react-router'
+import { Layout, Menu, Breadcrumb } from 'antd';
+const { Header, Content } = Layout;
 
 
 class App extends Component {
@@ -15,7 +14,7 @@ class App extends Component {
         <Header className="header">
           <div className="logo" />
           <Menu
-          className="app-menu"
+            className="app-menu"
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['1']}
@@ -30,7 +29,7 @@ class App extends Component {
           <OPSider />
           <Layout style={{ padding: '0 24px 24px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>首页</Breadcrumb.Item>
+              <Breadcrumb.Item><Link to="/">首页</Link></Breadcrumb.Item>
               <Breadcrumb.Item>摄影训练营</Breadcrumb.Item>
             </Breadcrumb>
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>

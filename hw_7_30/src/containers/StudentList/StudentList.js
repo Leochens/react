@@ -5,7 +5,7 @@ import allActionsCreators from '../../actions'
 import { Row, Col, Table, Button, Input, Select } from 'antd';
 import { browserHistory as history } from 'react-router'
 import headList from './headList';
-
+import './StudentList.css';
 class StudentList extends Component {
 
     componentDidMount() {
@@ -27,17 +27,18 @@ class StudentList extends Component {
         );
 
         return (
-            <div>
+            <div className="butons-wrapper">
                 <Button>汇总</Button>
                 <Button style={{
                     backgroundColor: "#aaa"
                 }}>摄影课</Button>
                 <Button>绘画课</Button>
                 <Search
+                    className="student-list-search"
                     addonBefore={select}
                     placeholder="input search text"
                     onSearch={this.handleSearch.bind(this)}
-                    style={{ width: 200 }}
+                    style={{ width: 200,float:'right' }}
                 />
                 <Button onClick={this.props.router.goBack}>返回</Button>
             </div>
