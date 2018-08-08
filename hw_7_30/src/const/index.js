@@ -3,12 +3,14 @@ import * as SERVER_ACTIONS from './serverActions';
 import * as SEARCH_ACTIONS from './searchAction';
 import * as TABLE_ACTIONS from './tableActions';
 import * as SWITCH_ACTIONS from './switchAction';
+import * as COMMENT_ACTIONS from './commentActions';
 
 const ACTION_TYPES = {
         INPUT_ACTIONS,
         SERVER_ACTIONS,
         SEARCH_ACTIONS,
         TABLE_ACTIONS,
-        SWITCH_ACTIONS
+        SWITCH_ACTIONS,
+        COMMENT_ACTIONS
 }
 export default ACTION_TYPES;

@@ -8,7 +8,11 @@ export default class ReviewBoxList extends Component {
         serverActions.actionFetchHomeworkList(filterRules)
     }
     render() {
-        const { data, serverActions , switchActions} = this.props;
+        const { data, 
+            serverActions, 
+            switchActions,
+            commentActions
+        } = this.props;
         return (
             <div>
                 <List
@@ -19,6 +23,7 @@ export default class ReviewBoxList extends Component {
                         <ReviewBox
                             serverActions={serverActions}
                             switchActions={switchActions}
+                            commentActions={commentActions}
                             data={item} />}
                 />
             </div>

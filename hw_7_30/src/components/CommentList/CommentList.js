@@ -5,7 +5,15 @@ import { getLocalTime } from '../../tools/dateTools';
 //评论列表
 
 class Item extends Component {
-
+    onRejectComment = () => {
+        const {
+            record,
+            reject
+        } = this.props;
+        console.log('reject ==>',reject);
+        const reason = '太简单';
+        reject && reject(record.id, reason);
+    }
     render() {
         const { record } = this.props;
         if (record.from === 'author') {   //学生
@@ -19,7 +27,6 @@ class Item extends Component {
             )
         } else { //老师
             return (
-
                 <div className="comment-list-item">
                     {record.nick} ({record.commentator.role} {record.commentator.nick})
                         <span className='comment-time'>{getLocalTime(record.time)}</span>
@@ -27,7 +34,11 @@ class Item extends Component {
                     {
                         record.status === 'reject' ?
                             <div className="reject-reason">(消息被退回，退回原因: {record.reason})</div> :
-                            null
+                            <div className="reject-comment"
+                                onClick={this.onRejectComment}
+                            >
+                                退回
+                            </div>
                     }
                 </div>
             )
@@ -41,8 +52,10 @@ export default class CommentList extends Component {
 
     render() {
 
-        const { data } = this.props;
-
+        const { data,
+            commentActions
+        } = this.props;
+        console.log('in CommentList reject =>',commentActions);
         return (
             <div>
                 <List
@@ -50,7 +63,7 @@ export default class CommentList extends Component {
                     size="small"
                     bordered
                     dataSource={data}
-                    renderItem={item => <Item record={item} />}
+                    renderItem={item => <Item record={item} reject={commentActions.actionRejectComment}/>}
                 />
             </div>
         )

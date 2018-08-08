@@ -1,0 +1,1 @@
+export const REJECT_COMMENT = 'REJECT_COMMENT'

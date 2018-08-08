@@ -69,6 +69,7 @@ class HomeworkReview extends Component {
                                 <ReviewBoxList
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
+                                    commentActions={this.props.commentActions}
                                     filterRules={filterRules.user_unreview}
                                     data={this.props._userUnreview}
                                 />
@@ -77,6 +78,7 @@ class HomeworkReview extends Component {
                                 <ReviewBoxList
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
+                                    commentActions={this.props.commentActions}
                                     filterRules={filterRules.user_reviewed}
                                     data={this.props._userReviewed}
                                 />
@@ -85,6 +87,7 @@ class HomeworkReview extends Component {
                                 <ReviewBoxList
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
+                                    commentActions={this.props.commentActions}
                                     filterRules={filterRules.all_unreview}
                                     data={this.props._allUnreview}
                                 />
@@ -93,6 +96,7 @@ class HomeworkReview extends Component {
                                 <ReviewBoxList
                                     serverActions={this.props.serverActions}
                                     switchActions={this.props.switchActions}
+                                    commentActions={this.props.commentActions}
                                     filterRules={filterRules.all_reviewed}
                                     data={this.props._allReviewed}
                                 />
@@ -113,7 +117,7 @@ const mapEntities = (ids, entity) => {
         comments,
         homeworks
     } = entity;
-    const data = ids.map(id => { //组装
+    const data = ids.map(id => { //组装 
         const {
             classInfo: classId,
             teacherInfo: teacherId,
@@ -156,6 +160,7 @@ const mapDispatchToProps = dispatch => {
         serverActions: bindActionCreators(allActionCreators.serverAction, dispatch),
         switchActions: bindActionCreators(allActionCreators.switchAction, dispatch),
         searchAction: bindActionCreators(allActionCreators.searchAction, dispatch),
+        commentActions: bindActionCreators(allActionCreators.commentAction, dispatch)
 
     }
 }
