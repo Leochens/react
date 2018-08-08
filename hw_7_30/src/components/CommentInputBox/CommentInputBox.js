@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, Icon, } from "antd";
 import Message from '../../tools/messageTools';
 import './CommentInputBox.css';
+import { MESSAGES } from '../../config'
 let id = 0;     //临时comment id
 export default class CommentInputBox extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ export default class CommentInputBox extends Component {
         
         const { commentActions, homeworkId } = this.props;
         if(!this.state.comment) {
-            Message.error('请输入您的点评再提交！');
+            Message.error(MESSAGES.COMMENT_NEED_CONTENT);
             return null;
         }
         debugger
@@ -41,7 +42,7 @@ export default class CommentInputBox extends Component {
         })
         commentActions.actionCommentHomework(homeworkId, comment);
         id++;
-        Message.success("您的点评已提交")
+        Message.success(MESSAGES.COMMENT_SUC)
     }
 
     render() {

@@ -1,4 +1,12 @@
 
+export const isTest = false;        //是否是测试模式
+export const isDebug = true;        //开发模式
+
+
+
+
+
+// 字符串常量
 export const TABLE_HEAD = {
     CLASS: '班级',
     LESSON_STATUS: '课程状态',
@@ -65,4 +73,13 @@ export const REVIEW = {
     USER_REVIEWED:"我的点评历史",
     ALL_REVIEWED:"全部已点评",
     ALL_UNREVIEW:"全部未点评"
+}
+
+
+export const MESSAGES = {
+    SET_EXCELENT:'设为佳作成功',
+    UNSET_EXCELENT:'取消作品佳作',
+    COMMENT_SUC:"点评成功",
+    COMMENT_FAI:'点评失败',
+    COMMENT_NEED_CONTENT:'请输入您的点评再提交！'
 }

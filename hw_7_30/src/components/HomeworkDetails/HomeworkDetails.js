@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './HomeworkDetails.css';
-import {  Avatar, Switch, } from "antd";
+import { Avatar, Switch, } from "antd";
 import Message from '../../tools/messageTools';
-
 import { getLocalTime } from '../../tools/dateTools';
+import { MESSAGES } from '../../config'
 
 export default class HomeworkDetails extends Component {
     handleToggleExcellent = () => {
@@ -12,10 +12,12 @@ export default class HomeworkDetails extends Component {
             isExcellent
         } } = this.props;
         switchActions.actionToggleExcellent(id);
-        Message.success(isExcellent?`${id}号作业已被取消置为佳作`:`${id}号作业已被置为佳作`)
+        Message.success(isExcellent ?
+            `${id}号作业${MESSAGES.UNSET_EXCELENT}` :
+            `${id}号作业${MESSAGES.SET_EXCELENT}`)
     }
     render() {
-        const { data } = this.props; 
+        const { data } = this.props;
         return (
             <div className="studentInfo">
                 <span>NO.{data.id}</span> <Avatar
