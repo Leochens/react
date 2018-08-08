@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import allActionsCreators from '../../actions'
 import { Row, Col, Table, Button, Input, Select } from 'antd';
-import { browserHistory as history} from 'react-router'
+import { browserHistory as history } from 'react-router'
 import headList from './headList';
-
-
 
 class StudentList extends Component {
 
@@ -45,16 +43,9 @@ class StudentList extends Component {
             </div>
         )
     }
-    rowKey = (record,i) => `${record.mid}_${i}`
+    rowKey = (record, i) => `${record.mid}_${i}`
     render() {
-        const {
-            studentList,
-            searchResult,
-            isSearching
-        } = this.props;
-        
-        //根据是否是搜索状态来判断渲染哪个列表
-        const renderList = isSearching ? searchResult : studentList;
+        const { studentList: renderList } = this.props;
         return (
             <div >
                 <Row >
@@ -64,10 +55,10 @@ class StudentList extends Component {
                             rowKey={this.rowKey}
                             dataSource={renderList}
                             columns={headList}
-                            onRow={(record)=>{
+                            onRow={(record) => {
                                 return {
-                                    onClick:()=>{
-                                        history.push( `/classInfo-${record.mid}-${record.nick}`)
+                                    onClick: () => {
+                                        history.push(`/classInfo-${record.mid}-${record.nick}`)
                                     }
                                 }
                             }}
@@ -79,22 +70,24 @@ class StudentList extends Component {
     }
 }
 const mapStateToProps = state => {
-    const { 
+    const {
         studentListReducer: {
             studentIds,
-            searchResult,
+            searchResultIds,
             isSearching
         },
         entitiesReducer: {
-            students:{
+            students: {
                 entities: students
             }
         }
     } = state;
+
+    //根据是否是搜索状态来判断渲染哪个列表
     return {
-        studentList: studentIds.map(id =>  students[id]),
-        searchResult,
-        isSearching
+        studentList: isSearching ?
+            searchResultIds.map(id => students[id]) :
+            studentIds.map(id => students[id])
     };
 }
 const mapDispatchToProps = dispatch => {
