@@ -3,6 +3,7 @@
     overflow: hidden;
     min-height: 60px;
     padding: 10px;
+    font-size: 12px;
     border-bottom: 1px solid #ddd;
 }
 .comment-list{

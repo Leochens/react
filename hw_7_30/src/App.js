@@ -15,6 +15,7 @@ class App extends Component {
         <Header className="header">
           <div className="logo" />
           <Menu
+          className="app-menu"
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['1']}

@@ -17,7 +17,6 @@ export default class ReviewBoxList extends Component {
             <div>
                 <List
                     size="small"
-                    bordered
                     dataSource={data}
                     renderItem={item =>
                         <ReviewBox
