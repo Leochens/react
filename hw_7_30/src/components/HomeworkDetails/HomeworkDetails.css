@@ -2,13 +2,14 @@
     height: 50px;
     font-size: 14px;
     overflow: hidden;
+    padding: 0 10px;
     /* background-color: #ddd; */
     display: flex;
     align-items: center;
-    /* margin: 10px 0; */
-}
-.review-box{
-    padding: 10px;
+    margin: 10px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
 }
 
 .homework-info{
@@ -16,5 +17,5 @@
     flex: 1;
 }
 .excellent{
-
+    
 }

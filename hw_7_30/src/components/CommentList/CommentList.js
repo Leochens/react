@@ -3,7 +3,6 @@ import { List } from 'antd'
 import "./CommentList.css";
 import { getLocalTime } from '../../tools/dateTools';
 //评论列表
-
 class Item extends Component {
     onRejectComment = () => {
         const {

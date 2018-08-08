@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import './HomeworkDetails.css';
 import {  Avatar, Switch, } from "antd";
+import Message from '../../tools/messageTools';
 
 import { getLocalTime } from '../../tools/dateTools';
 
 export default class HomeworkDetails extends Component {
     handleToggleExcellent = () => {
         const { switchActions, data: {
-            id
+            id,
+            isExcellent
         } } = this.props;
         switchActions.actionToggleExcellent(id);
+        Message.success(isExcellent?`${id}号作业已被取消置为佳作`:`${id}号作业已被置为佳作`)
     }
     render() {
         const { data } = this.props; 

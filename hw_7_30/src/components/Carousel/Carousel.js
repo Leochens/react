@@ -10,17 +10,18 @@ export default class _Carousel extends Component {
 
         return photoList.map((item, idx) => {
             return (
-                <span key={idx} className="photo-wraper">
-                    <img alt="" className="photo-item" src={item} />
+                <span key={idx}  className="photo-wraper">
+                    <img key={idx} alt="" className="photo-item" src={item} />
                 </span>
-
             )
         })
     }
     render() {
         return (
             <div className="homework-photos">
-                {this.renderCarousel()}
+                <Carousel >
+                    {this.renderCarousel()}
+                </Carousel>
             </div>
         )
     }

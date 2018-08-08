@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Input, Icon, } from "antd";
-
+import Message from '../../tools/messageTools';
 import './CommentInputBox.css';
 let id = 0;     //临时comment id
 export default class CommentInputBox extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            comment:''
+            comment: ''
         }
     }
     getInputValue = (e) => {
@@ -17,6 +17,10 @@ export default class CommentInputBox extends Component {
     }
     onCommentHomework = () => {
         const { commentActions, homeworkId } = this.props;
+        if(!this.state.comment) {
+            Message.error('请输入您的点评再提交！');
+            return null;
+        }
         const comment = {
             id,
             commentator: {
@@ -31,18 +35,18 @@ export default class CommentInputBox extends Component {
             time: 1533362538734
         }
         this.setState({
-            comment:''
+            comment: ''
         })
-        commentActions.actionCommentHomework(homeworkId,comment);
-
+        commentActions.actionCommentHomework(homeworkId, comment);
         id++;
+        Message.success("您的点评已提交")
     }
 
     render() {
         return (
             <div>
-                <Input 
-                    onChange={this.getInputValue} 
+                <Input
+                    onChange={this.getInputValue}
                     onPressEnter={this.onCommentHomework}
                     value={this.state.comment}
                     placeholder="请输入你的点评"
