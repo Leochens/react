@@ -18,7 +18,7 @@ class StudyInfo extends Component {
             <div >
                 <Row >
                     <Col span={20} offset={2}>
-                        <Row>
+                        <Row style={{margin:'10px 0',fontWeight:600}}>
                             <span> {BASIC_INFO.NAME} : {basic_info.name} </span>
                             <span> {BASIC_INFO.ID} : {basic_info.id} </span>
                             <span> {BASIC_INFO.TEACHER} : {basic_info.virtual_teacher.nick} </span>
@@ -27,7 +27,7 @@ class StudyInfo extends Component {
                             <span> {BASIC_INFO.STAFF} : {basic_info.real_teacher.name} </span>
                             <span> {BASIC_INFO.PERSON_ID} : {basic_info.real_teacher.mid} </span>
                             <span> {BASIC_INFO.WX_CODE} : {basic_info.real_teacher.wx_code} </span>
-                            <Button onClick={this.props.router.goBack}>返回</Button>
+                            <Button style={{float:'right'}} onClick={this.props.router.goBack}>返回</Button>
                         </Row>
                         <Row>
                             <Table

@@ -16,11 +16,13 @@ export default class CommentInputBox extends Component {
         })
     }
     onCommentHomework = () => {
+        
         const { commentActions, homeworkId } = this.props;
         if(!this.state.comment) {
             Message.error('请输入您的点评再提交！');
             return null;
         }
+        debugger
         const comment = {
             id,
             commentator: {
