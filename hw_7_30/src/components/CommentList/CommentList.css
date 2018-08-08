@@ -6,7 +6,8 @@
     border-bottom: 1px solid #ddd;
 }
 .comment-list{
-    min-height: 375px;;
+    height: 375px;
+
     overflow-y: scroll;
 }
 .comment-time{

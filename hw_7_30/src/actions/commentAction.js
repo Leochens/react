@@ -8,3 +8,11 @@ export const actionRejectComment = (id, reason) => {
         reason
     }
 }
+
+export const actionCommentHomework= (homeworkId, comment) => {
+    return {
+        type: ActionsTypes.COMMENT_ACTIONS.COMMENT_HOMEWORK,
+        homeworkId,
+        comment
+    }
+}

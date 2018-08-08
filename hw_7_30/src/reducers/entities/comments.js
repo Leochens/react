@@ -26,7 +26,14 @@ const comments = (state = {}, action) => {
                 }
             }
         }
-
+        case ActionTypes.COMMENT_ACTIONS.COMMENT_HOMEWORK: {
+            const { comment } = action;
+            console.log('接受到的新的comment',comment);
+            return {
+                ...state,
+                [comment.id]: comment
+            }
+        }
         default: return state;
     }
 }

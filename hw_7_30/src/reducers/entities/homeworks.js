@@ -2,7 +2,6 @@ import ActionTypes from '../../const';
 
 
 const homeworks = (state = {}, action) => {
-
     const { res } = action;
     switch (action.type) {
         case `${ActionTypes.SERVER_ACTIONS.FETCH_HOMEWORK_LIST_ALL_REVIEWED}_SUC`:
@@ -23,6 +22,21 @@ const homeworks = (state = {}, action) => {
                 }
             }
         }
+        case ActionTypes.COMMENT_ACTIONS.COMMENT_HOMEWORK: { //被点评的作业的comment更新
+            const { 
+                homeworkId,
+                comment: {
+                    id
+                }
+             } = action;
+            return {
+                ...state,
+                [homeworkId]: {
+                    ...state[homeworkId],
+                    comments: [id].concat(state[homeworkId].comments)
+                }
+            } 
+        } 
         default: return state;
     }
 }
