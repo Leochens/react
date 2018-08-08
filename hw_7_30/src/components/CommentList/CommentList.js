@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { List } from 'antd'
+import { List, Modal, Input } from 'antd'
 import "./CommentList.css";
 import { getLocalTime } from '../../tools/dateTools';
 //评论列表
 class Item extends Component {
     onRejectComment = () => {
         const {
-            record,
-            reject
+            toggleModal,
+            setCommentId,
+            record: {
+                id
+            }
         } = this.props;
-        console.log('reject ==>',reject);
-        const reason = '太简单';
-        reject && reject(record.id, reason);
+        setCommentId && setCommentId(id);
+        toggleModal && toggleModal();
     }
     render() {
         const { record } = this.props;
@@ -47,14 +49,54 @@ class Item extends Component {
 
 }
 
+
 export default class CommentList extends Component {
 
-    render() {
+    state = {
+        rejectModalStatus: false,
+        rejectReason: '',
+        commentId:null
+    }
+    setCommentId = (id) => {
+        this.setState({
+            commentId: id
+        })
+    }
+    handleInputChange = (e) => {
+        this.setState({
+            rejectReason: e.target.value
+        })
+    }
+    handleCancel = () => {
+        this.handleToggleModal();
+        this.setState({
+            rejectReason: ''
+        })
+    }
+    handleOk = () => {
+        const {
+            commentActions: {
+                actionRejectComment
+            }
+        } = this.props;
+        const { commentId, rejectReason } = this.state;
+        actionRejectComment(commentId, rejectReason);
 
+        this.handleToggleModal();
+        this.setState({
+            rejectReason:''
+        })
+    }
+    handleToggleModal = () => {
+        this.setState({
+            rejectModalStatus: !this.state.rejectModalStatus
+        })
+    }
+    render() {
         const { data,
             commentActions
         } = this.props;
-        console.log('in CommentList reject =>',commentActions);
+        console.log('in CommentList reject =>', commentActions);
         return (
             <div>
                 <List
@@ -62,8 +104,23 @@ export default class CommentList extends Component {
                     size="small"
                     bordered
                     dataSource={data}
-                    renderItem={item => <Item record={item} reject={commentActions.actionRejectComment}/>}
+                    renderItem={item => <Item
+                        record={item}
+                        reject={commentActions.actionRejectComment}
+                        toggleModal={this.handleToggleModal}
+                        setCommentId={this.setCommentId} />}
                 />
+                <Modal
+                    title="点评退回"
+                    visible={this.state.rejectModalStatus}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+                    <Input
+                        onChange={this.handleInputChange}
+                        value={this.state.rejectReason} 
+                        placeholder="请输入退回原因"/>
+                </Modal>
             </div>
         )
     }
