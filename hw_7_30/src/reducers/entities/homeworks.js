@@ -14,6 +14,8 @@ const homeworks = (state = {}, action) => {
             }
         }
         case ActionTypes.SWITCH_ACTIONS.TOGGLE_EXCELLENT: {
+
+            // const newItem :
             return {
                 ...state,
                 [action.id]: {

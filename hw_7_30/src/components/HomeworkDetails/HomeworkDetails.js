@@ -35,7 +35,7 @@ export default class HomeworkDetails extends Component {
                 <span className="excellent">
                     佳作 <Switch
                         onChange={this.handleToggleExcellent}
-                        defaultChecked={data.isExcellent} />
+                        checked={data.isExcellent} />
 
                 </span>
             </div>
