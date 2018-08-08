@@ -14,9 +14,10 @@ const satisfied = (state = {}, action) => {
         case `${ActionTypes.TABLE_ACTIONS.TOGGLE_REPLY}`: { //处理回复
             const { time } = action;
             return {
+                ...state,
                 [time]: {
                     ...state[time],
-                    reply_status: !state[time]
+                    reply_status: !state[time].reply_status
                 }
             }
         }
