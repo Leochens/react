@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-
+import ActionSheet from './WeUI/ActionSheet/ActionSheet';
 class Test extends Component {
-
     render() {
         return (
             <div>
-                <h1>Hello Test</h1>
+                <ActionSheet></ActionSheet>
             </div>
         )
     }
 }
-
 export default Test
