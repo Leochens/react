@@ -10,6 +10,7 @@
     background: #000;
     opacity: 0.6;
     transition: opacity .3s ease-in;
+    
   }
   
   .showMask {
@@ -39,7 +40,7 @@
     width: 274px;
     margin: 35% auto;
     font-size: 17px;
-    transition: opacity .3s ease-in,height .3s ease-in;
+    transition: opacity .3s ease-in;
   }
   .android-menu.showMenu{
       display: block

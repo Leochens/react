@@ -31,7 +31,7 @@ export default class TestSlider extends Component {
                         showValue={false}    
                         onChange={this.handleOnChange}     
                         barColor={'rgb(26, 173, 25)'}
-                        headerColor={'#ddd'}
+                        headerColor={'#eee'}
                     />
                 </div >
                 <h2

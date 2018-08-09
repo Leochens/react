@@ -6,9 +6,7 @@ export default class TestSwitch extends Component {
     }
     handleOnChange = (check) => {
         console.log('handleOnChange', check);
-        this.setState({
-            checked: check
-        })
+       
     }
     render() {
         return (
@@ -16,21 +14,14 @@ export default class TestSwitch extends Component {
                 padding: 25
             }}>
                 <Switch
-                    checked={this.state.checked}
+                    checked={true}
                     onChange={this.handleOnChange}
                 />
                 <Switch
-                    checked={this.state.checked}
+                    checked={false}
                     onChange={this.handleOnChange}
                 />
-                <Switch
-                    checked={this.state.checked}
-                    onChange={this.handleOnChange}
-                />
-                <Switch
-                    checked={this.state.checked}
-                    onChange={this.handleOnChange}
-                />
+               
             </div>
         )
     }

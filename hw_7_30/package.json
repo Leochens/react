@@ -5,6 +5,8 @@
   "dependencies": {
     "antd": "^3.7.3",
     "axios": "^0.18.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "normalizr": "normalizr@^3.2.4",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
@@ -22,9 +24,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "theme": {
-    "primary-color": "#0f0"
-  },
-  "proxy": "http://localhost:91"
+  }
 }
