@@ -7,7 +7,7 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import { isTest } from './config';      //测试模式
 //测试文件
-import Test from './Test/test.js'
+import Test from './test/test.js'
 ReactDOM.render(
     <Provider store={store}>
         {

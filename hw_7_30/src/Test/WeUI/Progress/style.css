@@ -1,0 +1,29 @@
+.progress-wraper{
+    position: relative;
+    height: 12px;
+    background-color: #eee;
+    border-radius: 6px;
+}
+
+.progress-value{
+    background-color:#7FFF00;
+    height: 100%;
+    border-radius: 6px;
+    transition: width 2s ease-in;
+}
+.btn-cancel{
+    position: absolute;
+    bottom: -4px;
+    right: 0;;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+}
+.btn-cancel::before{
+    content: 'x';
+    position: absolute;
+    left: 7px;
+    top: -2px;
+    color: #fff;
+}

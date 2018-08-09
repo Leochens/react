@@ -1,5 +1,5 @@
 
-export const isTest = false;        //是否是测试模式
+export const isTest = true;        //是否是测试模式
 export const isDebug = true;        //开发模式
 
 
