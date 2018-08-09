@@ -1,4 +1,6 @@
-
+.actionsheetCtn{
+  max-height: 100%;
+}
 .mask {
     position: fixed;
     top: 0;
@@ -17,9 +19,7 @@
   
   .hideMask {
     opacity: 0;
-    
     transform: translateY(100%);
-
   }
   
   .ios-menu {
@@ -35,14 +35,16 @@
     transform: translateY(100%);
   }
   .android-menu {
+    display: none;
     width: 274px;
     margin: 35% auto;
     font-size: 17px;
-    transition: transform .3s ease-in;
-    transform: translateY(999px);
-
+    transition: opacity .3s ease-in,height .3s ease-in;
   }
-  .showMenu {
+  .android-menu.showMenu{
+      display: block
+  }
+  .ios-menu.showMenu {
     transform: translateY(0)
   }
   

@@ -1,5 +1,13 @@
 import React from 'react';
 import ActionSheet from './ActionSheet';
+
+const btnStyle = {
+  border: 'none',
+  backgroundColor: '#eee',
+  borderRadius: '6px',
+  margin: 15,
+  padding: 15
+}
 export default class TestActionSheet extends React.Component {
   state = {
     isActionSheetActive: false,
@@ -12,7 +20,7 @@ export default class TestActionSheet extends React.Component {
     this.setState({
       type: 'ios',
       isActionSheetActive: true,
-      title: '标题文字',
+      title: 'ios菜单',
       menus: [{
         title: '示例菜单1',
         click: () => console.log('示例菜单1')
@@ -27,7 +35,7 @@ export default class TestActionSheet extends React.Component {
     this.setState({
       type: 'android',
       isActionSheetActive: true,
-      title: '标题文字2',
+      title: 'Android菜单',
       menus: [{
         title: '示例菜单3',
         type: 'danger',
@@ -48,9 +56,13 @@ export default class TestActionSheet extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleShowIosActionSheet}>ios actionsheet</button>
+        <button 
+          style={btnStyle}
+        onClick={this.handleShowIosActionSheet}>ios actionsheet</button>
 
-        <button onClick={this.handleShowAndroidActionSheet}>android actionsheet</button>
+        <button 
+          style={btnStyle}
+        onClick={this.handleShowAndroidActionSheet}>android actionsheet</button>
 
         <ActionSheet
           type={this.state.type}

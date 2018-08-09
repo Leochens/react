@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import Dialog from './Dialog';
+const btnStyle = {
+    border: 'none',
+    backgroundColor: '#eee',
+    borderRadius: '6px',
+    margin: 15,
+    padding: 15
+}
 export default class TestDialog extends Component {
 
     state = {
@@ -39,8 +46,12 @@ export default class TestDialog extends Component {
             <div style={{
                 padding: 25
             }}>
-                <button onClick={this.openAndroidDialog}>android dialog</button>
-                <button onClick={this.openIosDialog}>ios dialog</button>
+                <button
+                    style={btnStyle}
+                    onClick={this.openAndroidDialog}>android dialog</button>
+                <button
+                    style={btnStyle}
+                    onClick={this.openIosDialog}>ios dialog</button>
                 <Dialog
                     type={this.state.type}       // 显示类型：iOS or Android（参看weui: https://weui.io/#dialog）
                     isActive={this.state.isActive}   // 控制显示与否

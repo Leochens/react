@@ -10,14 +10,16 @@ export default class Progress extends Component {
     render() {
         const { value, showCancel, onCancel } = this.props;
         return (
-            <div className="progress-wraper">
-                <div style={{
-                    width: `${value}%`
-                }} className="progress-value">
-                {showCancel
-                    ? <div onClick={onCancel} className="btn-cancel"> </div>
-                    : null
-                }
+            <div className="progress-box">
+                <div className="progress-wraper">
+                    <div style={{
+                        width: `${value}%`
+                    }} className="progress-value">
+                        {showCancel
+                            ? <div onClick={onCancel} className="btn-cancel"> </div>
+                            : null
+                        }
+                    </div>
                 </div>
             </div>
         )

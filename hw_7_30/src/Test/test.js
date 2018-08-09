@@ -10,9 +10,9 @@ export default class Test extends Component {
     render() {
         return (
             <div>
-                {/* <TestActionSheet /> */}
+                <TestActionSheet />
                 {/* <TestProgress /> */}
-                <TestSlider/>
+                {/* <TestSlider/> */}
                 {/* <TestDialog /> */}
                 {/* <TestSwitch /> */}
             </div>

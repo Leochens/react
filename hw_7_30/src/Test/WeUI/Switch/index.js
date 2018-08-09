@@ -4,32 +4,40 @@ export default class Switch extends Component {
 
     static defaultProps = {
         checked: false,
-        onChange: () => {}
+        onChange: () => { },
+        color: ''
     }
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             checked: this.props.checked
         }
     }
     toggleSwitch = () => {
-        const { onChange } = this.props;
         this.setState({
             checked: !this.state.checked
         });
-        onChange && onChange();
+    }
+    onSwitchChange = () => {
+        const { onChange } = this.props;
+        onChange && onChange(!this.state.checked);
+        this.toggleSwitch();
+
     }
     getSwitchClassName = () => {
         const { checked } = this.state;
-        if(checked){
+        if (checked) {
             return 'checked'
-        }else {
+        } else {
             return null
         }
     }
     render() {
         return (
-            <div onClick={this.toggleSwitch}  className={"switch-box " + this.getSwitchClassName()}>
+            <div
+                onClick={this.onSwitchChange}
+                className={"switch-box " + this.getSwitchClassName()}
+               >
                 <div className="switch-ball"></div>
             </div>
         )

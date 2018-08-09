@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import Progress from './Progress';
+const btnStyle = {
+    border: 'none',
+    backgroundColor: '#eee',
+    borderRadius: '6px',
+    margin: 15,
+    padding: 15
+}
 export default class TestProgress extends Component {
     state = {
-        value: 25,
-        showCancel: true,
+        value: 35,
+        showCancel: false,
     }
     handleStart = () => {
         this.setState({
@@ -18,13 +25,19 @@ export default class TestProgress extends Component {
             <div style={{
                 padding:25
             }}>
-                <Progress       // 参看weui：https://weui.io/#progress    0-100
-                    value={this.state.value}      // 进度条的当前值
-                    showCancel={this.state.showCancel} // 是否展示cancel图标按钮
-                    onCancel={this.handleOnCancel}   // 点击cancel按钮的回调
+                <Progress       
+                    value={this.state.value}     
+                    showCancel={true} 
+                    onCancel={this.handleOnCancel}  
                 />
-
-                <button onClick={this.handleStart}>上传</button>
+                <Progress       
+                    value={this.state.value}     
+                    showCancel={false} 
+                    onCancel={this.handleOnCancel}  
+                />
+                <button 
+                style={btnStyle}
+                onClick={this.handleStart}>上传</button>
             </div>
         )
     }
