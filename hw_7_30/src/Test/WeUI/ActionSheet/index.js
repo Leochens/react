@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './style.css';
 
 export default class ActionSheet extends React.Component {
@@ -12,13 +11,6 @@ export default class ActionSheet extends React.Component {
     onCancel: () => { },
   };
 
-  static propTypes = {
-    type: PropTypes.string.isRequired,
-    isActive: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    menus: PropTypes.array.isRequired,
-    onCancel: PropTypes.func.isRequired
-  }
 
   getMaskClassName = () => {
     if (!this.props.isActive) {
@@ -57,7 +49,7 @@ export default class ActionSheet extends React.Component {
             menus.map((item, idx) => (
               <div
                 className="btn divider"
-                key={`actionSheet_${idx}`}
+                key={idx}
                 onClick={() => this.handleMenuItemClick(idx)}
               >
                 {item.title}
