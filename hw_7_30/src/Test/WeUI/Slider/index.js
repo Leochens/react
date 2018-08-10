@@ -6,6 +6,7 @@ export default class Slider extends Component {
         showValue: true,
         barColor: '',
         headerColor: '',
+        startPos: null,
         onChange: () => { },
         getValue: () => { }
     }
@@ -15,42 +16,53 @@ export default class Slider extends Component {
             value: this.props.defaultValue,
         }
     }
+    handleStartSlider = (e) => {
+        this.setState({
+            startPos: e.touches[0].pageX
+        })
+    }
     handleMoveSlider = (e) => { //处理坐标位置
         const allWidth = window.outerWidth
-        const pageX = e.touches[0].pageX
+        const pageX = e.touches[0].pageX;
+        console.log('start', this.state.startPos);
+        console.log('pageX', pageX);
+        console.log('差',pageX - this.state.startPos);
+        console.log('百分比',(pageX - this.state.startPos));
         const v = (pageX / allWidth) * 100;
         let pos = 0;
         if (v > 100) pos = 100;
         else if (v < 0) pos = 0;
         else pos = parseInt(v);
         this.setState({
-            value: pos
+            value: pos,
+            startPos: pageX
         })
         const { onChange } = this.props;
         onChange && onChange(pos);
     }
 
-    handleShowTip = () => {
-        this.setState({
-            tipIsActive: true
-        })
-    }
-
     render() {
 
         return (
-            <div className="slider-wraper">
+            <div
+                style={{
+                    width: '40%'
+                }}
+                className="slider-wraper">
                 <div style={{
                     width: `${this.state.value}%`,
                     backgroundColor: this.props.barColor
-                }} className="slider-value">
+                }}
+                    ref="track"
+                    className="slider-value">
                     <span
                         style={{
                             backgroundColor: this.props.headerColor
                         }}
                         className="slider-btn"
+                        onTouchStart={this.handleStartSlider}
                         onTouchMove={this.handleMoveSlider}
-                        onMouseOver={this.handleShowTip}
+
                     >
                         {this.props.showValue
                             ? this.state.value
