@@ -34,14 +34,15 @@ const getPublicUrl = appPackageJson =>
 function getServedPath(appPackageJson) {
   const publicUrl = getPublicUrl(appPackageJson);
   const servedUrl =
-    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : 'E:/IT_study/test/react_test2/');
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
   return ensureSlash(servedUrl, true);
 }
 
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
-  appBuild: resolveApp('build'),
+  // appBuild: resolveApp('build'),
+  appBuild: 'E:/IT_study/test/react_test3',
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.js'),
