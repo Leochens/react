@@ -19,7 +19,8 @@ export default class TopicComment extends Component {
             id,
             commentator: 2,
             comment_content: '这是一条测试的评论',
-            to:receiverId
+            to:receiverId,
+            comment_time:'8:55'
         }
         actionCommentTopic && actionCommentTopic(topicId,newComment);
         id++;
@@ -43,6 +44,7 @@ export default class TopicComment extends Component {
                             : null
                     }
                     : <span >{item.comment_content}</span>
+                    {/* <span className="comment_time">{item.comment_time}</span> */}
                 </div>
             )
         })
