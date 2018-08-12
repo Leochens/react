@@ -14,10 +14,9 @@ export default class TopicContent extends Component {
                     <Grid data={pics} columnNum={3}
                         renderItem={item => {
                             return <div className="topic-pics-item">
-                                <img src={item.icon} />
+                                <img src={item} />
                             </div>
                         }}
-                        itemStyle={{ margin: '    ' }}
                         hasLine={false}
                     />
                 </div>

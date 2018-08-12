@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './MessageItem.less';
+import './TopicItem.less';
 import TopicHeader from '../TopicHeader/TopicHeader';
 import TopicContent from '../TopicContent/TopicContent';
 import TopicComment from '../TopicComment/TopicComment';
@@ -20,21 +20,31 @@ const tabs = [
     }
 
 ]
-export default class MessageItem extends Component {
+export default class TopicItem extends Component {
     render() {
+        const {
+            data: { 
+                id,
+                user_info,
+                content,
+                comments,
+                public_time,
+                isHot
+             }
+        } = this.props;
         return (
             <div className="msg-item-wraper">
                 <TopicHeader
-                    userPhoto={'http://pic.kuaizhan.com/g2/M01/92/B4/CgpQVFoVe_GAcS0aAAEkci6rUXU834.JPG/imageView/v1/thumbnail/304x304'}
-                    userNick={'啦啦啦'}
-                    publicTime={'2018-8-15'}
+                    userPhoto={user_info.photo}
+                    userNick={user_info.nick}
+                    publicTime={public_time}
                 />
                 <TopicContent
-                    content={`假期已经过去一个礼拜了 
-                    回到了富有古城韵味的慢生活的泉州～`}
-                    pics={data}
+                    content={content.text}
+                    pics={content.pics}
                 />
                 <TopicComment
+                    comments={comments}
                 />
                 <TopicTabs
                     tabs={tabs}

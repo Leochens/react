@@ -4,7 +4,7 @@ import './TopicComment.less';
 
 export default class TopicComment extends Component {
 
-    defaultProps= {
+    static defaultProps = {
         comments: []
     }
 
