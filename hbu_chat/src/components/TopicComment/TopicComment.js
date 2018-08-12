@@ -7,18 +7,25 @@ export default class TopicComment extends Component {
     static defaultProps = {
         comments: []
     }
-
-    render() {
+    renderComments = () => {
         const {
             comments
         } = this.props;
+        return comments.map((item, id) => {
+            return (
+                <div className="topic-comment-items"
+                    key={id}>
+                    <span className="topic-commentor">{item.commentator.nick}</span> : 
+                    <span >{item.comment_content}</span>
+                </div>
+            )
+        })
+    }
+    render() {
+
         return (
             <div className="topic-comments">
-                <div>
-                    <div className="topic-comment-items">
-                        <span className="topic-commentor"></span>
-                    </div>
-                </div>
+                {this.renderComments()}
             </div>
         )
     }

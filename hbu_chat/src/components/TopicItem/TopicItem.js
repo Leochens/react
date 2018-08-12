@@ -23,14 +23,14 @@ const tabs = [
 export default class TopicItem extends Component {
     render() {
         const {
-            data: { 
+            data: {
                 id,
                 user_info,
                 content,
                 comments,
                 public_time,
                 isHot
-             }
+            }
         } = this.props;
         return (
             <div className="msg-item-wraper">
@@ -43,12 +43,17 @@ export default class TopicItem extends Component {
                     content={content.text}
                     pics={content.pics}
                 />
-                <TopicComment
-                    comments={comments}
-                />
-                <TopicTabs
+                 <TopicTabs
+                    topicId={id}
+                    topicAuthorId={user_info.id}
                     tabs={tabs}
                 />
+                <TopicComment
+                    topicId={id}
+                    topicAuthorId={user_info.id}
+                    comments={comments}
+                />
+               
             </div>
         )
     }

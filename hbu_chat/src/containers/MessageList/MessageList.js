@@ -42,7 +42,13 @@ const mapStateToProps = state => {
             user_info: userId,
             comments: commentIds
         } = topics[id];
-        const commentList = commentIds.map(id => comments[id])
+        const commentList = commentIds.map(id => {
+            const { commentator:userId } = comments[id]; 
+            return {
+                ...comments[id],
+                commentator: users[userId]
+            }
+        })
         return {
             ...topics[id],
             user_info: users[userId],
