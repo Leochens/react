@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MessageItem from '../components/MessageItem/MessageItem';
+import './MessageList.less'
+import MessageItem from '../../components/MessageItem/MessageItem';
 
 
 class MessageList extends Component {
     render() {
         return (
-            <div>
-                <Button>Hello</Button>
+            <div className="msg-list">
+                <MessageItem></MessageItem>
+                <MessageItem></MessageItem>
+                <MessageItem></MessageItem>
                 <MessageItem></MessageItem>
             </div>
         )

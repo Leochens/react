@@ -1,4 +1,4 @@
-import MessageList from './containers/MessageList'
+import MessageList from './containers/MessageList/MessageList'
 import App from './App';
 const routes = [{
     path: '/',
