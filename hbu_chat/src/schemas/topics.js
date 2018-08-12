@@ -4,7 +4,7 @@ import commentSchema from './comments';
 
 const _topicSchema = new schema.Entity('topics', {
     user_info: userSchema,
-    comments: commentSchema
+    comments: commentSchema,
 }, { idAttribute: 'id' });
 
 const topicSchema = [_topicSchema];

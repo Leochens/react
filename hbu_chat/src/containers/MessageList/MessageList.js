@@ -15,7 +15,10 @@ class MessageList extends Component {
     }
     renderTopicList = () => {
         const { topicList } = this.props;
-        return topicList.map((item, id) => <TopicItem key={id} data={item} />)
+        return topicList.map((item, id) => <TopicItem
+            key={id}
+            TopicActions={this.props.TopicActions}
+            data={item} />)
     }
     render() {
         console.log('组装后数据：', this.props.topicList);
@@ -43,10 +46,14 @@ const mapStateToProps = state => {
             comments: commentIds
         } = topics[id];
         const commentList = commentIds.map(id => {
-            const { commentator:userId } = comments[id]; 
+            const {
+                commentator: commentatorId,
+                to: receiverId
+            } = comments[id];
             return {
                 ...comments[id],
-                commentator: users[userId]
+                commentator: users[commentatorId],
+                to: users[receiverId]
             }
         })
         return {
@@ -56,13 +63,15 @@ const mapStateToProps = state => {
         }
     })
     return {
-        topicList
+        topicList,
+        users
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        ServerActions: bindActionCreators(Actions.ServerActions, dispatch)
+        ServerActions: bindActionCreators(Actions.ServerActions, dispatch),
+        TopicActions: bindActionCreators(Actions.TopicActions, dispatch),
     }
 }
 

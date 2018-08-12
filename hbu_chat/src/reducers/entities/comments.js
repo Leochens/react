@@ -8,6 +8,14 @@ const comments = (state = {}, action) => {
                 ...action.res.entities.comments
             }
         }
+        case ActionTyps.TOPIC_ACTIONS.COMMENT_TOPIC: {
+            console.log('进入comments实体');
+            const { comment } = action;
+            return {
+                ...state,
+                [comment.id]: comment
+            }
+        }
         default: return state;
     }
 }

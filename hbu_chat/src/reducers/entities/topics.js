@@ -8,6 +8,21 @@ const topics = (state = {}, action) => {
                 ...action.res.entities.topics
             }
         }
+        case ActionTyps.TOPIC_ACTIONS.COMMENT_TOPIC:{
+            const { 
+                topicId,
+                comment: {
+                    id
+                }
+             } = action;
+            return {
+                ...state,
+                [topicId]: {
+                    ...state[topicId],
+                    comments: state[topicId].comments.concat(id)
+                }
+            }
+        }        
         default: return state;
     }
 }

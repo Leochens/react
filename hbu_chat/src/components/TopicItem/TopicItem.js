@@ -30,7 +30,8 @@ export default class TopicItem extends Component {
                 comments,
                 public_time,
                 isHot
-            }
+            },
+            TopicActions
         } = this.props;
         return (
             <div className="msg-item-wraper">
@@ -52,6 +53,7 @@ export default class TopicItem extends Component {
                     topicId={id}
                     topicAuthorId={user_info.id}
                     comments={comments}
+                    TopicActions={TopicActions}
                 />
                
             </div>

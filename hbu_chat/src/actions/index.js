@@ -1,6 +1,8 @@
 import * as ServerActions from './server';
+import * as TopicActions from './topic';
 
 const Actions = {
-    ServerActions
+    ServerActions,
+    TopicActions
 }
 export default Actions;
