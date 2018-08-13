@@ -11,22 +11,19 @@ export default class DepartmentTree extends Component {
                 actionSelectDepartment
             }
         } = this.props;
-        console.log(selectedKeys,info.selectedNodes[0].key);
         actionSelectDepartment &&
             actionSelectDepartment(parseInt(selectedKeys))
     }
     loop = data => data.map((item) => {
         if (!item) return null;
-        // console.log('???????==>', item);
         if (item.childs && item.childs.length) {
-            return <TreeNode ref={`users_${item.id}`}
+            return <TreeNode
                 key={item.id}
                 title={item.name}
                 users={item.users}
             >{this.loop(item.childs)}</TreeNode>;
         }
-        return <TreeNode key={item.id} title={item.name}>
-        </TreeNode>;
+        return <TreeNode key={item.id} title={item.name} />
     });
     render() {
         const { departmentTree } = this.props;
@@ -34,7 +31,7 @@ export default class DepartmentTree extends Component {
             <div>
                 <Tree
                     showLine
-                    defaultExpandedKeys={['102']}
+                    defaultExpandedKeys={['101']}
                     onSelect={this.onSelect}
                 >
                     <TreeNode title="全部部门"

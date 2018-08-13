@@ -23,6 +23,9 @@ export default class _Sider extends Component {
                     <SubMenu key="sub3" title={<span><Icon type="laptop" />作业点评</span>}>
                         <Menu.Item key="3"><Link to="/homeworkReview">点评页面</Link></Menu.Item>
                     </SubMenu>
+                    <SubMenu key="sub4" title={<span><Icon type="laptop" />权限管理</span>}>
+                        <Menu.Item key="4"><Link to="/authorityManagement">权限管理</Link></Menu.Item>
+                    </SubMenu>
                 </Menu>
             </Sider>
         )

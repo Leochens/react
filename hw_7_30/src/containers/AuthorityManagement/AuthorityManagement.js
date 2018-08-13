@@ -19,22 +19,17 @@ class AuthorityManagement extends Component {
             }
         } = this.props;
         actionFetchAuthorities
-            && actionFetchAuthorities();//数据写死了
+            && actionFetchAuthorities();//从action里读死数据
     }
 
     render() {
         console.log('willBeSelectedUser', this.props.willBeSelectedUser);
         return (
             <div className="auth">
-                {/* <Row className="auth-comment">
-                    点评作业：拥有个人点评页，可以为学生作业进行点评
-                    <Button className="auth-btn">权限管理</Button>
-                </Row>
-                <Row className="auth-comment">
-                    带客老师：拥有审核点评老师点评内容的权限，包括撤回点评，自行点评
-                    <Button className="auth-btn">权限管理</Button>
-                </Row> */}
-                <Collapse accordion>
+
+                <Collapse accordion
+                    defaultActiveKey='3'
+                >
                     <Panel header={header('点评作业：拥有个人点评页，可以为学生作业进行点评')} key="1">
                         <AuthorityBar
                             willBeSelectedUser={this.props.willBeSelectedUser}
@@ -69,8 +64,8 @@ class AuthorityManagement extends Component {
 
 const getNode = (root, entity) => {
     if (!root) return {};
-    const { departments, admins } = entity;
-    const { childs, users } = root;
+    const { departments  } = entity;
+    const { childs } = root;
     if (childs.length === 0) {
         return []
     } else {
@@ -109,7 +104,7 @@ const mapStateToProps = state => {
     if (departments[currentDepartment].users) {
         willBeSelectedUser = departments[currentDepartment].users.map(id => admins[id])
     }
-    console.log('tree here', tree);
+    // console.log('tree here', tree);
     return {
         departmentTree: tree,
         willBeSelectedUser,

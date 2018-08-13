@@ -26,13 +26,17 @@ export default class AuthorityBar extends Component {
         })
     }
     renderSelectedUsers = () => {
-        const { selectedUser } = this.props;
+        const { selectedUser,
+            switchActions: {
+                actionToggleSelectAuthorityUsers
+            }
+        } = this.props;
         // console.log(this.props);
         if (!selectedUser) return null;
         return selectedUser.map((item, id) => {
             return <Button
                 className={"select-user-btn"}
-
+                onClick={() => actionToggleSelectAuthorityUsers(item.id)}
                 key={id}>
                 {item.name}
             </Button>
