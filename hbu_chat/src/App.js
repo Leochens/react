@@ -10,9 +10,9 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-          {this.props.children}
         <Tabs>
         </Tabs>
+          {this.props.children}
       </div>
     );
   }
