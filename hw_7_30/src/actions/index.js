@@ -4,13 +4,15 @@ import * as searchAction from './searchAction';
 import * as tableAction from './tableAction';
 import * as switchAction from './switchAction';
 import * as commentAction from './commentAction';
+import * as selectAction from './selectAction';
 const Actions = {
     inputAction,
     serverAction,
     searchAction,
     tableAction,
     switchAction,
-    commentAction
+    commentAction,
+    selectAction
 }
 
 export default Actions;

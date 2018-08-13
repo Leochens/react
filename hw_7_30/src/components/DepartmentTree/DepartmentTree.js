@@ -6,19 +6,31 @@ const TreeNode = Tree.TreeNode;
 
 export default class DepartmentTree extends Component {
     onSelect = (selectedKeys, info) => {
-        console.log('selected', selectedKeys, info);
+        const {
+            switchActions: {
+                actionSelectDepartment
+            }
+        } = this.props;
+
+        actionSelectDepartment &&
+            actionSelectDepartment(parseInt(selectedKeys))
     }
     loop = data => data.map((item) => {
         if (!item) return null;
         // console.log('???????==>', item);
         if (item.childs && item.childs.length) {
-            return <TreeNode key={item.id} title={item.name}>{this.loop(item.childs)}</TreeNode>;
+            return <TreeNode ref={`users_${item.id}`}
+                key={item.id}
+                title={item.name}
+                users={item.users}
+                onClick={() => console.log('gterte')}
+            >{this.loop(item.childs)}</TreeNode>;
         }
-        return <TreeNode key={item.id} title={item.name} />;
+        return <TreeNode key={item.id} title={item.name}>
+        </TreeNode>;
     });
     render() {
         const { departmentTree } = this.props;
-        // console.log('假的树', departmentTree);
         return (
             <div>
                 <Tree

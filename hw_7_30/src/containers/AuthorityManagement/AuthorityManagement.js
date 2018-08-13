@@ -8,7 +8,8 @@ import { Input, Button, Row, Col } from 'antd';
 
 const Search = Input.Search;
 class AuthorityManagement extends Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props);
         const {
             serverActions: {
                 actionFetchAuthorities
@@ -16,6 +17,30 @@ class AuthorityManagement extends Component {
         } = this.props;
         actionFetchAuthorities
             && actionFetchAuthorities();//数据写死了
+    }
+    renderWillBeSelectUsers = () => {
+        const { willBeSelectedUser } = this.props;
+        // console.log(this.props);
+        if (!willBeSelectedUser) return null;
+        return willBeSelectedUser.map((item, id) => {
+            return <Button
+                className="select-user-btn"
+                key={id}>
+                {item.name}
+            </Button>
+        })
+    }
+    renderSelectedUsers = () => {
+        const { selectedUser } = this.props;
+        // console.log(this.props);
+        if (!selectedUser) return null;
+        return selectedUser.map((item, id) => {
+            return <Button
+                className="select-user-btn"
+                key={id}>
+                {item.name}
+            </Button>
+        })
     }
     render() {
         return (
@@ -40,16 +65,18 @@ class AuthorityManagement extends Component {
                             />
                         </Row>
                         <Row >
-
+                            {this.renderSelectedUsers()}
                         </Row>
                     </Col >
                     <Col span={12}>
                         <Col span={8} className="auth-tree">
                             <DepartmentTree
-                                departmentTree={this.props.departmentTree} />
+                                departmentTree={this.props.departmentTree}
+                                switchActions={this.props.switchActions}
+                            />
                         </Col>
                         <Col span={16}>
-                            efew
+                            {this.renderWillBeSelectUsers()}
                         </Col>
 
                     </Col>
@@ -61,11 +88,11 @@ class AuthorityManagement extends Component {
 
 
 const getNode = (root, entity) => {
-
+    if(!root)   return {};
     const { departments, admins } = entity;
     const { childs, users } = root;
     if (childs.length === 0) {
-        console.log('最底层', root);
+        // console.log('最底层', root);
         return []
     } else {
         return childs.map(id => {
@@ -76,7 +103,6 @@ const getNode = (root, entity) => {
         });
     }
 }
-
 const recursionMapTree = (root, entity) => {
     const nodes = getNode(root, entity);
     console.log('nodes', nodes);
@@ -86,29 +112,35 @@ const recursionMapTree = (root, entity) => {
 const mapStateToProps = state => {
     const {
         AuthorityConfigReducer: {
-            AuthorityTreeRoot
+            treeRoot,
+            willBeSelectedUserIds,
+            selectedUserIds
         },
         entitiesReducer: {
             admins,
             departments
         }
     } = state;
-    // console.log('组装前', AuthorityTreeRoot, admins, departments);
-    const root = departments[AuthorityTreeRoot.pop()]; //根实体
+    // console.log('组装前', treeRoot, admins, departments);
+    const root = departments[treeRoot]; //根实体
     console.log('根实体', root);
     if (!root) {
-            // console.log('根实体是null');
-            return {}
-        }
+        // console.log('根实体是null');
+        return {}
+    }
+
     const tree = recursionMapTree(root, { admins, departments });
     console.log('tree here', tree);
     return {
-        departmentTree: tree
+        departmentTree: tree,
+        willBeSelectedUser: willBeSelectedUserIds.map(id => admins[id]),
+        selectedUser: selectedUserIds.map(id => admins[id])
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        serverActions: bindActionCreators(allActionCreators.serverAction, dispatch)
+        serverActions: bindActionCreators(allActionCreators.serverAction, dispatch),
+        switchActions: bindActionCreators(allActionCreators.switchAction, dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorityManagement);
