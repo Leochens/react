@@ -33,3 +33,7 @@ padding: 15px;
 .select-user-btn{
     margin: 6px;
 }
+.selected-user-btn{
+    margin: 9px;
+    background-color: #ddd;
+}

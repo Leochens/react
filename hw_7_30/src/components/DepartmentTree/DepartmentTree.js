@@ -11,7 +11,7 @@ export default class DepartmentTree extends Component {
                 actionSelectDepartment
             }
         } = this.props;
-
+        console.log(selectedKeys,info.selectedNodes[0].key);
         actionSelectDepartment &&
             actionSelectDepartment(parseInt(selectedKeys))
     }
@@ -23,7 +23,6 @@ export default class DepartmentTree extends Component {
                 key={item.id}
                 title={item.name}
                 users={item.users}
-                onClick={() => console.log('gterte')}
             >{this.loop(item.childs)}</TreeNode>;
         }
         return <TreeNode key={item.id} title={item.name}>

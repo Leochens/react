@@ -19,12 +19,21 @@ class AuthorityManagement extends Component {
             && actionFetchAuthorities();//数据写死了
     }
     renderWillBeSelectUsers = () => {
-        const { willBeSelectedUser } = this.props;
+        const {
+            willBeSelectedUser,
+            switchActions: {
+                actionToggleSelectAuthorityUsers
+            }
+        } = this.props;
         // console.log(this.props);
         if (!willBeSelectedUser) return null;
         return willBeSelectedUser.map((item, id) => {
             return <Button
-                className="select-user-btn"
+                onClick={() => actionToggleSelectAuthorityUsers(item.id)}
+                className={"select-user-btn"}
+                style={
+                    item.isSelected ? {backgroundColor:'#ddd'}: {}
+                }
                 key={id}>
                 {item.name}
             </Button>
@@ -36,13 +45,15 @@ class AuthorityManagement extends Component {
         if (!selectedUser) return null;
         return selectedUser.map((item, id) => {
             return <Button
-                className="select-user-btn"
+                className={ "select-user-btn"}
+               
                 key={id}>
                 {item.name}
             </Button>
         })
     }
     render() {
+        console.log('willBeSelectedUser', this.props.willBeSelectedUser);
         return (
             <div className="auth">
                 <Row className="auth-comment">
@@ -88,11 +99,10 @@ class AuthorityManagement extends Component {
 
 
 const getNode = (root, entity) => {
-    if(!root)   return {};
+    if (!root) return {};
     const { departments, admins } = entity;
     const { childs, users } = root;
     if (childs.length === 0) {
-        // console.log('最底层', root);
         return []
     } else {
         return childs.map(id => {
@@ -113,28 +123,28 @@ const mapStateToProps = state => {
     const {
         AuthorityConfigReducer: {
             treeRoot,
-            willBeSelectedUserIds,
-            selectedUserIds
+            selectedUserIds,
+            currentDepartment
         },
         entitiesReducer: {
             admins,
             departments
         }
     } = state;
-    // console.log('组装前', treeRoot, admins, departments);
     const root = departments[treeRoot]; //根实体
-    console.log('根实体', root);
     if (!root) {
-        // console.log('根实体是null');
         return {}
     }
-
+    let willBeSelectedUser = []
     const tree = recursionMapTree(root, { admins, departments });
+    if (departments[currentDepartment].users) {
+        willBeSelectedUser = departments[currentDepartment].users.map(id => admins[id])
+    }
     console.log('tree here', tree);
     return {
         departmentTree: tree,
-        willBeSelectedUser: willBeSelectedUserIds.map(id => admins[id]),
-        selectedUser: selectedUserIds.map(id => admins[id])
+        willBeSelectedUser,
+        selectedUser: selectedUserIds.map(id => admins[id]),
     }
 }
 const mapDispatchToProps = dispatch => {
