@@ -6,3 +6,10 @@ export const actionToggleExcellent = (id) => {
         id
     }
 }
+
+export const actionToggleSelectUsers = (id) => {
+    return {
+        type:'',
+        id
+    }
+}

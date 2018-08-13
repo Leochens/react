@@ -6,6 +6,8 @@ import satisfied from './satisfied';
 import students from './students'
 import comments from './comments';
 import homeworks from './homeworks';
+import departments from './departments';
+import admins from './admins';
 
 const entities = combineReducers({
     classes,
@@ -14,7 +16,9 @@ const entities = combineReducers({
     satisfied,
     students,
     comments,
-    homeworks
+    homeworks,
+    departments,
+    admins
 })
 
 export default entities;
