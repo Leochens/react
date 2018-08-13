@@ -11,29 +11,3 @@ background-color: #fff;
 margin: 15px;
 padding: 15px;
 }
-.auth-btn{
-    float: right;
-    margin: 0 15px;
-}
-.auth-comment-big{
-    background-color: #fff;
-    min-height: 350px;
-    width: 100%;
-    background-color: #fff;
-    margin: 15px;
-    padding: 15px;
-}
-.auth-tree{
-    overflow: auto;
-}
-.auth-left-btns{
-    padding: 12px;
-    border: 1px solid #ddd;
-}
-.select-user-btn{
-    margin: 6px;
-}
-.selected-user-btn{
-    margin: 9px;
-    background-color: #ddd;
-}

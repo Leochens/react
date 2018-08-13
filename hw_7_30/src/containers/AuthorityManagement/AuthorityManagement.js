@@ -3,10 +3,13 @@ import './AuthorityManagement.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import allActionCreators from '../../actions';
-import DepartmentTree from '../../components/DepartmentTree/DepartmentTree';
-import { Input, Button, Row, Col } from 'antd';
+import AuthorityBar from '../../components/AuthorityBar/AuthorityBar';
+import {Collapse, Button } from 'antd';
+const Panel = Collapse.Panel;
 
-const Search = Input.Search;
+const header = (text) => <div><span>{text}</span><Button style={{
+    float:'right'
+}}>权限管理</Button></div> 
 class AuthorityManagement extends Component {
     constructor(props) {
         super(props);
@@ -18,80 +21,46 @@ class AuthorityManagement extends Component {
         actionFetchAuthorities
             && actionFetchAuthorities();//数据写死了
     }
-    renderWillBeSelectUsers = () => {
-        const {
-            willBeSelectedUser,
-            switchActions: {
-                actionToggleSelectAuthorityUsers
-            }
-        } = this.props;
-        // console.log(this.props);
-        if (!willBeSelectedUser) return null;
-        return willBeSelectedUser.map((item, id) => {
-            return <Button
-                onClick={() => actionToggleSelectAuthorityUsers(item.id)}
-                className={"select-user-btn"}
-                style={
-                    item.isSelected ? {backgroundColor:'#ddd'}: {}
-                }
-                key={id}>
-                {item.name}
-            </Button>
-        })
-    }
-    renderSelectedUsers = () => {
-        const { selectedUser } = this.props;
-        // console.log(this.props);
-        if (!selectedUser) return null;
-        return selectedUser.map((item, id) => {
-            return <Button
-                className={ "select-user-btn"}
-               
-                key={id}>
-                {item.name}
-            </Button>
-        })
-    }
+
     render() {
         console.log('willBeSelectedUser', this.props.willBeSelectedUser);
         return (
             <div className="auth">
-                <Row className="auth-comment">
+                {/* <Row className="auth-comment">
                     点评作业：拥有个人点评页，可以为学生作业进行点评
                     <Button className="auth-btn">权限管理</Button>
                 </Row>
                 <Row className="auth-comment">
                     带客老师：拥有审核点评老师点评内容的权限，包括撤回点评，自行点评
                     <Button className="auth-btn">权限管理</Button>
-                </Row>
-                <Row className="auth-comment-big">
-                    <Col span={12} className="auth-left">
-                        <Row className="auth-left-btns">
-                            <Button>添加</Button>
-                            <Button>删除</Button>
-                            <Search
-                                placeholder="input search text"
-                                onSearch={value => console.log(value)}
-                                style={{ width: 200 }}
-                            />
-                        </Row>
-                        <Row >
-                            {this.renderSelectedUsers()}
-                        </Row>
-                    </Col >
-                    <Col span={12}>
-                        <Col span={8} className="auth-tree">
-                            <DepartmentTree
-                                departmentTree={this.props.departmentTree}
-                                switchActions={this.props.switchActions}
-                            />
-                        </Col>
-                        <Col span={16}>
-                            {this.renderWillBeSelectUsers()}
-                        </Col>
+                </Row> */}
+                <Collapse accordion>
+                    <Panel header={header('点评作业：拥有个人点评页，可以为学生作业进行点评')} key="1">
+                        <AuthorityBar
+                            willBeSelectedUser={this.props.willBeSelectedUser}
+                            switchActions={this.props.switchActions}
+                            selectedUser={this.props.selectedUser}
+                            departmentTree={this.props.departmentTree}
+                        />
+                    </Panel>
+                    <Panel header={header('带客老师：拥有审核点评老师点评内容的权限，包括撤回点评，自行点评')} key="2">
+                        <AuthorityBar
+                            willBeSelectedUser={this.props.willBeSelectedUser}
+                            switchActions={this.props.switchActions}
+                            selectedUser={this.props.selectedUser}
+                            departmentTree={this.props.departmentTree}
+                        />
+                    </Panel>
+                    <Panel header={header('点评作业：拥有个人点评页，可以为学生作业进行点评')} key="3">
+                        <AuthorityBar
+                            willBeSelectedUser={this.props.willBeSelectedUser}
+                            switchActions={this.props.switchActions}
+                            selectedUser={this.props.selectedUser}
+                            departmentTree={this.props.departmentTree}
+                        />
+                    </Panel>
+                </Collapse>,
 
-                    </Col>
-                </Row>
             </div>
         )
     }
