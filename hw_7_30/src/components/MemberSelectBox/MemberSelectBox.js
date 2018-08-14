@@ -27,7 +27,6 @@ export default class MemberSelectBox extends Component {
     handelSelectMember = (id) => {
         const newIds = this.state.selectedMemberIds.slice();
         let selectedFlag = false;
-
         //没有就添加 有就删除  动态改变最终的selectedMemberIds
         if (newIds.includes(id)) {
             newIds.splice(newIds.indexOf(id), 1);
@@ -56,7 +55,6 @@ export default class MemberSelectBox extends Component {
         this.setState({
             searchResult: res
         })
-
     }
     renderMembers = () => {
         const {
@@ -72,7 +70,10 @@ export default class MemberSelectBox extends Component {
                 onClick={() => this.handelSelectMember(item.id)}
             ><Button
                 style={ //根据判断状态表中的对应id的状态 来决定是否渲染背景色
-                    { backgroundColor: this.state.stateMap[item.id] ? '#ddd' : null}
+                    { 
+                        backgroundColor: this.state.stateMap[item.id] ? '#ddd' : null,
+                        margin: 10
+                }
                 }
                 disabled={
                     showDisable
@@ -82,7 +83,7 @@ export default class MemberSelectBox extends Component {
                         : false
                 }
             >
-                   {item.name}
+                   {item.name}{item.id}
                 </Button>
             </span>
         })

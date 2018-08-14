@@ -3,7 +3,7 @@ import { array2set } from '../tools/array2setTool';
 const AuthorityConfig = (
     state = {
         treeRoot: 0,
-        selectedUserIds: [],        //已选中
+        selectedMembersIds: [205,207],        //已选中
         currentDepartment: 101
     }, action) => {
     switch (action.type) {
@@ -17,8 +17,8 @@ const AuthorityConfig = (
         case ACTION_TYPES.SELECT_ACTIONS.SELECT_AUTHORITY_USER: {
             return {
                 ...state,
-                selectedUserIds: [
-                    ...state.selectedUserIds,
+                selectedMembersIds: [
+                    ...state.selectedMembersIds,
                     action.id
                 ]
             }
@@ -31,29 +31,29 @@ const AuthorityConfig = (
         }
         case ACTION_TYPES.SELECT_ACTIONS.ADD_AUTHORITY_MEMBERS: {
 
-            if(Array.isArray(action.ids) && action.ids.length === 0  ){
+            if (Array.isArray(action.ids) && action.ids.length === 0) {
                 return state;
-            } 
+            }
             // console.log(action.ids);
             return {
                 ...state,
-                selectedUserIds: array2set([
-                    ...state.selectedUserIds,
+                selectedMembersIds: array2set([
+                    ...state.selectedMembersIds,
                     ...action.ids
                 ])
             }
         }
         case ACTION_TYPES.SELECT_ACTIONS.DEL_AUTHORITY_MEMBERS: {
-            if(Array.isArray(action.ids) && action.ids.length === 0  ){
+            if (Array.isArray(action.ids) && action.ids.length === 0) {
                 return state;
             }
-            const oldIds = [...state.selectedUserIds];
-            const newIds = oldIds.filter(id=>{
+            const oldIds = [...state.selectedMembersIds];
+            const newIds = oldIds.filter(id => {
                 return !action.ids.includes(id)
-            }) 
+            })
             return {
                 ...state,
-                selectedUserIds: newIds
+                selectedMembersIds: newIds
             }
         }
         default: return state;

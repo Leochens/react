@@ -69,14 +69,14 @@ class AuthorityManagement extends Component {
 const getNode = (root, entity) => {
     if (!root) return {};
     const { departments } = entity;
-    const { childs } = root;
-    if (childs.length === 0) {
+    const { children } = root;
+    if (children.length === 0) {
         return []
     } else {
-        return childs.map(id => {
+        return children.map(id => {
             return {
                 ...departments[id],
-                childs: getNode(departments[id], entity)
+                children: getNode(departments[id], entity)
             }
         });
     }
@@ -89,7 +89,7 @@ const mapStateToProps = state => {
     const {
         AuthorityConfigReducer: {
             treeRoot,
-            selectedUserIds,
+            selectedMembersIds,
             currentDepartment
         },
         entitiesReducer: {
@@ -103,8 +103,8 @@ const mapStateToProps = state => {
     }
     let willBeSelectedUser = []
     const tree = recursionMapTree(root, { admins, departments });
-    if (departments[currentDepartment].users) {
-        willBeSelectedUser = departments[currentDepartment].users.map(id => {
+    if (departments[currentDepartment].members) {
+        willBeSelectedUser = departments[currentDepartment].members.map(id => {
             return {
                 ...admins[id],
                 selected: false
@@ -115,13 +115,13 @@ const mapStateToProps = state => {
     //将得到的子节点添加到原来的根节点上
     const _tree = {
         ...departments[treeRoot],
-        childs: tree
+        children: tree
     }
     console.log('>>>', _tree);
     return {
         departmentTree: _tree,
         willBeSelectedUser,
-        selectedUser: selectedUserIds.map(id => admins[id]),
+        selectedUser: selectedMembersIds.map(id => admins[id]),
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './AuthorityBar.css';
-import { Input, Button, Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 import DepartmentTree from '../DepartmentTree/DepartmentTree';
-import ToggleButton from '../ToggleButton/ToggleButton';
 import MemberSelectBox from '../MemberSelectBox/MemberSelectBox';
-const Search = Input.Search;
 export default class AuthorityBar extends Component {
 
     handleAddSelectedMembers = (ids) => {
@@ -29,6 +27,7 @@ export default class AuthorityBar extends Component {
     }
     render() {
         return (
+
             <Row className="auth-comment-big">
                 <Col span={12} className="auth-left">
                     <Row >

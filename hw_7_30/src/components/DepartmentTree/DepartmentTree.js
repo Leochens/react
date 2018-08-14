@@ -22,11 +22,11 @@ export default class DepartmentTree extends Component {
     loop = (data) => {
         return data.map((item) => {
             if (!item) return null;
-            if (item.childs && item.childs.length) {
+            if (item.children && item.children.length) {
                 return <TreeNode
                     key={item.id}
                     title={item.name}
-                >{this.loop(item.childs)}</TreeNode>;
+                >{this.loop(item.children)}</TreeNode>;
             }
             return <TreeNode key={item.id} title={item.name} />
         })

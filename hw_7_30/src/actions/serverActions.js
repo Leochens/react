@@ -115,75 +115,75 @@ export const actionFetchAuthorities = () => {
                     101: {
                         id: 101,
                         name: '所有部门',
-                        childs: [102, 103, 104, 105],
-                        users: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211]
+                        children: [102, 103, 104, 105],
+                        members: [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211]
                     },
                     102: {
                         id: 102,
                         name: '技术部',
-                        childs: [106, 107],
-                        users: [201, 202, 203, 206]
+                        children: [106, 107],
+                        members: [201, 202, 203, 206]
                     },
                     103: {
                         id: 103,
                         name: '财务部',
-                        childs: [109],
-                        users: [208, 209]
+                        children: [109],
+                        members: [208, 209]
                     },
                     104: {
                         id: 104,
                         name: '工程部',
-                        childs: [],
-                        users: [210, 205]
+                        children: [],
+                        members: [210, 205]
                     },
                     105: {
                         id: 105,
                         name: '产品研发部',
-                        childs: [108],
-                        users: [204, 207, 211]
+                        children: [108],
+                        members: [204, 207, 211]
                     },
                     106: {
                         id: 106,
                         name: '技术一组',
-                        childs: [115],
-                        users: [
+                        children: [115],
+                        members: [
                             201, 202
                         ]
                     },
                     107: {
                         id: 107,
                         name: '技术二组',
-                        childs: [],
-                        users: [
+                        children: [],
+                        members: [
                             203, 206
                         ]
                     },
                     108: {
                         id: 108,
                         name: '产品一组',
-                        childs: [],
-                        users: [
+                        children: [],
+                        members: [
                             204, 207, 211
                         ]
                     },
                     109: {
                         id: 109,
                         name: '财务一组',
-                        childs: [],
-                        users: [
+                        children: [],
+                        members: [
                             208, 209
                         ]
                     },
                     115: {
                         id: 115,
                         name: '技术一组子',
-                        childs: [],
-                        users: [
+                        children: [],
+                        members: [
                             201, 202
                         ]
                     },
                 },
-                users: {
+                members: {
                     201: {
                         id: 201,
                         name: '小李',
@@ -210,7 +210,7 @@ export const actionFetchAuthorities = () => {
                     205: {
                         id: 205,
                         name: '小夜',
-                        isSelected: false
+                        isSelected: true
                     },
                     206: {
                         id: 206,
@@ -220,7 +220,7 @@ export const actionFetchAuthorities = () => {
                     207: {
                         id: 207,
                         name: '何炅',
-                        isSelected: false
+                        isSelected: true
                     },
                     208: {
                         id: 208,

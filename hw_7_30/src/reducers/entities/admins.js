@@ -6,7 +6,7 @@ const admins = (state = {}, action) => {
         case ActionTypes.SERVER_ACTIONS.FETCH_AUTHORITIES: {
             return {
                 ...state,
-                ...action.data.entities.users
+                ...action.data.entities.members
             }
         }
         
