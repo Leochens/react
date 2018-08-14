@@ -15,7 +15,5 @@ export const actionChangeDynamicData = (item_id, newContent) => {
         newContent
     }
 }
-// export const actionReviewHomework = (id,msg) => {
 
-// }
 

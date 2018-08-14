@@ -26,7 +26,6 @@ const AuthorityConfig = (
         case ACTION_TYPES.SWITCH_ACTIONS.SELECT_DEPARTMENT: {
 
             return Object.assign({},state,{
-
                 currentDepartment: action.id
             })
         }

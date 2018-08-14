@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import allActionCreators from '../../actions';
 import AuthorityBar from '../../components/AuthorityBar/AuthorityBar';
-import {Collapse, Button } from 'antd';
+import { Collapse, Button } from 'antd';
 const Panel = Collapse.Panel;
 
-const header = (text) => <div><span>{text}</span><Button style={{
-    float:'right'
-}}>权限管理</Button></div> 
+const header = (text) => <div>
+    <span>{text}</span>
+    <Button style={{
+        float: 'right'
+    }}>权限管理</Button>
+</div>
+
 class AuthorityManagement extends Component {
     constructor(props) {
         super(props);
@@ -23,10 +27,8 @@ class AuthorityManagement extends Component {
     }
 
     render() {
-        console.log('willBeSelectedUser', this.props.willBeSelectedUser);
         return (
             <div className="auth">
-
                 <Collapse accordion
                     defaultActiveKey='3'
                 >
@@ -54,17 +56,16 @@ class AuthorityManagement extends Component {
                             departmentTree={this.props.departmentTree}
                         />
                     </Panel>
-                </Collapse>,
-
+                </Collapse>
             </div>
         )
     }
 }
 
-
-const getNode = (root, entity) => {
+//递归遍历树节点
+const getNode = (root, entity) => { 
     if (!root) return {};
-    const { departments  } = entity;
+    const { departments } = entity;
     const { childs } = root;
     if (childs.length === 0) {
         return []
@@ -78,9 +79,7 @@ const getNode = (root, entity) => {
     }
 }
 const recursionMapTree = (root, entity) => {
-    const nodes = getNode(root, entity);
-    console.log('nodes', nodes);
-    return nodes;
+    return getNode(root, entity);
 }
 
 const mapStateToProps = state => {
@@ -104,9 +103,15 @@ const mapStateToProps = state => {
     if (departments[currentDepartment].users) {
         willBeSelectedUser = departments[currentDepartment].users.map(id => admins[id])
     }
-    // console.log('tree here', tree);
+
+    //将得到的子节点添加到原来的根节点上
+    const _tree = {         
+        ...departments[treeRoot],
+        childs:tree
+    }
+    console.log('>>>',_tree);
     return {
-        departmentTree: tree,
+        departmentTree: _tree,
         willBeSelectedUser,
         selectedUser: selectedUserIds.map(id => admins[id]),
     }
