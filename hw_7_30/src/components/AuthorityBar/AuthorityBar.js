@@ -4,6 +4,37 @@ import { Input, Button, Row, Col } from 'antd';
 import DepartmentTree from '../DepartmentTree/DepartmentTree';
 const Search = Input.Search;
 export default class AuthorityBar extends Component {
+    state = {
+        selectedMemberIds: []
+    }
+
+    handelSelectMember = (id) => {
+        const {
+            switchActions: {
+                actionToggleSelectAuthorityUsers
+            }
+        } = this.props;
+
+        this.setState({
+            selectedMemberIds: [
+                ...this.state.selectedMemberIds,
+                id
+            ]
+        })
+        console.log(this.state);
+        actionToggleSelectAuthorityUsers(id);
+    }
+
+    handleAddSelectedMembers = () => {
+        const { selectedMemberIds } = this.state;
+        const {
+            selectActions: {
+                actionAddAuthorityMembers
+            }
+        } = this.props;
+        actionAddAuthorityMembers
+            && actionAddAuthorityMembers(selectedMemberIds);
+    }
     //渲染待选择用户区域
     renderWillBeSelectUsers = () => {
         const {
@@ -15,7 +46,7 @@ export default class AuthorityBar extends Component {
         if (!willBeSelectedUser) return null;
         return willBeSelectedUser.map((item, id) => {
             return <Button
-                onClick={() => actionToggleSelectAuthorityUsers(item.id)}
+                onClick={() => this.handelSelectMember(item.id)}
                 className={"select-user-btn"}
                 style={
                     item.isSelected ? { backgroundColor: '#ddd' } : {}
@@ -36,7 +67,7 @@ export default class AuthorityBar extends Component {
         return selectedUser.map((item, id) => {
             return <Button
                 className={"select-user-btn"}
-                onClick={() => actionToggleSelectAuthorityUsers(item.id)}
+                // onClick={() => actionToggleSelectAuthorityUsers(item.id)}
                 key={id}>
                 {item.name}
             </Button>
@@ -67,11 +98,16 @@ export default class AuthorityBar extends Component {
                         />
                     </Col>
                     <Col span={16}>
-                        <Search
-                            placeholder="input search text"
-                            onSearch={value => console.log(value)}
-                            style={{ width: '100%' }}
-                        />
+                        <Row>
+                            <Search
+                                placeholder="input search text"
+                                onSearch={value => console.log(value)}
+                                style={{ width: '80%' }}
+                            />
+                            <Button
+                                onClick={this.handleAddSelectedMembers}
+                            >添加</Button>
+                        </Row>
                         {this.renderWillBeSelectUsers()}
                     </Col>
 

@@ -36,6 +36,7 @@ class AuthorityManagement extends Component {
                         <AuthorityBar
                             willBeSelectedUser={this.props.willBeSelectedUser}
                             switchActions={this.props.switchActions}
+                            selectActions={this.props.selectActions}
                             selectedUser={this.props.selectedUser}
                             departmentTree={this.props.departmentTree}
                         />
@@ -44,6 +45,7 @@ class AuthorityManagement extends Component {
                         <AuthorityBar
                             willBeSelectedUser={this.props.willBeSelectedUser}
                             switchActions={this.props.switchActions}
+                            selectActions={this.props.selectActions}
                             selectedUser={this.props.selectedUser}
                             departmentTree={this.props.departmentTree}
                         />
@@ -52,6 +54,7 @@ class AuthorityManagement extends Component {
                         <AuthorityBar
                             willBeSelectedUser={this.props.willBeSelectedUser}
                             switchActions={this.props.switchActions}
+                            selectActions={this.props.selectActions}
                             selectedUser={this.props.selectedUser}
                             departmentTree={this.props.departmentTree}
                         />
@@ -63,7 +66,7 @@ class AuthorityManagement extends Component {
 }
 
 //递归遍历树节点
-const getNode = (root, entity) => { 
+const getNode = (root, entity) => {
     if (!root) return {};
     const { departments } = entity;
     const { childs } = root;
@@ -105,11 +108,11 @@ const mapStateToProps = state => {
     }
 
     //将得到的子节点添加到原来的根节点上
-    const _tree = {         
+    const _tree = {
         ...departments[treeRoot],
-        childs:tree
+        childs: tree
     }
-    console.log('>>>',_tree);
+    console.log('>>>', _tree);
     return {
         departmentTree: _tree,
         willBeSelectedUser,
@@ -119,7 +122,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         serverActions: bindActionCreators(allActionCreators.serverAction, dispatch),
-        switchActions: bindActionCreators(allActionCreators.switchAction, dispatch)
+        switchActions: bindActionCreators(allActionCreators.switchAction, dispatch),
+        selectActions: bindActionCreators(allActionCreators.selectAction, dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorityManagement);

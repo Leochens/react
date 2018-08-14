@@ -19,16 +19,18 @@ export default class DepartmentTree extends Component {
     }
 
     //递归输出树节点
-    loop = data => data.map((item) => {
-        if (!item) return null;
-        if (item.childs && item.childs.length) {
-            return <TreeNode
-                key={item.id}
-                title={item.name}
-            >{this.loop(item.childs)}</TreeNode>;
-        }
-        return <TreeNode key={item.id} title={item.name} />
-    });
+    loop = (data) => {
+        return data.map((item) => {
+            if (!item) return null;
+            if (item.childs && item.childs.length) {
+                return <TreeNode
+                    key={item.id}
+                    title={item.name}
+                >{this.loop(item.childs)}</TreeNode>;
+            }
+            return <TreeNode key={item.id} title={item.name} />
+        })
+    }
     render() {
         const { departmentTree } = this.props;
         // const { id } = departmentTree;
