@@ -6,3 +6,9 @@ export const actionAddAuthorityMembers = (ids) => {
         ids
     }
 }
+export const actionDelAuthorityMembers = (ids) => {
+    return {
+        type: ActionTypes.SELECT_ACTIONS.DEL_AUTHORITY_MEMBERS,
+        ids
+    }
+}

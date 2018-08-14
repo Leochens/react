@@ -34,13 +34,26 @@ const AuthorityConfig = (
             if(Array.isArray(action.ids) && action.ids.length === 0  ){
                 return state;
             } 
-            console.log(action.ids);
+            // console.log(action.ids);
             return {
                 ...state,
                 selectedUserIds: array2set([
                     ...state.selectedUserIds,
                     ...action.ids
                 ])
+            }
+        }
+        case ACTION_TYPES.SELECT_ACTIONS.DEL_AUTHORITY_MEMBERS: {
+            if(Array.isArray(action.ids) && action.ids.length === 0  ){
+                return state;
+            }
+            const oldIds = [...state.selectedUserIds];
+            const newIds = oldIds.filter(id=>{
+                return !action.ids.includes(id)
+            }) 
+            return {
+                ...state,
+                selectedUserIds: newIds
             }
         }
         default: return state;

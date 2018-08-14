@@ -9,6 +9,7 @@ const admins = (state = {}, action) => {
                 ...action.data.entities.users
             }
         }
+        
         //拿到所有选定的人的id 然后统一的做isselected字段取反
         case ActionTypes.SELECT_ACTIONS.ADD_AUTHORITY_MEMBERS: {
             const newState = { ...state };
@@ -18,6 +19,15 @@ const admins = (state = {}, action) => {
             });
             return newState
         }
+        case ActionTypes.SELECT_ACTIONS.DEL_AUTHORITY_MEMBERS: {
+            const newState = { ...state };
+            const { ids } = action;
+            ids.forEach(id => {
+                newState[id].isSelected = false;
+            });
+            return newState
+        }
+
         default: return state;
     }
 }
