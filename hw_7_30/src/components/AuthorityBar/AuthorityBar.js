@@ -5,7 +5,8 @@ import DepartmentTree from '../DepartmentTree/DepartmentTree';
 const Search = Input.Search;
 export default class AuthorityBar extends Component {
     state = {
-        selectedMemberIds: []
+        selectedMemberIds: [],
+        selectedClassname: ''
     }
 
     handelSelectMember = (id) => {
@@ -14,15 +15,19 @@ export default class AuthorityBar extends Component {
                 actionToggleSelectAuthorityUsers
             }
         } = this.props;
+        const newIds = this.state.selectedMemberIds.slice();
+        if (newIds.includes(id)) {
+            newIds.splice(newIds.indexOf(id), 1);
+            actionToggleSelectAuthorityUsers(id);
 
+        } else {
+            newIds.push(id);
+            actionToggleSelectAuthorityUsers(id);
+        }
         this.setState({
-            selectedMemberIds: [
-                ...this.state.selectedMemberIds,
-                id
-            ]
+            selectedMemberIds: newIds
         })
         console.log(this.state);
-        actionToggleSelectAuthorityUsers(id);
     }
 
     handleAddSelectedMembers = () => {
@@ -47,7 +52,7 @@ export default class AuthorityBar extends Component {
         return willBeSelectedUser.map((item, id) => {
             return <Button
                 onClick={() => this.handelSelectMember(item.id)}
-                className={"select-user-btn"}
+                className={"select-user-btn" + this.state.selectedClassname}
                 style={
                     item.isSelected ? { backgroundColor: '#ddd' } : {}
                 }
@@ -78,7 +83,6 @@ export default class AuthorityBar extends Component {
             <Row className="auth-comment-big">
                 <Col span={12} className="auth-left">
                     <Row className="auth-left-btns">
-                        <Button>添加</Button>
                         <Button>删除</Button>
                         <Search
                             placeholder="input search text"
