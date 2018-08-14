@@ -34,7 +34,7 @@ export default class AuthorityBar extends Component {
                     <Row >
                         <MemberSelectBox
                             onGetMemberIds={this.handleAddSelectedMembers}
-                            data={this.props.selectedUser}
+                            members={this.props.selectedUser}
                             action={this.handleDelSelectedMembers}
                             title={'删除'}
                         />
@@ -50,7 +50,7 @@ export default class AuthorityBar extends Component {
                     <Col span={16}>
                         <MemberSelectBox
                             onGetMemberIds={this.handleAddSelectedMembers}
-                            data={this.props.willBeSelectedUser}
+                            members={this.props.willBeSelectedUser}
                             action={this.handleAddSelectedMembers}
                             showDisable={true}
                             title={'添加'}

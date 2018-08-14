@@ -5,22 +5,30 @@ const Search = Input.Search;
 export default class MemberSelectBox extends Component {
 
     state = {
-        selectedMemberIds: [],
-        searchResult: [],
-        stateMap: {}
+        selectedMemberIds: [],      //选中的成员id
+        searchResult: [],           //过滤搜索结果
+        stateMap: {}                //判断当前按钮是否选中
     }
+
+    //外部传入回调函数来获取本组件内已经生成好的选中ids 并处理
     handleDealMembers = () => {
         const { action } = this.props;
         action && action(this.state.selectedMemberIds);
+
+        //一个大操作结束后置回初始值
         this.setState({
             selectedMemberIds: [],
             searchResult: [],
             stateMap: {}
         })
     }
+
+    //用户点击按钮进行选择
     handelSelectMember = (id) => {
         const newIds = this.state.selectedMemberIds.slice();
         let selectedFlag = false;
+
+        //没有就添加 有就删除  动态改变最终的selectedMemberIds
         if (newIds.includes(id)) {
             newIds.splice(newIds.indexOf(id), 1);
             selectedFlag = false;
@@ -28,6 +36,7 @@ export default class MemberSelectBox extends Component {
             newIds.push(id);
             selectedFlag = true;
         }
+        //被选中的人员对应状态会被置为不同bool值
         this.setState({
             selectedMemberIds: newIds,
             stateMap: {
@@ -37,10 +46,11 @@ export default class MemberSelectBox extends Component {
         })
     }
 
+    //搜索 根据人名或者id
     handleSearchMember = (v) => {
-        const { data } = this.props;
-        const res = data.filter(item => {
-            return item.name.indexOf(v) !== -1 || item.id.toString() === v
+        const { members } = this.props;
+        const res = members.filter(member => {
+            return member.name.indexOf(v) !== -1 || member.id.toString() === v
         })
         console.log('res', res);
         this.setState({
@@ -50,22 +60,19 @@ export default class MemberSelectBox extends Component {
     }
     renderMembers = () => {
         const {
-            data,
+            members,
             showDisable
         } = this.props;
 
-        if (!data) return null;
+        if (!members) return null;
         const { searchResult } = this.state;
-        return (searchResult.length !== 0 ? searchResult : data).map((item, id) => {
-            return <span data-flag={this.state.forthRefresh}
+        return (searchResult.length !== 0 ? searchResult : members).map((item, id) => {
+            return <span
                 key={id}
                 onClick={() => this.handelSelectMember(item.id)}
             ><Button
-                ref={`btn_${item.id}`} 
-                style={
-                    {
-                        backgroundColor: this.state.stateMap[item.id] ? '#ddd' : null
-                    }
+                style={ //根据判断状态表中的对应id的状态 来决定是否渲染背景色
+                    { backgroundColor: this.state.stateMap[item.id] ? '#ddd' : null}
                 }
                 disabled={
                     showDisable
@@ -75,7 +82,7 @@ export default class MemberSelectBox extends Component {
                         : false
                 }
             >
-                    {item.name}
+                   {item.name}
                 </Button>
             </span>
         })
@@ -83,12 +90,11 @@ export default class MemberSelectBox extends Component {
 
     render() {
         const { title } = this.props;
-        console.log('cccc', this.state);
         return (
             <div>
                 <Row  >
                     <Search
-                        placeholder="input search text"
+                        placeholder="输入姓名或id进行搜索"
                         onSearch={this.handleSearchMember}
                         style={{ width: '80%' }}
                     />

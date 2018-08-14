@@ -140,7 +140,7 @@ export const actionFetchAuthorities = () => {
                         id: 105,
                         name: '产品研发部',
                         childs: [108],
-                        222: [204, 207, 211]
+                        users: [204, 207, 211]
                     },
                     106: {
                         id: 106,
