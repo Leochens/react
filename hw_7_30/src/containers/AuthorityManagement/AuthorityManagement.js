@@ -104,7 +104,12 @@ const mapStateToProps = state => {
     let willBeSelectedUser = []
     const tree = recursionMapTree(root, { admins, departments });
     if (departments[currentDepartment].users) {
-        willBeSelectedUser = departments[currentDepartment].users.map(id => admins[id])
+        willBeSelectedUser = departments[currentDepartment].users.map(id => {
+            return {
+                ...admins[id],
+                selected: false
+            }
+        })
     }
 
     //将得到的子节点添加到原来的根节点上

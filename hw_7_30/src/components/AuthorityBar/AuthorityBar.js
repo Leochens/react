@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import './AuthorityBar.css';
 import { Input, Button, Row, Col } from 'antd';
 import DepartmentTree from '../DepartmentTree/DepartmentTree';
+import ToggleButton from '../ToggleButton/ToggleButton';
 const Search = Input.Search;
 export default class AuthorityBar extends Component {
     state = {
         selectedMemberIds: [],
-        selectedClassname: ''
     }
 
-    handelSelectMember = (id) => {
+    handelSelectMember = (id, e) => {
         const {
             switchActions: {
                 actionToggleSelectAuthorityUsers
@@ -18,16 +18,12 @@ export default class AuthorityBar extends Component {
         const newIds = this.state.selectedMemberIds.slice();
         if (newIds.includes(id)) {
             newIds.splice(newIds.indexOf(id), 1);
-            actionToggleSelectAuthorityUsers(id);
-
         } else {
             newIds.push(id);
-            actionToggleSelectAuthorityUsers(id);
         }
         this.setState({
             selectedMemberIds: newIds
         })
-        console.log(this.state);
     }
 
     handleAddSelectedMembers = () => {
@@ -48,17 +44,20 @@ export default class AuthorityBar extends Component {
                 actionToggleSelectAuthorityUsers
             }
         } = this.props;
+
         if (!willBeSelectedUser) return null;
         return willBeSelectedUser.map((item, id) => {
-            return <Button
+            return <span
+            key={id}
+
                 onClick={() => this.handelSelectMember(item.id)}
-                className={"select-user-btn" + this.state.selectedClassname}
-                style={
-                    item.isSelected ? { backgroundColor: '#ddd' } : {}
-                }
-                key={id}>
-                {item.name}
-            </Button>
+            ><ToggleButton
+                id={id}
+                className={"select-user-btn"}
+                disabled={item.isSelected ? true : false}
+                >
+                    {item.name}
+                </ToggleButton></span>
         })
     }
     //渲染已选择用户区域
@@ -70,12 +69,12 @@ export default class AuthorityBar extends Component {
         } = this.props;
         if (!selectedUser) return null;
         return selectedUser.map((item, id) => {
-            return <Button
+            return <ToggleButton
                 className={"select-user-btn"}
                 // onClick={() => actionToggleSelectAuthorityUsers(item.id)}
                 key={id}>
                 {item.name}
-            </Button>
+            </ToggleButton>
         })
     }
     render() {
