@@ -61,7 +61,7 @@ export default class MemberSelectBox extends Component {
                 key={id}
                 onClick={() => this.handelSelectMember(item.id)}
             ><Button
-                ref={`btn_${item.id}`}
+                ref={`btn_${item.id}`} 
                 style={
                     {
                         backgroundColor: this.state.stateMap[item.id] ? '#ddd' : null
