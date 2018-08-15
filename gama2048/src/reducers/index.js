@@ -24,23 +24,11 @@ const Game = (state = {
       newMap[pos.row][pos.col] = getRandomNumber();
       return {
         ...state,
-        squareMap: newMap
+        squareMap: newMap,
+        currentScore: 0,
+        increaseNum: 0
       }
     }
-    // case ActionTypes.ADD_NEW_SQUARE: {
-    //   const { row, col } = getNextPos(state);
-    //   console.log('坐标', row, col);
-    //   if(isGameOver({ row, col })){
-    //     return state;
-    //   }  
-    //   const randomNum = getRandomNumber();
-    //   const newMap = state.slice();
-    //   newMap[row][col] = randomNum;
-    //   return {
-    //     ...state,
-    //     squareMap: newMap
-    //   }
-    // }
     case ActionTypes.PRESS_KEYBOARD_BY_DIRECTIONS: {
       const { key } = action;
       const oldMap = state.squareMap.slice();
