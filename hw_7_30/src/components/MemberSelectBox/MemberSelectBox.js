@@ -7,7 +7,8 @@ export default class MemberSelectBox extends Component {
     state = {
         selectedMemberIds: [],      //选中的成员id
         searchResult: [],           //过滤搜索结果
-        stateMap: {}                //判断当前按钮是否选中
+        stateMap: {},                //判断当前按钮是否选中
+        isSearching: false
     }
 
     //外部传入回调函数来获取本组件内已经生成好的选中ids 并处理
@@ -48,13 +49,26 @@ export default class MemberSelectBox extends Component {
     //搜索 根据人名或者id
     handleSearchMember = (v) => {
         const { members } = this.props;
+        if (!v) {
+            this.setState({
+                searchResult: [],
+                isSearching: false
+            })
+        }
         const res = members.filter(member => {
             return member.name.indexOf(v) !== -1 || member.id.toString() === v
         })
         console.log('res', res);
         this.setState({
-            searchResult: res
+            searchResult: res,
+            isSearching: true
         })
+    }
+    renderNoSearchResultText = () => {
+        return (<div style={{
+            textAlign:'center',
+            margin:10
+        }}>没有搜到成员</div>)
     }
     renderMembers = () => {
         const {
@@ -63,17 +77,21 @@ export default class MemberSelectBox extends Component {
         } = this.props;
 
         if (!members) return null;
-        const { searchResult } = this.state;
-        return (searchResult.length !== 0 ? searchResult : members).map((item, id) => {
+        const { isSearching, searchResult } = this.state;
+        const membersWillBeRender = isSearching ? searchResult : members;
+        if (membersWillBeRender.length === 0) {
+           return this.renderNoSearchResultText();
+        }
+        return membersWillBeRender.map((item, id) => {
             return <span
                 key={id}
                 onClick={() => this.handelSelectMember(item.id)}
             ><Button
                 style={ //根据判断状态表中的对应id的状态 来决定是否渲染背景色
-                    { 
+                    {
                         backgroundColor: this.state.stateMap[item.id] ? '#ddd' : null,
                         margin: 10
-                }
+                    }
                 }
                 disabled={
                     showDisable
@@ -83,7 +101,7 @@ export default class MemberSelectBox extends Component {
                         : false
                 }
             >
-                   {item.name}{item.id}
+                    {item.name}{item.id}
                 </Button>
             </span>
         })

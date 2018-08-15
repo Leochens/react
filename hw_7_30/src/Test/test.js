@@ -12,26 +12,21 @@ import TestSwitch from './WeUI/TestSwitch';
 function promise() {
     return new Promise((resolve, reject) => {
         if (0) {
-            setTimeout(() => resolve(1), 2000)
+            resolve(1)
         } else {
             reject(0)
         }
     })
 }
 async function hello() {
-    try{
-        try{
-            // const x = await promise();
-            // console.log('reslove',x);
-            throw new Error("这是一个错误");
-        }catch(err){
-            throw err
-        }
-    }catch(err){
-        // console.log('errerrr',err);
-        throw err
+    try {
+        const x = await promise();
+        console.log('reslove', x);
+    } catch (err) {
+        console.log('reject', err);
     }
-   
+
+
     console.log('hahahaah');
 }
 
