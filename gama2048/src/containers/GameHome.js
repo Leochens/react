@@ -14,14 +14,24 @@ class GameHome extends Component {
   renderGameArea = () => {
     const { squareMap } = this.props;
     return squareMap.map((row, rowId) => {
-      return <div>
+      return <div key={rowId} >
         {
           row.map((squareNum, colId) => {
-            return <Square num={squareNum} />
+            return <Square key={colId} num={squareNum} />
           })
         }
       </div>
     })
+  }
+  handleKeyDown = e => {
+    const {
+      Actions: {
+        actionPressKayBoardByDirections
+      }
+    } = this.props;
+    if ([65, 37, 87, 38, 68, 39, 83, 40].includes(e.which)) {
+      actionPressKayBoardByDirections(e.which)
+    } else return null;
   }
   render() {
     const {
@@ -29,11 +39,11 @@ class GameHome extends Component {
       Actions: {
         actionUpdateScore,
         actionInitSquareMap,
-        actionAddNewSquare
+        actionAddNewSquare,
       }
     } = this.props;
     return (
-      <Row>
+      <Row onKeyDown={this.handleKeyDown}>
         <Col span={8} offset={8} >
           <h1>{currentScore}</h1>
           <Button
@@ -41,12 +51,12 @@ class GameHome extends Component {
           >
             Add
            </Button>
-           <Button
+          <Button
             onClick={actionInitSquareMap}
           >
             restart
            </Button>
-           <Button
+          <Button
             onClick={actionAddNewSquare}
           >
             tap

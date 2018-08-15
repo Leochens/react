@@ -21,3 +21,10 @@ export const actionAddNewSquare = () => {
     type: ActionTypes.ADD_NEW_SQUARE
   }
 }
+
+export const actionPressKayBoardByDirections = (key) => {
+  return {
+    type: ActionTypes.PRESS_KEYBOARD_BY_DIRECTIONS,
+    key
+  }
+}

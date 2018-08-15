@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from '../const/ActionTypes';
-import { getNextPos, getRandomNumber} from '../tools';
-const score = (state = {
-  currentScore: 0
-}, action) => {
+import {
+  getNextPos,
+  getRandomNumber,
+  clearedSquare,
+  handlePressKeyboard,
+  isGameOver
+} from '../tools';
+
+const score = (state = { currentScore: 0 }, action) => {
   switch (action.type) {
     case ActionTypes.UPDATE_SCORE: {
       return {
@@ -12,15 +17,8 @@ const score = (state = {
     }
     default: return state;
   }
-};
+}
 
-
-const clearedSquare = () => [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0]
-]
 const squareMap = (state = clearedSquare(), action) => {
   switch (action.type) {
     case ActionTypes.INIT_SQUARE_MAP: {
@@ -36,13 +34,18 @@ const squareMap = (state = clearedSquare(), action) => {
     case ActionTypes.ADD_NEW_SQUARE: {
       const { row, col } = getNextPos(state);
       console.log('坐标', row, col);
-      if (row === -1 && col === -1) {
-        alert('你输了,重新来吧');
+      if(isGameOver({ row, col })){
         return state;
-      }
+      }  
       const randomNum = getRandomNumber();
       const newMap = state.slice();
       newMap[row][col] = randomNum;
+      return newMap;
+    }
+    case ActionTypes.PRESS_KEYBOARD_BY_DIRECTIONS: {
+      const { key } = action;
+      const oldMap = state.slice();
+      const newMap = handlePressKeyboard(key,oldMap)
       return newMap;
     }
     default: return state;
