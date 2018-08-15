@@ -43,7 +43,8 @@ export default store => next => action => {
     return callServerApi(url,param,normalizeFunc).then(res => {
         return next({
             type:`${type}_SUC`,
-            res
+            res,
+            param
         })
     }
     ).catch(err => {
