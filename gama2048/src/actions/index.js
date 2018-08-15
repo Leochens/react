@@ -11,3 +11,13 @@ export const actionMergeSquare = () => {
     type: ActionTypes.MERGE_SQUARE
   }
 }
+export const actionInitSquareMap = () => {
+  return {
+    type: ActionTypes.INIT_SQUARE_MAP
+  }
+}
+export const actionAddNewSquare = () => {
+  return {
+    type: ActionTypes.ADD_NEW_SQUARE
+  }
+}
