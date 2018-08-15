@@ -5,21 +5,14 @@ import {
   getRandomNumber,
   clearedSquare,
   handlePressKeyboard,
-  isGameOver
 } from '../tools';
 
-const score = (state = { currentScore: 0 }, action) => {
-  switch (action.type) {
-    case ActionTypes.UPDATE_SCORE: {
-      return {
-        currentScore: state.currentScore + action.increaseNum
-      }
-    }
-    default: return state;
-  }
-}
 
-const squareMap = (state = clearedSquare(), action) => {
+const Game = (state = {
+   squareMap: clearedSquare(),
+   currentScore: 0,
+   increaseNum: 0 
+}, action) => {
   switch (action.type) {
     case ActionTypes.INIT_SQUARE_MAP: {
       // 取得随机数
@@ -29,29 +22,39 @@ const squareMap = (state = clearedSquare(), action) => {
       newMap[pos.row][pos.col] = getRandomNumber();
       pos = getNextPos(newMap);
       newMap[pos.row][pos.col] = getRandomNumber();
-      return newMap;
+      return {
+        ...state,
+        squareMap: newMap
+      }
     }
-    case ActionTypes.ADD_NEW_SQUARE: {
-      const { row, col } = getNextPos(state);
-      console.log('坐标', row, col);
-      if(isGameOver({ row, col })){
-        return state;
-      }  
-      const randomNum = getRandomNumber();
-      const newMap = state.slice();
-      newMap[row][col] = randomNum;
-      return newMap;
-    }
+    // case ActionTypes.ADD_NEW_SQUARE: {
+    //   const { row, col } = getNextPos(state);
+    //   console.log('坐标', row, col);
+    //   if(isGameOver({ row, col })){
+    //     return state;
+    //   }  
+    //   const randomNum = getRandomNumber();
+    //   const newMap = state.slice();
+    //   newMap[row][col] = randomNum;
+    //   return {
+    //     ...state,
+    //     squareMap: newMap
+    //   }
+    // }
     case ActionTypes.PRESS_KEYBOARD_BY_DIRECTIONS: {
       const { key } = action;
-      const oldMap = state.slice();
-      const newMap = handlePressKeyboard(key,oldMap)
-      return newMap;
+      const oldMap = state.squareMap.slice();
+      const { newMap, increaseNum } = handlePressKeyboard(key,oldMap)
+      return {
+        ...state,
+        squareMap:newMap,
+        increaseNum,
+        currentScore: state.currentScore + increaseNum
+      }
     }
     default: return state;
   }
 }
 export default combineReducers({
-  score,
-  squareMap
+  Game
 });

@@ -22,15 +22,25 @@ const getColor = (num) => {
 }
 
 export default class Square extends Component {
+    state= {
+        animateClass: ''
+    }
+    getSquareClass = () => {
+        const { num } = this.props;
+        return num === 0 
+            ? 'square'
+            : 'square ani'
+    }
     render() {
         const { num } = this.props;
         const squareStyle = {
             backgroundColor: getColor(num)
         }
+        
         return (
             <span>
                 <button style={squareStyle}
-                className="square">{
+                className={this.getSquareClass()}>{
                     num === 0 ? <span>&nbsp;</span> : num
                 }</button>
             </span>

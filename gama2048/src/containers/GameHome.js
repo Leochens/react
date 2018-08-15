@@ -72,8 +72,9 @@ class GameHome extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentScore: state.score.currentScore,
-    squareMap: state.squareMap
+    currentScore: state.Game.currentScore,
+    squareMap: state.Game.squareMap,
+    increaseNum: state.Game.increaseNum
   }
 }
 const mapDispatchToProps = dispatch => {

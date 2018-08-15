@@ -10,3 +10,12 @@
     margin: 1px;
     outline: none;
 }
+.ani{
+    animation: square-show .3s ease-in;
+}
+@keyframes square-show{
+    0%{
+        outline: 4px solid #eee
+    }
+   
+}

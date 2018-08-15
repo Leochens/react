@@ -43,6 +43,7 @@ const moveLeft = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
     const willLeftMerge = [];
+    let increaseNum = 0;
     const leftStack = (wantSetMergeList = 1) => {
         for (let rowId = len - 1; rowId >= 0; rowId--) {
             for (let colId = len - 1; colId >= 0; colId--) {
@@ -64,7 +65,7 @@ const moveLeft = (oldMap) => {
     //通过遍历预判列表中的待融合元素 得到融合后的map
     willLeftMerge.forEach((pos) => {
         const { rowId, colId } = pos;
-        newMap[rowId][colId - 1] *= 2;
+        increaseNum = newMap[rowId][colId - 1] *= 2;
         newMap[rowId][colId] = 0;
     })
     // 不预判堆叠
@@ -76,7 +77,10 @@ const moveLeft = (oldMap) => {
     }
     newMap[row][col] = getRandomNumber();
     console.log('left');
-    return newMap;
+    return {
+        newMap,
+        increaseNum
+    }
 }
 
 
@@ -85,6 +89,8 @@ const moveUp = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
     const willUpMerge = [];
+    let increaseNum = 0;
+
     const upStack = (wantSetMergeList = 1) => {
         for (let rowId = len - 1; rowId > 0; rowId--) {
             for (let colId = len - 1; colId >= 0; colId--) {
@@ -104,7 +110,7 @@ const moveUp = (oldMap) => {
     upStack();
     willUpMerge.forEach((pos) => {
         const { rowId, colId } = pos;
-        newMap[rowId-1][colId] *= 2;
+        increaseNum = newMap[rowId-1][colId] *= 2;
         newMap[rowId][colId] = 0;
     })
     upStack(0);
@@ -114,15 +120,20 @@ const moveUp = (oldMap) => {
     }
     newMap[row][col] = getRandomNumber();
     console.log('up');
-    return newMap;
+    return {
+        newMap,
+        increaseNum
+    }
 }
 
 const moveRight = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
     const willRightMerge = [];
+    let increaseNum = 0;
+
     const rightStack = (wantSetMergeList = 1) => {
-        for (let rowId = len - 1; rowId > 0; rowId--) {
+        for (let rowId = len - 1; rowId >= 0; rowId--) {
             for (let colId = 0; colId < 4; colId++) {
                 const pre = newMap[rowId][colId + 1];
                 const cur = newMap[rowId][colId];
@@ -141,7 +152,7 @@ const moveRight = (oldMap) => {
     rightStack();
     willRightMerge.forEach((pos) => {
         const { rowId, colId } = pos;
-        newMap[rowId][colId + 1] *= 2;
+        increaseNum = newMap[rowId][colId + 1] *= 2;
         newMap[rowId][colId] = 0;
     })
     rightStack(0);
@@ -153,13 +164,18 @@ const moveRight = (oldMap) => {
     newMap[row][col] = getRandomNumber();
     console.log('right');
 
-    return newMap;
+    return {
+        newMap,
+        increaseNum
+    }
 
 }
 const moveDowm = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
     const willDownMerge = [];
+    let increaseNum = 0;
+
     const downStack = (wantSetMergeList = 1) => {
         for (let rowId = 0; rowId < len - 1; rowId++) {
             for (let colId = 0; colId < 4; colId++) {
@@ -179,7 +195,7 @@ const moveDowm = (oldMap) => {
     downStack();
     willDownMerge.forEach((pos) => {
         const { rowId, colId } = pos;
-        newMap[rowId + 1][colId] *= 2;
+        increaseNum = newMap[rowId + 1][colId] *= 2;
         newMap[rowId][colId] = 0;
     })
     downStack(0);
@@ -190,7 +206,10 @@ const moveDowm = (oldMap) => {
     newMap[row][col] = getRandomNumber();
     console.log('dowm');
 
-    return newMap;
+    return {
+        newMap,
+        increaseNum
+    }
 
 }
 export const handlePressKeyboard = (key, oldMap) => {
@@ -207,7 +226,10 @@ export const handlePressKeyboard = (key, oldMap) => {
         case 83:
         case 40:
             return moveDowm(oldMap);
-        default: return oldMap;
+        default: return {
+            newMap:oldMap,
+            increaseNum: 0
+        }
     }
 
 }
