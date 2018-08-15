@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from '../const/ActionTypes';
+import { getNextPos, getRandomNumber} from '../tools';
 const score = (state = {
   currentScore: 0
 }, action) => {
@@ -13,39 +14,7 @@ const score = (state = {
   }
 };
 
-// const getRandomRowAndCol = (num) => {
-//   const row = ~~(Math.random() * num);
-//   const col = ~~(Math.random() * num);
-//   return {
-//     row,
-//     col
-//   }
-// }
-const getNextPos = (currentMap) => {
-  let res = [];
-  currentMap.forEach((row,rowId)=>{
-    row.forEach((col,colId)=>{
-      currentMap[rowId][colId]===0 
-                ? res.push({rowId,colId}): null
-    })
-  })
-  if(!res.length){
-    return {
-      row: -1,
-      col: -1
-    }
-  }
-  const rand = ~~(Math.random()*res.length) 
-  console.log(rand);
-  const { rowId: row, colId: col } = res[rand];
-  return {
-    row,
-    col
-  }
-}
-const  getRandomNumber = (numbers=[2,4]) => {
-  return numbers[~~(Math.random()*numbers.length)]
-} 
+
 const clearedSquare = () => [
   [0, 0, 0, 0],
   [0, 0, 0, 0],
@@ -68,7 +37,7 @@ const squareMap = (state = clearedSquare(), action) => {
       const { row, col } = getNextPos(state);
       console.log('坐标', row, col);
       if (row === -1 && col === -1) {
-        alert('你输了');
+        alert('你输了,重新来吧');
         return state;
       }
       const randomNum = getRandomNumber();
