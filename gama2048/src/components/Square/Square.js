@@ -25,14 +25,14 @@ export default class Square extends Component {
     render() {
         const { num } = this.props;
         const squareStyle = {
-            width: 60, height: 60,color:'#000',fontWeight:800,
             backgroundColor: getColor(num)
         }
         return (
             <span>
-                <Button style={squareStyle}>{
+                <button style={squareStyle}
+                className="square">{
                     num === 0 ? <span>&nbsp;</span> : num
-                }</Button>
+                }</button>
             </span>
         )
     }

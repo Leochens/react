@@ -39,56 +39,37 @@ export const isGameOver = ({ col, row }) => {
     return 0;
 }
 const copyMap = (oldMap) => oldMap.slice();
-// const swap = (map)
 const moveLeft = (oldMap) => {
     const newMap = copyMap(oldMap);
-    // -x
-    // 向左看 如果是0 那么就和0换位置 不是0 判断一下是否和自己相等
-    // 相等就*2 只保留左边的哪个数
-
     const len = 4;
-    for (let rowId = len - 1; rowId >= 0; rowId--) {
-        for (let colId = len - 1; colId >= 0; colId--) {
-            const pre = newMap[rowId][colId - 1];
-            const cur = newMap[rowId][colId];
-            if (cur === 0) {
-                continue
-            }
-            if (cur != 0 && pre === 0) {
-                const tmp = pre;
-                newMap[rowId][colId - 1] = cur;
-                newMap[rowId][colId] = tmp;
+    const willLeftMerge = [];
+    const leftStack = (wantSetMergeList = 1) => {
+        for (let rowId = len - 1; rowId >= 0; rowId--) {
+            for (let colId = len - 1; colId >= 0; colId--) {
+                const pre = newMap[rowId][colId - 1];
+                const cur = newMap[rowId][colId];
+                if (cur != 0 && pre === 0) {
+                    newMap[rowId][colId - 1] = cur
+                    newMap[rowId][colId] = 0;
+                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
+                    willLeftMerge.push({
+                        rowId, colId
+                    })
+                } else continue
             }
         }
     }
-    for (let rowId = len - 1; rowId >= 0; rowId--) {
-        for (let colId = len - 1; colId >= 0; colId--) {
-            const pre = newMap[rowId][colId - 1];
-            const cur = newMap[rowId][colId];
-            if (cur !== 0 && cur === pre) {      //找到相等
-                console.log('相等啦');
-                newMap[rowId][colId - 1] = pre * 2;
-                newMap[rowId][colId] = 0;
-                break;
-            }
-            else continue;
+    //先做预判堆叠
+    leftStack();
+    //通过遍历预判列表中的待融合元素 得到融合后的map
+    willLeftMerge.forEach((pos) => {
+        const { rowId, colId } = pos;
+        newMap[rowId][colId - 1] *= 2;
+        newMap[rowId][colId] = 0;
+    })
+    // 不预判堆叠
+    leftStack(0);
 
-        }
-    }
-    for (let rowId = len - 1; rowId >= 0; rowId--) {
-        for (let colId = len - 1; colId >= 0; colId--) {
-            const pre = newMap[rowId][colId - 1];
-            const cur = newMap[rowId][colId];
-            if (cur === 0) {
-                continue
-            }
-            if (cur != 0 && pre === 0) {
-                const tmp = pre;
-                newMap[rowId][colId - 1] = cur;
-                newMap[rowId][colId] = tmp;
-            }
-        }
-    }
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
         return newMap;
@@ -97,28 +78,36 @@ const moveLeft = (oldMap) => {
     console.log('left');
     return newMap;
 }
+
+
+
 const moveUp = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
-    for (let rowId = len - 1; rowId > 0; rowId--) {
-        for (let colId = len - 1; colId >= 0; colId--) {
-            const pre = newMap[rowId - 1][colId];
-            const cur = newMap[rowId][colId];
-            if (cur === 0) {
-                continue
-            }
-            if (cur != 0 && pre === 0) {
-                const tmp = pre;
-                newMap[rowId - 1][colId] = cur;
-                newMap[rowId][colId] = tmp;
-            } else if (cur === pre) {      //找到相等
-                console.log('相等啦');
-                newMap[rowId - 1][colId] = pre * 2;
-                newMap[rowId][colId] = 0;
-                break;
+    const willUpMerge = [];
+    const upStack = (wantSetMergeList = 1) => {
+        for (let rowId = len - 1; rowId > 0; rowId--) {
+            for (let colId = len - 1; colId >= 0; colId--) {
+                const pre = newMap[rowId - 1][colId];
+                const cur = newMap[rowId][colId];
+                if (cur != 0 && pre === 0) {
+                    newMap[rowId - 1][colId] = cur;
+                    newMap[rowId][colId] = 0;
+                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
+                    willUpMerge.push({
+                        rowId, colId
+                    })
+                } else continue
             }
         }
     }
+    upStack();
+    willUpMerge.forEach((pos) => {
+        const { rowId, colId } = pos;
+        newMap[rowId-1][colId] *= 2;
+        newMap[rowId][colId] = 0;
+    })
+    upStack(0);
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
         return newMap;
@@ -126,30 +115,37 @@ const moveUp = (oldMap) => {
     newMap[row][col] = getRandomNumber();
     console.log('up');
     return newMap;
-
 }
+
 const moveRight = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
-    for (let rowId = len - 1; rowId > 0; rowId--) {
-        for (let colId = 0; colId < 4; colId++) {
-            const pre = newMap[rowId][colId + 1];
-            const cur = newMap[rowId][colId];
-            if (cur === 0) {
-                continue
-            }
-            if (cur != 0 && pre === 0) {
-                const tmp = pre;
-                newMap[rowId][colId + 1] = cur;
-                newMap[rowId][colId] = tmp;
-            } else if (cur === pre) {      //找到相等
-                console.log('相等啦');
-                newMap[rowId][colId + 1] = pre * 2;
-                newMap[rowId][colId] = 0;
-                break;
+    const willRightMerge = [];
+    const rightStack = (wantSetMergeList = 1) => {
+        for (let rowId = len - 1; rowId > 0; rowId--) {
+            for (let colId = 0; colId < 4; colId++) {
+                const pre = newMap[rowId][colId + 1];
+                const cur = newMap[rowId][colId];
+                if (cur != 0 && pre === 0) {
+                    newMap[rowId][colId + 1] = cur;
+                    newMap[rowId][colId] = 0;
+                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
+                    willRightMerge.push({
+                        rowId, colId
+                    })
+                } else continue
             }
         }
     }
+
+    rightStack();
+    willRightMerge.forEach((pos) => {
+        const { rowId, colId } = pos;
+        newMap[rowId][colId + 1] *= 2;
+        newMap[rowId][colId] = 0;
+    })
+    rightStack(0);
+
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
         return newMap;
@@ -163,25 +159,30 @@ const moveRight = (oldMap) => {
 const moveDowm = (oldMap) => {
     const newMap = copyMap(oldMap);
     const len = 4;
-    for (let rowId = 0; rowId < len - 1; rowId++) {
-        for (let colId = 0; colId < 4; colId++) {
-            const after = newMap[rowId + 1][colId];
-            const cur = newMap[rowId][colId];
-            if (cur === 0) {
-                continue
-            }
-            if (cur != 0 && after === 0) {
-                const tmp = after;
-                newMap[rowId + 1][colId] = cur;
-                newMap[rowId][colId] = tmp;
-            } else if (cur === after) {      //找到相等
-                console.log('相等啦');
-                newMap[rowId + 1][colId] = after * 2;
-                newMap[rowId][colId] = 0;
-                break;
+    const willDownMerge = [];
+    const downStack = (wantSetMergeList = 1) => {
+        for (let rowId = 0; rowId < len - 1; rowId++) {
+            for (let colId = 0; colId < 4; colId++) {
+                const pre = newMap[rowId + 1][colId];
+                const cur = newMap[rowId][colId];
+                if (cur != 0 && pre === 0) {
+                    newMap[rowId + 1][colId] = cur;
+                    newMap[rowId][colId] = 0;
+                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
+                    willDownMerge.push({
+                        rowId, colId
+                    })
+                } else continue
             }
         }
     }
+    downStack();
+    willDownMerge.forEach((pos) => {
+        const { rowId, colId } = pos;
+        newMap[rowId + 1][colId] *= 2;
+        newMap[rowId][colId] = 0;
+    })
+    downStack(0);
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
         return newMap;
