@@ -1,0 +1,25 @@
+.auth-btn{
+    float: right;
+    margin: 0 15px;
+}
+.auth-right,
+.auth-left{
+    border: 1px solid #ddd;
+}
+.auth-comment-big{
+    background-color: #fff;
+    /* min-height: 350px; */
+    width: 100%;
+    background-color: #fff;
+
+}
+.auth-tree{
+    overflow: auto;
+}
+.auth-left-btns{
+    padding: 3px 6px;
+    /* border: 1px solid #ddd; */
+}
+.select-user-btn{
+    margin: 6px;
+}

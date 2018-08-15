@@ -1,0 +1,12 @@
+.table-row:hover{
+    background-color: #f00;
+}
+.table-row:focus{
+    background-color: #f00;
+}
+.data-table tr:hover{
+    background-color: #f00!important;
+}
+.table-row :hover{
+    background-color: red;
+}

@@ -1,0 +1,41 @@
+.head{
+  padding: 30px ;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: space-between
+}
+.head-photo{
+  flex: 1;
+  /* display: inline-block; */
+}
+.user-profile{
+ /* flex: 1 */
+}
+.user-info-item{
+   
+    width: 300px;
+    
+    margin:  3px 0;
+    font-weight: 450;
+    
+}
+.user-name{
+  font-weight: 600;
+  font-size: 15px;
+  color: rgb(96, 125, 139);
+}
+.inp{
+  width:100px;
+}
+.static-infos{
+  
+}
+.loading{
+  position: fixed;
+  z-index: 999;
+  bottom: 0;top: 0;left: 0;right: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
