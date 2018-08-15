@@ -1,10 +1,16 @@
 import { combineReducers } from 'redux';
-
-const main = (state = {}, action) => {
-  switch(action.type) {
-      
+import * as ActionTypes from '../const/ActionTypes';
+const main = (state = {
+  currentScore: 0
+}, action) => {
+  switch (action.type) {
+    case ActionTypes.UPDATE_SCORE: {
+      return {
+        currentScore: state.currentScore+action.increaseNum
+      }
+    }
+    default: return state;
   }
-  return state;
 };
 
 export default combineReducers({
