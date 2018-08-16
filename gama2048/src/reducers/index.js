@@ -6,7 +6,6 @@ import {
   clearedSquare,
   handlePressKeyboard
 } from '../tools';
-
 //判断是否死亡
 const amILose = (gameMap) => {
   const len = gameMap.length;
@@ -59,7 +58,6 @@ const amILose = (gameMap) => {
       };
     }
   }
-
   // 纵向
   return isAnotherWayHere;
 }
@@ -73,6 +71,7 @@ const Game = (state = {
   squareMap: clearedSquare(),
   currentScore: 0,
   increaseNum: 0,
+  changedSquares: [],
   newPos: {
     row: -1,
     col: -1
@@ -104,7 +103,8 @@ const Game = (state = {
       const {
         newMap,
         increaseNum,
-        willGenerateNew
+        willGenerateNew,
+        changedSquares
       } = handlePressKeyboard(key, oldMap)
 
       const { row, col } = getNextPos(newMap);
@@ -129,12 +129,16 @@ const Game = (state = {
         squareMap: newMap,
         increaseNum,
         currentScore: state.currentScore + increaseNum,
+        changedSquares,
         newPos: {
           row,
           col
         }
       }
     }
+
+
+
     case ActionTypes.CLEAR_NEW_POS: {
       return {
         ...state,

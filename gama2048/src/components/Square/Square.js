@@ -28,12 +28,15 @@ export default class Square extends Component {
         preNum: 0
     }
     getSquareClass = () => {
-        const { num, isNew } = this.props;
+        const {isChange, num, isNew } = this.props;
+        
         if (num === 0) {
             return 'square'
         } else if (isNew) {
             return 'animated jackInTheBox square'
-        } else {
+        } else if(isChange){
+            return 'animated jello square'
+        }else{
             return 'square'
         }
     }

@@ -38,6 +38,7 @@ const moveLeft = (oldMap) => {
     const newMap = copyMap(oldMap);
     let willGenerateNew = 0;
     let increaseNum = 0;
+    const changedSquares = [];
     for (let r = 0; r < 4; r++) {
         let i, nextNoZeroPos, len, m;
         const arr = newMap[r];
@@ -62,6 +63,7 @@ const moveLeft = (oldMap) => {
                     increaseNum += arr[i] = arr[i] * 2;
                     arr[nextNoZeroPos] = 0;
                     willGenerateNew = 1;
+                    changedSquares.push({row: r,col: i})
                 }
             }
         }
@@ -70,7 +72,8 @@ const moveLeft = (oldMap) => {
     return {
         newMap,
         increaseNum,
-        willGenerateNew
+        willGenerateNew,
+        changedSquares
     }
 }
 
@@ -80,6 +83,7 @@ const moveUp = (oldMap) => {
     const newMap = copyMap(oldMap);
     let increaseNum = 0;
     let willGenerateNew = 0;
+    const changedSquares = [];
     for (let r = 0; r < 4; r++) {
         let i, pos, len, m;
         len = 4;
@@ -102,6 +106,7 @@ const moveUp = (oldMap) => {
                 } else if (newMap[i][r] === newMap[pos][r]) {
                     increaseNum += newMap[i][r] = newMap[i][r] * 2;
                     newMap[pos][r] = 0;
+                    changedSquares.push({row: i,col: r});
                     willGenerateNew = 1;
                 }
             }
@@ -112,7 +117,8 @@ const moveUp = (oldMap) => {
     return {
         newMap,
         increaseNum,
-        willGenerateNew
+        willGenerateNew,
+        changedSquares
     }
 }
 
@@ -120,6 +126,7 @@ const moveRight = (oldMap) => {
     const newMap = copyMap(oldMap);
     let increaseNum = 0;
     let willGenerateNew = 0;
+    const changedSquares = [];
     const len = 4;
     for (let r = 0; r < len; r++) {
         let i, nextNoZeroPos, len, m;
@@ -144,6 +151,7 @@ const moveRight = (oldMap) => {
                 } else if (arr[i] === arr[nextNoZeroPos]) {
                     increaseNum += arr[i] = arr[i] * 2;
                     arr[nextNoZeroPos] = 0;
+                    changedSquares.push({row: r,col: i})
                     willGenerateNew = 1;
                 }
             }
@@ -155,7 +163,8 @@ const moveRight = (oldMap) => {
     return {
         newMap,
         increaseNum,
-        willGenerateNew
+        willGenerateNew,
+        changedSquares
     }
 
 }
@@ -163,6 +172,7 @@ const moveDowm = (oldMap) => {
     const newMap = copyMap(oldMap);
     let increaseNum = 0;
     let willGenerateNew = 0;
+    const changedSquares = [];
     const len = 4;
     for (let r = len - 1; r >= 0; r--) {
         let i, pos, m;
@@ -186,6 +196,7 @@ const moveDowm = (oldMap) => {
                     increaseNum += newMap[i][r] = newMap[i][r] * 2;
                     newMap[pos][r] = 0;
                     willGenerateNew = 1;
+                    changedSquares.push({row: i, col: r})
                 }
             }
         }
@@ -196,7 +207,8 @@ const moveDowm = (oldMap) => {
     return {
         newMap,
         increaseNum,
-        willGenerateNew
+        willGenerateNew,
+        changedSquares
     }
 
 }

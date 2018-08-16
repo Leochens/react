@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Button } from 'antd';
 import * as ActionCreators from '../actions';
 import Square from '../components/Square/Square';
 import './GameHome.css';
@@ -15,7 +14,9 @@ class GameHome extends Component {
   state = {
   };
   renderGameArea = () => {
-    const { squareMap, newPos } = this.props;
+    console.log('changedSquares',this.props.changedSquares);
+
+    const { squareMap, newPos, changedSquares } = this.props;
     return squareMap.map((row, rowId) => {
       return <div key={rowId} >
         {
@@ -23,6 +24,7 @@ class GameHome extends Component {
             return <Square
               //判断是否是新的方格
               isNew={(newPos.row === rowId && newPos.col === colId) ? true : false}
+              isChange = {changedSquares.includes({row: rowId, col: colId})}
               key={colId}
               num={squareNum} />
           })
@@ -43,7 +45,7 @@ class GameHome extends Component {
     } else return null;
   }
   render() {
-    // document.onkeyup(this.handleKeyDown);
+
     const {
       currentScore,
       Actions: {
@@ -89,7 +91,8 @@ const mapStateToProps = state => {
     currentScore: state.Game.currentScore,
     squareMap: state.Game.squareMap,
     increaseNum: state.Game.increaseNum,
-    newPos: state.Game.newPos
+    newPos: state.Game.newPos,
+    changedSquares: state.Game.changedSquares
   }
 }
 const mapDispatchToProps = dispatch => {
