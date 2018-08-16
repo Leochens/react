@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Row, Col, Button } from 'antd';
 import * as ActionCreators from '../actions';
 import Square from '../components/Square/Square';
-import './GameHome.css'
+import './GameHome.css';
+import './animate.css';
+
 class GameHome extends Component {
   componentDidMount() {
     const { Actions } = this.props;
@@ -14,7 +16,6 @@ class GameHome extends Component {
   };
   renderGameArea = () => {
     const { squareMap, newPos } = this.props;
-    console.log('???', (newPos.row !== -1 && newPos.col !== -1));
     return squareMap.map((row, rowId) => {
       return <div key={rowId} >
         {
@@ -32,11 +33,13 @@ class GameHome extends Component {
   handleKeyDown = e => {
     const {
       Actions: {
-        actionPressKayBoardByDirections
+        actionPressKayBoardByDirections,
+        actionClearNewPos
       }
     } = this.props;
     if ([65, 37, 87, 38, 68, 39, 83, 40].includes(e.keyCode)) {
-      actionPressKayBoardByDirections(e.keyCode)
+      actionPressKayBoardByDirections(e.keyCode);
+      setTimeout(()=>actionClearNewPos(),400);  // 清除位置 防止方格动画失效
     } else return null;
   }
   render() {
@@ -51,14 +54,25 @@ class GameHome extends Component {
     return (
       <div>
         <div className="game-wraper" >
-
           <div className="game-main">
-            <h1>{currentScore}</h1>
-            <Button
-              onClick={actionInitSquareMap}
-            >
-              restart
-           </Button>
+            <div className="header-warper">
+              <span className="title2048">
+                2048
+              </span>
+              <div className="header-right">
+                <div className="score">
+                  <span className="">{currentScore}+{this.props.increaseNum}</span>
+                </div>
+              </div>
+              <div>
+                <button
+                  className="restart-btn"
+                  onClick={actionInitSquareMap}
+                >
+                  重新开始
+           </button>
+              </div>
+            </div>
             <div>
               {this.renderGameArea()}
             </div>

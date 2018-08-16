@@ -29,14 +29,13 @@ export default class Square extends Component {
     }
     getSquareClass = () => {
         const { num, isNew } = this.props;
-
         if (num === 0) {
             return 'square'
         } else if (isNew) {
-            return 'animated wobble square'
+            return 'animated jackInTheBox square'
         } else {
-            return ' animated jello  square'
-        } 
+            return 'square'
+        }
     }
     render() {
         const { num } = this.props;

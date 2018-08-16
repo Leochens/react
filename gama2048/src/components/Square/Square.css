@@ -6,6 +6,8 @@
     text-align: center;
     line-height: 120px;
     margin:0 3px;
+    border-radius: 10px;
+
 }
 .square{
     display: inline-block;
@@ -15,7 +17,7 @@
     font-weight: 800;
     font-size: 32px;
     color: #808080;
-    border-radius: 3px;
+    border-radius: 10px;
     overflow: hidden;
     outline: none;
     border-style: none;

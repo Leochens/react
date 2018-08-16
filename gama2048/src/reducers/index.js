@@ -69,6 +69,15 @@ const Game = (state = {
         }
       }
     }
+    case ActionTypes.CLEAR_NEW_POS: {
+      return {
+        ...state,
+        newPos:{
+          row: -1,
+          col: -1
+        }
+      }
+    }
     default: return state;
   }
 }
