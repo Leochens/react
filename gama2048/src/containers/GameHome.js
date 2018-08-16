@@ -37,29 +37,18 @@ class GameHome extends Component {
     const {
       currentScore,
       Actions: {
-        actionUpdateScore,
         actionInitSquareMap,
-        actionAddNewSquare,
       }
     } = this.props;
     return (
       <Row onKeyDown={this.handleKeyDown}>
-        <Col span={8} offset={8} >
+        <Col span={8} offset={8}  >
+
           <h1>{currentScore}</h1>
-          <Button
-            onClick={actionUpdateScore.bind(this, 5)}
-          >
-            Add
-           </Button>
           <Button
             onClick={actionInitSquareMap}
           >
             restart
-           </Button>
-          <Button
-            onClick={actionAddNewSquare}
-          >
-            tap
            </Button>
           <Row>
             {this.renderGameArea()}

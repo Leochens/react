@@ -39,43 +39,120 @@ export const isGameOver = ({ col, row }) => {
     return 0;
 }
 const copyMap = (oldMap) => oldMap.slice();
+
+const swap = (map, { curRow, curCol }, { preRow, preCol }) => {
+    const tmp = map[curRow][curCol];
+    map[curRow][curCol] = map[preRow][preCol];
+    map[preRow][preCol] = tmp;
+}
+const stackByDirections = (map, direction, wantMerge = 0) => {
+
+    const len = 4;
+    let initRowId = 0;
+    let initColId = 0;
+    let rowIdWillPlus = true;
+    let colIdWillPlus = true;
+    let prePos = {};
+    const getPrePos = (preRow = -1, preCol = -1) => {
+        prePos.preRow = preRow;
+        prePos.preCol = preCol
+    }
+    switch (direction) {
+        case 'up':
+            initColId = len - 1;
+            colIdWillPlus = false;
+            initRowId = len - 1;
+            rowIdWillPlus = false;
+            break;
+        case 'left':
+            initColId = len - 1;
+            colIdWillPlus = false;
+            break
+        case 'down':
+
+
+            break;
+        case 'right':
+            initRowId = len - 1;
+            rowIdWillPlus = false;
+            break
+        default: break;
+    }
+    for (let rowId = initRowId; rowIdWillPlus ? rowId < len - 1 : rowId >= 0; rowIdWillPlus ? rowId++ : rowId--) {
+        for (let colId = initColId; colIdWillPlus ? colId < len : colId >= 0; colIdWillPlus ? colId++ : colId--) {
+            switch (direction) {
+                case 'left':
+                    getPrePos(rowId, colId - 1)
+                    break;
+                case 'right':
+                    getPrePos(rowId, colId + 1)
+                    break;
+                case 'up':
+                    getPrePos(rowId - 1, colId)
+                    break;
+                case 'down':
+                    getPrePos(rowId + 1, colId)
+                    break;
+                default: break;
+            }
+            const { preRow, preCol } = prePos;
+            const pre = map[preRow][preCol];
+            const cur = map[rowId][colId];
+            if (cur != 0 && pre === 0) {
+                map[preRow][preCol] = cur
+                map[rowId][colId] = 0;
+            } else if (wantMerge && cur !== 0 && cur === pre) {     //保存下要改变的位置
+                map[preRow][preCol] = pre * 2;
+                map[rowId][colId] = 0;
+            } else continue
+        }
+    }
+}
+
 const moveLeft = (oldMap) => {
     const newMap = copyMap(oldMap);
-    const len = 4;
-    const willLeftMerge = [];
-    let increaseNum = 0;
-    const leftStack = (wantSetMergeList = 1) => {
-        for (let rowId = len - 1; rowId >= 0; rowId--) {
-            for (let colId = len - 1; colId >= 0; colId--) {
-                const pre = newMap[rowId][colId - 1];
-                const cur = newMap[rowId][colId];
-                if (cur != 0 && pre === 0) {
-                    newMap[rowId][colId - 1] = cur
-                    newMap[rowId][colId] = 0;
-                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
-                    willLeftMerge.push({
-                        rowId, colId
-                    })
-                } else continue
+    let flag = 0;
+    for (let r = 0; r < 4; r++) {
+        let i, nextI, len, m;
+        len = 4;
+        for (i = 0; i < len; i += 1) {
+            //先找nextI
+            nextI = -1;
+            for (m = i + 1; m < len; m++) {
+                if (newMap[r][m] !== 0) {
+                    nextI = m;
+                    break;
+                }
+            }
+            if (nextI !== -1) {
+                //存在下个不为0的位置
+                if (newMap[r][i] === 0) {
+                    newMap[r][i] = newMap[r][nextI];
+                    newMap[r][nextI] = 0;
+                    i -= 1;
+                    flag = 1;
+                } else if (newMap[r][i] === newMap[r][nextI]) {
+                    newMap[r][i] = newMap[r][i] * 2;
+                    newMap[r][nextI] = 0;
+                    flag = 1;
+                }
             }
         }
     }
-    //先做预判堆叠
-    leftStack();
-    //通过遍历预判列表中的待融合元素 得到融合后的map
-    willLeftMerge.forEach((pos) => {
-        const { rowId, colId } = pos;
-        increaseNum = newMap[rowId][colId - 1] *= 2;
-        newMap[rowId][colId] = 0;
-    })
-    // 不预判堆叠
-    leftStack(0);
 
+
+    let increaseNum = 0;
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
-        return newMap;
+        return {
+            newMap,
+            increaseNum: 0
+        };
     }
+    if (flag) {
     newMap[row][col] = getRandomNumber();
+    }
+
     console.log('left');
     return {
         newMap,
@@ -87,38 +164,47 @@ const moveLeft = (oldMap) => {
 
 const moveUp = (oldMap) => {
     const newMap = copyMap(oldMap);
-    const len = 4;
-    const willUpMerge = [];
     let increaseNum = 0;
-
-    const upStack = (wantSetMergeList = 1) => {
-        for (let rowId = len - 1; rowId > 0; rowId--) {
-            for (let colId = len - 1; colId >= 0; colId--) {
-                const pre = newMap[rowId - 1][colId];
-                const cur = newMap[rowId][colId];
-                if (cur != 0 && pre === 0) {
-                    newMap[rowId - 1][colId] = cur;
-                    newMap[rowId][colId] = 0;
-                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
-                    willUpMerge.push({
-                        rowId, colId
-                    })
-                } else continue
+    let flag = 0;
+    for (let r = 0; r < 4; r++) {
+        let i, nextI, len, m;
+        len = 4;
+        for (i = 0; i < len; i += 1) {
+            //先找nextI
+            nextI = -1;
+            for (m = i + 1; m < len; m++) {
+                if (newMap[m][r] !== 0) {
+                    nextI = m;
+                    break;
+                }
+            }
+            if (nextI !== -1) {
+                //存在下个不为0的位置
+                if (newMap[i][r] === 0) {
+                    newMap[i][r] = newMap[nextI][r];
+                    newMap[nextI][r] = 0;
+                    i -= 1;
+                    flag = 1;
+                } else if (newMap[i][r] === newMap[nextI][r]) {
+                    newMap[i][r] = newMap[i][r] * 2;
+                    newMap[nextI][r] = 0;
+                    flag = 1;
+                }
             }
         }
     }
-    upStack();
-    willUpMerge.forEach((pos) => {
-        const { rowId, colId } = pos;
-        increaseNum = newMap[rowId-1][colId] *= 2;
-        newMap[rowId][colId] = 0;
-    })
-    upStack(0);
+
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
-        return newMap;
+        return {
+            newMap,
+            increaseNum: 0
+        };
     }
-    newMap[row][col] = getRandomNumber();
+    if (flag) {
+        newMap[row][col] = getRandomNumber();
+    }
+
     console.log('up');
     return {
         newMap,
@@ -131,7 +217,7 @@ const moveRight = (oldMap) => {
     const len = 4;
     const willRightMerge = [];
     let increaseNum = 0;
-
+    let flag = 0;
     const rightStack = (wantSetMergeList = 1) => {
         for (let rowId = len - 1; rowId >= 0; rowId--) {
             for (let colId = 0; colId < 4; colId++) {
@@ -140,10 +226,12 @@ const moveRight = (oldMap) => {
                 if (cur != 0 && pre === 0) {
                     newMap[rowId][colId + 1] = cur;
                     newMap[rowId][colId] = 0;
+                    flag = 1;
                 } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
                     willRightMerge.push({
                         rowId, colId
                     })
+                    flag = 1;
                 } else continue
             }
         }
@@ -159,9 +247,15 @@ const moveRight = (oldMap) => {
 
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
-        return newMap;
+        return {
+            newMap,
+            increaseNum: 0
+        };
     }
-    newMap[row][col] = getRandomNumber();
+    if (flag) {
+        newMap[row][col] = getRandomNumber();
+    }
+
     console.log('right');
 
     return {
@@ -175,7 +269,7 @@ const moveDowm = (oldMap) => {
     const len = 4;
     const willDownMerge = [];
     let increaseNum = 0;
-
+    let flag = 0;
     const downStack = (wantSetMergeList = 1) => {
         for (let rowId = 0; rowId < len - 1; rowId++) {
             for (let colId = 0; colId < 4; colId++) {
@@ -184,10 +278,12 @@ const moveDowm = (oldMap) => {
                 if (cur != 0 && pre === 0) {
                     newMap[rowId + 1][colId] = cur;
                     newMap[rowId][colId] = 0;
+                    flag = 1;
                 } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
                     willDownMerge.push({
                         rowId, colId
                     })
+                    flag = 1;
                 } else continue
             }
         }
@@ -201,9 +297,15 @@ const moveDowm = (oldMap) => {
     downStack(0);
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
-        return newMap;
+        return {
+            newMap,
+            increaseNum: 0
+        };
     }
-    newMap[row][col] = getRandomNumber();
+    if (flag) {
+        newMap[row][col] = getRandomNumber();
+    }
+
     console.log('dowm');
 
     return {
@@ -227,7 +329,7 @@ export const handlePressKeyboard = (key, oldMap) => {
         case 40:
             return moveDowm(oldMap);
         default: return {
-            newMap:oldMap,
+            newMap: oldMap,
             increaseNum: 0
         }
     }
