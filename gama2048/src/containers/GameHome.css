@@ -1,0 +1,22 @@
+.row{
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+
+    height: 100%;
+    width: 100%;
+}
+.game-wraper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFCCB8;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center
+}
+.game-main{
+    border-radius: 16px;
+}

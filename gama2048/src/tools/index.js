@@ -43,13 +43,14 @@ const copyMap = (oldMap) => oldMap.slice();
 
 const moveLeft = (oldMap) => {
     const newMap = copyMap(oldMap);
-    let flag = 0;
+    let willGenerateNew = 0;
+    let increaseNum = 0;
     for (let r = 0; r < 4; r++) {
         let i, nextNoZeroPos, len, m;
         const arr = newMap[r];
         len = arr.length;
         for (i = 0; i < len; i += 1) {
-            //先找nextNoZeroPos
+            //找到 不为零的元素 nextNoZeroPos
             nextNoZeroPos = -1;
             for (m = i + 1; m < len; m++) {
                 if (arr[m] !== 0) {
@@ -63,33 +64,20 @@ const moveLeft = (oldMap) => {
                     arr[i] = arr[nextNoZeroPos];
                     arr[nextNoZeroPos] = 0;
                     i -= 1;
-                    flag = 1;
+                    willGenerateNew = 1;
                 } else if (arr[i] === arr[nextNoZeroPos]) {
-                    increaseNum =  arr[i] = arr[i] * 2;
+                    increaseNum += arr[i] = arr[i] * 2;
                     arr[nextNoZeroPos] = 0;
-                    flag = 1;
+                    willGenerateNew = 1;
                 }
             }
         }
     }
-
-
-    let increaseNum = 0;
-    const { row, col } = getNextPos(oldMap);
-    if (isGameOver({ row, col })) {
-        return {
-            newMap,
-            increaseNum: 0
-        };
-    }
-    if (flag) {
-        newMap[row][col] = getRandomNumber();
-    }
-
     console.log('left');
     return {
         newMap,
-        increaseNum
+        increaseNum,
+        willGenerateNew
     }
 }
 
@@ -98,12 +86,12 @@ const moveLeft = (oldMap) => {
 const moveUp = (oldMap) => {
     const newMap = copyMap(oldMap);
     let increaseNum = 0;
-    let flag = 0;
+    let willGenerateNew = 0;
     for (let r = 0; r < 4; r++) {
         let i, pos, len, m;
         len = 4;
         for (i = 0; i < len; i += 1) {
-            //先找pos
+            //找到 不为零的元素 pos
             pos = -1;
             for (m = i + 1; m < len; m++) {
                 if (newMap[m][r] !== 0) {
@@ -117,46 +105,37 @@ const moveUp = (oldMap) => {
                     newMap[i][r] = newMap[pos][r];
                     newMap[pos][r] = 0;
                     i -= 1;
-                    flag = 1;
+                    willGenerateNew = 1;
                 } else if (newMap[i][r] === newMap[pos][r]) {
-                    increaseNum = newMap[i][r] = newMap[i][r] * 2;
+                    increaseNum += newMap[i][r] = newMap[i][r] * 2;
                     newMap[pos][r] = 0;
-                    flag = 1;
+                    willGenerateNew = 1;
                 }
             }
         }
     }
 
-    const { row, col } = getNextPos(oldMap);
-    if (isGameOver({ row, col })) {
-        return {
-            newMap,
-            increaseNum: 0
-        };
-    }
-    if (flag) {
-        newMap[row][col] = getRandomNumber();
-    }
-
     console.log('up');
     return {
         newMap,
-        increaseNum
+        increaseNum,
+        willGenerateNew
     }
 }
 
 const moveRight = (oldMap) => {
     const newMap = copyMap(oldMap);
     let increaseNum = 0;
-    let flag = 0;
-    for (let r = 0; r < 4; r++) {
+    let willGenerateNew = 0;
+    const len = 4;
+    for (let r = 0; r < len; r++) {
         let i, nextNoZeroPos, len, m;
         const arr = newMap[r];
         len = arr.length;
-        for (i = len -1 ; i > 0 ; i --) {
-            //先找nextNoZeroPos
+        for (i = len - 1; i > 0; i--) {
+            //找到 不为零的元素 nextNoZeroPos
             nextNoZeroPos = -1;
-            for (m = i - 1 ; m >= 0 ; m--) {
+            for (m = i - 1; m >= 0; m--) {
                 if (arr[m] !== 0) {
                     nextNoZeroPos = m;
                     break;
@@ -168,43 +147,34 @@ const moveRight = (oldMap) => {
                     arr[i] = arr[nextNoZeroPos];
                     arr[nextNoZeroPos] = 0;
                     i += 1;
-                    flag = 1;
+                    willGenerateNew = 1;
                 } else if (arr[i] === arr[nextNoZeroPos]) {
-                    increaseNum =  arr[i] = arr[i] * 2;
+                    increaseNum += arr[i] = arr[i] * 2;
                     arr[nextNoZeroPos] = 0;
-                    flag = 1;
+                    willGenerateNew = 1;
                 }
             }
         }
-    }
-    const { row, col } = getNextPos(oldMap);
-    if (isGameOver({ row, col })) {
-        return {
-            newMap,
-            increaseNum: 0
-        };
-    }
-    if (flag) {
-        newMap[row][col] = getRandomNumber();
     }
 
     console.log('right');
 
     return {
         newMap,
-        increaseNum
+        increaseNum,
+        willGenerateNew
     }
 
 }
 const moveDowm = (oldMap) => {
     const newMap = copyMap(oldMap);
     let increaseNum = 0;
-    let flag = 0;
+    let willGenerateNew = 0;
     const len = 4;
     for (let r = len - 1; r >= 0; r--) {
         let i, pos, m;
         for (i = len - 1; i >= 0; i--) {
-            //先找pos
+            //找到 不为零的元素 pos
             pos = -1;
             for (m = i - 1; m >= 0; m--) {
                 if (newMap[m][r] !== 0) {
@@ -218,31 +188,22 @@ const moveDowm = (oldMap) => {
                     newMap[i][r] = newMap[pos][r];
                     newMap[pos][r] = 0;
                     i += 1;
-                    flag = 1;
+                    willGenerateNew = 1;
                 } else if (newMap[i][r] === newMap[pos][r]) {
-                    increaseNum = newMap[i][r] = newMap[i][r] * 2;
+                    increaseNum += newMap[i][r] = newMap[i][r] * 2;
                     newMap[pos][r] = 0;
-                    flag = 1;
+                    willGenerateNew = 1;
                 }
             }
         }
-    }
-    const { row, col } = getNextPos(oldMap);
-    if (isGameOver({ row, col })) {
-        return {
-            newMap,
-            increaseNum: 0
-        };
-    }
-    if (flag) {
-        newMap[row][col] = getRandomNumber();
     }
 
     console.log('dowm');
 
     return {
         newMap,
-        increaseNum
+        increaseNum,
+        willGenerateNew
     }
 
 }
@@ -262,9 +223,12 @@ export const handlePressKeyboard = (key, oldMap) => {
             return moveDowm(oldMap);
         default: return {
             newMap: oldMap,
-            increaseNum: 0
+            increaseNum: 0,
+            newPos: {
+                col: -1,
+                row: -1
+            }
         }
     }
-
 }
 
