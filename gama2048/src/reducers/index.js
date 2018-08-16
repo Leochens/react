@@ -4,11 +4,71 @@ import {
   getNextPos,
   getRandomNumber,
   clearedSquare,
-  handlePressKeyboard,
-  isGameOver
+  handlePressKeyboard
 } from '../tools';
 
+//判断是否死亡
+const amILose = (gameMap) => {
+  const len = gameMap.length;
+  // 横向
+  let isAnotherWayHere = 1;
+  for (let r = 0; r < len; r++) {
+    for (let c = 0; c < len; c++) {
+      //四个角不用检查
+      if (r === 0 && c === 0 ||
+        r === 0 && c === len - 1 ||
+        r === len - 1 && c === 0 ||
+        r === len - 1 && c === len - 1) {
+        continue;
+      }
+      const cur = gameMap[r][c];
+      if (r === 0) {
+        const left = gameMap[r][c - 1];
+        const right = gameMap[r][c + 1];
+        const down = gameMap[r + 1][c];
 
+        if (cur === left || cur === right || cur === down) {
+          isAnotherWayHere = 0;
+          break;
+        }
+      } else if (r === len - 1) {
+        const left = gameMap[r][c - 1];
+        const right = gameMap[r][c + 1];
+        const up = gameMap[r - 1][c];
+        if (cur === left || cur === right || cur === up) {
+          isAnotherWayHere = 0;
+          break;
+        }
+      } else if (c === 0) {
+        const right = gameMap[r][c + 1];
+        const up = gameMap[r - 1][c];
+        const down = gameMap[r + 1][c];
+        if (cur === up || cur === right || cur === down) {
+          isAnotherWayHere = 0;
+          break;
+        }
+      } else if (c === len - 1) {
+        const left = gameMap[r][c - 1];
+        const up = gameMap[r - 1][c];
+        const down = gameMap[r + 1][c];
+        if (cur === up || cur === left || cur === down) {
+          isAnotherWayHere = 0;
+          break;
+        }
+      } else {
+      };
+    }
+  }
+
+  // 纵向
+  return isAnotherWayHere;
+}
+const mapIsFull = ({ col, row }) => {
+  if (col === -1 && row === -1) {
+    return 1;
+  }
+  return 0;
+}
 const Game = (state = {
   squareMap: clearedSquare(),
   currentScore: 0,
@@ -48,8 +108,14 @@ const Game = (state = {
       } = handlePressKeyboard(key, oldMap)
 
       const { row, col } = getNextPos(newMap);
-      if (isGameOver({ row, col })) {
-        return state;
+      if (mapIsFull({ row, col })) {
+        if (amILose(newMap)) {
+          alert('你输了');
+          return state;
+        } else {
+
+          return state;
+        }
       }
       if (willGenerateNew) {
         newMap[row][col] = getRandomNumber();
@@ -57,7 +123,7 @@ const Game = (state = {
         newPos.col = col;
       }
 
-      console.log('新位置',newPos);
+      console.log('新位置', newPos);
       return {
         ...state,
         squareMap: newMap,
@@ -72,7 +138,7 @@ const Game = (state = {
     case ActionTypes.CLEAR_NEW_POS: {
       return {
         ...state,
-        newPos:{
+        newPos: {
           row: -1,
           col: -1
         }

@@ -30,14 +30,7 @@ export const clearedSquare = () => [
     [0, 0, 0, 0],
     [0, 0, 0, 0]
 ]
-//判断是否死亡
-export const isGameOver = ({ col, row }) => {
-    if (col === -1 && row === -1) {
-        alert('你输了,重新来吧');
-        return 1;
-    }
-    return 0;
-}
+
 const copyMap = (oldMap) => oldMap.slice();
 
 
