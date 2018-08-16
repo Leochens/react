@@ -150,7 +150,7 @@ const moveLeft = (oldMap) => {
         };
     }
     if (flag) {
-    newMap[row][col] = getRandomNumber();
+        newMap[row][col] = getRandomNumber();
     }
 
     console.log('left');
@@ -214,37 +214,35 @@ const moveUp = (oldMap) => {
 
 const moveRight = (oldMap) => {
     const newMap = copyMap(oldMap);
-    const len = 4;
-    const willRightMerge = [];
     let increaseNum = 0;
     let flag = 0;
-    const rightStack = (wantSetMergeList = 1) => {
-        for (let rowId = len - 1; rowId >= 0; rowId--) {
-            for (let colId = 0; colId < 4; colId++) {
-                const pre = newMap[rowId][colId + 1];
-                const cur = newMap[rowId][colId];
-                if (cur != 0 && pre === 0) {
-                    newMap[rowId][colId + 1] = cur;
-                    newMap[rowId][colId] = 0;
+    for (let r = 0; r < 4; r++) {
+        let i, nextI, len, m;
+        len = 4;
+        for (i = len - 1; i >= 0; i--) {
+            //先找nextI
+            nextI = -1;
+            for (m = i - 1; m >= 0; m--) {
+                if (newMap[r][m] !== 0) {
+                    nextI = m;
+                    break;
+                }
+            }
+            if (nextI !== -1) {
+                //存在下个不为0的位置
+                if (newMap[r][i] === 0) {
+                    newMap[r][i] = newMap[r][nextI];
+                    newMap[r][nextI] = 0;
+                    i -= 1;
                     flag = 1;
-                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
-                    willRightMerge.push({
-                        rowId, colId
-                    })
+                } else if (newMap[r][i] === newMap[r][nextI]) {
+                    newMap[r][i] = newMap[r][i] * 2;
+                    newMap[r][nextI] = 0;
                     flag = 1;
-                } else continue
+                }
             }
         }
     }
-
-    rightStack();
-    willRightMerge.forEach((pos) => {
-        const { rowId, colId } = pos;
-        increaseNum = newMap[rowId][colId + 1] *= 2;
-        newMap[rowId][colId] = 0;
-    })
-    rightStack(0);
-
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
         return {
@@ -266,35 +264,35 @@ const moveRight = (oldMap) => {
 }
 const moveDowm = (oldMap) => {
     const newMap = copyMap(oldMap);
-    const len = 4;
-    const willDownMerge = [];
     let increaseNum = 0;
     let flag = 0;
-    const downStack = (wantSetMergeList = 1) => {
-        for (let rowId = 0; rowId < len - 1; rowId++) {
-            for (let colId = 0; colId < 4; colId++) {
-                const pre = newMap[rowId + 1][colId];
-                const cur = newMap[rowId][colId];
-                if (cur != 0 && pre === 0) {
-                    newMap[rowId + 1][colId] = cur;
-                    newMap[rowId][colId] = 0;
+    const len = 4;
+    for (let r = len-1; r >= 0 ; r --) {
+        let i, nextI, m;
+        for (i = len - 1; i >= 0; i--) {
+            //先找nextI
+            nextI = -1;
+            for (m = i - 1; m >= 0; m--) {
+                if (newMap[m][r] !== 0) {
+                    nextI = m;
+                    break;
+                }
+            }
+            if (nextI !== -1) {
+                //存在下个不为0的位置
+                if (newMap[i][r] === 0) {
+                    newMap[i][r] = newMap[nextI][r];
+                    newMap[nextI][r] = 0;
+                    i -= 1;
                     flag = 1;
-                } else if (wantSetMergeList && cur !== 0 && cur === pre) {     //保存下要改变的位置
-                    willDownMerge.push({
-                        rowId, colId
-                    })
+                } else if (newMap[i][r] === newMap[nextI][r]) {
+                    newMap[i][r] = newMap[i][r] * 2;
+                    newMap[nextI][r] = 0;
                     flag = 1;
-                } else continue
+                }
             }
         }
     }
-    downStack();
-    willDownMerge.forEach((pos) => {
-        const { rowId, colId } = pos;
-        increaseNum = newMap[rowId + 1][colId] *= 2;
-        newMap[rowId][colId] = 0;
-    })
-    downStack(0);
     const { row, col } = getNextPos(oldMap);
     if (isGameOver({ row, col })) {
         return {
