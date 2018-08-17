@@ -1,0 +1,98 @@
+.header-warper{
+    /* overflow: hidden; */
+    
+
+
+}
+.title2048{
+    font-weight: 800;
+    font-size: 80px;
+    margin-right: 25px;
+    height: 106px;
+}
+
+.header-right{
+    display: inline-block;
+    margin-left: 135px;
+}
+.score{
+    width: 150px;
+    height: 50px;
+    float: right;
+    background-color: #F08080;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 33px;
+    font-weight: 600;
+    position: relative;
+    /* animation: scorechage .3s ease-in; */
+}
+@keyframes scorechange {
+    0%{
+        background-color: #fff;
+    }
+    100%{
+        background-color: blue;
+    }
+}
+.score::before{
+    content: '';
+    display: block;
+    height: 3px;
+    position: absolute;
+    right: 6px;
+    left: 6px;
+    top: 3px;
+    background-color: #fff;
+    border-radius: 15px;
+    animation: scorechage .3s ease-in;
+    
+}
+.btn-wraper{
+    /* vertical-align: middle; */
+}
+.restart-btn{
+    /* float: right; */
+    text-align: center;
+    width: 200px;
+    /* height: 35px; */
+    border: none;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 6px 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 60px;
+}
+.readme-wrap{
+    display: inline-block;
+}
+.readme{
+    font-size: 17px;
+    font-weight: 600;
+}
+.increase-number{
+    font-size: 16px;
+}
+@media screen and (max-width: 500px) {
+    .header-right{
+        margin: 0;
+        padding: 3px;
+        text-align: center;
+    }
+    .score{
+        width: 150px;
+        margin: 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .btn-wraper{
+        position: fixed;
+        bottom: 20%;
+        left: 0;right: 0;
+        text-align: center;
+    }
+
+}

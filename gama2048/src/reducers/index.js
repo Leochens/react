@@ -2,14 +2,15 @@ import { combineReducers } from 'redux';
 import * as ActionTypes from '../const/ActionTypes';
 import tools from '../tools';
 
-//判断是否死亡
 
+// 判满
 const mapIsFull = ({ col, row }) => {
   if (col === -1 && row === -1) {
     return 1;
   }
   return 0;
 }
+
 const Game = (state = {
   squareMap: tools.clearSquare(),
   currentScore: 0,
@@ -34,7 +35,11 @@ const Game = (state = {
         ...state,
         squareMap: newMap,
         currentScore: 0,
-        increaseNum: 0
+        increaseNum: 0,
+        newPos: {
+          row: -1,
+          col: -1
+        }
       }
     }
     case ActionTypes.MOVE_BY_DIRECTIONS: {
@@ -57,7 +62,6 @@ const Game = (state = {
           alert('你输了');
           return state;
         } else {
-
           return state;
         }
       }
@@ -80,9 +84,6 @@ const Game = (state = {
         }
       }
     }
-
-
-
     case ActionTypes.CLEAR_NEW_POS: {
       return {
         ...state,

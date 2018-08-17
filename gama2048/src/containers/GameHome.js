@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionCreators from '../actions';
-import Square from '../components/Square/Square';
 import tools from '../tools';
+import Header from '../components/Header/Header';
+import Square from '../components/Square/Square';
 import './GameHome.css';
 import './animate.css';
 
@@ -43,16 +44,16 @@ class GameHome extends Component {
     switch (e.keyCode) {
       case 65:
       case 37:
-          return actionMoveByDirections('left');
+        return actionMoveByDirections('left');
       case 87:
       case 38:
-          return actionMoveByDirections('up');
+        return actionMoveByDirections('up');
       case 68:
       case 39:
-          return actionMoveByDirections('right');
+        return actionMoveByDirections('right');
       case 83:
       case 40:
-          return actionMoveByDirections('down');
+        return actionMoveByDirections('down');
       default: return null;
     }
   }
@@ -77,47 +78,40 @@ class GameHome extends Component {
       console.log(distanceX > 0 ? '右' : '左');
       distanceX > 0
         ? actionMoveByDirections('right')
-        : actionMoveByDirections('left') ;
+        : actionMoveByDirections('left');
     } else if (Math.abs(distanceX) < Math.abs(distanceY)) {
       console.log(distanceY > 0 ? '下' : '上');
       distanceY > 0
-        ?  actionMoveByDirections('down')
+        ? actionMoveByDirections('down')
         : actionMoveByDirections('up');
-    }else return ;
+    } else return;
+  }
+
+  bindDocumentActions = () => {
+    document.onkeydown = this.handleKeyDown;
+    document.ontouchstart = this.handleTouchStart;
+    document.ontouchend = this.handleTouchEnd;
   }
   render() {
 
     const {
       currentScore,
+      increaseNum,
       Actions: {
         actionInitSquareMap,
       }
     } = this.props;
-    document.onkeydown = this.handleKeyDown;
-    document.ontouchstart = this.handleTouchStart;
-    document.ontouchend = this.handleTouchEnd;
+
+    this.bindDocumentActions();
     return (
       <div>
         <div className="game-wraper" >
           <div className="game-main">
-            <div className="header-warper">
-              <span className="title2048">
-                2048
-              </span>
-              <div className="header-right">
-                <div className="score">
-                  <span className="">{currentScore}+{this.props.increaseNum}</span>
-                </div>
-              </div>
-              <div className="btn-wraper">
-                <button
-                  className="restart-btn"
-                  onClick={actionInitSquareMap}
-                >
-                  重新开始
-           </button>
-              </div>
-            </div>
+          <Header 
+            currentScore = {currentScore}
+            increaseNum = {increaseNum}
+            restartAction = { actionInitSquareMap }
+          />
             <div>
               {this.renderGameArea()}
             </div>

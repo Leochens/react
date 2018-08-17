@@ -1,0 +1,7 @@
+.increase{
+    font-size: 16px;
+}
+.hide{
+    /* display: none; */
+    visibility: hidden;
+}

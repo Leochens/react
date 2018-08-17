@@ -21,43 +21,7 @@
     border-radius: 16px;
     overflow: hidden;
 }
-.title2048{
-    font-weight: 800;
-    font-size: 80px;
-    margin-right: 25px;
-    height: 106px;
-}
-.header-warper{
-    /* overflow: hidden; */
-}
-.header-right{
-    display: inline-block;
-    margin-left: 135px;
-}
-.score{
-    width: 150px;
-    height: 50px;
-    float: right;
-    background-color: #F08080;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 33px;
-    font-weight: 600;
-}
-.restart-btn{
-    /* float: right; */
-    text-align: center;
-    width: 200px;
-    height: 35px;
-    border: none;
-    background-color: #fff;
-    outline: none;
-    cursor: pointer;
-    border-radius: 6px;
-    margin: 6px 0;
-    font-size: 18px;
-    font-weight: 600;
-}
+
 
 @media screen and (max-width: 500px) {
     .game-wraper {
@@ -66,22 +30,5 @@
     .game-main{
         width: 300px;
 
-    }
-    .header-right{
-        margin: 0;
-        padding: 3px;
-        text-align: center;
-    }
-    .score{
-        width: 150px;
-        margin: 0;
-        margin: 0 auto;
-        text-align: center;
-    }
-    .btn-wraper{
-        position: fixed;
-        bottom: 20%;
-        left: 0;right: 0;
-        text-align: center;
     }
 }
