@@ -1,66 +1,9 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from '../const/ActionTypes';
-import {
-  getNextPos,
-  getRandomNumber,
-  clearedSquare,
-  handlePressKeyboard
-} from '../tools';
-//判断是否死亡
-const amILose = (gameMap) => {
-  const len = gameMap.length;
-  // 横向
-  let isAnotherWayHere = 1;
-  for (let r = 0; r < len; r++) {
-    for (let c = 0; c < len; c++) {
-      //四个角不用检查
-      if (r === 0 && c === 0 ||
-        r === 0 && c === len - 1 ||
-        r === len - 1 && c === 0 ||
-        r === len - 1 && c === len - 1) {
-        continue;
-      }
-      const cur = gameMap[r][c];
-      if (r === 0) {
-        const left = gameMap[r][c - 1];
-        const right = gameMap[r][c + 1];
-        const down = gameMap[r + 1][c];
+import tools from '../tools';
 
-        if (cur === left || cur === right || cur === down) {
-          isAnotherWayHere = 0;
-          break;
-        }
-      } else if (r === len - 1) {
-        const left = gameMap[r][c - 1];
-        const right = gameMap[r][c + 1];
-        const up = gameMap[r - 1][c];
-        if (cur === left || cur === right || cur === up) {
-          isAnotherWayHere = 0;
-          break;
-        }
-      } else if (c === 0) {
-        const right = gameMap[r][c + 1];
-        const up = gameMap[r - 1][c];
-        const down = gameMap[r + 1][c];
-        if (cur === up || cur === right || cur === down) {
-          isAnotherWayHere = 0;
-          break;
-        }
-      } else if (c === len - 1) {
-        const left = gameMap[r][c - 1];
-        const up = gameMap[r - 1][c];
-        const down = gameMap[r + 1][c];
-        if (cur === up || cur === left || cur === down) {
-          isAnotherWayHere = 0;
-          break;
-        }
-      } else {
-      };
-    }
-  }
-  // 纵向
-  return isAnotherWayHere;
-}
+//判断是否死亡
+
 const mapIsFull = ({ col, row }) => {
   if (col === -1 && row === -1) {
     return 1;
@@ -68,7 +11,7 @@ const mapIsFull = ({ col, row }) => {
   return 0;
 }
 const Game = (state = {
-  squareMap: clearedSquare(),
+  squareMap: tools.clearSquare(),
   currentScore: 0,
   increaseNum: 0,
   changedSquares: [],
@@ -77,15 +20,16 @@ const Game = (state = {
     col: -1
   }
 }, action) => {
+
   switch (action.type) {
     case ActionTypes.INIT_SQUARE_MAP: {
       // 取得随机数
       let pos = {};
-      const newMap = clearedSquare();
-      pos = getNextPos(newMap);
-      newMap[pos.row][pos.col] = getRandomNumber();
-      pos = getNextPos(newMap);
-      newMap[pos.row][pos.col] = getRandomNumber();
+      const newMap = tools.clearSquare();
+      pos = tools.getNextPos(newMap);
+      newMap[pos.row][pos.col] = tools.getRandomNumber();
+      pos = tools.getNextPos(newMap);
+      newMap[pos.row][pos.col] = tools.getRandomNumber();
       return {
         ...state,
         squareMap: newMap,
@@ -105,11 +49,11 @@ const Game = (state = {
         increaseNum,
         willGenerateNew,
         changedSquares
-      } = handlePressKeyboard(key, oldMap)
+      } = tools.moveByDirections(key, oldMap)
 
-      const { row, col } = getNextPos(newMap);
+      const { row, col } = tools.getNextPos(newMap);
       if (mapIsFull({ row, col })) {
-        if (amILose(newMap)) {
+        if (tools.judgeDie(newMap)) {
           alert('你输了');
           return state;
         } else {
@@ -118,7 +62,7 @@ const Game = (state = {
         }
       }
       if (willGenerateNew) {
-        newMap[row][col] = getRandomNumber();
+        newMap[row][col] = tools.getRandomNumber();
         newPos.row = row;
         newPos.col = col;
       }

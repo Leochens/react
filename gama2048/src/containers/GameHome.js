@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionCreators from '../actions';
 import Square from '../components/Square/Square';
-import { getSingleNumberPos } from '../tools';
+import tools from '../tools';
 import './GameHome.css';
 import './animate.css';
 
@@ -26,7 +26,7 @@ class GameHome extends Component {
             return <Square
               //判断是否是新的方格
               isNew={(newPos.row === rowId && newPos.col === colId) ? true : false}
-              isChange={changedSquares.includes(getSingleNumberPos(rowId, colId))}
+              isChange={changedSquares.includes(tools.transformPosToNum(rowId, colId))}
               key={colId}
               num={squareNum} />
           })
