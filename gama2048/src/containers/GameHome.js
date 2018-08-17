@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionCreators from '../actions';
 import Square from '../components/Square/Square';
+import { getSingleNumberPos } from '../tools';
 import './GameHome.css';
 import './animate.css';
 
@@ -12,10 +13,11 @@ class GameHome extends Component {
     Actions.actionInitSquareMap();
   }
   state = {
+    startX: 0,
+    startY: 0
   };
   renderGameArea = () => {
-    console.log('changedSquares',this.props.changedSquares);
-
+    console.log('changedSquares', this.props.changedSquares);
     const { squareMap, newPos, changedSquares } = this.props;
     return squareMap.map((row, rowId) => {
       return <div key={rowId} >
@@ -24,7 +26,7 @@ class GameHome extends Component {
             return <Square
               //判断是否是新的方格
               isNew={(newPos.row === rowId && newPos.col === colId) ? true : false}
-              isChange = {changedSquares.includes({row: rowId, col: colId})}
+              isChange={changedSquares.includes(getSingleNumberPos(rowId, colId))}
               key={colId}
               num={squareNum} />
           })
@@ -35,14 +37,53 @@ class GameHome extends Component {
   handleKeyDown = e => {
     const {
       Actions: {
-        actionPressKayBoardByDirections,
-        actionClearNewPos
+        actionMoveByDirections
       }
     } = this.props;
-    if ([65, 37, 87, 38, 68, 39, 83, 40].includes(e.keyCode)) {
-      actionPressKayBoardByDirections(e.keyCode);
-      setTimeout(()=>actionClearNewPos(),400);  // 清除位置 防止方格动画失效
-    } else return null;
+    switch (e.keyCode) {
+      case 65:
+      case 37:
+          return actionMoveByDirections('left');
+      case 87:
+      case 38:
+          return actionMoveByDirections('up');
+      case 68:
+      case 39:
+          return actionMoveByDirections('right');
+      case 83:
+      case 40:
+          return actionMoveByDirections('down');
+      default: return null;
+    }
+  }
+
+  handleTouchStart = e => {
+    console.log('start', e.touches[0].pageX);
+    this.setState({
+      startX: e.touches[0].pageX,
+      startY: e.touches[0].pageY,
+    })
+  }
+  handleTouchEnd = e => {
+    const {
+      Actions: {
+        actionMoveByDirections
+      }
+    } = this.props;
+    const { pageX, pageY } = e.changedTouches[0];
+    const distanceX = pageX - this.state.startX;
+    const distanceY = pageY - this.state.startY;
+    if (Math.abs(distanceX) > Math.abs(distanceY)) {
+      console.log(distanceX > 0 ? '右' : '左');
+      distanceX > 0
+        ? actionMoveByDirections('right')
+        : actionMoveByDirections('left') ;
+    } else if (Math.abs(distanceX) < Math.abs(distanceY)) {
+      console.log(distanceY > 0 ? '下' : '上');
+      distanceY > 0
+        ?  actionMoveByDirections('down')
+        : actionMoveByDirections('up');
+    }else return ;
   }
   render() {
 
@@ -53,6 +94,8 @@ class GameHome extends Component {
       }
     } = this.props;
     document.onkeydown = this.handleKeyDown;
+    document.ontouchstart = this.handleTouchStart;
+    document.ontouchend = this.handleTouchEnd;
     return (
       <div>
         <div className="game-wraper" >
@@ -66,7 +109,7 @@ class GameHome extends Component {
                   <span className="">{currentScore}+{this.props.increaseNum}</span>
                 </div>
               </div>
-              <div>
+              <div className="btn-wraper">
                 <button
                   className="restart-btn"
                   onClick={actionInitSquareMap}

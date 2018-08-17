@@ -23,10 +23,7 @@ const getColor = (num) => {
 }
 
 export default class Square extends Component {
-    state = {
-        animateClass: '',
-        preNum: 0
-    }
+
     getSquareClass = () => {
         const {isChange, num, isNew } = this.props;
         
@@ -40,7 +37,13 @@ export default class Square extends Component {
             return 'square'
         }
     }
+    componentWillReceiveProps(nextProps){
+        // const {isChange, num, isNew } = this.props;
+
+        this.forceUpdate();
+    }
     render() {
+        console.log('强制渲染');
         const { num } = this.props;
         const squareStyle = {
             backgroundColor: getColor(num)

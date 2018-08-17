@@ -93,7 +93,7 @@ const Game = (state = {
         increaseNum: 0
       }
     }
-    case ActionTypes.PRESS_KEYBOARD_BY_DIRECTIONS: {
+    case ActionTypes.MOVE_BY_DIRECTIONS: {
       const { key } = action;
       const oldMap = state.squareMap.slice();
       const newPos = {

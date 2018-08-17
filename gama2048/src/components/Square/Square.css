@@ -45,3 +45,17 @@
     }
    
 }
+
+@media screen and (max-width: 500px) {
+    .square-warp{
+        height: 65px;
+        width: 65px;
+        line-height: 65px;
+        margin:0 3px;
+        border-radius: 10px;
+    }
+    .square{
+        height: 65px;
+        width: 65px;
+    }
+}

@@ -31,9 +31,11 @@ export const clearedSquare = () => [
     [0, 0, 0, 0]
 ]
 
-const copyMap = (oldMap) => oldMap.slice();
+export const copyMap = (oldMap) => oldMap.slice();
 
-
+export const getSingleNumberPos = (row, col, len = 4) => {
+    return ((row === 0 ? 0 : row) * len + col + 1)
+}
 const moveLeft = (oldMap) => {
     const newMap = copyMap(oldMap);
     let willGenerateNew = 0;
@@ -63,7 +65,7 @@ const moveLeft = (oldMap) => {
                     increaseNum += arr[i] = arr[i] * 2;
                     arr[nextNoZeroPos] = 0;
                     willGenerateNew = 1;
-                    changedSquares.push({row: r,col: i})
+                    changedSquares.push(getSingleNumberPos(r,i));
                 }
             }
         }
@@ -106,7 +108,7 @@ const moveUp = (oldMap) => {
                 } else if (newMap[i][r] === newMap[pos][r]) {
                     increaseNum += newMap[i][r] = newMap[i][r] * 2;
                     newMap[pos][r] = 0;
-                    changedSquares.push({row: i,col: r});
+                    changedSquares.push(getSingleNumberPos(i,r));
                     willGenerateNew = 1;
                 }
             }
@@ -151,7 +153,7 @@ const moveRight = (oldMap) => {
                 } else if (arr[i] === arr[nextNoZeroPos]) {
                     increaseNum += arr[i] = arr[i] * 2;
                     arr[nextNoZeroPos] = 0;
-                    changedSquares.push({row: r,col: i})
+                    changedSquares.push(getSingleNumberPos(r,i))
                     willGenerateNew = 1;
                 }
             }
@@ -196,12 +198,11 @@ const moveDowm = (oldMap) => {
                     increaseNum += newMap[i][r] = newMap[i][r] * 2;
                     newMap[pos][r] = 0;
                     willGenerateNew = 1;
-                    changedSquares.push({row: i, col: r})
+                    changedSquares.push(getSingleNumberPos(i,r))
                 }
             }
         }
     }
-
     console.log('dowm');
 
     return {
@@ -214,17 +215,13 @@ const moveDowm = (oldMap) => {
 }
 export const handlePressKeyboard = (key, oldMap) => {
     switch (key) {
-        case 65:
-        case 37:
+        case 'left':
             return moveLeft(oldMap);
-        case 87:
-        case 38:
+        case 'up':
             return moveUp(oldMap);
-        case 68:
-        case 39:
+        case 'right':
             return moveRight(oldMap);
-        case 83:
-        case 40:
+        case 'down':
             return moveDowm(oldMap);
         default: return {
             newMap: oldMap,

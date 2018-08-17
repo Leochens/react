@@ -7,9 +7,9 @@ export const actionInitSquareMap = () => {
   }
 }
 
-export const actionPressKayBoardByDirections = (key) => {
+export const actionMoveByDirections = (key) => {
   return {
-    type: ActionTypes.PRESS_KEYBOARD_BY_DIRECTIONS,
+    type: ActionTypes.MOVE_BY_DIRECTIONS,
     key
   }
 }
