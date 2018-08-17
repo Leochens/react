@@ -35,19 +35,6 @@
         background-color: blue;
     }
 }
-.score::before{
-    content: '';
-    display: block;
-    height: 3px;
-    position: absolute;
-    right: 6px;
-    left: 6px;
-    top: 3px;
-    background-color: #fff;
-    border-radius: 15px;
-    animation: scorechage .3s ease-in;
-    
-}
 .btn-wraper{
     /* vertical-align: middle; */
 }

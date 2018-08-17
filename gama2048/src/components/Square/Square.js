@@ -26,9 +26,8 @@ export default class Square extends Component {
 
     getSquareClass = () => {
         const {isChange, num, isNew } = this.props;
-        
-        if (num === 0) {
-            return 'square'
+        if (!isNew && isChange && [128,256,512,1024,2048].includes(num) ) {
+            return 'animated zoomIn square '
         } else if (isNew) {
             return 'animated jackInTheBox square'
         } else if(isChange){

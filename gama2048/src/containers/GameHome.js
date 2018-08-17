@@ -5,6 +5,7 @@ import * as ActionCreators from '../actions';
 import tools from '../tools';
 import Header from '../components/Header/Header';
 import Square from '../components/Square/Square';
+import Power from '../components/Power/Power';
 import './GameHome.css';
 import './animate.css';
 
@@ -112,7 +113,12 @@ class GameHome extends Component {
             increaseNum = {increaseNum}
             restartAction = { actionInitSquareMap }
           />
-            <div>
+  
+            <div className="game-area">
+            <Power 
+            currentScore = {currentScore}
+            increaseNum = {increaseNum}          
+          />
               {this.renderGameArea()}
             </div>
           </div>

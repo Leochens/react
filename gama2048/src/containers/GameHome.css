@@ -6,6 +6,11 @@
     height: 100%;
     width: 100%;
 }
+.game-area{
+    position: relative;
+    height: 505px;
+    width: 505px;
+}
 .game-wraper{
     position: fixed;
     top: 0;
@@ -14,12 +19,11 @@
     right: 0;
     background-color: #FFCCB8;
     display: flex;
-    /* align-items: center; */
-    justify-content: center
+    justify-content: center;
 }
 .game-main{
     border-radius: 16px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 

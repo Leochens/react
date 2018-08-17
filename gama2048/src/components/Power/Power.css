@@ -1,0 +1,30 @@
+.power-wrap{
+    /* height: 300px; */
+    width: 25px;
+    background-color: #FFA07A;
+    /* float: right; */
+    position: absolute;
+    right: -100px;
+    top: 10px;
+    bottom: 66px;
+    border-radius: 15px;
+}
+.power-wrap::after{
+    content: '';
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-color: #FF4500;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 0;
+}
+.power-content{
+    background-color: #FF4500;
+    position: absolute;
+    border-radius: 15px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    transition: height .3s ease-in;
+}
