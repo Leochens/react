@@ -8,6 +8,7 @@
     top: 10px;
     bottom: 66px;
     border-radius: 15px;
+    overflow: hidden;
 }
 .power-wrap::after{
     content: '';
@@ -26,5 +27,5 @@
     bottom: 10px;
     left: 0;
     right: 0;
-    transition: height .3s ease-in;
+    transition: height .3s ease-in,background-color, .3s ease-in;
 }

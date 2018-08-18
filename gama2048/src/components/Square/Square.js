@@ -24,6 +24,12 @@ const getColor = (num) => {
 
 export default class Square extends Component {
 
+    // componentWillReceiveProps(){
+    //     this.setState({
+    //         pp: 'p'
+    //     })
+    // }
+    
     getSquareClass = () => {
         const {isChange, num, isNew } = this.props;
         if (!isNew && isChange && [128,256,512,1024,2048].includes(num) ) {

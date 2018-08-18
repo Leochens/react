@@ -10,6 +10,7 @@
     position: relative;
     height: 505px;
     width: 505px;
+    /* background-color: #806C00; */
 }
 .game-wraper{
     position: fixed;
