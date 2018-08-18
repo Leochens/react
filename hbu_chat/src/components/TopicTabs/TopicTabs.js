@@ -4,35 +4,55 @@ import './TopicTabs.less';
 let id = 8001;
 export default class TopicTabs extends Component {
 
-    handleTabAction = (tab) => {
-        const { action } = tab;
-        const { topicId, topicAuthorId } = this.props;
+    handleCommentTopic = () => {
+        const {
+            topicId,
+            TopicActions: {
+                actionCommentTopic
+            }
+        } = this.props;
         const newComment = {
             id,
             commentator: 1,
             comment_content: '这是一条直接评论',
             comment_time: '6:22'
         }
-        action && action(topicId,newComment);
+        actionCommentTopic && actionCommentTopic(topicId, newComment);
     }
+    handleHitTopic = () => {
+        const {
+            topicId,
+            TopicActions: {
+                actionHitTopic
+            }
+        } = this.props;
+        const who = 1;
+        actionHitTopic && actionHitTopic(topicId, who);
 
-    renderTabs = () => {
-        const { tabs } = this.props;
-        return tabs.map((item, idx) => {
-            return (
-                <span 
-                key={idx} 
-                className="topic-tabs-item"
-                onClick={() => this.handleTabAction(item)}>
-                    {item.title}
-                </span>
-            )
-        })
     }
     render() {
         return (
             <div className="topic-tabs">
-                {this.renderTabs()}
+                <span
+                    className="topic-tabs-item"
+                >
+                    分享
+                </span>
+                <span
+                    className="topic-tabs-item"
+                    onClick={this.handleCommentTopic}>
+                    评论
+                </span>
+                <span
+                    className="topic-tabs-item"
+                    onClick = {this.handleHitTopic}
+                >
+                    赞
+                </span>
+
+
+
+
             </div>
         )
     }

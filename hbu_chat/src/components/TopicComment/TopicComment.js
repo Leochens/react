@@ -3,12 +3,11 @@ import './TopicComment.less';
 // import { Icon } from 'antd-mobile';
 let id = 7001;
 export default class TopicComment extends Component {
-
     static defaultProps = {
         comments: []
     }
     handleCommentTopic = (receiverId) => {
-        const { 
+        const {
             topicId,
             topicAuthorId,
             TopicActions: {
@@ -19,16 +18,14 @@ export default class TopicComment extends Component {
             id,
             commentator: 2,
             comment_content: '这是一条测试的评论',
-            to:receiverId,
-            comment_time:'8:55'
+            to: receiverId,
+            comment_time: '8:55'
         }
-        actionCommentTopic && actionCommentTopic(topicId,newComment);
+        actionCommentTopic && actionCommentTopic(topicId, newComment);
         id++;
     }
     renderComments = () => {
-        const {
-            comments
-        } = this.props;
+        const { comments } = this.props;
         return comments.map((item, id) => {
             return (
                 <div className="topic-comment-items"
@@ -50,7 +47,10 @@ export default class TopicComment extends Component {
         })
     }
     render() {
-
+        const { comments } = this.props;
+        if (Array.isArray(comments) && comments.length === 0) {
+            return null;
+        }
         return (
             <div className="topic-comments">
                 {this.renderComments()}

@@ -8,13 +8,13 @@ export const actionCommentTopic = (topicId, comment) => {
         comment
     }
 }
-//回复评论
-// export const actionReplyComment = (topicId, commentatorId, receiverId, comment) => {
-//     return {
-//         type: ACTIONS.TOPIC_ACTIONS.COMMENT_TOPIC,
-//         topicId,
-//         receiverId,
-//         commentatorId,
-//         comment
-//     }
-// }
+// 点赞
+export const actionHitTopic = ( topicId, who ) => {
+
+    return {
+        type: ACTIONS.TOPIC_ACTIONS.HIT_TOPIC,
+        topicId,
+        who
+    }
+
+}

@@ -43,7 +43,8 @@ const mapStateToProps = state => {
     const topicList = topicIds.map(id => {
         const {
             user_info: userId,
-            comments: commentIds
+            comments: commentIds,
+            hits: hitsUserIds
         } = topics[id];
         const commentList = commentIds.map(id => {
             const {
@@ -56,10 +57,12 @@ const mapStateToProps = state => {
                 to: users[receiverId]
             }
         })
+        const hitsUserList = hitsUserIds.map(userId => users[userId]);
         return {
             ...topics[id],
             user_info: users[userId],
-            comments: commentList
+            comments: commentList,
+            hits: hitsUserList
         }
     })
     return {

@@ -48,7 +48,8 @@
           }
         ],
         "public_time": "2018-3-21",
-        "isHot": false
+        "isHot": false,
+        "hits":[1,2,3]
       },
       {
         "id": 1002,
@@ -63,7 +64,8 @@
         },
         "comments": [],
         "public_time": "2018-4-23",
-        "isHot": false
+        "isHot": false,
+        "hits":[]
       },
       {
         "id": 1003,
@@ -78,7 +80,8 @@
         },
         "comments": [],
         "public_time": "2017-3-21",
-        "isHot": false
+        "isHot": false,
+        "hits":[]
       },
       {
         "id": 1004,
@@ -110,7 +113,8 @@
           }
         ],
         "public_time": "2017-1-16",
-        "isHot": false
+        "isHot": false,
+        "hits":[]
       }
     ]
   }

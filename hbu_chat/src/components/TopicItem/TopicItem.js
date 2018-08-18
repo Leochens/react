@@ -3,12 +3,8 @@ import './TopicItem.less';
 import TopicHeader from '../TopicHeader/TopicHeader';
 import TopicContent from '../TopicContent/TopicContent';
 import TopicComment from '../TopicComment/TopicComment';
+import TopicHits from '../TopicHits/TopicHits';
 import TopicTabs from '../TopicTabs/TopicTabs';
-const data = Array.from(new Array(9)).map((_val, i) => ({
-    icon: 'http://pic.kuaizhan.com/g3/73/66/7d30-de74-49b5-b2d0-0f306fda35a642.jpeg/imageView/v1/thumbnail/200x200',
-}));
-
-
 export default class TopicItem extends Component {
     render() {
         const {
@@ -18,25 +14,11 @@ export default class TopicItem extends Component {
                 content,
                 comments,
                 public_time,
+                hits,
                 isHot
             },
             TopicActions
         } = this.props;
-        const tabs = [
-            {
-                title: '分享'
-            },
-            {
-                title: '评论',
-                action: (topicId, comment)=>{
-                    TopicActions.actionCommentTopic(topicId,comment);
-                }
-            },
-            {
-                title: '赞'
-            }
-        
-        ]
         return (
             <div className="msg-item-wraper">
                 <TopicHeader
@@ -51,7 +33,10 @@ export default class TopicItem extends Component {
                  <TopicTabs
                     topicId={id}
                     topicAuthorId={user_info.id}
-                    tabs={tabs}
+                    TopicActions = {TopicActions}
+                />
+                <TopicHits 
+                    hitUserList = {hits}
                 />
                 <TopicComment
                     topicId={id}
