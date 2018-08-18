@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import './TopicTabs.less';
+import CommentInput from '../CommentInput/CommentInput';
 
-let id = 8001;
 export default class TopicTabs extends Component {
-
+    state = {
+        commentInputIsActive: false
+    }
     handleCommentTopic = () => {
-        const {
-            topicId,
-            TopicActions: {
-                actionCommentTopic
-            }
-        } = this.props;
-        const newComment = {
-            id,
-            commentator: 1,
-            comment_content: '这是一条直接评论',
-            comment_time: '6:22'
-        }
-        actionCommentTopic && actionCommentTopic(topicId, newComment);
+        this.toggleCommentInputActive();
+       
+    }
+    toggleCommentInputActive = () => {
+        this.setState({
+            commentInputIsActive: !this.state.commentInputIsActive
+        })
     }
     handleHitTopic = () => {
         const {
@@ -30,30 +26,43 @@ export default class TopicTabs extends Component {
         actionHitTopic && actionHitTopic(topicId, who);
 
     }
+
+    renderCommentInput = () => {
+
+        const { commentInputIsActive } = this.state;
+        if (commentInputIsActive) {
+            return <CommentInput 
+                {...this.props}
+                onHideInput = { this.toggleCommentInputActive }
+            />
+        } else return null;
+
+    }
     render() {
         return (
-            <div className="topic-tabs">
-                <span
-                    className="topic-tabs-item"
-                >
-                    分享
+            <div className="topic-tabs-wrapper">
+                <div className="topic-tabs">
+                    <span
+                        className="topic-tabs-item"
+                    >
+                        分享
                 </span>
-                <span
-                    className="topic-tabs-item"
-                    onClick={this.handleCommentTopic}>
-                    评论
+                    <span
+                        className="topic-tabs-item"
+                        onClick={this.handleCommentTopic}>
+                        评论
                 </span>
-                <span
-                    className="topic-tabs-item"
-                    onClick = {this.handleHitTopic}
-                >
-                    赞
+                    <span
+                        className="topic-tabs-item"
+                        onClick={this.handleHitTopic}
+                    >
+                        赞
                 </span>
-
-
-
+                </div>
+                {this.renderCommentInput()}
 
             </div>
+
         )
     }
 }
