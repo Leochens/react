@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
 import './TopicComment.less';
+import CommentInput from '../CommentInput/CommentInput';
 // import { Icon } from 'antd-mobile';
 let id = 7001;
 export default class TopicComment extends Component {
     static defaultProps = {
         comments: []
     }
-    handleCommentTopic = (receiverId) => {
-        const {
-            topicId,
-            topicAuthorId,
-            TopicActions: {
-                actionCommentTopic
-            }
-        } = this.props;
-        const newComment = {
-            id,
-            commentator: 2,
-            comment_content: '这是一条测试的评论',
-            to: receiverId,
-            comment_time: '8:55'
-        }
-        actionCommentTopic && actionCommentTopic(topicId, newComment);
-        id++;
+    state = {
+        commentInputIsActive: false,
+        receiver: null,
+        commentator: 2
+    }
+
+    handleShowCommentInput = () => {
+        this.setState({
+            commentInputIsActive: true
+        })
+    }
+    handleHideCommentInput = () => {
+        this.setState({
+            commentInputIsActive: false
+        }) 
+    }
+    
+    handleReplyComment = (receiver) => {
+        this.handleShowCommentInput();
+        this.setState({
+            receiver
+        })
+    }
+    renderCommentInput = () => {
+        const { 
+            commentInputIsActive, 
+            receiver 
+        } = this.state;
+        if(commentInputIsActive){
+            return <CommentInput 
+            topicId = {this.props.topicId}
+            TopicActions = { this.props.TopicActions}
+            receiver={receiver}
+            placeholder = {`回复 ${receiver.nick}:`}
+            onHideInput = { this.handleHideCommentInput }
+            />
+        }else return null;
     }
     renderComments = () => {
         const { comments } = this.props;
@@ -31,12 +52,12 @@ export default class TopicComment extends Component {
                 <div className="topic-comment-items"
                     key={id}>
                     <span className="topic-commentor"
-                        onClick={() => this.handleCommentTopic(item.commentator.id)}
+                        onClick={() => this.handleReplyComment(item.commentator)}
                     >{item.commentator.nick}</span>
                     {
                         item.to
                             ? <span> 回复 <span className="topic-commentor"
-                                onClick={() => this.handleCommentTopic(item.to.id)}
+                                onClick={() => this.handleReplyComment(item.to)}
                             >{item.to.nick}</span> </span>
                             : null
                     }
@@ -54,6 +75,7 @@ export default class TopicComment extends Component {
         return (
             <div className="topic-comments">
                 {this.renderComments()}
+                {this.renderCommentInput()}
             </div>
         )
     }

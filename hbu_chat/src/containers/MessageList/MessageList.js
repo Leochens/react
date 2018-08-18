@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './MessageList.less'
 import TopicItem from '../../components/TopicItem/TopicItem';
-
-
 class MessageList extends Component {
 
     componentDidMount() {
@@ -75,6 +73,8 @@ const mapDispatchToProps = dispatch => {
     return {
         ServerActions: bindActionCreators(Actions.ServerActions, dispatch),
         TopicActions: bindActionCreators(Actions.TopicActions, dispatch),
+        UIActions: bindActionCreators(Actions.UIActions, dispatch ),
+
     }
 }
 
