@@ -4,7 +4,10 @@ import './Tabs.less'
 
 const tabs2 = [
     { title: '树洞', sub: '1' },
-    { title: '发帖', sub: '2' },
+    { 
+        title: '发帖',
+        sub: '2'
+},
     { title: '我', sub: '3' },
 ];
 

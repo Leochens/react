@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './CommentInput.less';
-const id = new Date().getTime();    //临时时间戳id 与后台同步时调用
 export default class CommentInput extends Component {
-    state={
+    state = {
         inputValue: ''
     }
     handleInputChange = (v) => {
@@ -11,6 +10,7 @@ export default class CommentInput extends Component {
         })
     }
     handleCommentTopic = () => {
+        const id = new Date().getTime();    //临时时间戳id 与后台同步时调用
         const {
             topicId,
             TopicActions: {
@@ -37,6 +37,7 @@ export default class CommentInput extends Component {
         return (
             <div className="topic-comment-input">
                 <input
+                    autoFocus
                     placeholder={placeholder ? placeholder : "写点评论吧~"}
                     onChange={this.handleInputChange}
 
