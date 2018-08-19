@@ -16,6 +16,6 @@ db.connection = () => {
     })
     return connection;
 }
-console.log(db);
+// console.log(db);
 
 export default db;
