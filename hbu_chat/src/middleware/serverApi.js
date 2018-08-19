@@ -1,10 +1,11 @@
 import axios from 'axios';
+// import url from 'url'
 //sna
 const callServerApi = (url, param, normalizeFunc) => {
     return new Promise((resolve, reject) => {
         axios({
-            // method: "POST",
-            method:"GET",
+            method: "POST",
+            // method:"GET",
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             url: url,
             data: param
