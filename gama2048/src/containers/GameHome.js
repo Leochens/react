@@ -146,7 +146,9 @@ class GameHome extends Component {
             {isDie
               ? (
                 <div className="game-die">
-                你输了...
+                GAME OVER 你停在了第
+                  {level}
+                关
                 </div>
               )
               : null

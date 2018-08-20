@@ -69,22 +69,31 @@
     font-size: 16px;
 }
 @media screen and (max-width: 500px) {
+    .game-area{
+        width: auto!important;
+        height: auto!important;
+    }
     .header-right{
         margin: 0;
-        padding: 3px;
+        padding: 15px 15px;
         text-align: center;
+        margin-left: 0;
+        display: flex;
+        overflow: hidden;
+        justify-content: space-around;
     }
     .score{
-        width: 150px;
         margin: 0;
         margin: 0 auto;
         text-align: center;
     }
     .btn-wraper{
         position: fixed;
-        bottom: 20%;
+        bottom: 5%;
         left: 0;right: 0;
         text-align: center;
+    }
+    .restart-btn{
     }
 
 }
