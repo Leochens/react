@@ -5,5 +5,3 @@ export const INIT_SQUARE_MAP = 'INIT_SQUARE_MAP';
 export const MOVE_BY_DIRECTIONS = 'MOVE_BY_DIRECTIONS';
 
 export const CLEAR_NEW_POS = 'CLEAR_NEW_POS';
-
-

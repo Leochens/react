@@ -10,32 +10,36 @@ import './GameHome.css';
 import './animate.css';
 
 class GameHome extends Component {
-  componentDidMount() {
-    const { Actions } = this.props;
-    Actions.actionInitSquareMap();
-  }
   state = {
     startX: 0,
     startY: 0
   };
+
+  componentDidMount() {
+    const { Actions } = this.props;
+    Actions.actionInitSquareMap();
+  }
+
   renderGameArea = () => {
     console.log('changedSquares', this.props.changedSquares);
     const { squareMap, newPos, changedSquares } = this.props;
-    return squareMap.map((row, rowId) => {
-      return <div key={rowId} >
+    return squareMap.map((row, rowId) => (
+      <div key={rowId}>
         {
-          row.map((squareNum, colId) => {
-            return <Square
-              //判断是否是新的方格
-              isNew={(newPos.row === rowId && newPos.col === colId) ? true : false}
-              isChange={changedSquares.includes(tools.transformPosToNum(rowId, colId))}
-              key={colId}
-              num={squareNum} />
-          })
-        }
+        row.map((squareNum, colId) => (
+          <Square
+          // 判断是否是新的方格
+            isNew={(newPos.row === rowId && newPos.col === colId)}
+            isChange={changedSquares.includes(tools.transformPosToNum(rowId, colId))}
+            key={colId}
+            num={squareNum}
+          />
+        ))
+      }
       </div>
-    })
+    ));
   }
+
   handleKeyDown = e => {
     const {
       Actions: {
@@ -63,9 +67,10 @@ class GameHome extends Component {
     console.log('start', e.touches[0].pageX);
     this.setState({
       startX: e.touches[0].pageX,
-      startY: e.touches[0].pageY,
-    })
+      startY: e.touches[0].pageY
+    });
   }
+
   handleTouchEnd = e => {
     const {
       Actions: {
@@ -77,15 +82,19 @@ class GameHome extends Component {
     const distanceY = pageY - this.state.startY;
     if (Math.abs(distanceX) > Math.abs(distanceY)) {
       console.log(distanceX > 0 ? '右' : '左');
-      distanceX > 0
-        ? actionMoveByDirections('right')
-        : actionMoveByDirections('left');
+      if (distanceX > 0) {
+        actionMoveByDirections('right');
+      } else {
+        actionMoveByDirections('left');
+      }
     } else if (Math.abs(distanceX) < Math.abs(distanceY)) {
       console.log(distanceY > 0 ? '下' : '上');
-      distanceY > 0
-        ? actionMoveByDirections('down')
-        : actionMoveByDirections('up');
-    } else return;
+      if (distanceY > 0) {
+        actionMoveByDirections('down');
+      } else {
+        actionMoveByDirections('up');
+      }
+    }
   }
 
   bindDocumentActions = () => {
@@ -93,54 +102,50 @@ class GameHome extends Component {
     document.ontouchstart = this.handleTouchStart;
     document.ontouchend = this.handleTouchEnd;
   }
-  render() {
 
+  render() {
     const {
       currentScore,
       increaseNum,
       Actions: {
-        actionInitSquareMap,
+        actionInitSquareMap
       }
     } = this.props;
 
     this.bindDocumentActions();
     return (
       <div>
-        <div className="game-wraper" >
+        <div className="game-wraper">
           <div className="game-main">
-          <Header 
-            currentScore = {currentScore}
-            increaseNum = {increaseNum}
-            restartAction = { actionInitSquareMap }
-          />
-  
+            <Header
+              currentScore={currentScore}
+              increaseNum={increaseNum}
+              restartAction={actionInitSquareMap}
+            />
             <div className="game-area">
-            <Power 
-            currentScore = {currentScore}
-            increaseNum = {increaseNum}          
-          />
+              <Power
+                currentScore={currentScore}
+                increaseNum={increaseNum}
+              />
               {this.renderGameArea()}
             </div>
           </div>
-
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentScore: state.Game.currentScore,
-    squareMap: state.Game.squareMap,
-    increaseNum: state.Game.increaseNum,
-    newPos: state.Game.newPos,
-    changedSquares: state.Game.changedSquares
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    Actions: bindActionCreators(ActionCreators, dispatch)
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(GameHome)
+const mapStateToProps = state => ({
+  currentScore: state.Game.currentScore,
+  squareMap: state.Game.squareMap,
+  increaseNum: state.Game.increaseNum,
+  newPos: state.Game.newPos,
+  changedSquares: state.Game.changedSquares
+});
+
+const mapDispatchToProps = dispatch => ({
+  Actions: bindActionCreators(ActionCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameHome);

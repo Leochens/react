@@ -9,7 +9,7 @@ const mapIsFull = ({ col, row }) => {
     return 1;
   }
   return 0;
-}
+};
 
 const Game = (state = {
   squareMap: tools.clearSquare(),
@@ -21,7 +21,6 @@ const Game = (state = {
     col: -1
   }
 }, action) => {
-
   switch (action.type) {
     case ActionTypes.INIT_SQUARE_MAP: {
       // 取得随机数
@@ -40,7 +39,7 @@ const Game = (state = {
           row: -1,
           col: -1
         }
-      }
+      };
     }
     case ActionTypes.MOVE_BY_DIRECTIONS: {
       const { key } = action;
@@ -48,22 +47,21 @@ const Game = (state = {
       const newPos = {
         row: -1,
         col: -1
-      }
+      };
       const {
         newMap,
         increaseNum,
         willGenerateNew,
         changedSquares
-      } = tools.moveByDirections(key, oldMap)
+      } = tools.moveByDirections(key, oldMap);
 
       const { row, col } = tools.getNextPos(newMap);
       if (mapIsFull({ row, col })) {
         if (tools.judgeDie(newMap)) {
           alert('你输了');
           return state;
-        } else {
-          return state;
         }
+        return state;
       }
       if (willGenerateNew) {
         newMap[row][col] = tools.getRandomNumber();
@@ -82,7 +80,7 @@ const Game = (state = {
           row,
           col
         }
-      }
+      };
     }
     case ActionTypes.CLEAR_NEW_POS: {
       return {
@@ -91,11 +89,11 @@ const Game = (state = {
           row: -1,
           col: -1
         }
-      }
+      };
     }
     default: return state;
   }
-}
+};
 export default combineReducers({
   Game
 });

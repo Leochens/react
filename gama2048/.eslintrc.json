@@ -21,6 +21,10 @@
             "error",
             "as-needed"
         ],
+        "arrow-body-style": [
+            "off",
+            "never"
+        ],
         "import/no-extraneous-dependencies": [
             "off",
             "never"
