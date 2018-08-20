@@ -1,13 +1,23 @@
 import transformPosToNum from './transformPosToNum';
 
+// TODO 把四个函数写成一个
+const move = (oldMap, direct) => {
+  const newMap = [...oldMap];
+  let willGenerateNew = 0;
+  let increaseNum = 0;
+  const changedSquares = [];
+
+}
+
+
 const moveLeft = oldMap => {
   const newMap = [...oldMap];
   let willGenerateNew = 0;
   let increaseNum = 0;
   const changedSquares = [];
   for (let r = 0; r < 4; r++) {
-    const arr = newMap[r];
-    const len = arr.length;
+    // const arr = newMap[r];
+    const len = newMap[r].length;
     let i,
       nextNoZeroPos,
       m;
@@ -16,7 +26,7 @@ const moveLeft = oldMap => {
       // 找到 不为零的元素 nextNoZeroPos
       nextNoZeroPos = -1;
       for (m = i + 1; m < len; m++) {
-        if (arr[m] !== 0) {
+        if (newMap[r][m] !== 0) {
           nextNoZeroPos = m;
           break;
         }
@@ -24,15 +34,15 @@ const moveLeft = oldMap => {
       if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
         // 只要有以下两个操作都证明是地图已经发生了改变 那么就要生长新的方块 willGenerateNew = 1
-        if (arr[i] === 0) {
-          arr[i] = arr[nextNoZeroPos];
-          arr[nextNoZeroPos] = 0;
+        if (newMap[r][i] === 0) {
+          newMap[r][i] = newMap[r][nextNoZeroPos];
+          newMap[r][nextNoZeroPos] = 0;
           i -= 1;
           willGenerateNew = 1;
-        } else if (arr[i] === arr[nextNoZeroPos]) {
-          arr[i] *= 2;
-          increaseNum += arr[i];
-          arr[nextNoZeroPos] = 0;
+        } else if (newMap[r][i] === newMap[r][nextNoZeroPos]) {
+          newMap[r][i] *= 2;
+          increaseNum += newMap[r][i];
+          newMap[r][nextNoZeroPos] = 0;
           willGenerateNew = 1;
           changedSquares.push(transformPosToNum(r, i));
         }
@@ -102,28 +112,28 @@ const moveRight = oldMap => {
     let i,
       nextNoZeroPos,
       m;
-    const arr = newMap[r];
-    const len = arr.length;
+    // const arr = newMap[r];
+    const len = newMap[r].length;
     for (i = len - 1; i > 0; i--) {
       // 找到 不为零的元素 nextNoZeroPos
       nextNoZeroPos = -1;
       for (m = i - 1; m >= 0; m--) {
-        if (arr[m] !== 0) {
+        if (newMap[r][m] !== 0) {
           nextNoZeroPos = m;
           break;
         }
       }
       if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
-        if (arr[i] === 0) {
-          arr[i] = arr[nextNoZeroPos];
-          arr[nextNoZeroPos] = 0;
+        if (newMap[r][i] === 0) {
+          newMap[r][i] = newMap[r][nextNoZeroPos];
+          newMap[r][nextNoZeroPos] = 0;
           i += 1;
           willGenerateNew = 1;
-        } else if (arr[i] === arr[nextNoZeroPos]) {
-          arr[i] *= 2;
-          increaseNum += arr[i];
-          arr[nextNoZeroPos] = 0;
+        } else if (newMap[r][i] === newMap[r][nextNoZeroPos]) {
+          newMap[r][i] *= 2;
+          increaseNum += newMap[r][i];
+          newMap[r][nextNoZeroPos] = 0;
           changedSquares.push(transformPosToNum(r, i));
           willGenerateNew = 1;
         }
