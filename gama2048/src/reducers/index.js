@@ -87,7 +87,8 @@ const Game = (state = {
         newPos: {
           row,
           col
-        }
+        },
+        isDie: false
       };
     }
     case ActionTypes.CLEAR_NEW_POS: {
@@ -96,7 +97,8 @@ const Game = (state = {
         newPos: {
           row: -1,
           col: -1
-        }
+        },
+        isDie: false
       };
     }
 
@@ -110,7 +112,8 @@ const Game = (state = {
 
       return {
         ...state,
-        squareMap: newMap
+        squareMap: newMap,
+        isDie: false
       };
     }
 

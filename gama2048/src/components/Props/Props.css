@@ -28,3 +28,11 @@
     color: #fff;
     background-color: red;
 }
+@media screen and (max-width: 500px) {
+    .Props{
+        left: 50%;
+        top: 280px;
+        margin-left: -44px;
+    }
+
+}

@@ -54,6 +54,7 @@ export default class Header extends Component {
           <div className="readme-wrap">
             <div className="readme">移动端操作：滑动</div>
             <div className="readme">PC端操作：W A S D 或者 ↑ ↓ ← →</div>
+            <div className="readme">道具:炸弹，可以随机炸掉0~3个方块,双刃剑哦~</div>
           </div>
         </div>
       </div>

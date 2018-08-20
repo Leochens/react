@@ -25,7 +25,7 @@ const getNextPos = currentMap => {
     };
   }
   const rand = ~~(Math.random() * res.length);
-  console.log(rand);
+  // console.log(rand);
   const { rowId: row, colId: col } = res[rand];
   return {
     row,

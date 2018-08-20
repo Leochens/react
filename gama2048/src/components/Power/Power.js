@@ -14,7 +14,9 @@ export default class Power extends Component {
         case 6: return 7000;
         case 7: return 10000;
         case 8: return 20000;
-        default: return 500;
+        case 9: return 30000;
+        case 10: return 50000;
+        default: return 99999;
       }
     }
 
@@ -32,7 +34,7 @@ export default class Power extends Component {
 
       if (currentScore >= winScore) {
         // 奖励措施
-        // alert(`你闯过了第${winScoreLevel}关`);
+        alert(`你闯过了第${winScoreLevel}关`);
         actionIncreaseLevel && actionIncreaseLevel();
       }
       return (
@@ -41,7 +43,7 @@ export default class Power extends Component {
           <div
             style={{
               // backgroundColor: increaseNum > 16 ? '#FFD700' : null,
-              height: ((currentScore / winScore) * 430)// 430是红条的高度
+              height: `${(currentScore / winScore) * 100}%`// 红条的高度
             }}
             className="power-content"
           />

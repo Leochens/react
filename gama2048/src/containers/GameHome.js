@@ -22,7 +22,7 @@ class GameHome extends Component {
   }
 
   renderGameArea = () => {
-    console.log('changedSquares', this.props.changedSquares);
+    // console.log('changedSquares', this.props.changedSquares);
     const {
       squareMap,
       newPos,
@@ -69,7 +69,7 @@ class GameHome extends Component {
   }
 
   handleTouchStart = e => {
-    console.log('start', e.touches[0].pageX);
+    // console.log('start', e.touches[0].pageX);
     this.setState({
       startX: e.touches[0].pageX,
       startY: e.touches[0].pageY
@@ -86,14 +86,14 @@ class GameHome extends Component {
     const distanceX = pageX - this.state.startX;
     const distanceY = pageY - this.state.startY;
     if (Math.abs(distanceX) > Math.abs(distanceY)) {
-      console.log(distanceX > 0 ? '右' : '左');
+      // console.log(distanceX > 0 ? '右' : '左');
       if (distanceX > 0) {
         actionMoveByDirections('right');
       } else {
         actionMoveByDirections('left');
       }
     } else if (Math.abs(distanceX) < Math.abs(distanceY)) {
-      console.log(distanceY > 0 ? '下' : '上');
+      // console.log(distanceY > 0 ? '下' : '上');
       if (distanceY > 0) {
         actionMoveByDirections('down');
       } else {
@@ -153,9 +153,14 @@ class GameHome extends Component {
             {isDie
               ? (
                 <div className="game-die">
-                GAME OVER 你停在了第
+                  GAME OVER 你停在了第
                   {level}
-                关
+                  关
+                  {
+                    bombCount > 0
+                      ? '你还可以使用炸弹'
+                      : '你真的输了，重新来吧'
+                  }
                 </div>
               )
               : null

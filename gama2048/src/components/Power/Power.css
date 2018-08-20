@@ -34,3 +34,11 @@
     top: -25px;
     left: -7px;
 }
+
+@media screen and (max-width: 500px) {
+    .power-wrap{
+        right: -10px;
+        bottom: 0;
+    }
+
+}
