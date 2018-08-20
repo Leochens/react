@@ -22,10 +22,6 @@ const getColor = num => {
 };
 
 export default class Square extends Component {
-  componentWillReceiveProps() {
-    this.forceUpdate();
-  }
-
   getSquareClass = () => {
     const { isChange, num, isNew } = this.props;
     if (!isNew && isChange && [128, 256, 512, 1024, 2048].includes(num)) {
@@ -53,7 +49,7 @@ export default class Square extends Component {
           className={this.getSquareClass()}
         >
           {
-              num === 0 ? <span>&nbsp;</span> : num
+            num === 0 ? <span>&nbsp;</span> : num
           }
         </span>
       </div>
