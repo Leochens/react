@@ -1,6 +1,6 @@
 const judgeDie = gameMap => {
   const len = gameMap.length;
-  // 横向
+  // 除四个角落外 要检查其余各个方块是否和邻近的方块num相等
   let isDie = 1;
   for (let r = 0; r < len; r++) {
     for (let c = 0; c < len; c++) {
@@ -11,6 +11,8 @@ const judgeDie = gameMap => {
       || (r === len - 1 && c === len - 1)
       ) break;
       const cur = gameMap[r][c];
+
+      // 第一行
       if (r === 0) {
         const left = gameMap[r][c - 1];
         const right = gameMap[r][c + 1];
@@ -20,6 +22,7 @@ const judgeDie = gameMap => {
           isDie = 0;
           break;
         }
+      // 最后一行
       } else if (r === len - 1) {
         const left = gameMap[r][c - 1];
         const right = gameMap[r][c + 1];
@@ -28,6 +31,7 @@ const judgeDie = gameMap => {
           isDie = 0;
           break;
         }
+      // 第一列
       } else if (c === 0) {
         const right = gameMap[r][c + 1];
         const up = gameMap[r - 1][c];
@@ -36,6 +40,7 @@ const judgeDie = gameMap => {
           isDie = 0;
           break;
         }
+      // 最后一列
       } else if (c === len - 1) {
         const left = gameMap[r][c - 1];
         const up = gameMap[r - 1][c];

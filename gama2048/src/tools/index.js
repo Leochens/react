@@ -13,6 +13,7 @@ const clearSquare = () => [
   [0, 0, 0, 0]
 ];
 
+// 工具类
 const tools = {
   judgeDie,
   getNextPos,

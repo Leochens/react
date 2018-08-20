@@ -1,17 +1,4 @@
-.row{
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
 
-    height: 100%;
-    width: 100%;
-}
-.game-area{
-    position: relative;
-    height: 505px;
-    width: 505px;
-    /* background-color: #806C00; */
-}
 .game-wraper{
     position: fixed;
     top: 0;
@@ -22,19 +9,7 @@
     display: flex;
     justify-content: center;
 }
-.game-main{
-    border-radius: 16px;
-    /* overflow: hidden; */
-}
-.game-die{
-    text-align: center;
-    font-size: 50px;
-    font-weight: 800;
-    position: fixed;
-    top: 50%;
-    left: 0;
-    right: 0;
-}
+
 
 @media screen and (max-width: 500px) {
     .game-wraper {
@@ -44,7 +19,4 @@
         width: 300px;
 
     }
-    .game-die{
-        font-size: 25px;
-    }    
 }

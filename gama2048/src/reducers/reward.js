@@ -1,6 +1,5 @@
 import * as ActionTypes from '../const/ActionTypes';
 
-
 const reward = (state = {
   level: 1,
   bombCount: 0

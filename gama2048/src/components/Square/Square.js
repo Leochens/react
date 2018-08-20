@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Square.css';
-import './animate.css';
 
 const getColor = num => {
   let squareColor = '';
@@ -37,7 +36,6 @@ export default class Square extends Component {
   }
 
   render() {
-    // console.log('强制渲染');
     const { num } = this.props;
     const squareStyle = {
       backgroundColor: getColor(num)

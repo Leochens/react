@@ -34,13 +34,15 @@ const GameHome = props => (
 );
 
 const mapStateToProps = state => ({
-  currentScore: state.Game.currentScore,
-  squareMap: state.Game.squareMap,
-  increaseNum: state.Game.increaseNum,
-  newPos: state.Game.newPos,
-  changedSquares: state.Game.changedSquares,
-  maxScore: state.Game.maxScore,
-  isDie: state.Game.isDie,
+  // 游戏属性
+  currentScore: state.game.currentScore,
+  squareMap: state.game.squareMap,
+  increaseNum: state.game.increaseNum,
+  newPos: state.game.newPos,
+  changedSquares: state.game.changedSquares,
+  maxScore: state.game.maxScore,
+  isDie: state.game.isDie,
+  // 奖励属性
   level: state.reward.level,
   bombCount: state.reward.bombCount
 
