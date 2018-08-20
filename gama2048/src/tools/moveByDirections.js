@@ -25,7 +25,7 @@ const moveLeft = oldMap => {
     for (i = 0; i < len; i += 1) {
       // 找到 不为零的元素 nextNoZeroPos
       nextNoZeroPos = -1;
-      for (m = i + 1; m < len; m++) {
+      for (m = i + 1; m < len; m++) { 
         if (newMap[r][m] !== 0) {
           nextNoZeroPos = m;
           break;
