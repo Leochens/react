@@ -10,19 +10,24 @@
     margin-right: 25px;
     height: 106px;
 }
-
+.game-level{
+    font-size: 25px;
+    font-weight: 700;
+}
 .header-right{
     display: inline-block;
-    margin-left: 135px;
+    margin-left: 115px;;
+    font-size: 25px;
 }
 .score{
-    width: 150px;
+    width: 75px;
     height: 50px;
+    margin: 0 5px;
     float: right;
     background-color: #F08080;
-    border-radius: 15px;
+    border-radius: 8px;
     text-align: center;
-    font-size: 33px;
+    font-size: 15px;
     font-weight: 600;
     position: relative;
     /* animation: scorechage .3s ease-in; */

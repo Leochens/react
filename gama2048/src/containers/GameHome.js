@@ -23,19 +23,20 @@ class GameHome extends Component {
   renderGameArea = () => {
     console.log('changedSquares', this.props.changedSquares);
     const { squareMap, newPos, changedSquares } = this.props;
+
     return squareMap.map((row, rowId) => (
       <div key={rowId}>
         {
-        row.map((squareNum, colId) => (
-          <Square
-          // 判断是否是新的方格
-            isNew={(newPos.row === rowId && newPos.col === colId)}
-            isChange={changedSquares.includes(tools.transformPosToNum(rowId, colId))}
-            key={colId}
-            num={squareNum}
-          />
-        ))
-      }
+          row.map((squareNum, colId) => (
+            <Square
+              // 判断是否是新的方格
+              isNew={(newPos.row === rowId && newPos.col === colId)}
+              isChange={changedSquares.includes(tools.transformPosToNum(rowId, colId))}
+              key={colId}
+              num={squareNum}
+            />
+          ))
+        }
       </div>
     ));
   }
@@ -107,9 +108,13 @@ class GameHome extends Component {
     const {
       currentScore,
       increaseNum,
+      maxScore,
       Actions: {
-        actionInitSquareMap
-      }
+        actionInitSquareMap,
+        actionIncreaseLevel,
+        actionResetLevel
+      },
+      level
     } = this.props;
 
     this.bindDocumentActions();
@@ -121,11 +126,16 @@ class GameHome extends Component {
               currentScore={currentScore}
               increaseNum={increaseNum}
               restartAction={actionInitSquareMap}
+              maxScore={maxScore}
+              level={level}
             />
             <div className="game-area">
               <Power
                 currentScore={currentScore}
                 increaseNum={increaseNum}
+                level={level}
+                actionIncreaseLevel={actionIncreaseLevel}
+                actionResetLevel={actionResetLevel}
               />
               {this.renderGameArea()}
             </div>
@@ -141,7 +151,9 @@ const mapStateToProps = state => ({
   squareMap: state.Game.squareMap,
   increaseNum: state.Game.increaseNum,
   newPos: state.Game.newPos,
-  changedSquares: state.Game.changedSquares
+  changedSquares: state.Game.changedSquares,
+  maxScore: state.Game.maxScore,
+  level: state.reward.level
 });
 
 const mapDispatchToProps = dispatch => ({

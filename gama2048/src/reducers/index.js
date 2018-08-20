@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from '../const/ActionTypes';
 import tools from '../tools';
+import reward from './reward';
 
 
 // 判满
@@ -16,6 +17,7 @@ const Game = (state = {
   currentScore: 0,
   increaseNum: 0,
   changedSquares: [],
+  maxScore: 0,
   newPos: {
     row: -1,
     col: -1
@@ -59,7 +61,12 @@ const Game = (state = {
       if (mapIsFull({ row, col })) {
         if (tools.judgeDie(newMap)) {
           alert('你输了');
-          return state;
+          return {
+            ...state,
+            maxScore: state.maxScore < state.currentScore
+              ? state.currentScore
+              : state.maxScore
+          };
         }
         return state;
       }
@@ -95,5 +102,6 @@ const Game = (state = {
   }
 };
 export default combineReducers({
-  Game
+  Game,
+  reward
 });

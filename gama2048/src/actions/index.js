@@ -17,3 +17,16 @@ export const actionClearNewPos = () => {
     type: ActionTypes.CLEAR_NEW_POS
   };
 };
+
+
+export const actionIncreaseLevel = () => {
+  return {
+    type: ActionTypes.INCREASE_LEVEL
+  };
+};
+
+export const actionResetLevel = () => {
+  return {
+    type: ActionTypes.RESET_LEVEL
+  };
+};

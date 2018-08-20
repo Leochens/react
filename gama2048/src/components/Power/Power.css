@@ -1,6 +1,6 @@
 .power-wrap{
     /* height: 300px; */
-    width: 25px;
+    width: 8px;
     background-color: #FFA07A;
     /* float: right; */
     position: absolute;
@@ -8,24 +8,29 @@
     top: 10px;
     bottom: 66px;
     border-radius: 15px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
-.power-wrap::after{
+/* .power-wrap::after{
     content: '';
     display: block;
-    width: 25px;
-    height: 25px;
+    width: 8px;
+    height: 8px;
     background-color: #FF4500;
     border-radius: 15px;
     position: absolute;
-    bottom: 0;
-}
+    bottom: -10px;
+} */
 .power-content{
     background-color: #FF4500;
     position: absolute;
     border-radius: 15px;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
     right: 0;
     transition: height .3s ease-in,background-color, .3s ease-in;
+}
+.maxScore{
+    position: absolute;
+    top: -25px;
+    left: -7px;
 }
