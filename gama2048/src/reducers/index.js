@@ -11,13 +11,13 @@ const mapIsFull = ({ col, row }) => {
   }
   return 0;
 };
-
 const Game = (state = {
   squareMap: tools.clearSquare(),
   currentScore: 0,
   increaseNum: 0,
   changedSquares: [],
   maxScore: 0,
+  isDie: false,
   newPos: {
     row: -1,
     col: -1
@@ -37,6 +37,7 @@ const Game = (state = {
         squareMap: newMap,
         currentScore: 0,
         increaseNum: 0,
+        isDie: false,
         newPos: {
           row: -1,
           col: -1
@@ -60,12 +61,12 @@ const Game = (state = {
       const { row, col } = tools.getNextPos(newMap);
       if (mapIsFull({ row, col })) {
         if (tools.judgeDie(newMap)) {
-          alert('你输了');
           return {
             ...state,
             maxScore: state.maxScore < state.currentScore
               ? state.currentScore
-              : state.maxScore
+              : state.maxScore,
+            isDie: true
           };
         }
         return state;

@@ -22,8 +22,11 @@ class GameHome extends Component {
 
   renderGameArea = () => {
     console.log('changedSquares', this.props.changedSquares);
-    const { squareMap, newPos, changedSquares } = this.props;
-
+    const {
+      squareMap,
+      newPos,
+      changedSquares
+    } = this.props;
     return squareMap.map((row, rowId) => (
       <div key={rowId}>
         {
@@ -114,7 +117,8 @@ class GameHome extends Component {
         actionIncreaseLevel,
         actionResetLevel
       },
-      level
+      level,
+      isDie
     } = this.props;
 
     this.bindDocumentActions();
@@ -139,6 +143,14 @@ class GameHome extends Component {
               />
               {this.renderGameArea()}
             </div>
+            {isDie
+              ? (
+                <div className="game-die">
+                你输了...
+                </div>
+              )
+              : null
+            }
           </div>
         </div>
       </div>
@@ -153,6 +165,7 @@ const mapStateToProps = state => ({
   newPos: state.Game.newPos,
   changedSquares: state.Game.changedSquares,
   maxScore: state.Game.maxScore,
+  isDie: state.Game.isDie,
   level: state.reward.level
 });
 

@@ -26,7 +26,15 @@
     border-radius: 16px;
     /* overflow: hidden; */
 }
-
+.game-die{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 800;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+}
 
 @media screen and (max-width: 500px) {
     .game-wraper {
