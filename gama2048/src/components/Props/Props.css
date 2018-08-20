@@ -15,4 +15,16 @@
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
+    position: relative;
+}
+.bomb-cnt{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    bottom: 3px;
+    right: 3px;
+    line-height: 15px;
+    color: #fff;
+    background-color: red;
 }
