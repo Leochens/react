@@ -23,6 +23,7 @@ const moveLeft = oldMap => {
       }
       if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
+        // 只要有以下两个操作都证明是地图已经发生了改变 那么就要生长新的方块 willGenerateNew = 1
         if (arr[i] === 0) {
           arr[i] = arr[nextNoZeroPos];
           arr[nextNoZeroPos] = 0;
@@ -38,7 +39,6 @@ const moveLeft = oldMap => {
       }
     }
   }
-  console.log('left');
   return {
     newMap,
     increaseNum,
@@ -84,7 +84,6 @@ const moveUp = oldMap => {
     }
   }
 
-  console.log('up');
   return {
     newMap,
     increaseNum,
@@ -132,7 +131,6 @@ const moveRight = oldMap => {
     }
   }
 
-  console.log('right');
 
   return {
     newMap,
@@ -178,7 +176,6 @@ const moveDowm = oldMap => {
       }
     }
   }
-  console.log('dowm');
 
   return {
     newMap,

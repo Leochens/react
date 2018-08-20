@@ -6,9 +6,9 @@ import tools from '../tools';
 import Header from '../components/Header/Header';
 import Square from '../components/Square/Square';
 import Power from '../components/Power/Power';
+import Props from '../components/Props/Props';
 import './GameHome.css';
 import './animate.css';
-import Props from '../components/Props/Props';
 
 class GameHome extends Component {
   state = {
@@ -22,7 +22,6 @@ class GameHome extends Component {
   }
 
   renderGameArea = () => {
-    // console.log('changedSquares', this.props.changedSquares);
     const {
       squareMap,
       newPos,
@@ -45,6 +44,7 @@ class GameHome extends Component {
     ));
   }
 
+  // 键盘事件 w a s d 和 方向键上下左右
   handleKeyDown = e => {
     const {
       Actions: {
@@ -68,32 +68,33 @@ class GameHome extends Component {
     }
   }
 
+  // 触屏事件
   handleTouchStart = e => {
-    // console.log('start', e.touches[0].pageX);
     this.setState({
       startX: e.touches[0].pageX,
       startY: e.touches[0].pageY
     });
   }
 
+  // 触屏事件
   handleTouchEnd = e => {
     const {
       Actions: {
         actionMoveByDirections
       }
     } = this.props;
+
     const { pageX, pageY } = e.changedTouches[0];
     const distanceX = pageX - this.state.startX;
     const distanceY = pageY - this.state.startY;
+
     if (Math.abs(distanceX) > Math.abs(distanceY)) {
-      // console.log(distanceX > 0 ? '右' : '左');
       if (distanceX > 0) {
         actionMoveByDirections('right');
       } else {
         actionMoveByDirections('left');
       }
     } else if (Math.abs(distanceX) < Math.abs(distanceY)) {
-      // console.log(distanceY > 0 ? '下' : '上');
       if (distanceY > 0) {
         actionMoveByDirections('down');
       } else {
@@ -102,6 +103,7 @@ class GameHome extends Component {
     }
   }
 
+  // 绑定文档事件 页面一加载就能响应键盘事件和触摸事件
   bindDocumentActions = () => {
     document.onkeydown = this.handleKeyDown;
     document.ontouchstart = this.handleTouchStart;
@@ -125,6 +127,7 @@ class GameHome extends Component {
     } = this.props;
 
     this.bindDocumentActions();
+
     return (
       <div>
         <div className="game-wraper">
@@ -173,6 +176,7 @@ class GameHome extends Component {
 }
 
 const mapStateToProps = state => ({
+
   currentScore: state.Game.currentScore,
   squareMap: state.Game.squareMap,
   increaseNum: state.Game.increaseNum,
@@ -182,6 +186,7 @@ const mapStateToProps = state => ({
   isDie: state.Game.isDie,
   level: state.reward.level,
   bombCount: state.reward.bombCount
+
 });
 
 const mapDispatchToProps = dispatch => ({

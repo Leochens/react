@@ -6,7 +6,6 @@ import configureStore from './store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
 import AppRoutes from './routes';
-// console.log(document.onkeyup);
 
 const store = configureStore();
 render(

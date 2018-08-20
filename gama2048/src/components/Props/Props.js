@@ -20,7 +20,13 @@ export default class Props extends Component {
       bombCount
     } = this.props;
     if (bombCount === 0) {
-      return null;
+      return (
+        <div className="Props animated flipInX">
+          <div className="props-box">
+          暂无道具
+          </div>
+        </div>
+      );
     }
     return (
       <div className="Props animated flipInX">

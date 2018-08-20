@@ -12,12 +12,6 @@ export const actionMoveByDirections = key => {
     key
   };
 };
-export const actionClearNewPos = () => {
-  return {
-    type: ActionTypes.CLEAR_NEW_POS
-  };
-};
-
 
 export const actionIncreaseLevel = () => {
   return {
