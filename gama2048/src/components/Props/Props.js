@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Props.css';
-import './animate.css';
 
 export default class Props extends Component {
   state = {};
