@@ -99,6 +99,21 @@ const Game = (state = {
         }
       };
     }
+
+    // 随机销毁0~3个方块
+    case ActionTypes.DESTROY_SQUARE: {
+      const newMap = state.squareMap.slice();
+      [1, 2, 3].forEach(() => {
+        const { row, col } = tools.getNextPos();
+        newMap[row][col] = 0;
+      });
+
+      return {
+        ...state,
+        squareMap: newMap
+      };
+    }
+
     default: return state;
   }
 };

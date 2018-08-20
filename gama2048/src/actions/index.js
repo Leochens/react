@@ -30,3 +30,9 @@ export const actionResetLevel = () => {
     type: ActionTypes.RESET_LEVEL
   };
 };
+
+export const actionDestroySquare = () => {
+  return {
+    type: ActionTypes.DESTROY_SQUARE
+  };
+};

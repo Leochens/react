@@ -8,6 +8,7 @@ import Square from '../components/Square/Square';
 import Power from '../components/Power/Power';
 import './GameHome.css';
 import './animate.css';
+import Props from '../components/Props/Props';
 
 class GameHome extends Component {
   state = {
@@ -115,8 +116,10 @@ class GameHome extends Component {
       Actions: {
         actionInitSquareMap,
         actionIncreaseLevel,
-        actionResetLevel
+        actionResetLevel,
+        actionDestroySquare
       },
+      bombCount,
       level,
       isDie
     } = this.props;
@@ -134,6 +137,10 @@ class GameHome extends Component {
               level={level}
             />
             <div className="game-area">
+              <Props
+                bombCount={bombCount}
+                actionDestroySquare={actionDestroySquare}
+              />
               <Power
                 currentScore={currentScore}
                 increaseNum={increaseNum}
@@ -168,7 +175,8 @@ const mapStateToProps = state => ({
   changedSquares: state.Game.changedSquares,
   maxScore: state.Game.maxScore,
   isDie: state.Game.isDie,
-  level: state.reward.level
+  level: state.reward.level,
+  bombCount: state.reward.bombCount
 });
 
 const mapDispatchToProps = dispatch => ({
