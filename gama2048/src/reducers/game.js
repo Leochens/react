@@ -30,11 +30,13 @@ const game = (state = {
     case ActionTypes.MOVE_BY_DIRECTIONS: { // 根据方向来执行不同的操作
       const { key } = action;
       const oldMap = state.squareMap.slice();
+
       const moveResult = tools.moveByDirections(key, oldMap);// 从移动方块函数中可以得到移动后的地图，增加的分数位置发生改变的方块，以及是否需要生出新方块的标志
       const {
         newMap, increaseNum, willGenerateNew, changedSquares
       } = moveResult;
       const { row, col } = tools.getNextPos(newMap);// 获得新方块的坐标
+
       if (tools.mapIsFull({ row, col })) { // 判断地图是否已满 满了之后还有没有继续融合方块的条件 从而判断是否死亡
         if (tools.judgeDie(newMap)) { // 如果确实game over 那么要和当前的历史最高分做比较 取高者替代
           return {
@@ -47,9 +49,11 @@ const game = (state = {
         }
         return state;
       }
+
       if (willGenerateNew) { // 如果允许生长新的方块 那么就在新地图响应位置生出
         newMap[row][col] = tools.getRandomNumber();
       }
+
       return {
         ...state,
         squareMap: newMap,

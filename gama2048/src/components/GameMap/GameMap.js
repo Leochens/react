@@ -123,11 +123,11 @@ export default class GameMap extends Component {
         onTouchStart={this.handleTouchStart}
         onTouchEnd={this.handleTouchEnd}
       >
-        <Props
+        <Props // 道具
           bombCount={bombCount}
           actionDestroySquare={actionDestroySquare}
         />
-        <Power
+        <Power // 能量条
           currentScore={currentScore}
           increaseNum={increaseNum}
           level={level}
