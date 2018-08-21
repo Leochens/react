@@ -61,7 +61,6 @@ export default class GameMap extends Component {
     const { pageX, pageY } = e.changedTouches[0];
     const distanceX = pageX - this.state.startX;
     const distanceY = pageY - this.state.startY;
-
     if (Math.abs(distanceX) > Math.abs(distanceY)) {
       if (distanceX > 0) {
         actionMoveByDirections('right');

@@ -12,7 +12,12 @@ const clearSquare = () => [
   [0, 0, 0, 0],
   [0, 0, 0, 0]
 ];
-
+const mapIsFull = ({ col, row }) => {
+  if (col === -1 && row === -1) {
+    return 1;
+  }
+  return 0;
+};
 // 工具类
 const tools = {
   judgeDie,
@@ -20,7 +25,8 @@ const tools = {
   moveByDirections,
   getRandomNumber,
   clearSquare,
-  transformPosToNum
+  transformPosToNum,
+  mapIsFull
 };
 
 export default tools;
