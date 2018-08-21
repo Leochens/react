@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import './Navigator.less';
-
-export default class Navigator extends Component {
+import './Modal.less';
+export default class Modal extends Component {
   state = {};
 
   render() {
     return (
       <div>
-        hello world
+        Modal
       </div>
     );
   }
 }
-
-

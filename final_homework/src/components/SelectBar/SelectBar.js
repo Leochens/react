@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import './Navigator.less';
-
-export default class Navigator extends Component {
+import './SelectBar.less';
+export default class SelectBar extends Component {
   state = {};
 
   render() {
     return (
       <div>
-        hello world
+        SelectBar
       </div>
     );
   }
 }
-
-

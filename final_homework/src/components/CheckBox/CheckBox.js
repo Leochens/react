@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import './Navigator.less';
-
-export default class Navigator extends Component {
+import './CheckBox.less';
+export default class CheckBox extends Component {
   state = {};
 
   render() {
     return (
       <div>
-        hello world
+        CheckBox
       </div>
     );
   }
 }
-
-

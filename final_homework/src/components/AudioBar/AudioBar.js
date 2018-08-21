@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import './Navigator.less';
-
-export default class Navigator extends Component {
+import './AudioBar.less';
+export default class AudioBar extends Component {
   state = {};
 
   render() {
     return (
       <div>
-        hello world
+      AudioBar
       </div>
     );
   }
 }
-
-

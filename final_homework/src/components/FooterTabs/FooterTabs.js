@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import './Navigator.less';
-
-export default class Navigator extends Component {
+import './FooterTabs.less';
+export default class FooterTabs extends Component {
   state = {};
 
   render() {
     return (
       <div>
-        hello world
+        FooterTabs
       </div>
     );
   }
 }
-
-

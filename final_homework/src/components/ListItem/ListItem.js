@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import './Navigator.less';
-
-export default class Navigator extends Component {
+import './ListItem.less';
+export default class ListItem extends Component {
   state = {};
 
   render() {
     return (
       <div>
-        hello world
+        ListItem
       </div>
     );
   }
 }
-
-
