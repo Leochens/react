@@ -10,7 +10,7 @@ const DieMessage = props => (
           {props.level}
           关
           {
-          props.havaBomb
+          props.haveBomb
             ? '你还可以使用炸弹'
             : '你真的输了，重新来吧'
         }

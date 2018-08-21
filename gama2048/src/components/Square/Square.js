@@ -19,32 +19,48 @@ const getColor = num => {
   }
   return squareColor;
 };
-
+let triggerSameNumAndSamePos = 0;
+let triggerSameNumAndIsNew = 0;
 export default class Square extends Component {
-  getSquareClass = () => {
-    const { isChange, num, isNew } = this.props;
-    if (!isNew && isChange && [128, 256, 512, 1024, 2048].includes(num)) {
-      return 'animated zoomIn square ';
-    }
-    if (isNew) {
-      return 'animated jackInTheBox square';
-    }
-    if (isChange) {
-      return 'animated jello square';
-    }
-    return 'square';
+  state = {
+    animationClass: 'square'
   }
+
+  // 使用标志位触发器来保持连续动画
+  componentWillReceiveProps(nextProps) {
+    let animationClass = 'square';
+    if (nextProps.isChange) {
+      if (nextProps.num === this.props.num) {
+        animationClass = triggerSameNumAndSamePos ? 'square animated jello3 ' : 'square animated jello4';
+      } else {
+        animationClass = triggerSameNumAndSamePos ? 'square animated jello ' : 'square animated jello2';
+      }
+      triggerSameNumAndSamePos = !triggerSameNumAndSamePos;
+    } else if (nextProps.isNew) {
+      if (nextProps.num === this.props.num) {
+        animationClass = triggerSameNumAndIsNew ? 'square animated jackInTheBox3 ' : 'square animated jackInTheBox4';
+      } else {
+        animationClass = triggerSameNumAndIsNew ? 'square animated jackInTheBox ' : 'square animated jackInTheBox2';
+        triggerSameNumAndIsNew = !triggerSameNumAndIsNew;
+      }
+    }
+    this.setState({
+      animationClass
+    });
+  }
+
 
   render() {
     const { num } = this.props;
     const squareStyle = {
       backgroundColor: getColor(num)
     };
+    console.log('class', this.state.animationClass);
     return (
       <div className="square-warp">
         <span
           style={squareStyle}
-          className={this.getSquareClass()}
+          className={this.state.animationClass}
         >
           {
             num === 0 ? <span>&nbsp;</span> : num
