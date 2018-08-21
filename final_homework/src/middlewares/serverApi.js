@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_DOMAIN = 'http://xly-wkop.xiaoniangao.cn';
 
-const callServerApi = (endpoint, params, normalizeFuc) => new Promise((resolve, reject) => {
+const callServerApi = (endpoint, params, normalizeFunc) => new Promise((resolve, reject) => {
   axios({
     method: 'POST',
     url: API_DOMAIN + endpoint,
@@ -12,7 +12,7 @@ const callServerApi = (endpoint, params, normalizeFuc) => new Promise((resolve, 
     data: params
   }).then(res => {
     if (res.data.ret === 1) {
-      return resolve(normalizeFuc ? normalizeFuc(res.data.data) : res.data.data);
+      return resolve(normalizeFunc ? normalizeFunc(res.data.data) : res.data.data);
     }
     return reject(new Error(res.data.errMsg));
   }).catch(err => reject(err));
@@ -27,7 +27,7 @@ export default store => next => action => {
     type,
     endpoint,
     params,
-    normalizeFuc
+    normalizeFunc
   } = action.SERVER_API;
 
   if (typeof type !== 'string') {
@@ -44,7 +44,7 @@ export default store => next => action => {
     type: `${type}_REQ`
   });
 
-  return callServerApi(endpoint, params, normalizeFuc)
+  return callServerApi(endpoint, params, normalizeFunc)
     .then(response => {
       next({
         type: `${type}_SUC`,

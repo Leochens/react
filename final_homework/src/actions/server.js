@@ -1,4 +1,6 @@
+import { normalize } from 'normalizr';
 import * as ActionTypes from '../contants/ActionTypes';
+import Schemas from '../shemas';
 
 export const actionUserLogin = mid => {
   return {
@@ -7,6 +9,11 @@ export const actionUserLogin = mid => {
       endpoint: '/login',
       params: {
         mid
+      },
+      normalizeFunc: json => {
+        const users = normalize(json, Schemas.users);
+        console.log(users);
+        return users;
       }
     }
   };
@@ -19,6 +26,11 @@ export const actionFetchMyMusic = token => {
       endpoint: '/music/my_list',
       params: {
         token
+      },
+      normalizeFunc: json => {
+        const myMusics = normalize(json.list, Schemas.musics);
+        console.log(myMusics);
+        return myMusics;
       }
     }
   };
@@ -31,6 +43,11 @@ export const actionFetchRecommendMusic = token => {
       endpoint: '/music/recommend_list',
       params: {
         token
+      },
+      normalizeFunc: json => {
+        const recommendMusics = normalize(json.list, Schemas.musics);
+        console.log(recommendMusics);
+        return recommendMusics;
       }
     }
   };
