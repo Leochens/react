@@ -9,6 +9,7 @@ import './GameHome.css';
 import './animate.css';
 
 // 纯函数组件
+// 游戏主容器
 const GameHome = props => (
   <div>
     <div className="game-wraper">
