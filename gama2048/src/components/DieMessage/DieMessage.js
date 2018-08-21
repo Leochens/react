@@ -1,6 +1,7 @@
 import React from 'react';
 import './DieMessage.css';
 
+// 玩家输了的时候显示的文字提示
 const DieMessage = props => (
   <div>
     {props.isDie

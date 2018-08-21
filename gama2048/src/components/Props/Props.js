@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Props.css';
-
+// 道具
 export default class Props extends Component {
   state = {};
 

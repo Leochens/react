@@ -1,6 +1,7 @@
 import React from 'react';
 import Increase from '../Increase/Increase';
 import './Header.css';
+// 头部信息 包括使用说明重新开始按钮 以及当前关卡
 
 const Header = props => (
   <div className="header-warper">

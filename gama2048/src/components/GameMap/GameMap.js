@@ -6,6 +6,7 @@ import Power from '../Power/Power';
 import Props from '../Props/Props';
 import './GameMap.css';
 
+// 游戏地图
 export default class GameMap extends Component {
   state = {
     startX: 0,

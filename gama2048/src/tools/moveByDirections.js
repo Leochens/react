@@ -285,4 +285,3 @@ export default moveByDirections;
 //     changedSquares
 //   };
 // };
-

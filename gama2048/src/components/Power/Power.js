@@ -1,6 +1,6 @@
 import React from 'react';
 import './Power.css';
-
+// 能量条
 const getWinScore = winScoreLevel => {
   switch (winScoreLevel) {
     case 1: return 500;

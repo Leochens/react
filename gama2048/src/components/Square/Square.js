@@ -21,6 +21,8 @@ const getColor = num => {
 };
 let triggerSameNumAndSamePos = 0;
 let triggerSameNumAndIsNew = 0;
+
+// 每一个小方格
 export default class Square extends Component {
   state = {
     animationClass: 'square'
