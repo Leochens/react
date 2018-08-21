@@ -57,7 +57,6 @@ export default class Square extends Component {
     const squareStyle = {
       backgroundColor: getColor(num)
     };
-    console.log('class', this.state.animationClass);
     return (
       <div className="square-warp">
         <span
