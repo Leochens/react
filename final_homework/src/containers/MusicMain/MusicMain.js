@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../actions';
+import './MusicMain.less';
 
 class MusicMain extends Component {
   state = {};
@@ -15,7 +16,7 @@ class MusicMain extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
       df
       </div>
     );
