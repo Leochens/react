@@ -15,17 +15,33 @@ class MusicMain extends Component {
   }
 
   render() {
+    console.log('组装后数据', this.props);
     return (
       <div className="main">
-      df
+        df
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {
+  const {
+    musicManage: {
+      myMusicIds,
+      recommendMusicIds
+    },
+    login: userData,
+    entities: {
+      musics
+    }
+  } = state;
 
+  const myMusics = myMusicIds.map(id => musics.myMusics[id]);
+  const recommendMusics = recommendMusicIds.map(id => musics.recommendMusics[id]);
+  return {
+    user: userData,
+    myMusics,
+    recommendMusics
   };
 };
 

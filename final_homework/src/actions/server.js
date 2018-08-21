@@ -9,11 +9,6 @@ export const actionUserLogin = mid => {
       endpoint: '/login',
       params: {
         mid
-      },
-      normalizeFunc: json => {
-        const users = normalize(json, Schemas.users);
-        console.log(users);
-        return users;
       }
     }
   };

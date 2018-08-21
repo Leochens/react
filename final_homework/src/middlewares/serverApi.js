@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const API_DOMAIN = 'http://xly-wkop.xiaoniangao.cn';
 
+const waitingActions = [];
+
 const callServerApi = (endpoint, params, normalizeFunc) => new Promise((resolve, reject) => {
   axios({
     method: 'POST',

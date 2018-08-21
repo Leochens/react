@@ -13,7 +13,6 @@ const musicManage = (state = {
         myMusicIds
       };
     }
-
     case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`: {
       console.log('拉取推荐音乐ids成功', action.response.result);
       const { result: recommendMusicIds } = action.response;
