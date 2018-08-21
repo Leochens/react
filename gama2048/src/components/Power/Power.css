@@ -10,16 +10,6 @@
     border-radius: 15px;
     /* overflow: hidden; */
 }
-/* .power-wrap::after{
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    background-color: #FF4500;
-    border-radius: 15px;
-    position: absolute;
-    bottom: -10px;
-} */
 .power-content{
     background-color: #FF4500;
     position: absolute;

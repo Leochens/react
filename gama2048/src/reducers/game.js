@@ -42,6 +42,7 @@ const game = (state = {
         }
       };
     }
+
     // 根据方向来执行不同的操作
     case ActionTypes.MOVE_BY_DIRECTIONS: {
       const { key } = action;
@@ -54,13 +55,13 @@ const game = (state = {
       // 从移动方块函数中可以得到移动后的地图，增加的分数
       // 位置发生改变的方块，以及是否需要生出新方块的标志
       const moveResult = tools.moveByDirections(key, oldMap);
-
       const {
         newMap,
         increaseNum,
         willGenerateNew,
         changedSquares
       } = moveResult;
+
       // 获得新方块的坐标
       const { row, col } = tools.getNextPos(newMap);
 

@@ -1,14 +1,5 @@
 import transformPosToNum from './transformPosToNum';
 
-// TODO 把四个函数写成一个
-const move = (oldMap, direct) => {
-  const newMap = [...oldMap];
-  let willGenerateNew = 0;
-  let increaseNum = 0;
-  const changedSquares = [];
-
-}
-
 
 const moveLeft = oldMap => {
   const newMap = [...oldMap];
@@ -18,14 +9,14 @@ const moveLeft = oldMap => {
   for (let r = 0; r < 4; r++) {
     // const arr = newMap[r];
     const len = newMap[r].length;
-    let i,
+    let c,
       nextNoZeroPos,
       m;
 
-    for (i = 0; i < len; i += 1) {
+    for (c = 0; c < len; c += 1) {
       // 找到 不为零的元素 nextNoZeroPos
       nextNoZeroPos = -1;
-      for (m = i + 1; m < len; m++) { 
+      for (m = c + 1; m < len; m++) {
         if (newMap[r][m] !== 0) {
           nextNoZeroPos = m;
           break;
@@ -34,17 +25,17 @@ const moveLeft = oldMap => {
       if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
         // 只要有以下两个操作都证明是地图已经发生了改变 那么就要生长新的方块 willGenerateNew = 1
-        if (newMap[r][i] === 0) {
-          newMap[r][i] = newMap[r][nextNoZeroPos];
+        if (newMap[r][c] === 0) {
+          newMap[r][c] = newMap[r][nextNoZeroPos];
           newMap[r][nextNoZeroPos] = 0;
-          i -= 1;
+          c -= 1;
           willGenerateNew = 1;
-        } else if (newMap[r][i] === newMap[r][nextNoZeroPos]) {
-          newMap[r][i] *= 2;
-          increaseNum += newMap[r][i];
+        } else if (newMap[r][c] === newMap[r][nextNoZeroPos]) {
+          newMap[r][c] *= 2;
+          increaseNum += newMap[r][c];
           newMap[r][nextNoZeroPos] = 0;
           willGenerateNew = 1;
-          changedSquares.push(transformPosToNum(r, i));
+          changedSquares.push(transformPosToNum(r, c));
         }
       }
     }
@@ -63,31 +54,31 @@ const moveUp = oldMap => {
   let willGenerateNew = 0;
   const changedSquares = [];
   for (let r = 0; r < 4; r++) {
-    let i,
-      pos,
+    let c,
+      nextNoZeroPos,
       m;
     const len = 4;
-    for (i = 0; i < len; i += 1) {
-      // 找到 不为零的元素 pos
-      pos = -1;
-      for (m = i + 1; m < len; m++) {
+    for (c = 0; c < len; c += 1) {
+      // 找到 不为零的元素 nextNoZeroPos
+      nextNoZeroPos = -1;
+      for (m = c + 1; m < len; m++) {
         if (newMap[m][r] !== 0) {
-          pos = m;
+          nextNoZeroPos = m;
           break;
         }
       }
-      if (pos !== -1) {
+      if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
-        if (newMap[i][r] === 0) {
-          newMap[i][r] = newMap[pos][r];
-          newMap[pos][r] = 0;
-          i -= 1;
+        if (newMap[c][r] === 0) {
+          newMap[c][r] = newMap[nextNoZeroPos][r];
+          newMap[nextNoZeroPos][r] = 0;
+          c -= 1;
           willGenerateNew = 1;
-        } else if (newMap[i][r] === newMap[pos][r]) {
-          newMap[i][r] *= 2;
-          increaseNum += newMap[i][r];
-          newMap[pos][r] = 0;
-          changedSquares.push(transformPosToNum(i, r));
+        } else if (newMap[c][r] === newMap[nextNoZeroPos][r]) {
+          newMap[c][r] *= 2;
+          increaseNum += newMap[c][r];
+          newMap[nextNoZeroPos][r] = 0;
+          changedSquares.push(transformPosToNum(c, r));
           willGenerateNew = 1;
         }
       }
@@ -108,16 +99,16 @@ const moveRight = oldMap => {
   let willGenerateNew = 0;
   const changedSquares = [];
   const len = 4;
-  for (let r = 0; r < len; r++) {
-    let i,
+  for (let r = len - 1; r >= 0; r--) {
+    let c,
       nextNoZeroPos,
       m;
     // const arr = newMap[r];
     const len = newMap[r].length;
-    for (i = len - 1; i > 0; i--) {
+    for (c = len - 1; c > 0; c--) {
       // 找到 不为零的元素 nextNoZeroPos
       nextNoZeroPos = -1;
-      for (m = i - 1; m >= 0; m--) {
+      for (m = c - 1; m >= 0; m--) {
         if (newMap[r][m] !== 0) {
           nextNoZeroPos = m;
           break;
@@ -125,16 +116,16 @@ const moveRight = oldMap => {
       }
       if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
-        if (newMap[r][i] === 0) {
-          newMap[r][i] = newMap[r][nextNoZeroPos];
+        if (newMap[r][c] === 0) {
+          newMap[r][c] = newMap[r][nextNoZeroPos];
           newMap[r][nextNoZeroPos] = 0;
-          i += 1;
+          c += 1;
           willGenerateNew = 1;
-        } else if (newMap[r][i] === newMap[r][nextNoZeroPos]) {
-          newMap[r][i] *= 2;
-          increaseNum += newMap[r][i];
+        } else if (newMap[r][c] === newMap[r][nextNoZeroPos]) {
+          newMap[r][c] *= 2;
+          increaseNum += newMap[r][c];
           newMap[r][nextNoZeroPos] = 0;
-          changedSquares.push(transformPosToNum(r, i));
+          changedSquares.push(transformPosToNum(r, c));
           willGenerateNew = 1;
         }
       }
@@ -157,31 +148,31 @@ const moveDowm = oldMap => {
   const changedSquares = [];
   const len = 4;
   for (let r = len - 1; r >= 0; r--) {
-    let i,
-      pos,
+    let c,
+      nextNoZeroPos,
       m;
-    for (i = len - 1; i >= 0; i--) {
-      // 找到 不为零的元素 pos
-      pos = -1;
-      for (m = i - 1; m >= 0; m--) {
+    for (c = len - 1; c >= 0; c--) {
+      // 找到 不为零的元素 nextNoZeroPos
+      nextNoZeroPos = -1;
+      for (m = c - 1; m >= 0; m--) {
         if (newMap[m][r] !== 0) {
-          pos = m;
+          nextNoZeroPos = m;
           break;
         }
       }
-      if (pos !== -1) {
+      if (nextNoZeroPos !== -1) {
         // 存在下个不为0的位置
-        if (newMap[i][r] === 0) {
-          newMap[i][r] = newMap[pos][r];
-          newMap[pos][r] = 0;
-          i += 1;
+        if (newMap[c][r] === 0) {
+          newMap[c][r] = newMap[nextNoZeroPos][r];
+          newMap[nextNoZeroPos][r] = 0;
+          c += 1;
           willGenerateNew = 1;
-        } else if (newMap[i][r] === newMap[pos][r]) {
-          newMap[i][r] *= 2;
-          increaseNum += newMap[i][r];
-          newMap[pos][r] = 0;
+        } else if (newMap[c][r] === newMap[nextNoZeroPos][r]) {
+          newMap[c][r] *= 2;
+          increaseNum += newMap[c][r];
+          newMap[nextNoZeroPos][r] = 0;
           willGenerateNew = 1;
-          changedSquares.push(transformPosToNum(i, r));
+          changedSquares.push(transformPosToNum(c, r));
         }
       }
     }
@@ -218,3 +209,80 @@ const moveByDirections = (key, oldMap) => {
 
 
 export default moveByDirections;
+
+// TODO 把四个函数写成一个
+// 事实证明写成一个后并没有很简单 反而变得更加复杂 并且每次还要做很多多余的判断 放弃
+// const move = (oldMap, direct) => {
+//   const newMap = [...oldMap];
+//   const changedSquares = [];
+//   const len = 4;
+//   let increaseNum = 0;
+//   let willGenerateNew = 0;
+//   let initR = 0;
+//   let initC = 0;
+//   switch (direct) {
+//     case 'left':
+//     case 'up':
+//       break;
+//     case 'down':
+//     case 'right':
+//       initR = len - 1;
+//       initC = len - 1;
+//       break;
+//     default: break;
+//   }
+
+//   for (let r = initR; initR ? r >= 0 : r < len; initR ? r-- : r++) {
+//     let nextNoZeroPos = -1;
+//     for (let c = initC; initC ? c >= 0 : c < len; initC ? c-- : c++) {
+//       nextNoZeroPos = -1;
+//       for (let p = initC ? c - 1 : c + 1; initC ? p >= 0 : p < len; initC ? p-- : p++) {
+//         if (['left', 'up'].includes(direct) && newMap[r][p] !== 0) {
+//           nextNoZeroPos = p;
+//           break;
+//         } else if (['right', 'down'].includes(direct) && newMap[p][r] !== 0) {
+//           nextNoZeroPos = p;
+//           break;
+//         }
+//         if (nextNoZeroPos !== -1) {
+//           if (['left', 'right'].includes(direct)) {
+//             if (newMap[r][c] === 0) {
+//               newMap[r][c] = newMap[r][nextNoZeroPos];
+//               newMap[r][nextNoZeroPos] = 0;
+//               direct === 'left' ? c -= 1 : c += 1;
+//               willGenerateNew = 1;
+//             } else if (newMap[r][c] === newMap[r][nextNoZeroPos]) {
+//               newMap[r][c] *= 2;
+//               increaseNum += newMap[r][c];
+//               newMap[r][nextNoZeroPos] = 0;
+//               willGenerateNew = 1;
+//               changedSquares.push(transformPosToNum(r, c));
+//             }
+//           } else if (['up', 'down'].includes(direct)) {
+//             if (newMap[c][r] === 0) {
+//               newMap[c][r] = newMap[nextNoZeroPos][r];
+//               newMap[nextNoZeroPos][r] = 0;
+//               direct === 'up' ? c -= 1 : c += 1;
+//               willGenerateNew = 1;
+//             } else if (newMap[c][r] === newMap[nextNoZeroPos][r]) {
+//               newMap[c][r] *= 2;
+//               increaseNum += newMap[c][r];
+//               newMap[nextNoZeroPos][r] = 0;
+//               willGenerateNew = 1;
+//               changedSquares.push(transformPosToNum(r, c));
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+
+
+//   return {
+//     newMap,
+//     increaseNum,
+//     willGenerateNew,
+//     changedSquares
+//   };
+// };
+
