@@ -23,7 +23,8 @@ export default class SelectBox extends Component {
               type="radio"
               onChange={this.handleCheck}
               />
-            <span className="radio"></span>
+            <span className="radio">
+            </span>
             <span className="text">{data.text}</span>
         </label>
     );

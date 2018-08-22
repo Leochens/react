@@ -23,7 +23,9 @@ class MusicMain extends Component {
       <div className="main">
         {/* <Slider /> */}
         {/* <SelectBar /> */}
-        <Navigator>曲库</Navigator>
+        <div className="nav-wrapper">
+          <Navigator>曲库</Navigator>
+        </div>
         <SelectBar />
         <MusicList
           title={"我的音乐"}
