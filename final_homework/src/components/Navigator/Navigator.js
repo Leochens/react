@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './Navigator.less';
-import returnIcon from '../../resource/images/return.png'
+import Images from '../../contants/Images';
 
 export default class Navigator extends Component {
   state = {};
-
+  
   render() {
     return (
       <div className="nav-wrapper">
         <div className="nav">
           <div className="left">
-            <img src={returnIcon} />
+            <img src={Images.btnReturn} alt="" />
             <span></span>
           </div>
           <div className="title">{this.props.children}</div>

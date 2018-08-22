@@ -18,16 +18,19 @@ export default class SelectBar extends Component {
       SelectActions:{
         actionChangeToMultipleSelect,
         actionChangeToSingleSelect
-      }
+      },
+      isMultipleSelect
     } = this.props;
     const data = [
       {
         text: '单选',
-        action: actionChangeToSingleSelect
+        action: actionChangeToSingleSelect,
+        checked: !isMultipleSelect 
       },
       {
         text: '多选',
-        action: actionChangeToMultipleSelect
+        action: actionChangeToMultipleSelect,
+        checked: isMultipleSelect
       }
     ]
 
@@ -35,7 +38,7 @@ export default class SelectBar extends Component {
       (<SelectBox
         key={`SelectBox_${id}`}
         id={id}
-        checked={id === this.state.currentCheckedId}
+        checked={item.checked}
         onCheck={this.handleCheck}
         data={item}
       />)

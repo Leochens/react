@@ -8,7 +8,7 @@ import Navigator from '../../components/Navigator/Navigator';
 import MusicList from '../../components/MusicList/MusicList';
 import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
-import FooterTabs from '../../components/FooterTabs/FooterTabs';
+import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
 
 class MusicMain extends Component {
@@ -20,7 +20,7 @@ class MusicMain extends Component {
     ServerActions.actionFetchRecommendMusic('test81627');
   }
   render() {
-    console.log('组装后数据', this.props);
+    // console.log('组装后数据', this.props);
     const {
       myMusics,
       recommendMusics,
@@ -28,19 +28,21 @@ class MusicMain extends Component {
       currentSingleSelectedId,
       isMultipleSelect,
       SelectActions,
+      user,
     } = this.props;
     return (
       <div className="main">
-        <Navigator>曲库</Navigator>
+        <Navigator>{user.nick}</Navigator>
         <Tabs defaultActiveId={1}>
           <TabItem id={1} title={'我的音乐'}
             icon={{
-              active: Images.music_ac,
+              active: Images.musicAc,
               normal: Images.music
             }}
           >
             <SelectBar
               SelectActions={SelectActions}
+              isMultipleSelect={isMultipleSelect}
             />
             <MusicList
               title={"我的音乐"}
@@ -58,17 +60,17 @@ class MusicMain extends Component {
               SelectActions={SelectActions}
               isMultipleSelect={isMultipleSelect}
             />
-            <FooterTabs />
+            <ToolBar />
           </TabItem  >
           <TabItem id={2} title={'搜索音乐'}
             icon={{
-              active: Images.search_ac,
+              active: Images.searchAc,
               normal: Images.search
             }}
           >搜索音乐</TabItem>
           <TabItem id={3} title={'上传音乐'}
             icon={{
-              active: Images.upload_ac,
+              active: Images.uploadAc,
               normal: Images.upload
             }}
           >上传音乐</TabItem>

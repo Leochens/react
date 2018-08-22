@@ -37,16 +37,17 @@ const musicManage = (state = {
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
       const { id } = action;
       const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice(); 
-      if(currentMultipleSelectedMusicIds.length === 5) {
-        // 最多选择5首
-        // TODO: 此时应该提示用户
-        return state;
-      }
+
       // 如果有就剔除 没有就添加
       if(currentMultipleSelectedMusicIds.includes(id)) {
         const index = currentMultipleSelectedMusicIds.indexOf(id);
         currentMultipleSelectedMusicIds.splice(index,1);
       }else{
+        if(currentMultipleSelectedMusicIds.length === 5) {
+          // 最多选择5首
+          // TODO: 此时应该提示用户
+          return state;
+        }
         currentMultipleSelectedMusicIds.push(id);
       }
       
