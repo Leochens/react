@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../actions';
 import './MusicMain.less';
-import Slider from '../../components/Slider/Slider';
+
+
 import SelectBar from '../../components/SelectBar/SelectBar';
 import Navigator from '../../components/Navigator/Navigator';
 import MusicList from '../../components/MusicList/MusicList';
 import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
 import FooterTabs from '../../components/FooterTabs/FooterTabs';
+import music from '../../resource/images/music.png';
+import music_ac from '../../resource/images/music_ac.png';
+import upload from '../../resource/images/upload.png';
+import upload_ac from '../../resource/images/upload_ac.png';
+import search from '../../resource/images/search.png';
+import search_ac from '../../resource/images/search_ac.png';
+
 class MusicMain extends Component {
   state = {};
   componentDidMount() {
@@ -25,7 +33,12 @@ class MusicMain extends Component {
       <div className="main">
         <Navigator>曲库</Navigator>
         <Tabs defaultActiveId={1}>
-          <TabItem id={1} title={'我的音乐'}>
+          <TabItem id={1} title={'我的音乐'}
+            icon={{
+              active: music_ac,
+              normal: music
+            }}
+          >
             <SelectBar />
             <MusicList
               title={"我的音乐"}
@@ -36,11 +49,21 @@ class MusicMain extends Component {
               musics={recommendMusics}
             />
           </TabItem  >
-          <TabItem id={2} title={'搜索音乐'}>搜索音乐</TabItem>
-          <TabItem id={3} title={'上传音乐'}>上传音乐</TabItem>
-        </Tabs>
+          <TabItem id={2} title={'搜索音乐'}
+            icon={{
+              active: search_ac,
+              normal: search
+            }}
+          >搜索音乐</TabItem>
+          <TabItem id={3} title={'上传音乐'}
+            icon={{
+              active: upload_ac,
+              normal: upload
+            }}
+          >上传音乐</TabItem>
+        </Tabs >
         <FooterTabs />
-      </div>
+      </div >
     );
   }
 }

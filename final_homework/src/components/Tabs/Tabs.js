@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import './Tabs.less';
 import './Tabs.less';
-// import TabItem from '../TabItem/TabItem';
+
+const Item = props => {
+  const onClick = () => {
+    const { id, onClick } = props;
+    onClick && onClick(id);
+  }
+  const { icon, title, isActive } = props;
+  return (
+    <div
+      className={`tab-item${isActive? '-is-active' : ''}`}
+      onClick={onClick}
+    >
+      <img src={isActive? icon.active : icon.normal} />
+      <span>{title}</span>
+    </div>
+  );
+};
 
 export default class Tabs extends Component {
   state = {
@@ -28,12 +44,15 @@ export default class Tabs extends Component {
       )
     }
     return tabs.map(tab => (
-      <div
-        className="tab-item"
+      <Item
         key={`tab_${tab.props.id}`}
-        onClick={() => this.handleTabClick(tab.props.id)}
-      >{tab.props.title}</div>
-    ));
+        id={tab.props.id}
+        title={tab.props.title}
+        icon={tab.props.icon}
+        onClick={this.handleTabClick}
+        isActive={tab.props.id === this.state.currentTabId}
+      />)
+    );
   }
   renderCurrentTab = () => {
     const { children: tabs } = this.props;
