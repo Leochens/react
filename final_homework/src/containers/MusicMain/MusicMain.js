@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../actions';
-import './MusicMain.less';
 
+import './MusicMain.less';
+import Slider from '../../components/Slider/Slider';
+import SelectBar from '../../components/SelectBar/SelectBar';
 class MusicMain extends Component {
   state = {};
 
@@ -18,7 +20,8 @@ class MusicMain extends Component {
     console.log('组装后数据', this.props);
     return (
       <div className="main">
-        df
+        {/* <Slider /> */}
+        <SelectBar />
       </div>
     );
   }
