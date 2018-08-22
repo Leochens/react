@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../actions';
-
 import './MusicMain.less';
 import Slider from '../../components/Slider/Slider';
 import SelectBar from '../../components/SelectBar/SelectBar';
+import Navigator from '../../components/Navigator/Navigator';
 class MusicMain extends Component {
   state = {};
 
@@ -15,13 +15,13 @@ class MusicMain extends Component {
     ServerActions.actionFetchMyMusic('test81627');
     ServerActions.actionFetchRecommendMusic('test81627');
   }
-
   render() {
     console.log('组装后数据', this.props);
     return (
       <div className="main">
         {/* <Slider /> */}
-        <SelectBar />
+        {/* <SelectBar /> */}
+        <Navigator>曲库</Navigator>
       </div>
     );
   }

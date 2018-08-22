@@ -24,7 +24,7 @@ export default class SelectBar extends Component {
         action: () => {console.log('多选');}
       }
     ]
-    
+
     return data.map((item, id) =>
       (<SelectBox
         key={`SelectBox_${id}`}
@@ -38,7 +38,7 @@ export default class SelectBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="select-bar">
         {this.renderSelectBox()}
       </div>
     );
