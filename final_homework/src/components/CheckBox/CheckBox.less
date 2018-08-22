@@ -1,0 +1,28 @@
+.checkbox{
+  display: inline-block;
+  input[type="checkbox"]{
+    display: none;
+  }
+  input[type="checkbox"]:checked + span.single-check{
+      display: inline-block;
+      margin: 0 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid #eee;
+      background-position: center;
+      background: url(./select_music.png);
+      background-repeat: no-repeat;
+      background-clip: border-box;
+      background-size: 100%;
+  }
+  input[type="checkbox"] + span.single-check{
+      display: inline-block;
+      margin: 0 8px;
+
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid #eee;
+  }
+}

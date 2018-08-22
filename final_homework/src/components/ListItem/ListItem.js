@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './ListItem.less';
+import CheckBox from '../CheckBox/CheckBox';
+
 export default class ListItem extends Component {
   state = {};
 
@@ -8,7 +10,7 @@ export default class ListItem extends Component {
 
     return (
       <div className="list-item">
-        {data.name}
+        <span><CheckBox /></span>{data.name}
       </div>
     );
   }

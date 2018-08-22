@@ -5,9 +5,11 @@ export default class CheckBox extends Component {
 
   render() {
     return (
-      <div>
-        CheckBox
-      </div>
+      <label className="checkbox">
+        <input type="checkbox"/>
+        <span className="single-check"></span>
+        <span className="multi-check"></span>
+      </label>
     );
   }
-}
+} 
