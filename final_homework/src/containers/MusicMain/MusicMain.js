@@ -6,6 +6,7 @@ import './MusicMain.less';
 import Slider from '../../components/Slider/Slider';
 import SelectBar from '../../components/SelectBar/SelectBar';
 import Navigator from '../../components/Navigator/Navigator';
+import MusicList from '../../components/MusicList/MusicList';
 class MusicMain extends Component {
   state = {};
 
@@ -17,11 +18,21 @@ class MusicMain extends Component {
   }
   render() {
     console.log('组装后数据', this.props);
+    const { myMusics, recommendMusics } = this.props;
     return (
       <div className="main">
         {/* <Slider /> */}
         {/* <SelectBar /> */}
         <Navigator>曲库</Navigator>
+        <SelectBar />
+        <MusicList
+          title={"我的音乐"}
+          musics={myMusics}
+        />
+        <MusicList
+          title={"推荐音乐"}
+          musics={recommendMusics}
+        />
       </div>
     );
   }
