@@ -14,3 +14,15 @@ export const actionSetMultipleSelectedMusicIds = ids => {
     ids
   }
 }
+
+export const actionChangeToMultipleSelect = () => {
+  return {
+    type: ActionTypes.CHANGE_TO_MULTIPLE_SELECT
+  }
+}
+
+export const actionChangeToSingleSelect = () => {
+  return {
+    type: ActionTypes.CHANGE_TO_SINGLE_SELECT
+  }
+}

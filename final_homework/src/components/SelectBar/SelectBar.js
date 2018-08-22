@@ -14,14 +14,20 @@ export default class SelectBar extends Component {
   }
 
   renderSelectBox = () => {
+    const {
+      SelectActions:{
+        actionChangeToMultipleSelect,
+        actionChangeToSingleSelect
+      }
+    } = this.props;
     const data = [
       {
         text: '单选',
-        action: () => {console.log('单选');}
+        action: actionChangeToSingleSelect
       },
       {
         text: '多选',
-        action: () => {console.log('多选');}
+        action: actionChangeToMultipleSelect
       }
     ]
 

@@ -9,7 +9,7 @@ export default class ListItem extends Component {
     onSelect && onSelect(id);
   }
   render() {
-    const { data } = this.props;
+    const { data, isMultipleSelect } = this.props;
     return (
       <div
         className="list-item"
@@ -18,6 +18,8 @@ export default class ListItem extends Component {
         <span>
           <CheckBox
             isChecked={this.props.isSelected}
+            type={isMultipleSelect ? 'multiple' : 'single'}
+            // order={1}
           />
         </span>
         {data.name}

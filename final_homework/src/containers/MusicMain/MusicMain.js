@@ -9,13 +9,7 @@ import MusicList from '../../components/MusicList/MusicList';
 import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
 import FooterTabs from '../../components/FooterTabs/FooterTabs';
-
-import music from '../../resource/images/music.png';
-import music_ac from '../../resource/images/music_ac.png';
-import upload from '../../resource/images/upload.png';
-import upload_ac from '../../resource/images/upload_ac.png';
-import search from '../../resource/images/search.png';
-import search_ac from '../../resource/images/search_ac.png';
+import Images from '../../contants/Images';
 
 class MusicMain extends Component {
   state = {};
@@ -32,7 +26,8 @@ class MusicMain extends Component {
       recommendMusics,
       currentMultipleSelectedMusicIds,
       currentSingleSelectedId,
-      SelectActions
+      isMultipleSelect,
+      SelectActions,
     } = this.props;
     return (
       <div className="main">
@@ -40,17 +35,20 @@ class MusicMain extends Component {
         <Tabs defaultActiveId={1}>
           <TabItem id={1} title={'我的音乐'}
             icon={{
-              active: music_ac,
-              normal: music
+              active: Images.music_ac,
+              normal: Images.music
             }}
           >
-            <SelectBar />
+            <SelectBar
+              SelectActions={SelectActions}
+            />
             <MusicList
               title={"我的音乐"}
               musics={myMusics}
               currentMultipleSelectedMusicIds={currentMultipleSelectedMusicIds}
               currentSingleSelectedId={currentSingleSelectedId}
               SelectActions={SelectActions}
+              isMultipleSelect={isMultipleSelect}
             />
             <MusicList
               title={"推荐音乐"}
@@ -58,19 +56,20 @@ class MusicMain extends Component {
               currentMultipleSelectedMusicIds={currentMultipleSelectedMusicIds}
               currentSingleSelectedId={currentSingleSelectedId}
               SelectActions={SelectActions}
+              isMultipleSelect={isMultipleSelect}
             />
             <FooterTabs />
           </TabItem  >
           <TabItem id={2} title={'搜索音乐'}
             icon={{
-              active: search_ac,
-              normal: search
+              active: Images.search_ac,
+              normal: Images.search
             }}
           >搜索音乐</TabItem>
           <TabItem id={3} title={'上传音乐'}
             icon={{
-              active: upload_ac,
-              normal: upload
+              active: Images.upload_ac,
+              normal: Images.upload
             }}
           >上传音乐</TabItem>
         </Tabs >
@@ -85,7 +84,8 @@ const mapStateToProps = state => {
       myMusicIds,
       recommendMusicIds,
       currentMultipleSelectedMusicIds,
-      currentSingleSelectedId
+      currentSingleSelectedId,
+      isMultipleSelect
     },
     login: userData,
     entities: {
@@ -100,7 +100,8 @@ const mapStateToProps = state => {
     myMusics,
     recommendMusics,
     currentMultipleSelectedMusicIds,
-    currentSingleSelectedId
+    currentSingleSelectedId,
+    isMultipleSelect
   };
 };
 
@@ -108,7 +109,6 @@ const mapDispatchToProps = dispatch => {
   return {
     ServerActions: bindActionCreators(Actions.server, dispatch),
     SelectActions: bindActionCreators(Actions.select, dispatch),
-  
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MusicMain);

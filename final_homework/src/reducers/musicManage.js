@@ -4,7 +4,8 @@ const musicManage = (state = {
   myMusicIds: [],
   recommendMusicIds: [],
   currentMultipleSelectedMusicIds: [],
-  currentSingleSelectedId: 133482000
+  currentSingleSelectedId: 133482000,
+  isMultipleSelect: false
 }, action) => {
   switch (action.type) {
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`: {
@@ -28,6 +29,20 @@ const musicManage = (state = {
       return {
         ...state,
         currentSingleSelectedId: id
+      }
+    }
+
+    case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
+      return {
+        ...state,
+        isMultipleSelect: false
+      }
+    }
+
+    case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
+      return {
+        ...state,
+        isMultipleSelect: true
       }
     }
 
