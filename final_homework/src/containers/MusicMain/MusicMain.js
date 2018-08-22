@@ -9,9 +9,9 @@ import Navigator from '../../components/Navigator/Navigator';
 import MusicList from '../../components/MusicList/MusicList';
 import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
+import FooterTabs from '../../components/FooterTabs/FooterTabs';
 class MusicMain extends Component {
   state = {};
-
   componentDidMount() {
     const { ServerActions } = this.props;
     ServerActions.actionUserLogin(103);
@@ -39,7 +39,7 @@ class MusicMain extends Component {
           <TabItem id={2} title={'搜索音乐'}>搜索音乐</TabItem>
           <TabItem id={3} title={'上传音乐'}>上传音乐</TabItem>
         </Tabs>
-
+        <FooterTabs />
       </div>
     );
   }

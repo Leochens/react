@@ -11,7 +11,7 @@ export default class Navigator extends Component {
         <div className="nav">
           <div className="left">
             <img src={returnIcon} />
-            <span>制作影集</span>
+            <span></span>
           </div>
           <div className="title">{this.props.children}</div>
           <div className="right">
