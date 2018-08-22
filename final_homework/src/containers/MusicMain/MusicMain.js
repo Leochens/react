@@ -36,8 +36,8 @@ class MusicMain extends Component {
               musics={recommendMusics}
             />
           </TabItem  >
-          <TabItem id={2} title={'搜索音乐'}/>
-          <TabItem id={3} title={'上传音乐'}/>
+          <TabItem id={2} title={'搜索音乐'}>搜索音乐</TabItem>
+          <TabItem id={3} title={'上传音乐'}>上传音乐</TabItem>
         </Tabs>
 
       </div>
