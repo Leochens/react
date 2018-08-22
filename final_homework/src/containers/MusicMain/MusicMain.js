@@ -7,6 +7,8 @@ import Slider from '../../components/Slider/Slider';
 import SelectBar from '../../components/SelectBar/SelectBar';
 import Navigator from '../../components/Navigator/Navigator';
 import MusicList from '../../components/MusicList/MusicList';
+import Tabs from '../../components/Tabs/Tabs';
+import TabItem from '../../components/TabItem/TabItem';
 class MusicMain extends Component {
   state = {};
 
@@ -21,20 +23,23 @@ class MusicMain extends Component {
     const { myMusics, recommendMusics } = this.props;
     return (
       <div className="main">
-        {/* <Slider /> */}
-        {/* <SelectBar /> */}
-        <div className="nav-wrapper">
-          <Navigator>曲库</Navigator>
-        </div>
-        <SelectBar />
-        <MusicList
-          title={"我的音乐"}
-          musics={myMusics}
-        />
-        <MusicList
-          title={"推荐音乐"}
-          musics={recommendMusics}
-        />
+        <Navigator>曲库</Navigator>
+        <Tabs defaultActiveId={1}>
+          <TabItem id={1} title={'我的音乐'}>
+            <SelectBar />
+            <MusicList
+              title={"我的音乐"}
+              musics={myMusics}
+            />
+            <MusicList
+              title={"推荐音乐"}
+              musics={recommendMusics}
+            />
+          </TabItem  >
+          <TabItem id={2} title={'搜索音乐'}/>
+          <TabItem id={3} title={'上传音乐'}/>
+        </Tabs>
+
       </div>
     );
   }

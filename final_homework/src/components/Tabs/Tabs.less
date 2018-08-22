@@ -1,0 +1,23 @@
+@height:50px;
+@color: rgb(255, 33, 100);
+.tabs-wrapper{
+  height: @height;
+}
+.tabs{
+  // position: fixed;
+  left: 0;
+  right: 0;
+  height: @height;
+  z-index: 100;
+  // color: @color;
+  // font-weight: 550;
+  background-color: #fff;
+  display: flex;
+  .tab-item{
+    flex: 1;
+    text-align: center;
+    height: @height;
+    line-height: @height;
+    color: @color;
+  }
+}
