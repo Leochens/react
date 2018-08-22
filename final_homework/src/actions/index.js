@@ -1,7 +1,8 @@
 import * as server from './server';
-
+import * as select from './select';
 const Actions = {
-  server
+  server,
+  select
 };
 
 export default Actions;

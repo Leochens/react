@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../actions';
 import './MusicMain.less';
-
-
 import SelectBar from '../../components/SelectBar/SelectBar';
 import Navigator from '../../components/Navigator/Navigator';
 import MusicList from '../../components/MusicList/MusicList';
 import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
 import FooterTabs from '../../components/FooterTabs/FooterTabs';
+
 import music from '../../resource/images/music.png';
 import music_ac from '../../resource/images/music_ac.png';
 import upload from '../../resource/images/upload.png';
@@ -28,7 +27,13 @@ class MusicMain extends Component {
   }
   render() {
     console.log('组装后数据', this.props);
-    const { myMusics, recommendMusics } = this.props;
+    const {
+      myMusics,
+      recommendMusics,
+      currentMultipleSelectedMusicIds,
+      currentSingleSelectedId,
+      SelectActions
+    } = this.props;
     return (
       <div className="main">
         <Navigator>曲库</Navigator>
@@ -43,11 +48,18 @@ class MusicMain extends Component {
             <MusicList
               title={"我的音乐"}
               musics={myMusics}
+              currentMultipleSelectedMusicIds={currentMultipleSelectedMusicIds}
+              currentSingleSelectedId={currentSingleSelectedId}
+              SelectActions={SelectActions}
             />
             <MusicList
               title={"推荐音乐"}
               musics={recommendMusics}
+              currentMultipleSelectedMusicIds={currentMultipleSelectedMusicIds}
+              currentSingleSelectedId={currentSingleSelectedId}
+              SelectActions={SelectActions}
             />
+            <FooterTabs />
           </TabItem  >
           <TabItem id={2} title={'搜索音乐'}
             icon={{
@@ -62,7 +74,6 @@ class MusicMain extends Component {
             }}
           >上传音乐</TabItem>
         </Tabs >
-        <FooterTabs />
       </div >
     );
   }
@@ -72,7 +83,9 @@ const mapStateToProps = state => {
   const {
     musicManage: {
       myMusicIds,
-      recommendMusicIds
+      recommendMusicIds,
+      currentMultipleSelectedMusicIds,
+      currentSingleSelectedId
     },
     login: userData,
     entities: {
@@ -85,13 +98,17 @@ const mapStateToProps = state => {
   return {
     user: userData,
     myMusics,
-    recommendMusics
+    recommendMusics,
+    currentMultipleSelectedMusicIds,
+    currentSingleSelectedId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    ServerActions: bindActionCreators(Actions.server, dispatch)
+    ServerActions: bindActionCreators(Actions.server, dispatch),
+    SelectActions: bindActionCreators(Actions.select, dispatch),
+  
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MusicMain);

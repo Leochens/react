@@ -4,7 +4,9 @@ import ListItem from '../ListItem/ListItem';
 
 
 export default class MusicList extends Component {
-  state = {};
+  state = {
+    isMultipleSelect: false,
+  };
 
   renderListTitle = () => {
     const { title } = this.props;
@@ -17,12 +19,23 @@ export default class MusicList extends Component {
     } else return null;
   }
 
+
   renderListItems = () => {
-    const { musics } = this.props;
-    return musics.map((music,idx)=>(
-      <ListItem 
+    const {
+      musics,
+      currentSingleSelectedId,
+      SelectActions: {
+        actionSetSingleSelectedMusicId
+      }
+    } = this.props;
+    console.log(this.props);
+    return musics.map((music, idx) => (
+      <ListItem
         key={`music_${idx}`}
+        id={music.id}
         data={music}
+        onSelect={actionSetSingleSelectedMusicId}
+        isSelected={music.id === currentSingleSelectedId}
       />
     ))
   }

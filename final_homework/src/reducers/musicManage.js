@@ -2,7 +2,9 @@ import * as ActionTypes from '../contants/ActionTypes';
 
 const musicManage = (state = {
   myMusicIds: [],
-  recommendMusicIds: []
+  recommendMusicIds: [],
+  currentMultipleSelectedMusicIds: [],
+  currentSingleSelectedId: 133482000
 }, action) => {
   switch (action.type) {
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`: {
@@ -20,6 +22,13 @@ const musicManage = (state = {
         ...state,
         recommendMusicIds
       };
+    }
+    case ActionTypes.SET_SINGLE_SELECTED_MUSIC_ID: {
+      const { id } = action;
+      return {
+        ...state,
+        currentSingleSelectedId: id
+      }
     }
 
     default: return state;
