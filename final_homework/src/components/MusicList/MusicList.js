@@ -5,6 +5,28 @@ import ListItem from '../ListItem/ListItem';
 
 export default class MusicList extends Component {
 
+  componentDidMount() {
+    const { currentSingleSelectedId } = this.props;
+    // this.updateToolState(currentSingleSelectedId);
+  }
+
+  updateToolState = musicId => {
+    const { musics, isMultipleSelect, actionUpdateToolState } = this.props;
+    if(!musics.length) {
+      return;
+    }
+    console.log('musics',musics);
+    const data = musics[musicId];
+    const newToolState = {
+      play: isMultipleSelect ? false : true,
+      rename: data.plp || !data.med ? false : true,
+      slice: data.med ? true : false,
+      share: data.med ? true : false,
+      delete: data.med ? true : false
+    }
+    actionUpdateToolState && actionUpdateToolState(newToolState);
+  }
+
   renderListTitle = () => {
     const { title } = this.props;
     if (title) {
@@ -16,12 +38,6 @@ export default class MusicList extends Component {
     } else return null;
   }
 
-  handleMultipleSelect = id => {
-
-  }
-  judgeItemIsMultipleSelected = () => {
-
-  }
   renderListItems = () => {
     const {
       musics,
@@ -31,9 +47,13 @@ export default class MusicList extends Component {
         actionSetSingleSelectedMusicId,
         actionSetMultipleSelectedMusicIds
       },
-      isMultipleSelect
+      UiActions: {
+        actionUpdateToolState
+      },
+      ui: {
+        isMultipleSelect
+      }
     } = this.props;
-    console.log(this.props);
     return musics.map((music, idx) => (
       <ListItem
         key={`music_${idx}`}
@@ -46,10 +66,14 @@ export default class MusicList extends Component {
         isSelected={isMultipleSelect
           ? currentMultipleSelectedMusicIds.includes(music.id)
           : music.id === currentSingleSelectedId}
-        isMultipleSelect={isMultipleSelect}
+
         order={isMultipleSelect
           ? currentMultipleSelectedMusicIds.indexOf(music.id)
           : null}
+
+        actionUpdateToolState={actionUpdateToolState}
+        isMultipleSelect={isMultipleSelect}
+        updateToolState={this.updateToolState}
       />
     ))
   }

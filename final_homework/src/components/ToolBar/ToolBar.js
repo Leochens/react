@@ -3,6 +3,11 @@ import './ToolBar.less';
 import Images from '../../contants/Images';
 
 const ToolItem = props => {
+
+  const handleTap = () => {
+    const { isActive, action } = props;
+    isActive && action && action();
+  }
   return (
     <div className="item">
       <div className="icon">
@@ -21,45 +26,47 @@ export default class ToolBar extends Component {
   state = {};
 
   renderTools = () => {
+    const { ui } = this.props;
     const tools = [
       {
         title: '播放',
         icon: Images.btnNewPlay,
         iconAc: Images.btnNewPlayAc,
-        isActive: false,
+        isActive: ui.play,
         action: () => { }
       },
       {
         title: '重命名',
         icon: Images.btnRename,
         iconAc: Images.btnRenameAc,
-        isActive: false,
+        isActive: ui.rename,
         action: () => { }
       },
       {
         title: '选取片段',
         icon: Images.btnCut,
         iconAc: Images.btnCutAc,
-        isActive: false,
+        isActive: ui.slice,
         action: () => { }
       },
       {
         title: '送给朋友',
         icon: Images.btnShare,
         iconAc: Images.btnShareAc,
-        isActive: false,
+        isActive: ui.share,
         action: () => { }
       },
       {
         title: '删除',
         icon: Images.btnDelete,
         iconAc: Images.btnDeleteAc,
-        isActive: false,
+        isActive: ui.delete,
         action: () => { }
       },
     ];
 
-    return tools.map(item => (<ToolItem
+    return tools.map((item, idx) => (<ToolItem
+      key={`tool_${idx}`}
       title={item.title}
       icon={item.isActive ? item.iconAc : item.icon}
       isActive={item.isActive}
@@ -72,7 +79,6 @@ export default class ToolBar extends Component {
       <div className="tool-bar-wrapper">
         <div className="tool-bar">
           {this.renderTools()}
-
         </div>
       </div>
     );

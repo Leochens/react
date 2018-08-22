@@ -12,4 +12,5 @@ export const DELETE_MUSIC = 'DELETE_MUSIC';
 export const PLAY_MUSIC = 'PLAY_MUSIC';
 export const SHARE_MUSIC = 'SHARE_MUSIC';
 export const SLICE_MUSIC = 'SLICE_MUSIC';
+export const UPDATE_TOOL_STATE = 'UPDATE_TOOL_STATE';
 

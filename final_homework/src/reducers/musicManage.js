@@ -5,7 +5,6 @@ const musicManage = (state = {
   recommendMusicIds: [],
   currentMultipleSelectedMusicIds: [],
   currentSingleSelectedId: 133482000,
-  isMultipleSelect: false
 }, action) => {
   switch (action.type) {
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`: {
@@ -16,7 +15,7 @@ const musicManage = (state = {
         myMusicIds
       };
     }
-    
+
     case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`: {
       // console.log('拉取推荐音乐ids成功', action.response.result);
       const { result: recommendMusicIds } = action.response;
@@ -36,21 +35,21 @@ const musicManage = (state = {
 
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
       const { id } = action;
-      const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice(); 
+      const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice();
 
       // 如果有就剔除 没有就添加
-      if(currentMultipleSelectedMusicIds.includes(id)) {
+      if (currentMultipleSelectedMusicIds.includes(id)) {
         const index = currentMultipleSelectedMusicIds.indexOf(id);
-        currentMultipleSelectedMusicIds.splice(index,1);
-      }else{
-        if(currentMultipleSelectedMusicIds.length === 5) {
+        currentMultipleSelectedMusicIds.splice(index, 1);
+      } else {
+        if (currentMultipleSelectedMusicIds.length === 5) {
           // 最多选择5首
           // TODO: 此时应该提示用户
           return state;
         }
         currentMultipleSelectedMusicIds.push(id);
       }
-      
+
       return {
         ...state,
         currentMultipleSelectedMusicIds
@@ -60,8 +59,7 @@ const musicManage = (state = {
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
       return {
         ...state,
-        isMultipleSelect: false,
-        currentMultipleSelectedMusicIds:[]
+        currentMultipleSelectedMusicIds: []
       }
     }
 
@@ -71,13 +69,26 @@ const musicManage = (state = {
       // COMPLETED
       return {
         ...state,
-        isMultipleSelect: true,
-        currentMultipleSelectedMusicIds:[
+        currentMultipleSelectedMusicIds: [
           state.currentSingleSelectedId
         ]
       }
     }
-
+    case ActionTypes.PLAY_MUSIC: {
+      return state;
+    }
+    case ActionTypes.DELETE_MUSIC: {
+      return state;
+    }
+    case ActionTypes.SHARE_MUSIC: {
+      return state;
+    }
+    case ActionTypes.SLICE_MUSIC: {
+      return state;
+    }
+    case ActionTypes.RENAME_MUSIC: {
+      return state;
+    }
 
     default: return state;
   }

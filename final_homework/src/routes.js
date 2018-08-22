@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './App';
-import MusicMain from './containers/MusicMain/MusicMain';
+import AppMain from './containers/AppMain/AppMain';
 
 
 const AppRoutes = () => (
   <Route path="/" component={App}>
-    <IndexRoute component={MusicMain} />
+    <IndexRoute component={AppMain} />
   </Route>
 );
 
