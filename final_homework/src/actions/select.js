@@ -8,10 +8,10 @@ export const actionSetSingleSelectedMusicId = id => {
   }
 }
 
-export const actionSetMultipleSelectedMusicIds = ids => {
+export const actionSetMultipleSelectedMusicIds = id => {
   return{
     type: ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS,
-    ids
+    id
   }
 }
 

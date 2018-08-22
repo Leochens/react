@@ -19,13 +19,17 @@ export default class MusicList extends Component {
   handleMultipleSelect = id => {
 
   }
+  judgeItemIsMultipleSelected = () => {
 
+  }
   renderListItems = () => {
     const {
       musics,
       currentSingleSelectedId,
+      currentMultipleSelectedMusicIds,
       SelectActions: {
-        actionSetSingleSelectedMusicId
+        actionSetSingleSelectedMusicId,
+        actionSetMultipleSelectedMusicIds
       },
       isMultipleSelect
     } = this.props;
@@ -35,9 +39,17 @@ export default class MusicList extends Component {
         key={`music_${idx}`}
         id={music.id}
         data={music}
-        onSelect={actionSetSingleSelectedMusicId}
-        isSelected={music.id === currentSingleSelectedId}
+        onSelect={isMultipleSelect
+          ? actionSetMultipleSelectedMusicIds
+          : actionSetSingleSelectedMusicId}
+
+        isSelected={isMultipleSelect
+          ? currentMultipleSelectedMusicIds.includes(music.id)
+          : music.id === currentSingleSelectedId}
         isMultipleSelect={isMultipleSelect}
+        order={isMultipleSelect
+          ? currentMultipleSelectedMusicIds.indexOf(music.id)
+          : null}
       />
     ))
   }

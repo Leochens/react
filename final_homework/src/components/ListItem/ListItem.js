@@ -9,7 +9,7 @@ export default class ListItem extends Component {
     onSelect && onSelect(id);
   }
   render() {
-    const { data, isMultipleSelect } = this.props;
+    const { data, isMultipleSelect, order } = this.props;
     return (
       <div
         className="list-item"
@@ -19,7 +19,8 @@ export default class ListItem extends Component {
           <CheckBox
             isChecked={this.props.isSelected}
             type={isMultipleSelect ? 'multiple' : 'single'}
-            // order={1}
+            // 如果当前ids数组里没有 那么就会返回-1 再+1就是0 不显示
+            order={order+1}
           />
         </span>
         {data.name}

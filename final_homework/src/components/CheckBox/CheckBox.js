@@ -33,7 +33,7 @@ export default class CheckBox extends Component {
           type="checkbox" />
         <span className="multi-check">
           <span>
-            {order}
+            {order ? order : null}
           </span>
         </span>
       </label>
