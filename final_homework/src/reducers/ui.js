@@ -7,7 +7,7 @@ const ui = (state = {
   share: false,
   delete: false,
   modalIsActive: false,
-  isAudioBarActive: false,
+  isToolPenaActive: false,
   modalMessage: ''
 }, action) => {
   switch (action.type) {
@@ -21,7 +21,7 @@ const ui = (state = {
     case ActionTypes.PLAY_MUSIC: {
       return {
         ...state,
-        isAudioBarActive: true
+        isToolPenaActive: true
       }
     }
 
@@ -54,7 +54,7 @@ const ui = (state = {
     case ActionTypes.CLOSE_AUDIOBAR: {
       return {
         ...state,
-        isAudioBarActive: false
+        isToolPenaActive: false
       }
     }
     default: return state;

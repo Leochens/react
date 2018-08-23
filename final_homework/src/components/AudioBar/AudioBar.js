@@ -9,11 +9,9 @@ export default class AudioBar extends Component {
     endTime: 1,
     isPause: true
   };
-
   static defaultProps = {
     isAudioBarActive: false
   }
-
   pauseMusic = () => {
     const { audio } = this;
     if (!audio) {
@@ -25,7 +23,6 @@ export default class AudioBar extends Component {
       isPause: true
     });
   }
-
   playMusic = () => {
     const { audio } = this;
     if (!audio) {
@@ -46,6 +43,11 @@ export default class AudioBar extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { music } = nextProps;
+
+    // 关键判断 不然父级组件不能每秒都得到时间
+    if(this.props.music === music) {
+      return ;
+    }
     this.setState({
       seconds: 0,
       endTime: ~~music.du,
@@ -65,11 +67,8 @@ export default class AudioBar extends Component {
         seconds: seconds + 1
       });
     }
-  }
-
-  getClassName = () => {
-    const { isAudioBarActive } = this.props;
-    return 'audio-bar-wrapper' + (isAudioBarActive ? ' ' : ' hide')
+    // 每秒都向上一组件发送当前时间串
+    this.sendTimeString();
   }
 
   setAudioPos = pos => {
@@ -78,33 +77,30 @@ export default class AudioBar extends Component {
     audio.currentTime = curTime;
     this.setState({
       seconds: curTime
-    })
+    });
+    // 有拖动事件 向上一组件发送当前时间串
+    // console.log('发生拖动事件');
+    this.sendTimeString();
+  }
+  sendTimeString = () => {
+    const { onTimeChange } = this.props;
+    const timeString = this.getTimeString();
+    onTimeChange && onTimeChange(timeString);
   }
 
   /**
    * 时间格式化
    */
-  renderMinutes = () => {
+  getTimeString = () => {
     const { seconds, endTime } = this.state;
     const curSecAndMin = secondToMinutes(seconds).split(':');
     const endSecAndMin = secondToMinutes(endTime).split(':');
-
     const cur = addPreZero(curSecAndMin[0]) + ':' + addPreZero(curSecAndMin[1]);
     const end = addPreZero(endSecAndMin[0]) + ':' + addPreZero(endSecAndMin[1]);
-    return (
-      <div className="audio-time">{cur} / {end}</div>
-    );
+    return `${cur} / ${end}`;
   }
-  onClose = () => {
-    const { onClose } = this.props;
-    this.setState({
-      seconds: 0,
-      endTime: 1,
-      isPause: true
-    });
-    onClose && onClose();
-    clearInterval(this.interval);
-  }
+
+
   render() {
     const { music, isAudioBarActive } = this.props;
     const { isPause } = this.state;
@@ -113,38 +109,25 @@ export default class AudioBar extends Component {
       return null;
     }
     return (
-      <div className={this.getClassName()}>
-        <div className="audio-bar">
-          <audio
-            ref={self => this.audio = self}
-            autoPlay={false}
-            src={music.m_url}
-          ></audio>
-          <div className="audio-head">
-            <div className="title">{music.name}</div>
-            <button
-              className="close"
-              onClick={this.onClose}
-            >关闭</button>
-            {this.renderMinutes()}
-          </div>
-          <div className="play-bar">
-            <span
-              className="toggle-play"
-              onClick={this.handelTogglePlay}
-            >
-              <img src={isPause ? Images.btnPlay : Images.btnPause} alt="" />
-            </span>
-            <div className="slider">
-              <Slider
-                defaultValue={~~((this.state.seconds / this.state.endTime) * 100)}
-                onChange={this.setAudioPos}
-              ></Slider>
-            </div>
-          </div>
-        </div >
+      <div className="play-bar">
+        <audio
+          ref={self => this.audio = self}
+          autoPlay={false}
+          src={music.m_url}
+        ></audio>
+        <span
+          className="toggle-play"
+          onClick={this.handelTogglePlay}
+        >
+          <img src={isPause ? Images.btnPlay : Images.btnPause} alt="" />
+        </span>
+        <div className="slider">
+          <Slider
+            defaultValue={~~((this.state.seconds / this.state.endTime) * 100)}
+            onChange={this.setAudioPos}
+          ></Slider>
+        </div>
       </div>
-
     );
   }
 }

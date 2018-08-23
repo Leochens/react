@@ -4,7 +4,7 @@ import SelectBar from '../../components/SelectBar/SelectBar';
 import MusicList from '../../components/MusicList/MusicList';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
-import AudioBar from '../../components/AudioBar/AudioBar';
+import ToolPane from '../../components/ToolPena/ToolPena';
 
 
 
@@ -90,8 +90,8 @@ export default class MusicMain extends Component {
         <ToolBar
           tools={this.getTools()}
         />
-        <AudioBar
-          isAudioBarActive={ui.isAudioBarActive}
+        <ToolPane
+          isToolPenaActive={ui.isToolPenaActive}
           music={audio}
           onClose={UiActions.actionCloseAudioBar}
         />
