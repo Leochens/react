@@ -1,20 +1,87 @@
-.slider-wrapper{
-  width: 300px;
-  height: 8px;
-  background-color: red;
-  padding: 25px;
-  position: relative;
-  .slider-bar{
-   background-color: blue;
-   height: 100%;
-  }
-  .slider-ball{
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: green;
-    // top: 50%;
-    // margin-top: -10px;
-  }
+.sliderWrapper {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }
+
+.sliderWrapper .slider {
+  flex: 1;
+  padding: 15px 0;
+  user-select: none;
+}
+
+.sliderWrapperValue {
+  margin-left: .5em;
+  min-width: 24px;
+  color: #808080;
+  text-align: center;
+  font-size: 14px;
+}
+
+.sliderInner {
+  position: relative;
+  height: 2px;
+  background-color: #E9E9E9;
+}
+
+.sliderTrack {
+  height: 2px;
+  background-color: rgb(255, 33, 100);
+  width:80%;
+}
+
+.sliderHandler {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -14px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+// .slider-wrapper{
+//   width: 300px;
+//   height: 8px;
+//   // background-color: red;
+//   padding: 25px;
+//   position: relative;
+ 
+// }
+
+// input[type=range] {
+//   -webkit-appearance: none;
+//   width: 300px;
+//   border-radius: 2px; /*这个属性设置使填充进度条时的图形为圆角*/
+//   background: -webkit-linear-gradient(rgb(255, 33, 100), rgb(255, 33, 100)) no-repeat;
+//   background-size: 0% 100%; 
+// }
+// input[type=range]::-webkit-slider-thumb {
+//   -webkit-appearance: none;
+// }
+// input[type=range]::-webkit-slider-runnable-track {
+//   height: 2px;
+//   // background-color: rgb(255, 33, 100);
+//   // border-radius: 10px; /*将轨道设为圆角的*/
+//   // box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
+// }
+// input[type=range]:focus {
+//   outline: none;
+// }
+
+// input[type=range]::-webkit-slider-thumb {
+//   -webkit-appearance: none;
+//   height: 25px;
+//   width: 25px;
+//   margin-top: -12px;
+//   // margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+//   background: #ffffff; 
+//   border-radius: 50%; /*外观设置为圆形*/
+//   // border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+//   -moz-box-shadow:0px 0px 5px #999999;
+//   -webkit-box-shadow:0px 0px 5px #999999; box-shadow:0px 0px 5px #999999;
+// }

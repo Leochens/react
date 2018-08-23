@@ -1,50 +1,76 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Slider.less';
-export default class Slider extends Component {
-  state = {
-    startX: 0,
-    width: 0
+
+export default class Slider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flag: 0
+    };
+  }
+
+  static defaultProps = {
+    defaultValue: 50,
+    showValue: false
   };
 
-  handleTouchStart = e => {
-    const { clientX } = e.touches[0];
-    console.log("startX", clientX);
+  static propTypes = {
+    defaultValue: PropTypes.number.isRequired,
+    showValue: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
+  }
+  handleTouchStart = () => {
     this.setState({
-      startX: clientX
+      flag: 1
     });
   }
-  handleTouchMove = e => {
-    const { clientX } = e.touches[0];
-    console.log('curX', clientX);
-    const diff = (clientX - this.state.startX);
-    const percent = (diff / 300).toFixed(6) * 100;
-    console.log('percent', percent);
-    console.log('width', this.state.width);
 
-    const currentPosition = Math.max(0, Math.min(
-      this.state.startX + percent, 100));
-    this.setState({
-      width: currentPosition
-    })
+  handleTouchmove = (e) => {
+    const { flag } = this.state;
+    if (!flag) {
+      return;
+    }
+    this.sliderHandler.style.left = e.changedTouches[0].pageX - this.slideInner.offsetLeft + 'px';
+    this.sliderTrack.style.width = e.changedTouches[0].pageX - this.slideInner.offsetLeft + 'px';
+    let Innerwidth = document.defaultView.getComputedStyle(this.slideInner, null)['width']
+    let handlLeft = this.sliderTrack.style.width;
+    Innerwidth = parseInt(Innerwidth, 10);
+    handlLeft = parseInt(handlLeft, 10);
+    let value = Number.parseInt(handlLeft / Innerwidth * 100, 10)
+    
+    if (value >= 100 || value <= 0) {
+
+      this.setState({
+        flag: 0
+      })
+    }
   }
+
 
   render() {
     return (
-      <div className="slider-wrapper">
-        <div
-          style={{
-            width: (this.state.width) + '%'
-          }}
-          className="slider-bar"
-        ></div>
-        <div
-          style={{
-            left: (this.state.width) + '%'
-          }}
-          onTouchStart={this.handleTouchStart}
-          onTouchMove={this.handleTouchMove}
-          className="slider-ball"></div>
-        {this.state.width}
+      <div className="sliderWrapper" >
+        <div className="slider">
+          <div
+            className="sliderInner"
+            ref={self => this.slideInner = self}
+          >
+            <div
+              ref={self => this.sliderTrack = self}
+              style={{ width: this.props.defaultValue + '%' }}
+              className="sliderTrack"
+            ></div>
+            <div
+              ref={self => this.sliderHandler = self}
+              style={{ left: this.props.defaultValue + '%' }}
+              className="sliderHandler"
+              onTouchStart={this.handleTouchStart}
+              onTouchMove={this.handleTouchmove}
+            ></div>
+          </div>
+        </div>
+        {this.props.showValue ? <div id="sliderValue" className="sliderWrapperValue">{this.props.defaultValue}</div> : ''}
       </div>
     );
   }

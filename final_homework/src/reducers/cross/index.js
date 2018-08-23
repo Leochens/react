@@ -1,5 +1,5 @@
 import *  as ActionTypes from '../../contants/ActionTypes';
-
+import audio from './audio';
 const crossReducer = (state, action) => {
 
   // console.log('全部的State', state);
@@ -46,7 +46,7 @@ const crossReducer = (state, action) => {
         entities: {
           musics
         },
-        musicManage:{ isMultipleSelect }
+        musicManage: { isMultipleSelect }
       } = state;
 
       const curMusic = musics[id];
@@ -61,7 +61,20 @@ const crossReducer = (state, action) => {
 
       return {
         ...state,
-        ui: newToolUiState
+        ui: newToolUiState,
+        audio: audio(state, action)
+      }
+    }
+
+    case ActionTypes.SET_AUDIO_DATA: {
+      const {
+        ui: {
+          isMultipleSelect
+        }
+      } = state;
+      return {
+        ...state,
+        audio: isMultipleSelect ? {} : audio(state, action)
       }
     }
 

@@ -11,6 +11,8 @@ import Images from '../../contants/Images';
 import MusicMain from '../MusicMain/MusicMain';
 import Modal from '../../components/Modal/Modal';
 
+import Slider from '../../components/Slider/Slider';
+
 class AppMain extends Component {
   state = {};
   componentDidMount() {
@@ -39,6 +41,7 @@ class AppMain extends Component {
               ToolActions={this.props.ToolActions}
               currentMultipleSelectedMusicIds={this.props.currentMultipleSelectedMusicIds}
               currentSingleSelectedId={this.props.currentSingleSelectedId}
+              audio={this.props.audio}
             />
           </TabItem  >
           <TabItem id={2} title={'搜索音乐'}
@@ -46,7 +49,9 @@ class AppMain extends Component {
               active: Images.searchAc,
               normal: Images.search
             }}
-          >搜索音乐</TabItem>
+          >
+          <Slider />
+          </TabItem>
           <TabItem id={3} title={'上传音乐'}
             icon={{
               active: Images.uploadAc,
@@ -55,7 +60,7 @@ class AppMain extends Component {
           >上传音乐</TabItem>
         </Tabs >
         <Modal
-          message={'确认删除哈哈哈哈-哈哈哈哈.mp3这首歌曲吗？'}
+          message={'确认删除歌曲吗？'}
           isActive={this.props.ui.modalIsActive}
           onOk={()=>this.props.ToolActions.actiondeleteMusic(this.props.ui.isMultipleSelect)}
           onCancel={this.props.UiActions.actionHideModal}
@@ -77,7 +82,8 @@ const mapStateToProps = state => {
     login: userData,
     entities: {
       musics
-    }
+    },
+    audio
   } = state;
 
   const myMusics = myMusicIds.map(id => musics[id]);
@@ -88,7 +94,8 @@ const mapStateToProps = state => {
     recommendMusics,
     currentMultipleSelectedMusicIds,
     currentSingleSelectedId,
-    ui
+    ui,
+    audio
   };
 };
 

@@ -4,6 +4,7 @@ import SelectBar from '../../components/SelectBar/SelectBar';
 import MusicList from '../../components/MusicList/MusicList';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
+import AudioBar from '../../components/AudioBar/AudioBar';
 
 
 
@@ -59,7 +60,8 @@ export default class MusicMain extends Component {
       currentSingleSelectedId,
       SelectActions,
       UiActions,
-      ui
+      ui,
+      audio
     } = this.props;
     return (
       <div className="wrapper">
@@ -87,6 +89,10 @@ export default class MusicMain extends Component {
         />
         <ToolBar
           tools={this.getTools()}
+        />
+        <AudioBar
+          ui={ui}
+          music={audio}
         />
       </div>
     );

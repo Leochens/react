@@ -10,7 +10,8 @@ const combineReducer = combineReducers({
   entities,
   musicManage,
   login,
-  ui
+  ui,
+  audio: () => { return {}}
 });
 
 const RootReducer = (state, action) => {
