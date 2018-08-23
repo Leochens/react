@@ -17,6 +17,9 @@ export default class AudioBar extends Component {
   pauseMusic = () => {
     // console.log(this.audio);
     const { audio } = this;
+    if (!audio) {
+      return;
+    }
     audio.pause();
     clearInterval(this.interval);
     this.setState({
@@ -45,8 +48,11 @@ export default class AudioBar extends Component {
     const { music } = nextProps;
     this.setState({
       seconds: 0,
-      endTime: ~~music.du
-    })
+      endTime: ~~music.du,
+      isPause: true
+    });
+    clearInterval(this.interval);
+
   }
 
   // setCurrentTime = () => {
@@ -72,6 +78,19 @@ export default class AudioBar extends Component {
     return 'audio-bar-wrapper' + (isAudioBarActive ? ' ' : ' hide')
   }
 
+  setAudioPos = pos => {
+    const { audio } = this;
+    const curTime = this.state.endTime * (pos/100).toFixed(2)*1
+    audio.currentTime = curTime;
+    this.setState({
+      seconds: curTime
+    })
+  }
+
+  // getSliderPos = () => {
+
+  // }
+
   /**
    * 时间格式化
    */
@@ -86,11 +105,22 @@ export default class AudioBar extends Component {
       <div className="audio-time">{cur} / {end}</div>
     );
   }
+  onClose = () => {
+    const { onClose } = this.props;
+    this.setState({
+      seconds: 0,
+      endTime: 1,
+      isPause: true
+    });
+    onClose && onClose();
+    clearInterval(this.interval);
+
+  }
   render() {
-    const { music, onClose, isAudioBarActive } = this.props;
+    const { music, isAudioBarActive } = this.props;
     const { isPause } = this.state;
     console.log('audio-bar', this.state);
-    if(!isAudioBarActive) {
+    if (!isAudioBarActive) {
       return null;
     }
     return (
@@ -105,7 +135,7 @@ export default class AudioBar extends Component {
             <div className="title">{music.name}</div>
             <button
               className="close"
-              onClick={onClose}  
+              onClick={this.onClose}
             >关闭</button>
             {this.renderMinutes()}
           </div>
@@ -119,6 +149,7 @@ export default class AudioBar extends Component {
             <div className="slider">
               <Slider
                 defaultValue={~~((this.state.seconds / this.state.endTime) * 100)}
+                onChange={this.setAudioPos}
               ></Slider>
             </div>
 

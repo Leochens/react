@@ -11,8 +11,10 @@ export default class Slider extends React.Component {
   }
 
   static defaultProps = {
-    defaultValue: 50,
-    showValue: false
+    defaultValue: 0,
+    showValue: false,
+    value: 0,
+    onChange: () => { }
   };
 
   static propTypes = {
@@ -38,15 +40,23 @@ export default class Slider extends React.Component {
     Innerwidth = parseInt(Innerwidth, 10);
     handlLeft = parseInt(handlLeft, 10);
     let value = Number.parseInt(handlLeft / Innerwidth * 100, 10)
-    
-    if (value >= 100 || value <= 0) {
 
+    if (value >= 100 || value <= 0) {
       this.setState({
-        flag: 0
+        flag: 0,
+        value: Math.max(0, Math.min(100, value))
+      })
+    } else {
+      this.setState({
+        value
       })
     }
   }
-
+  handleTouchEnd = () => {
+    const { onChange } = this.props;
+    // console.log('value change ',this.state.value);
+    onChange && onChange(this.state.value);
+  }
 
   render() {
     return (
@@ -67,6 +77,7 @@ export default class Slider extends React.Component {
               className="sliderHandler"
               onTouchStart={this.handleTouchStart}
               onTouchMove={this.handleTouchmove}
+              onTouchEnd={this.handleTouchEnd}
             ></div>
           </div>
         </div>
