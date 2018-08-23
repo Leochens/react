@@ -5,7 +5,9 @@ const ui = (state = {
   rename: false,
   slice: false,
   share: false,
-  delete: false
+  delete: false,
+  modalIsActive: true,
+  modalMessage: ''
 }, action) => {
   switch (action.type) {
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
@@ -26,27 +28,21 @@ const ui = (state = {
         delete: true
       }
     }
-
-    case ActionTypes.UPDATE_TOOL_STATE: {
-      const { toolState } = action;
-      if(state.isMultipleSelect) {
-        return {
-          ...state,
-          play: false,
-          rename: false,
-          slice: false,
-          share: false,
-          delete: true
-        }
-      }
+    
+    case ActionTypes.SHOW_MODAL: {
       return {
         ...state,
-        ...toolState
+        modalIsActive: true
       }
     }
 
-    // 发现有不是我的音乐的 就不能删除 此时多选什么都不做
-
+    case ActionTypes.HIDE_MODAL: {
+      return {
+        ...state,
+        modalIsActive: false,
+        modalMessage:''
+      }
+    }
     default: return state;
   }
 };

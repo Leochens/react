@@ -1,8 +1,12 @@
 import * as ActionTypes from '../contants/ActionTypes';
 
-export const actionUpdateToolState = toolState => {
+export const actionShowModal = () => {
   return {
-    type: ActionTypes.UPDATE_TOOL_STATE,
-    toolState
+    type: ActionTypes.SHOW_MODAL,
+  }
+}
+export const actionHideModal = () => {
+  return {
+    type: ActionTypes.HIDE_MODAL,
   }
 }

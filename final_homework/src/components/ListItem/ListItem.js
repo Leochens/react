@@ -4,22 +4,9 @@ import CheckBox from '../CheckBox/CheckBox';
 
 export default class ListItem extends Component {
   handleClickMusic = () => {
-    const { onSelect, id, updateToolState } = this.props;
+    const { onSelect, id } = this.props;
 
     onSelect && onSelect(id);
-    this.updateToolState();
-  }
-
-  updateToolState = () => {
-    const { isMultipleSelect, actionUpdateToolState, data } = this.props;
-    const newToolState = {
-      play: isMultipleSelect ? false : true,
-      rename: data.plp || !data.med ? false : true,
-      slice: data.med ? true : false,
-      share: data.med ? true : false,
-      delete: data.med ? true : false
-    }
-    actionUpdateToolState && actionUpdateToolState(newToolState);
   }
 
   render() {
