@@ -17,6 +17,7 @@ const audio = (state, action) => {
       return ownState;
     }
     case ActionTypes.PLAY_MUSIC: {
+      console.log('hahah', ownState);
       return ownState;
     }
     default: return ownState;

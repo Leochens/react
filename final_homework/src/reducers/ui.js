@@ -7,6 +7,7 @@ const ui = (state = {
   share: false,
   delete: false,
   modalIsActive: false,
+  isAudioBarActive: false,
   modalMessage: ''
 }, action) => {
   switch (action.type) {
@@ -14,6 +15,13 @@ const ui = (state = {
       return {
         ...state,
         isMultipleSelect: false,
+      }
+    }
+    
+    case ActionTypes.PLAY_MUSIC: {
+      return {
+        ...state,
+        isAudioBarActive: true
       }
     }
 
@@ -41,6 +49,12 @@ const ui = (state = {
         ...state,
         modalIsActive: false,
         modalMessage:''
+      }
+    }
+    case ActionTypes.CLOSE_AUDIOBAR: {
+      return {
+        ...state,
+        isAudioBarActive: false
       }
     }
     default: return state;

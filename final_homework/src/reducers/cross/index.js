@@ -61,8 +61,7 @@ const crossReducer = (state, action) => {
 
       return {
         ...state,
-        ui: newToolUiState,
-        audio: audio(state, action)
+        ui: newToolUiState
       }
     }
 
@@ -78,7 +77,11 @@ const crossReducer = (state, action) => {
       }
     }
 
-    default: return state;
+    // 音频事件是后执行的
+    default:  return {
+      ...state,
+      audio: audio(state, state.audio, action)
+    }
   }
 
 }

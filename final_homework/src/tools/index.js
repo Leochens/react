@@ -21,5 +21,12 @@ export const deleteArrayItem = (arr, item, step = 1) => {
  * @param {秒数} seconds 
  */
 export const secondToMinutes = seconds => {
-  return seconds;
+  return ~~(seconds / 60) + ':' + ~~(seconds % 60);
+}
+/**
+ * 补零函数
+ * @param {数字} num 
+ */
+export const addPreZero = num => {
+  return ('00' + num).slice(-2);
 }

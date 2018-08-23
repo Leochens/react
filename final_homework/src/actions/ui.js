@@ -10,3 +10,9 @@ export const actionHideModal = () => {
     type: ActionTypes.HIDE_MODAL,
   }
 }
+
+export const actionCloseAudioBar = () => {
+  return {
+    type: ActionTypes.CLOSE_AUDIOBAR
+  }
+}

@@ -12,14 +12,14 @@ export default class MusicMain extends Component {
   state = {};
 
   getTools = () => {
-    const { ui, UiActions } = this.props;
+    const { ui, UiActions, ToolActions } = this.props;
     return [
       {
         title: '播放',
         icon: Images.btnNewPlay,
         iconAc: Images.btnNewPlayAc,
         isActive: ui.play,
-        action: () => { }
+        action: ToolActions.actionPlayMusic
       },
       {
         title: '重命名',
@@ -91,8 +91,9 @@ export default class MusicMain extends Component {
           tools={this.getTools()}
         />
         <AudioBar
-          ui={ui}
+          isAudioBarActive={ui.isAudioBarActive}
           music={audio}
+          onClose={UiActions.actionCloseAudioBar}
         />
       </div>
     );

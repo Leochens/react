@@ -15,5 +15,6 @@ export const SLICE_MUSIC = 'SLICE_MUSIC';
 
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
+export const CLOSE_AUDIOBAR = 'CLOSE_AUDIOBAR';
 
 export const SET_AUDIO_DATA = 'SET_AUDIO_DATA';
