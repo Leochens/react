@@ -80,6 +80,7 @@ const musicManage = (state = {
       return state;
     }
     case ActionTypes.DELETE_MUSIC: {
+      
       return state;
     }
     case ActionTypes.SHARE_MUSIC: {

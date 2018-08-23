@@ -9,14 +9,17 @@ export default class Modal extends Component {
     return isActive ? 'modal-show' : 'modal-hide';
   }
 
-  onCancel = () => {
+  onCancel = (e) => {
+    e.stopPropagation();
     const { onCancel } = this.props;
     onCancel && onCancel();
   }
 
-  onOk = () => {
-    const { onOk } = this.props;
+  onOk = (e) => {
+    e.stopPropagation();
+    const { onOk,onCancel } = this.props;
     onOk && onOk();
+    onCancel && onCancel();
   }
 
   render() {
@@ -25,7 +28,8 @@ export default class Modal extends Component {
     return (
       <div
         className={this.getClassName()}
-        onClick={this.onCancel}>
+        onClick={this.onCancel}
+      >
         <div className="modal-wrapper">
           <div className="content">
             {message}

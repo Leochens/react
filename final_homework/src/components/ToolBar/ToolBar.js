@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './ToolBar.less';
-import Images from '../../contants/Images';
 
 const ToolItem = props => {
 
@@ -9,7 +8,10 @@ const ToolItem = props => {
     isActive && action && action();
   }
   return (
-    <div className="item">
+    <div
+      className="item"
+      onClick={handleTap}
+      >
       <div className="icon">
         <img src={props.icon} alt={props.title} />
       </div>
@@ -26,45 +28,7 @@ export default class ToolBar extends Component {
   state = {};
 
   renderTools = () => {
-    const { ui } = this.props;
-    const tools = [
-      {
-        title: '播放',
-        icon: Images.btnNewPlay,
-        iconAc: Images.btnNewPlayAc,
-        isActive: ui.play,
-        action: () => { }
-      },
-      {
-        title: '重命名',
-        icon: Images.btnRename,
-        iconAc: Images.btnRenameAc,
-        isActive: ui.rename,
-        action: () => { }
-      },
-      {
-        title: '选取片段',
-        icon: Images.btnCut,
-        iconAc: Images.btnCutAc,
-        isActive: ui.slice,
-        action: () => { }
-      },
-      {
-        title: '送给朋友',
-        icon: Images.btnShare,
-        iconAc: Images.btnShareAc,
-        isActive: ui.share,
-        action: () => { }
-      },
-      {
-        title: '删除',
-        icon: Images.btnDelete,
-        iconAc: Images.btnDeleteAc,
-        isActive: ui.delete,
-        action: () => { }
-      },
-    ];
-
+    const { tools } = this.props;
     return tools.map((item, idx) => (<ToolItem
       key={`tool_${idx}`}
       title={item.title}

@@ -36,6 +36,7 @@ class AppMain extends Component {
               recommendMusics={this.props.recommendMusics}
               SelectActions={this.props.SelectActions}
               UiActions={this.props.UiActions}
+              ToolActions={this.props.ToolActions}
               currentMultipleSelectedMusicIds={this.props.currentMultipleSelectedMusicIds}
               currentSingleSelectedId={this.props.currentSingleSelectedId}
             />

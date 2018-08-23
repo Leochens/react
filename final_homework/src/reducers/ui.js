@@ -6,7 +6,7 @@ const ui = (state = {
   slice: false,
   share: false,
   delete: false,
-  modalIsActive: true,
+  modalIsActive: false,
   modalMessage: ''
 }, action) => {
   switch (action.type) {

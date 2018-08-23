@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './SelectBox.less';
 export default class SelectBox extends Component {
   state = {};
+  
+  static defaultProps = {
+    checked: false
+  }
 
   handleCheck = e => {
     const {
