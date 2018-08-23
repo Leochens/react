@@ -1,4 +1,5 @@
 import * as ActionTypes from '../contants/ActionTypes';
+import { deleteArrayItem } from '../tools';
 
 const musicManage = (state = {
   myMusicIds: [],
@@ -75,13 +76,32 @@ const musicManage = (state = {
         ]
       }
     }
-    
+
     case ActionTypes.PLAY_MUSIC: {
       return state;
     }
     case ActionTypes.DELETE_MUSIC: {
-      
-      return state;
+      const { isMultipleSelect } = action;
+      const {
+        currentMultipleSelectedMusicIds: mId,
+        currentSingleSelectedId: sId,
+        myMusicIds
+      } = state;
+      const newMyMusicIds = myMusicIds.slice();
+      const _mId = mId.slice(); 
+      if (isMultipleSelect) { // 多选
+        mId.forEach(id => {
+          deleteArrayItem(newMyMusicIds, id);
+        });
+      } else {  // 单选
+        deleteArrayItem(newMyMusicIds, sId);
+        deleteArrayItem(_mId, sId);
+      }
+      return {
+        ...state,
+        myMusicIds: newMyMusicIds,
+        currentMultipleSelectedMusicIds: isMultipleSelect ? [] : _mId
+      }
     }
     case ActionTypes.SHARE_MUSIC: {
       return state;

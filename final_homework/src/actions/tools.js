@@ -6,9 +6,10 @@ export const actionRenameMusic = () => {
   }
 }
 
-export const actiondeleteMusic = () => {
+export const actiondeleteMusic = (isMultipleSelect) => {
   return {
-    type: ActionTypes.DELETE_MUSIC
+    type: ActionTypes.DELETE_MUSIC,
+    isMultipleSelect
   }
 }
 

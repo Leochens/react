@@ -11,7 +11,7 @@ const crossReducer = (state, action) => {
       const {
         musicManage: {
           currentMultipleSelectedMusicIds: cIds,
-          recommendMusicIds: rIds
+          recommendMusicIds: rIds,
         }
       } = state;
       // 一个都没选 不能删除

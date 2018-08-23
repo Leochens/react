@@ -57,7 +57,7 @@ class AppMain extends Component {
         <Modal
           message={'确认删除哈哈哈哈-哈哈哈哈.mp3这首歌曲吗？'}
           isActive={this.props.ui.modalIsActive}
-          onOk={this.props.ToolActions.actiondeleteMusic}
+          onOk={()=>this.props.ToolActions.actiondeleteMusic(this.props.ui.isMultipleSelect)}
           onCancel={this.props.UiActions.actionHideModal}
         />
       </div >
