@@ -22,10 +22,40 @@ export default class Slider extends React.Component {
     showValue: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
   }
+
   handleTouchStart = () => {
     this.setState({
       flag: 1
     });
+  }
+
+  setSliderStyle = (e, type = 'touch') => {
+    const pageX = type === 'touch' ? e.changedTouches[0].pageX : e.pageX;
+    this.sliderHandler.style.left = pageX - this.slideInner.offsetLeft + 'px';
+    this.sliderTrack.style.width = pageX - this.slideInner.offsetLeft + 'px';
+    let Innerwidth = document.defaultView.getComputedStyle(this.slideInner, null)['width']
+    let handlLeft = this.sliderTrack.style.width;
+    Innerwidth = parseInt(Innerwidth, 10);
+    handlLeft = parseInt(handlLeft, 10);
+    let value = Number.parseInt(handlLeft / Innerwidth * 100, 10)
+    if (value >= 100 || value <= 0) {
+      this.setState({
+        flag: 0,
+        value: Math.max(0, Math.min(100, value))
+      });
+      return value;
+    } else {
+      this.setState({
+        value
+      });
+      return value;
+    }
+  }
+
+  handleClickSliderInner = (e) => {
+    const { onChange } = this.props;
+    const value = this.setSliderStyle(e, 'click');
+    onChange && onChange(value);
   }
 
   handleTouchmove = (e) => {
@@ -33,30 +63,15 @@ export default class Slider extends React.Component {
     if (!flag) {
       return;
     }
-    this.sliderHandler.style.left = e.changedTouches[0].pageX - this.slideInner.offsetLeft + 'px';
-    this.sliderTrack.style.width = e.changedTouches[0].pageX - this.slideInner.offsetLeft + 'px';
-    let Innerwidth = document.defaultView.getComputedStyle(this.slideInner, null)['width']
-    let handlLeft = this.sliderTrack.style.width;
-    Innerwidth = parseInt(Innerwidth, 10);
-    handlLeft = parseInt(handlLeft, 10);
-    let value = Number.parseInt(handlLeft / Innerwidth * 100, 10)
-
-    if (value >= 100 || value <= 0) {
-      this.setState({
-        flag: 0,
-        value: Math.max(0, Math.min(100, value))
-      })
-    } else {
-      this.setState({
-        value
-      })
-    }
+    this.setSliderStyle(e, 'touch');
   }
+
   handleTouchEnd = () => {
     const { onChange } = this.props;
     // console.log('value change ',this.state.value);
     onChange && onChange(this.state.value);
   }
+
 
   render() {
     return (
@@ -65,11 +80,13 @@ export default class Slider extends React.Component {
           <div
             className="sliderInner"
             ref={self => this.slideInner = self}
+            onClick={this.handleClickSliderInner}
           >
             <div
               ref={self => this.sliderTrack = self}
               style={{ width: this.props.defaultValue + '%' }}
               className="sliderTrack"
+
             ></div>
             <div
               ref={self => this.sliderHandler = self}

@@ -15,7 +15,6 @@ export default class AudioBar extends Component {
   }
 
   pauseMusic = () => {
-    // console.log(this.audio);
     const { audio } = this;
     if (!audio) {
       return;
@@ -29,13 +28,15 @@ export default class AudioBar extends Component {
 
   playMusic = () => {
     const { audio } = this;
+    if (!audio) {
+      return;
+    }
     this.interval = setInterval(() => this.tick(), 1000);
     audio.play();
     this.setState({
       isPause: false
     });
   }
-
   handelTogglePlay = () => {
     if (this.state.isPause) {
       this.playMusic();
@@ -43,7 +44,6 @@ export default class AudioBar extends Component {
       this.pauseMusic();
     }
   }
-
   componentWillReceiveProps(nextProps) {
     const { music } = nextProps;
     this.setState({
@@ -52,14 +52,7 @@ export default class AudioBar extends Component {
       isPause: true
     });
     clearInterval(this.interval);
-
   }
-
-  // setCurrentTime = () => {
-  //   const { audio } = this;
-  // }
-
-
   tick = () => {
     const { seconds, endTime } = this.state;
     if (seconds >= endTime) {
@@ -73,6 +66,7 @@ export default class AudioBar extends Component {
       });
     }
   }
+
   getClassName = () => {
     const { isAudioBarActive } = this.props;
     return 'audio-bar-wrapper' + (isAudioBarActive ? ' ' : ' hide')
@@ -80,16 +74,12 @@ export default class AudioBar extends Component {
 
   setAudioPos = pos => {
     const { audio } = this;
-    const curTime = this.state.endTime * (pos/100).toFixed(2)*1
+    const curTime = this.state.endTime * (pos / 100).toFixed(2) * 1
     audio.currentTime = curTime;
     this.setState({
       seconds: curTime
     })
   }
-
-  // getSliderPos = () => {
-
-  // }
 
   /**
    * 时间格式化
@@ -114,12 +104,11 @@ export default class AudioBar extends Component {
     });
     onClose && onClose();
     clearInterval(this.interval);
-
   }
   render() {
     const { music, isAudioBarActive } = this.props;
     const { isPause } = this.state;
-    console.log('audio-bar', this.state);
+    // console.log('audio-bar', this.state);
     if (!isAudioBarActive) {
       return null;
     }
@@ -152,9 +141,7 @@ export default class AudioBar extends Component {
                 onChange={this.setAudioPos}
               ></Slider>
             </div>
-
           </div>
-
         </div >
       </div>
 
