@@ -11,7 +11,6 @@ export default class PlayToolPane extends Component {
   };
   componentWillMount() {
     const { music } = this.props;
-    console.log('托管组件componentWillMount');
     this.setState({
       bmt: music.bmt,
       emt: music.emt,
@@ -19,14 +18,12 @@ export default class PlayToolPane extends Component {
     });
   }
   getAudioTime = timeString => {
-    console.log('检测到时间串发生变化', timeString);
     this.setState({
       timeString
     });
   }
   onClose = () => {
     const { onClose } = this.props;
-
     this.setState({
       timeString: '00:00 / 00:00',
       pause: true
@@ -38,7 +35,6 @@ export default class PlayToolPane extends Component {
       music,
       isToolPenaActive,
     } = this.props;
-    console.log('tool next music', music);
     return (
       <div className="audio-bar">
         <div className="audio-head">

@@ -1,7 +1,7 @@
 import * as ActionTypes from '../contants/ActionTypes';
 const ui = (state = {
   isMultipleSelect: false,
-  play: true,
+  play: false,
   rename: false,
   slice: false,
   share: false,

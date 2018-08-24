@@ -1,6 +1,15 @@
 import *  as ActionTypes from '../../contants/ActionTypes';
 import audio from './audio';
 const getToolPaneState = (musics, id) => {
+  if(!musics || !id || !musics[id]) {  // 不传参数说明当前都没有选中
+    return {
+      play: false,
+      rename: false,
+      slice: false,
+      share: false,
+      delete: false
+    }
+  }
   const curMusic = musics[id];
   return {
     play: true,
@@ -13,7 +22,6 @@ const getToolPaneState = (musics, id) => {
 
 const crossReducer = (state, action) => {
 
-  // console.log('全部的State', state);
 
   switch (action.type) {
 
@@ -63,44 +71,64 @@ const crossReducer = (state, action) => {
         }
       }
     }
-
-    case ActionTypes.SET_CURRENT_TOOL:
-    case ActionTypes.CLEAR_SLICE_MUSIC:
-    case ActionTypes.SLICE_MUSIC_END_POS:
-    case ActionTypes.SLICE_MUSIC_START_POS:
-    {
-      return {
-        ...state,
-        audio: audio(state, action)
-      }
-    }
-    // 音频事件是后执行的
-    default: {
-      console.log('default');
+    case ActionTypes.DELETE_MUSIC: {
       const {
         musicManage: {
           currentSingleSelectedId: sId
         },
-        entities: {
-          musics
-        }
       } = state;
-      console.log(state);
-      if (!musics[0]) {
-        return state;
-      }
-
-      if (sId) {
-        const newToolPaneState = getToolPaneState(musics, sId);
+      if(!sId) {
         return {
           ...state,
-          audio: audio(state, action),
-          ui: {
-            ...state.ui,
-            ...newToolPaneState
-          }
+          ui: getToolPaneState()
         }
       }
+      return state;
+
+    }
+    case ActionTypes.SET_CURRENT_TOOL:
+    case ActionTypes.CLEAR_SLICE_MUSIC:
+    case ActionTypes.SLICE_MUSIC_END_POS:
+    case ActionTypes.SLICE_MUSIC_START_POS:
+      {
+        return {
+          ...state,
+          audio: audio(state, action)
+        }
+      }
+    case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`:
+    // case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`:
+      {
+        console.log('default');
+        const {
+          musicManage: {
+            currentSingleSelectedId: sId
+          },
+          entities: {
+            musics
+          }
+        } = state;
+        console.log(state);
+        if (sId) {
+          const newToolPaneState = getToolPaneState(musics, sId);
+          return {
+            ...state,
+            audio: audio(state, action),
+            ui: {
+              ...state.ui,
+              ...newToolPaneState
+            }
+          }
+        }
+        return {
+          ...state,
+          audio: audio(state, action)
+        }
+      }
+
+    // 音频事件是后执行的
+    default: {
+
       return {
         ...state,
         audio: audio(state, action)

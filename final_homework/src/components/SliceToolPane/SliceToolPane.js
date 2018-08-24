@@ -3,17 +3,17 @@ import './SliceToolPane.less';
 import AudioBar from '../AudioBar/AudioBar';
 import Images from '../../contants/Images';
 import { secondToMinutes, timeStringToSeconds } from '../../tools';
-import Toast from '../Toast/Toast';
 
 export default class SliceToolPane extends Component {
   state = {
     timeString: '00:00 / 00:00',
     bmt: 0,
     emt: 0,
-    endTime: 0
+    endTime: 0,
+    hasSetBmt: false,
+    hasSetEmt: false,
   };
   getAudioTime = timeString => {
-    console.log('检测到时间串发生变化', timeString);
     this.setState({
       timeString
     });
@@ -23,33 +23,54 @@ export default class SliceToolPane extends Component {
     this.setState({
       bmt: music.bmt,
       emt: music.emt,
-      endTime: music.emt ? music.emt : music.du
+      endTime: music.emt ? music.emt : music.du,
+      hasSetBmt: music.bmt ? true : false,
+      hasSetEmt: music.emt ? true : false,
     });
   }
 
   setEmt = () => {
     const { timeString } = this.state;
-
+    if (!this.state.hasSetBmt) {
+      window.alert('请先标记起点');
+      return;
+    }
+    if(this.state.hasSetEmt) {
+      window.alert("请先点击清除");
+      return;
+    }
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
     this.setState({
       emt: curSenconds,
-      endTime: curSenconds
+      endTime: curSenconds,
+      hasSetEmt: true
     })
   }
   setBmt = () => {
+    if (this.state.hasSetBmt) {
+      window.alert("请先点击清除");
+      return;
+    }
     const { timeString } = this.state;
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
     this.setState({
-      bmt: curSenconds
+      bmt: curSenconds,
+      hasSetBmt: true
     })
   }
   clearSlice = () => {
+    if (!this.state.hasSetBmt && !this.state.hasSetEmt) {
+      window.alert("你还没有选择起点和终点！");
+      return;
+    }
     const { music: { id, du }, SelectActions } = this.props;
 
     this.setState({
       emt: 0,
       bmt: 0,
-      endTime: du
+      endTime: du,
+      hasSetBmt: false,
+      hasSetEmt: false
     });
     SelectActions.actionClearSliceMusic(id);
   }
@@ -68,13 +89,16 @@ export default class SliceToolPane extends Component {
     onClose && onClose();
   }
   renderSliceTools = () => {
+    const { hasSetBmt, hasSetEmt } = this.state;
     return (
       <div className="slice-pane-tools">
         <span
           className="item"
           onClick={this.setBmt}
         >
-          <img src={Images.btnCutMusicStart} alt="" />
+          <img src={hasSetBmt
+            ? Images.btnCutMusicStart
+            : Images.btnCutMusicStartAc} alt="" />
           <div className="descript">标记起点</div>
           <div className="time">{secondToMinutes(this.state.bmt)}</div>
         </span>
@@ -82,7 +106,9 @@ export default class SliceToolPane extends Component {
           className="item"
           onClick={this.clearSlice}
         >
-          <img src={Images.btnClear} alt="" />
+          <img src={(hasSetBmt || hasSetEmt)
+            ? Images.btnClearAc
+            : Images.btnClear} alt="" />
           <div className="descript">清除</div>
           <div className="time">&nbsp;</div>
         </span>
@@ -90,7 +116,9 @@ export default class SliceToolPane extends Component {
           className="item"
           onClick={this.setEmt}
         >
-          <img src={Images.btnCutMusicFinish} alt="" />
+          <img src={hasSetEmt
+            ? Images.btnCutMusicFinish
+            : Images.btnCutMusicFinishAc} alt="" />
           <div className="descript">标记终点</div>
           <div className="time">{secondToMinutes(this.state.emt)}</div>
         </span>
@@ -103,8 +131,6 @@ export default class SliceToolPane extends Component {
       music,
       isToolPenaActive,
     } = this.props;
-    console.log('托管组件的state', this.state);
-    console.log('tool next music', music);
     return (
       <div className="slice-pane">
         <div className="slice-pane-audio-head">
@@ -126,7 +152,6 @@ export default class SliceToolPane extends Component {
           onClick={this.onClose}
         >确认</span>
 
-        {/* <Toast msg="哈哈哈"/> */}
       </div >
     );
   }

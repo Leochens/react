@@ -52,10 +52,10 @@ export default class AudioBar extends Component {
   }
 
   handleTimeUpdate = (e) => {
-    const { music: { du }, onTimeChange,endTime,bmt } = this.props;
+    const { music: { du }, onTimeChange, endTime, bmt } = this.props;
     const curTime = e.target.currentTime;
-    if (curTime >= endTime) {
-      // this.pauseMusic();
+    if (curTime >= endTime || curTime <= bmt) {
+      // this.pauseMusic(); stop ? no! 老子不停 老子要无限循环
       e.target.currentTime = bmt ? bmt : 0;
       this.setState({
         seconds: bmt ? bmt : 0
@@ -71,7 +71,7 @@ export default class AudioBar extends Component {
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.playMusic();
   }
   render() {
@@ -87,7 +87,7 @@ export default class AudioBar extends Component {
         <audio
           ref={self => this.audio = self}
           src={music.m_url}
-          onTimeUpdate={this.handleTimeUpdate}          
+          onTimeUpdate={this.handleTimeUpdate}
         ></audio>
         <span
           className="toggle-play"
