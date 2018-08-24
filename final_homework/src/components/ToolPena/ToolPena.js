@@ -17,7 +17,8 @@ export default class ToolPane extends Component {
       isToolPenaActive,
       onClose,
       currentTool,
-      SelectActions
+      SelectActions,
+      UiActions,
     } = this.props;
     switch (currentTool) {
       case 'play':
@@ -35,6 +36,7 @@ export default class ToolPane extends Component {
             isToolPenaActive={isToolPenaActive}
             onClose={onClose}
             SelectActions={SelectActions}
+            UiActions={UiActions}
           />
         );
       default: return null;

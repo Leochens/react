@@ -5,7 +5,7 @@ import MusicList from '../../components/MusicList/MusicList';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
 import ToolPane from '../../components/ToolPena/ToolPena';
-
+import Toast from '../../components/Toast/Toast';
 
 
 export default class MusicMain extends Component {
@@ -96,7 +96,9 @@ export default class MusicMain extends Component {
           music={audio}
           onClose={UiActions.actionCloseAudioBar}
           SelectActions={SelectActions}
+          UiActions={UiActions}
         />
+
       </div>
     );
   }

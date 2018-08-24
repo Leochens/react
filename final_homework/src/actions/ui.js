@@ -23,3 +23,15 @@ export const actionSetCurrentTool = tool => {
     tool
   }
 }
+
+// export const actionShowToast = msg => {
+//   return {
+//     type: ActionTypes.SHOW_TOAST,
+//     msg
+//   }
+// }
+// export const actionHideToast = () => {
+//   return {
+//     type: ActionTypes.HIDE_TOAST
+//   }
+// }

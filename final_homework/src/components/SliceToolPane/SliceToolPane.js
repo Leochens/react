@@ -3,6 +3,7 @@ import './SliceToolPane.less';
 import AudioBar from '../AudioBar/AudioBar';
 import Images from '../../contants/Images';
 import { secondToMinutes, timeStringToSeconds } from '../../tools';
+import Toast from '../Toast/Toast';
 
 export default class SliceToolPane extends Component {
   state = {
@@ -28,6 +29,7 @@ export default class SliceToolPane extends Component {
 
   setEmt = () => {
     const { timeString } = this.state;
+
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
     this.setState({
       emt: curSenconds,
@@ -123,6 +125,8 @@ export default class SliceToolPane extends Component {
           className="slice-pane-ok"
           onClick={this.onClose}
         >确认</span>
+
+        {/* <Toast msg="哈哈哈"/> */}
       </div >
     );
   }

@@ -9,7 +9,7 @@ const ui = (state = {
   modalIsActive: false,
   isToolPenaActive: false,
   modalMessage: '',
-  currentTool: ''
+  currentTool: '',
 }, action) => {
   switch (action.type) {
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
@@ -18,14 +18,12 @@ const ui = (state = {
         isMultipleSelect: false,
       }
     }
-    
     case ActionTypes.PLAY_MUSIC: {
       return {
         ...state,
         isToolPenaActive: true
       }
     }
-
     case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
       return {
         ...state,
@@ -37,14 +35,12 @@ const ui = (state = {
         delete: true
       }
     }
-    
     case ActionTypes.SHOW_MODAL: {
       return {
         ...state,
         modalIsActive: true
       }
     }
-
     case ActionTypes.HIDE_MODAL: {
       return {
         ...state,
@@ -58,7 +54,6 @@ const ui = (state = {
         isToolPenaActive: false
       }
     }
-
     case ActionTypes.SET_CURRENT_TOOL: {
       const { tool } = action;
       return {
@@ -67,7 +62,22 @@ const ui = (state = {
         isToolPenaActive: true
       }
     }
-
+    // case ActionTypes.SHOW_TOAST: {
+    //   const { msg } = action;
+    //   return {
+    //     ...state,
+    //     toastIsActive: true,
+    //     toastMsg:msg
+    //   }
+    // }
+    // case ActionTypes.HIDE_TOAST: {
+    //   // const { msg } = action;
+    //   return {
+    //     ...state,
+    //     toastIsActive: false,
+    //     toastMsg:''
+    //   }
+    // }
     default: return state;
   }
 };

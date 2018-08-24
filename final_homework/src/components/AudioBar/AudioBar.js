@@ -7,7 +7,6 @@ export default class AudioBar extends Component {
   state = {
     du: 0,
     seconds: 0,
-    // endTime: 1,
     isPause: true
   };
   static defaultProps = {
@@ -25,13 +24,9 @@ export default class AudioBar extends Component {
   playMusic = () => {
     const { audio } = this;
     const { seconds } = this.state;
-    const { music, bmt, emt, endTime } = this.props;
-
-    console.log('props.music', music);
+    const { music, bmt, endTime } = this.props;
     if (!audio) return;
     audio.currentTime = seconds ? seconds : music.bmt;
-    console.log('currentTime', audio.currentTime);
-    this.interval = setInterval(() => this.tick(), 1000);
     audio.play();
     this.setState({
       seconds: bmt ? bmt : seconds,
@@ -47,49 +42,6 @@ export default class AudioBar extends Component {
       this.pauseMusic();
     }
   }
-  componentWillReceiveProps(nextProps) {
-    const { music, bmt, emt } = nextProps;
-    const { music: _music, bmt: _bmt, emt: _emt } = this.props;
-    console.log('next music', music);
-    // 关键判断 不然父级组件不能每秒都得到时间 并且会一卡一卡的
-    if (_music === music) {
-      return;
-    }
-    if (_bmt !== bmt) {
-      return;
-    }
-    if (_music !== music) {
-      this.setState({
-        seconds: bmt ? bmt : this.state.seconds,
-      })
-      return;
-    }
-    clearInterval(this.interval);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-
-  }
-  // 每秒执行 时钟函数
-  tick = () => {
-    const { seconds } = this.state;
-
-    const { bmt, emt, endTime } = this.props;
-    if (seconds >= endTime) {
-      this.pauseMusic();
-      this.setState({
-        seconds: bmt ? bmt : 0
-      });
-    } else {
-      this.setState({
-        seconds: seconds + 1
-      });
-    }
-    // 每秒都向上一组件发送当前时间串
-    this.sendTimeString();
-  }
-
   setAudioPos = pos => {
     const { audio } = this;
     const curTime = this.state.du * (pos / 100).toFixed(2) * 1
@@ -97,28 +49,27 @@ export default class AudioBar extends Component {
     this.setState({
       seconds: curTime
     });
-    // 有拖动事件 向上一组件发送当前时间串
-    // console.log('发生拖动事件');
-    this.sendTimeString();
-  }
-  sendTimeString = () => {
-    const { onTimeChange } = this.props;
-    const timeString = this.getTimeString();
-    onTimeChange && onTimeChange(timeString);
   }
 
-  /**
-   * 时间格式化
-   */
-  getTimeString = () => {
-    const { seconds, du } = this.state;
-    const curSecAndMin = secondToMinutes(seconds).split(':');
+  handleTimeUpdate = (e) => {
+    const { music: { du }, onTimeChange,endTime,bmt } = this.props;
+    const curTime = e.target.currentTime;
+    if (curTime >= endTime) {
+      this.pauseMusic();
+      e.target.currentTime = bmt ? bmt : 0;
+      this.setState({
+        seconds: bmt ? bmt : 0
+      });
+    }
+    const curSecAndMin = secondToMinutes(curTime).split(':');
     const endSecAndMin = secondToMinutes(du).split(':');
     const cur = addPreZero(curSecAndMin[0]) + ':' + addPreZero(curSecAndMin[1]);
     const end = addPreZero(endSecAndMin[0]) + ':' + addPreZero(endSecAndMin[1]);
-    return `${cur} / ${end}`;
+    onTimeChange && onTimeChange(`${cur} / ${end}`);
+    this.setState({
+      seconds: curTime
+    })
   }
-
 
   render() {
     const { music, isAudioBarActive, bmt, emt } = this.props;
@@ -134,6 +85,7 @@ export default class AudioBar extends Component {
           ref={self => this.audio = self}
           autoPlay={false}
           src={music.m_url}
+          onTimeUpdate={this.handleTimeUpdate}
         ></audio>
         <span
           className="toggle-play"
