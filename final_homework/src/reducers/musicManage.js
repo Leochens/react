@@ -5,7 +5,7 @@ const musicManage = (state = {
   myMusicIds: [],
   recommendMusicIds: [],
   currentMultipleSelectedMusicIds: [],
-  currentSingleSelectedId: 0,
+  currentSingleSelectedId: 133482000,
 }, action) => {
   switch (action.type) {
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`: {
@@ -67,19 +67,17 @@ const musicManage = (state = {
 
     case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
 
-      // TODO: 触发多选时要记得把单选时选中的那个加入到多选列表里
-      // COMPLETED
+      // 触发多选时要记得把单选时选中的那个加入到多选列表里
+      // 如果单选的那个元素已经被删了 那么此时多选数组就是一个空数组
       return {
         ...state,
-        currentMultipleSelectedMusicIds: [
+        currentMultipleSelectedMusicIds: state.currentSingleSelectedId ? [
           state.currentSingleSelectedId
-        ]
+        ] : []
       }
     }
 
-    case ActionTypes.PLAY_MUSIC: {
-      return state;
-    }
+    // 删除
     case ActionTypes.DELETE_MUSIC: {
       const { isMultipleSelect } = action;
       const {
@@ -87,20 +85,26 @@ const musicManage = (state = {
         currentSingleSelectedId: sId,
         myMusicIds
       } = state;
+      let flag = true;  // 判断是否把当前单选置0
       const newMyMusicIds = myMusicIds.slice();
-      const _mId = mId.slice(); 
+      const _mId = mId.slice();
       if (isMultipleSelect) { // 多选
+        if (mId.includes(sId)) {
+          flag = false;  // 多选删除中包含当前的单选 单选要置零
+        }
         mId.forEach(id => {
           deleteArrayItem(newMyMusicIds, id);
         });
       } else {  // 单选
         deleteArrayItem(newMyMusicIds, sId);
         deleteArrayItem(_mId, sId);
+        flag = false; // 删除当前单选 单选要置0
       }
       return {
         ...state,
         myMusicIds: newMyMusicIds,
-        currentMultipleSelectedMusicIds: isMultipleSelect ? [] : _mId
+        currentMultipleSelectedMusicIds: isMultipleSelect ? [] : _mId,
+        currentSingleSelectedId: flag ? sId : 0
       }
     }
     case ActionTypes.SHARE_MUSIC: {

@@ -50,7 +50,7 @@ export default class AudioBar extends Component {
   componentWillReceiveProps(nextProps) {
     const { music } = nextProps;
     console.log('next music', music);
-    // 关键判断 不然父级组件不能每秒都得到时间
+    // 关键判断 不然父级组件不能每秒都得到时间 并且会一卡一卡的
     if (this.props.music === music) {
       return;
     }
@@ -60,11 +60,10 @@ export default class AudioBar extends Component {
       endTime: music.emt ? music.emt : music.du,
       isPause: true
     });
-    
-
     clearInterval(this.interval);
   }
 
+  // 每秒执行 时钟函数
   tick = () => {
     const { seconds, endTime } = this.state;
     const { music } = this.props;

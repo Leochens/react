@@ -1,5 +1,16 @@
 import *  as ActionTypes from '../../contants/ActionTypes';
 import audio from './audio';
+const getToolPaneState = (musics, id) => {
+  const curMusic = musics[id];
+  return {
+    play: true,
+    rename: curMusic.plp || !curMusic.med ? false : true,
+    slice: curMusic.med ? true : false,
+    share: curMusic.med ? true : false,
+    delete: curMusic.med ? true : false
+  }
+};
+
 const crossReducer = (state, action) => {
 
   // console.log('全部的State', state);
@@ -14,29 +25,25 @@ const crossReducer = (state, action) => {
           recommendMusicIds: rIds,
         }
       } = state;
+      const ui = { ...state.ui };
       // 一个都没选 不能删除
       if (cIds.length === 0) {
+        ui.delete = false;
         return {
           ...state,
-          ui: {
-            ...state.ui,
-            delete: false
-          }
+          ui
         }
       }
-      let flag = true;
+      ui.delete = true;
       for (let i = 0; i < cIds.length; i++) {
         if (rIds.includes(cIds[i])) {
-          flag = false;
+          ui.delete = false;
           break;
         }
       }
       return {
         ...state,
-        ui: {
-          ...state.ui,
-          delete: flag
-        }
+        ui
       }
     }
 
@@ -45,37 +52,51 @@ const crossReducer = (state, action) => {
       const {
         entities: {
           musics
-        },
-        musicManage: { isMultipleSelect }
+        }
       } = state;
-
-      const curMusic = musics[id];
-
-      const newToolUiState = {
-        play: isMultipleSelect ? false : true,
-        rename: curMusic.plp || !curMusic.med ? false : true,
-        slice: curMusic.med ? true : false,
-        share: curMusic.med ? true : false,
-        delete: curMusic.med ? true : false
-      }
-
+      const newToolPaneState = getToolPaneState(musics, id);
       return {
         ...state,
-        ui: newToolUiState,
-        // audio: audio(state, action)
-
+        ui: {
+          ...state.ui,
+          ...newToolPaneState
+        }
       }
     }
 
     case ActionTypes.PLAY_MUSIC: {
-     return {
-       ...state,
-       audio:audio(state,action)
-     }
+      return {
+        ...state,
+        audio: audio(state, action)
+      }
     }
     // 音频事件是后执行的
     default: {
       console.log('default');
+      const {
+        musicManage: {
+          currentSingleSelectedId: sId
+        },
+        entities: {
+          musics
+        }
+      } = state;
+      console.log(state);
+      if(!musics[0]) {
+        return state;
+      }
+      
+      if (sId) {
+        const newToolPaneState = getToolPaneState(musics, sId);
+        return {
+          ...state,
+          audio: audio(state, action),
+          ui: {
+            ...state.ui,
+            ...newToolPaneState
+          }
+        }
+      }
       return {
         ...state,
         audio: audio(state, action)
