@@ -5,7 +5,7 @@ import Images from '../../contants/Images';
 import { secondToMinutes, addPreZero } from '../../tools';
 export default class AudioBar extends Component {
   state = {
-    du:0,
+    du: 0,
     seconds: 0,
     endTime: 1,
     isPause: true
@@ -15,9 +15,7 @@ export default class AudioBar extends Component {
   }
   pauseMusic = () => {
     const { audio } = this;
-    if (!audio) {
-      return;
-    }
+    if (!audio) return;
     audio.pause();
     clearInterval(this.interval);
     this.setState({
@@ -25,16 +23,18 @@ export default class AudioBar extends Component {
     });
   }
   playMusic = () => {
+
     const { music } = this.props;
     const { audio } = this;
-    if (!audio) {
-      return;
-    }
-    audio.currentTime = music.bmt ? music.bmt : 0;
+    const { seconds } = this.state;
+    console.log('props.music', music);
+    if (!audio) return;
+    audio.currentTime = seconds ? seconds : music.bmt;
+    console.log('currentTime', audio.currentTime);
     this.interval = setInterval(() => this.tick(), 1000);
     audio.play();
     this.setState({
-      seconds: music.bmt ? music.bmt : 0,
+      seconds: music.bmt ? music.bmt : seconds,
       endTime: music.emt ? music.emt : music.du,
       du: music.du,
       isPause: false
@@ -49,17 +49,14 @@ export default class AudioBar extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { music } = nextProps;
+    const { music: _music } = this.props;
+    const { seconds } = this.state;
     console.log('next music', music);
     // 关键判断 不然父级组件不能每秒都得到时间 并且会一卡一卡的
-    if (this.props.music === music) {
+    if (_music === music) {
+      
       return;
     }
-    this.setState({
-      du: music.du,
-      seconds: music.bmt ? music.bmt : 0,
-      endTime: music.emt ? music.emt : music.du,
-      isPause: true
-    });
     clearInterval(this.interval);
   }
 

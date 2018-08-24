@@ -23,9 +23,7 @@ export default class Slider extends React.Component {
     onChange: PropTypes.func.isRequired,
   }
 
-  componentWillReceiveProps(nextProps) {
 
-  }
 
   handleTouchStart = () => {
     this.setState({
@@ -76,6 +74,10 @@ export default class Slider extends React.Component {
     onChange && onChange(this.state.value);
   }
 
+  componentWillReceiveProps(nextProps) {
+
+  }
+  
   renderSlicer = () => {
     const { begin, end, showSliceFlag, enableSlice } = this.props;
     if (showSliceFlag) {

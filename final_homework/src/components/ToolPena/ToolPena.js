@@ -16,7 +16,8 @@ export default class ToolPane extends Component {
       music,
       isToolPenaActive,
       onClose,
-      currentTool
+      currentTool,
+      SelectActions
     } = this.props;
     switch (currentTool) {
       case 'play':
@@ -33,6 +34,7 @@ export default class ToolPane extends Component {
             music={music}
             isToolPenaActive={isToolPenaActive}
             onClose={onClose}
+            SelectActions={SelectActions}
           />
         );
       default: return null;

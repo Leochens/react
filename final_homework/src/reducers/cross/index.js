@@ -64,7 +64,11 @@ const crossReducer = (state, action) => {
       }
     }
 
-    case ActionTypes.SET_CURRENT_TOOL: {
+    case ActionTypes.SET_CURRENT_TOOL:
+    case ActionTypes.CLEAR_SLICE_MUSIC:
+    case ActionTypes.SLICE_MUSIC_END_POS:
+    case ActionTypes.SLICE_MUSIC_START_POS:
+    {
       return {
         ...state,
         audio: audio(state, action)

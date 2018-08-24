@@ -30,3 +30,7 @@ export const secondToMinutes = seconds => {
 export const addPreZero = num => {
   return ('00' + num).slice(-2);
 }
+
+export const getFormatTime = seconds => {
+  return addPreZero(secondToMinutes(seconds));
+}

@@ -21,6 +21,37 @@ const musics = (state = {}, action) => {
       };
     }
 
+    case ActionTypes.SLICE_MUSIC_START_POS: {
+      const { id, startPos } = action;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          bmt: startPos
+        }
+      }
+    }
+    case ActionTypes.SLICE_MUSIC_END_POS: {
+      const { id, endPos } = action;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          emt: endPos
+        }
+      }
+    }
+    case ActionTypes.CLEAR_SLICE_MUSIC: {
+      const { id } = action;
+      return {
+        ...state,
+        [id]:{
+          ...state[id],
+          emt: 0,
+          bmt: 0
+        }
+      }
+    }
     default: return state;
   }
 };

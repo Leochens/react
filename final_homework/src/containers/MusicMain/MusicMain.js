@@ -95,6 +95,7 @@ export default class MusicMain extends Component {
           currentTool={ui.currentTool}
           music={audio}
           onClose={UiActions.actionCloseAudioBar}
+          SelectActions={SelectActions}
         />
       </div>
     );

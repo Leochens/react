@@ -26,3 +26,26 @@ export const actionChangeToSingleSelect = () => {
     type: ActionTypes.CHANGE_TO_SINGLE_SELECT
   }
 }
+
+export const actionClearSliceMusic = id => {
+  return {
+    type: ActionTypes.CLEAR_SLICE_MUSIC,
+    id
+  }
+}
+
+export const actionSliceMusicStartPos = (id,startPos) => {
+  return {
+    type: ActionTypes.SLICE_MUSIC_START_POS,
+    startPos,
+    id
+  }
+}
+
+export const actionSliceMusicEndPos = (id,endPos) => {
+  return {
+    type: ActionTypes.SLICE_MUSIC_START_POS,
+    endPos,
+    id
+  }
+}

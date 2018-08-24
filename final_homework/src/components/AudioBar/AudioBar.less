@@ -1,69 +1,21 @@
-.audio-bar-wrapper.hide{
-  display: none;
-}
-.audio-bar-wrapper{
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 101;
-
-  .audio-bar{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    background-color: #fff;
-    z-index: 150;
-  }
-
-  .audio-head{
-    padding: 10px 40px 10px 40px;
-    position: relative;
-    .title{
-      font-size: 14px;
-      text-align: center;
-    }
-    .audio-time{
-      margin-top: 15px;
-
-      font-size: 11px;
-      text-align: center;
-    }
-    .close{
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      border: none;
-      background-color: #fff;
-      color: rgb(255, 33, 100);
-      outline: none;
+.play-bar{
+  display: flex;
+  align-items: center;
+  .toggle-play{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    border-radius: 50%;
+    // background-color: rgb(255, 33, 100);
+    img{
+      width: 15px;
+      height: 16px;
     }
   }
-
-  .play-bar{
-    display: flex;
-    align-items: center;
-    .toggle-play{
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-left: 20px;
-      border-radius: 50%;
-      // background-color: rgb(255, 33, 100);
-      img{
-        width: 15px;
-        height: 16px;
-      }
-    }
-    .slider{
-      display: inline-block;
-      flex: 1;
-    }
+  .slider{
+    display: inline-block;
+    flex: 1;
   }
 }
-
