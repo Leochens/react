@@ -28,6 +28,12 @@ export default class AudioBar extends Component {
     if (!audio) {
       return;
     }
+    // const isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended
+    //   && audio.readyState > 2;
+
+    // if (!isPlaying) {
+    //   audio.play();
+    // }
     this.interval = setInterval(() => this.tick(), 1000);
     audio.play();
     this.setState({
@@ -43,10 +49,10 @@ export default class AudioBar extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { music } = nextProps;
-
+    console.log('next music', music);
     // 关键判断 不然父级组件不能每秒都得到时间
-    if(this.props.music === music) {
-      return ;
+    if (this.props.music === music) {
+      return;
     }
     this.setState({
       seconds: 0,
@@ -55,6 +61,7 @@ export default class AudioBar extends Component {
     });
     clearInterval(this.interval);
   }
+
   tick = () => {
     const { seconds, endTime } = this.state;
     if (seconds >= endTime) {
@@ -104,7 +111,7 @@ export default class AudioBar extends Component {
   render() {
     const { music, isAudioBarActive } = this.props;
     const { isPause } = this.state;
-    // console.log('audio-bar', this.state);
+    console.log('audio-bar', this.state);
     if (!isAudioBarActive) {
       return null;
     }

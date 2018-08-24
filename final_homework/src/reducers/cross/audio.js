@@ -13,13 +13,7 @@ const audio = (state, action) => {
   const ownState = { ...musics[sId] };
 
   switch (action.type) {
-    case ActionTypes.SET_AUDIO_DATA: {
-      return ownState;
-    }
-    case ActionTypes.PLAY_MUSIC: {
-      console.log('hahah', ownState);
-      return ownState;
-    }
+
     default: return ownState;
   }
 }

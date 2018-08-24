@@ -61,28 +61,28 @@ const crossReducer = (state, action) => {
 
       return {
         ...state,
-        ui: newToolUiState
+        ui: newToolUiState,
+        // audio: audio(state, action)
+
       }
     }
 
-    case ActionTypes.SET_AUDIO_DATA: {
-      const {
-        ui: {
-          isMultipleSelect
-        }
-      } = state;
+    case ActionTypes.PLAY_MUSIC: {
+     return {
+       ...state,
+       audio:audio(state,action)
+     }
+    }
+    // 音频事件是后执行的
+    default: {
+      console.log('default');
       return {
         ...state,
-        audio: isMultipleSelect ? {} : audio(state, action)
+        audio: audio(state, action)
       }
     }
-
-    // 音频事件是后执行的
-    default:  return {
-      ...state,
-      audio: audio(state, state.audio, action)
-    }
   }
+
 
 }
 
