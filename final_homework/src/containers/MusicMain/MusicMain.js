@@ -19,7 +19,7 @@ export default class MusicMain extends Component {
         icon: Images.btnNewPlay,
         iconAc: Images.btnNewPlayAc,
         isActive: ui.play,
-        action: ToolActions.actionPlayMusic
+        action: () => UiActions.actionSetCurrentTool('play')
       },
       {
         title: '重命名',
@@ -33,7 +33,7 @@ export default class MusicMain extends Component {
         icon: Images.btnCut,
         iconAc: Images.btnCutAc,
         isActive: ui.slice,
-        action: () => { }
+        action: () => UiActions.actionSetCurrentTool('slice')
       },
       {
         title: '送给朋友',
@@ -92,6 +92,7 @@ export default class MusicMain extends Component {
         />
         <ToolPane
           isToolPenaActive={ui.isToolPenaActive}
+          currentTool={ui.currentTool}
           music={audio}
           onClose={UiActions.actionCloseAudioBar}
         />

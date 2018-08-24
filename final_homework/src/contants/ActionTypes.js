@@ -18,3 +18,6 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 export const CLOSE_AUDIOBAR = 'CLOSE_AUDIOBAR';
 
 export const SET_AUDIO_DATA = 'SET_AUDIO_DATA';
+
+export const SET_CURRENT_TOOL = 'SET_CURRENT_TOOL';
+

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ToolPane.less';
 import PlayToolPane from '../PlayToolPane/PlayToolPane';
+import SliceToolPane from '../SliceToolPane/SliceToolPane';
 
 export default class ToolPane extends Component {
   // 交给AudioBar去回调 来改变当前时间串(播放事件/结束时间)
@@ -10,19 +11,38 @@ export default class ToolPane extends Component {
     return 'audio-bar-wrapper' + (isToolPenaActive ? ' ' : ' hide')
   }
 
-  render() {
+  renderTool = () => {
     const {
       music,
       isToolPenaActive,
-      onClose
+      onClose,
+      currentTool
     } = this.props;
+    switch (currentTool) {
+      case 'play':
+        return (
+          <PlayToolPane
+            music={music}
+            isToolPenaActive={isToolPenaActive}
+            onClose={onClose}
+          />
+        );
+      case 'slice':
+        return (
+          <SliceToolPane
+            music={music}
+            isToolPenaActive={isToolPenaActive}
+            onClose={onClose}
+          />
+        );
+      default: return null;
+    }
+  }
+  render() {
+
     return (
       <div className={this.getClassName()}>
-      <PlayToolPane 
-         music={music}
-         isToolPenaActive={isToolPenaActive}
-         onClose={onClose}
-      />
+        {this.renderTool()}
       </div>
     );
   }

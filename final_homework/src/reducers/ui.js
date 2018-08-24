@@ -8,7 +8,8 @@ const ui = (state = {
   delete: false,
   modalIsActive: false,
   isToolPenaActive: false,
-  modalMessage: ''
+  modalMessage: '',
+  currentTool: ''
 }, action) => {
   switch (action.type) {
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
@@ -57,6 +58,16 @@ const ui = (state = {
         isToolPenaActive: false
       }
     }
+
+    case ActionTypes.SET_CURRENT_TOOL: {
+      const { tool } = action;
+      return {
+        ...state,
+        currentTool: tool,
+        isToolPenaActive: true
+      }
+    }
+
     default: return state;
   }
 };

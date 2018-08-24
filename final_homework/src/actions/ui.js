@@ -16,3 +16,10 @@ export const actionCloseAudioBar = () => {
     type: ActionTypes.CLOSE_AUDIOBAR
   }
 }
+
+export const actionSetCurrentTool = tool => {
+  return {
+    type: ActionTypes.SET_CURRENT_TOOL,
+    tool
+  }
+}

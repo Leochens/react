@@ -64,7 +64,7 @@ const crossReducer = (state, action) => {
       }
     }
 
-    case ActionTypes.PLAY_MUSIC: {
+    case ActionTypes.SET_CURRENT_TOOL: {
       return {
         ...state,
         audio: audio(state, action)
@@ -82,10 +82,10 @@ const crossReducer = (state, action) => {
         }
       } = state;
       console.log(state);
-      if(!musics[0]) {
+      if (!musics[0]) {
         return state;
       }
-      
+
       if (sId) {
         const newToolPaneState = getToolPaneState(musics, sId);
         return {
