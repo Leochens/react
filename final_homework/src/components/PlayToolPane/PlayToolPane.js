@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import './PlayToolPane.less';
 import AudioBar from '../AudioBar/AudioBar';
 
+const initTimeString = '00:00 / 00:00';
+
 export default class PlayToolPane extends Component {
   state = {
-    timeString: '00:00 / 00:00',
+    timeString: initTimeString,
     bmt: 0,
     emt: 0,
     endTime: 0
@@ -25,7 +27,7 @@ export default class PlayToolPane extends Component {
   onClose = () => {
     const { onClose } = this.props;
     this.setState({
-      timeString: '00:00 / 00:00',
+      timeString: initTimeString,
       pause: true
     });
     onClose && onClose();

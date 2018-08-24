@@ -49,8 +49,7 @@ class AppMain extends Component {
               active: Images.searchAc,
               normal: Images.search
             }}
-          >
-          <Slider />
+          >搜索音乐
           </TabItem>
           <TabItem id={3} title={'上传音乐'}
             icon={{

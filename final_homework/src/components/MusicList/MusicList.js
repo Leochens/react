@@ -4,8 +4,6 @@ import ListItem from '../ListItem/ListItem';
 
 
 export default class MusicList extends Component {
-
-
   renderListTitle = () => {
     const { title } = this.props;
     if (title) {
