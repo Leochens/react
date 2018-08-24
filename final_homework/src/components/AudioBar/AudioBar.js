@@ -55,7 +55,7 @@ export default class AudioBar extends Component {
     const { music: { du }, onTimeChange,endTime,bmt } = this.props;
     const curTime = e.target.currentTime;
     if (curTime >= endTime) {
-      this.pauseMusic();
+      // this.pauseMusic();
       e.target.currentTime = bmt ? bmt : 0;
       this.setState({
         seconds: bmt ? bmt : 0
@@ -71,11 +71,14 @@ export default class AudioBar extends Component {
     })
   }
 
+  componentDidMount(){
+    this.playMusic();
+  }
   render() {
     const { music, isAudioBarActive, bmt, emt } = this.props;
     const { isPause } = this.state;
-    console.log('audio-bar', this.state);
-    console.log('endTime', this.props.endTime);
+    // console.log('audio-bar', this.state);
+    // console.log('endTime', this.props.endTime);
     if (!isAudioBarActive) {
       return null;
     }
@@ -83,9 +86,8 @@ export default class AudioBar extends Component {
       <div className="play-bar">
         <audio
           ref={self => this.audio = self}
-          autoPlay={false}
           src={music.m_url}
-          onTimeUpdate={this.handleTimeUpdate}
+          onTimeUpdate={this.handleTimeUpdate}          
         ></audio>
         <span
           className="toggle-play"
