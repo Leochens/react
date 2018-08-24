@@ -4,8 +4,18 @@ import AudioBar from '../AudioBar/AudioBar';
 
 export default class PlayToolPane extends Component {
   state = {
-    timeString: '00:00 / 00:00'
+    timeString: '00:00 / 00:00',
+    bmt: 0,
+    emt: 0
   };
+  componentWillMount() {
+    const { music } = this.props;
+    console.log('托管组件componentWillMount');
+    this.setState({
+      bmt: music.bmt,
+      emt: music.emt
+    });
+  }
   getAudioTime = timeString => {
     console.log('检测到时间串发生变化', timeString);
     this.setState({
@@ -16,7 +26,8 @@ export default class PlayToolPane extends Component {
     const { onClose } = this.props;
 
     this.setState({
-      timeString: '00:00 / 00:00'
+      timeString: '00:00 / 00:00',
+      pause: true
     });
     onClose && onClose();
   }
@@ -41,6 +52,8 @@ export default class PlayToolPane extends Component {
           isAudioBarActive={isToolPenaActive}
           autoplay={false}
           onTimeChange={this.getAudioTime}
+          bmt={this.state.bmt}
+          emt={this.state.emt}
         />
       </div >
     );

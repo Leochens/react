@@ -23,10 +23,10 @@ export default class AudioBar extends Component {
     });
   }
   playMusic = () => {
-
-    const { music } = this.props;
     const { audio } = this;
     const { seconds } = this.state;
+    const { music, bmt, emt } = this.props;
+
     console.log('props.music', music);
     if (!audio) return;
     audio.currentTime = seconds ? seconds : music.bmt;
@@ -34,8 +34,8 @@ export default class AudioBar extends Component {
     this.interval = setInterval(() => this.tick(), 1000);
     audio.play();
     this.setState({
-      seconds: music.bmt ? music.bmt : seconds,
-      endTime: music.emt ? music.emt : music.du,
+      seconds: bmt ? bmt : seconds,
+      endTime: emt ? emt : music.du,
       du: music.du,
       isPause: false
     });
@@ -48,26 +48,44 @@ export default class AudioBar extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    const { music } = nextProps;
-    const { music: _music } = this.props;
-    const { seconds } = this.state;
+    const { music, bmt, emt } = nextProps;
+    const { music: _music, bmt: _bmt, emt: _emt } = this.props;
     console.log('next music', music);
     // 关键判断 不然父级组件不能每秒都得到时间 并且会一卡一卡的
     if (_music === music) {
-      
+      return;
+    }
+    if (_bmt !== bmt) {
+      return;
+    }
+    if (_emt !== emt) {
+      console.log('设置新的emt');
+      this.setState({
+        endTime: music.emt
+      })
+    }
+    if (_music !== music) {
+      this.setState({
+        seconds: bmt ? bmt : this.state.seconds,
+      })
       return;
     }
     clearInterval(this.interval);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+
+  }
   // 每秒执行 时钟函数
   tick = () => {
     const { seconds, endTime } = this.state;
-    const { music } = this.props;
-    if (seconds >= endTime) {
+
+    const { bmt, emt } = this.props;
+    if (seconds >= (emt ? emt : endTime)) {
       this.pauseMusic();
       this.setState({
-        seconds: music.bmt ? music.bmt : 0
+        seconds: bmt ? bmt : 0
       });
     } else {
       this.setState({
@@ -109,7 +127,7 @@ export default class AudioBar extends Component {
 
 
   render() {
-    const { music, isAudioBarActive } = this.props;
+    const { music, isAudioBarActive, bmt, emt } = this.props;
     const { isPause } = this.state;
     console.log('audio-bar', this.state);
     if (!isAudioBarActive) {
@@ -132,16 +150,16 @@ export default class AudioBar extends Component {
           <Slider
             defaultValue={~~((this.state.seconds / this.state.du) * 100)}
             onChange={this.setAudioPos}
-            showSliceFlag={!(!music.bmt && !music.emt)}
+            showSliceStartFlag={bmt}
+            showSliceEndFlag={emt}
             begin={{
               icon: Images.cutMusicStart,
-              pos: (music.bmt / music.du) * 100
+              pos: (bmt / music.du) * 100
             }}
             end={{
               icon: Images.cutMusicFinish,
-              pos: (music.emt / music.du) * 100
+              pos: (emt / music.du) * 100
             }}
-            enableSlice={true}
           ></Slider>
         </div>
       </div>

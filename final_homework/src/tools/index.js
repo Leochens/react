@@ -34,3 +34,11 @@ export const addPreZero = num => {
 export const getFormatTime = seconds => {
   return addPreZero(secondToMinutes(seconds));
 }
+
+/**
+ * 01:25 => 85
+ */
+export const timeStringToSeconds = timeString => {
+  const [minutes,seconds] = timeString.split(':');
+  return minutes*60 + seconds*1; 
+} 

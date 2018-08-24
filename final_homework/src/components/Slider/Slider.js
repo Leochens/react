@@ -23,8 +23,6 @@ export default class Slider extends React.Component {
     onChange: PropTypes.func.isRequired,
   }
 
-
-
   handleTouchStart = () => {
     this.setState({
       flag: 1
@@ -74,37 +72,37 @@ export default class Slider extends React.Component {
     onChange && onChange(this.state.value);
   }
 
-  componentWillReceiveProps(nextProps) {
-
-  }
-  
   renderSlicer = () => {
-    const { begin, end, showSliceFlag, enableSlice } = this.props;
-    if (showSliceFlag) {
-      return (
-        <div>
-          <div
+    const { begin, end, showSliceStartFlag, showSliceEndFlag } = this.props;
+    return (
+      <div>
+        {showSliceStartFlag
+          ? <div
             style={{
               left: begin.pos + '%'
             }}
             className="begin">
             <img src={begin.icon} alt="" />
           </div>
-          <div
-            style={{
-              left: end.pos + '%'
-            }}
-            className="end">
-            <img src={end.icon} alt="" />
-          </div>
-          <div
-            style={{ width: begin.pos + '%' }}
-            className="faker"
-          ></div>
-        </div>
-      );
-    }
-    return null;
+          : null
+        }
+        {
+          showSliceEndFlag
+            ? <div
+              style={{
+                left: end.pos + '%'
+              }}
+              className="end">
+              <img src={end.icon} alt="" />
+            </div>
+            : null
+        }
+        <div
+          style={{ width: begin.pos + '%' }}
+          className="faker"
+        ></div>
+      </div>
+    );
   }
   render() {
     return (

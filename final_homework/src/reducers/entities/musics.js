@@ -31,24 +31,36 @@ const musics = (state = {}, action) => {
         }
       }
     }
-    case ActionTypes.SLICE_MUSIC_END_POS: {
-      const { id, endPos } = action;
+    // case ActionTypes.SLICE_MUSIC_END_POS: {
+    //   const { id, endPos } = action;
+    //   return {
+    //     ...state,
+    //     [id]: {
+    //       ...state[id],
+    //       emt: endPos
+    //     }
+    //   }
+    // }
+    // case ActionTypes.CLEAR_SLICE_MUSIC: {
+    //   const { id } = action;
+    //   return {
+    //     ...state,
+    //     [id]:{
+    //       ...state[id],
+    //       emt: 0,
+    //       bmt: 0
+    //     }
+    //   }
+    // }
+    case ActionTypes.SLICE_MUSIC: {
+      const { id, startPos, endPos } = action;
+
       return {
         ...state,
         [id]: {
           ...state[id],
+          bmt: startPos,
           emt: endPos
-        }
-      }
-    }
-    case ActionTypes.CLEAR_SLICE_MUSIC: {
-      const { id } = action;
-      return {
-        ...state,
-        [id]:{
-          ...state[id],
-          emt: 0,
-          bmt: 0
         }
       }
     }

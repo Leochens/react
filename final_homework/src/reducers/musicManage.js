@@ -110,9 +110,7 @@ const musicManage = (state = {
     case ActionTypes.SHARE_MUSIC: {
       return state;
     }
-    case ActionTypes.SLICE_MUSIC: {
-      return state;
-    }
+
     case ActionTypes.RENAME_MUSIC: {
       return state;
     }

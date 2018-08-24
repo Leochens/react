@@ -44,7 +44,16 @@ export const actionSliceMusicStartPos = (id,startPos) => {
 
 export const actionSliceMusicEndPos = (id,endPos) => {
   return {
-    type: ActionTypes.SLICE_MUSIC_START_POS,
+    type: ActionTypes.SLICE_MUSIC_END_POS,
+    endPos,
+    id
+  }
+}
+
+export const actionSliceMusic = (id, startPos, endPos) => {
+  return {
+    type: ActionTypes.SLICE_MUSIC,
+    startPos,
     endPos,
     id
   }

@@ -42,6 +42,9 @@ export default class ToolPane extends Component {
   }
   render() {
 
+    if(!this.props.isToolPenaActive) {
+      return null;
+    }
     return (
       <div className={this.getClassName()}>
         {this.renderTool()}
