@@ -24,7 +24,7 @@ export default class Slider extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    
+
   }
 
   handleTouchStart = () => {
@@ -95,6 +95,10 @@ export default class Slider extends React.Component {
             className="end">
             <img src={end.icon} alt="" />
           </div>
+          <div
+            style={{ width: begin.pos + '%' }}
+            className="faker"
+          ></div>
         </div>
       );
     }
@@ -113,7 +117,9 @@ export default class Slider extends React.Component {
               ref={self => this.sliderTrack = self}
               style={{ width: this.props.defaultValue + '%' }}
               className="sliderTrack"
-            ></div>
+            >
+            </div>
+
             <div
               ref={self => this.sliderHandler = self}
               style={{ left: this.props.defaultValue + '%' }}
@@ -121,7 +127,8 @@ export default class Slider extends React.Component {
               onTouchStart={this.handleTouchStart}
               onTouchMove={this.handleTouchmove}
               onTouchEnd={this.handleTouchEnd}
-            ></div>
+            >
+            </div>
             {this.renderSlicer()}
           </div>
         </div>
