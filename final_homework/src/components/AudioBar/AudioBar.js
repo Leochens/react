@@ -5,6 +5,7 @@ import Images from '../../contants/Images';
 import { secondToMinutes, addPreZero } from '../../tools';
 export default class AudioBar extends Component {
   state = {
+    du:0,
     seconds: 0,
     endTime: 1,
     isPause: true
@@ -24,19 +25,18 @@ export default class AudioBar extends Component {
     });
   }
   playMusic = () => {
+    const { music } = this.props;
     const { audio } = this;
     if (!audio) {
       return;
     }
-    // const isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended
-    //   && audio.readyState > 2;
-
-    // if (!isPlaying) {
-    //   audio.play();
-    // }
+    audio.currentTime = music.bmt ? music.bmt : 0;
     this.interval = setInterval(() => this.tick(), 1000);
     audio.play();
     this.setState({
+      seconds: music.bmt ? music.bmt : 0,
+      endTime: music.emt ? music.emt : music.du,
+      du: music.du,
       isPause: false
     });
   }
@@ -55,10 +55,13 @@ export default class AudioBar extends Component {
       return;
     }
     this.setState({
-      seconds: 0,
-      endTime: ~~music.du,
+      du: music.du,
+      seconds: music.bmt ? music.bmt : 0,
+      endTime: music.emt ? music.emt : music.du,
       isPause: true
     });
+    
+
     clearInterval(this.interval);
   }
 
@@ -80,7 +83,7 @@ export default class AudioBar extends Component {
 
   setAudioPos = pos => {
     const { audio } = this;
-    const curTime = this.state.endTime * (pos / 100).toFixed(2) * 1
+    const curTime = this.state.du * (pos / 100).toFixed(2) * 1
     audio.currentTime = curTime;
     this.setState({
       seconds: curTime
@@ -99,9 +102,9 @@ export default class AudioBar extends Component {
    * 时间格式化
    */
   getTimeString = () => {
-    const { seconds, endTime } = this.state;
+    const { seconds, du } = this.state;
     const curSecAndMin = secondToMinutes(seconds).split(':');
-    const endSecAndMin = secondToMinutes(endTime).split(':');
+    const endSecAndMin = secondToMinutes(du).split(':');
     const cur = addPreZero(curSecAndMin[0]) + ':' + addPreZero(curSecAndMin[1]);
     const end = addPreZero(endSecAndMin[0]) + ':' + addPreZero(endSecAndMin[1]);
     return `${cur} / ${end}`;
@@ -130,8 +133,18 @@ export default class AudioBar extends Component {
         </span>
         <div className="slider">
           <Slider
-            defaultValue={~~((this.state.seconds / this.state.endTime) * 100)}
+            defaultValue={~~((this.state.seconds / this.state.du) * 100)}
             onChange={this.setAudioPos}
+            showSliceFlag={!(!music.bmt && !music.emt)}
+            begin={{
+              icon: Images.cutMusicStart,
+              pos: (music.bmt / music.du) * 100
+            }}
+            end={{
+              icon: Images.cutMusicFinish,
+              pos: (music.emt / music.du) * 100
+            }}
+            enableSlice={true}
           ></Slider>
         </div>
       </div>

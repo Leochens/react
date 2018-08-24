@@ -9,6 +9,7 @@
   flex: 1;
   padding: 15px 0;
   user-select: none;
+  // position: relative;
 }
 
 .sliderWrapperValue {
@@ -43,45 +44,14 @@
   background-color: #FFFFFF;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
-
-// .slider-wrapper{
-//   width: 300px;
-//   height: 8px;
-//   // background-color: red;
-//   padding: 25px;
-//   position: relative;
- 
-// }
-
-// input[type=range] {
-//   -webkit-appearance: none;
-//   width: 300px;
-//   border-radius: 2px; /*这个属性设置使填充进度条时的图形为圆角*/
-//   background: -webkit-linear-gradient(rgb(255, 33, 100), rgb(255, 33, 100)) no-repeat;
-//   background-size: 0% 100%; 
-// }
-// input[type=range]::-webkit-slider-thumb {
-//   -webkit-appearance: none;
-// }
-// input[type=range]::-webkit-slider-runnable-track {
-//   height: 2px;
-//   // background-color: rgb(255, 33, 100);
-//   // border-radius: 10px; /*将轨道设为圆角的*/
-//   // box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
-// }
-// input[type=range]:focus {
-//   outline: none;
-// }
-
-// input[type=range]::-webkit-slider-thumb {
-//   -webkit-appearance: none;
-//   height: 25px;
-//   width: 25px;
-//   margin-top: -12px;
-//   // margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
-//   background: #ffffff; 
-//   border-radius: 50%; /*外观设置为圆形*/
-//   // border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
-//   -moz-box-shadow:0px 0px 5px #999999;
-//   -webkit-box-shadow:0px 0px 5px #999999; box-shadow:0px 0px 5px #999999;
-// }
+.begin,.end{
+  position: absolute;
+  top: -8px;
+  img{
+    width: 3px;
+    height: 17px;
+  }
+}
+.begin{
+  // margin-left: 14px;
+}
