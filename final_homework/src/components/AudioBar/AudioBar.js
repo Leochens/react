@@ -67,10 +67,11 @@ export default class AudioBar extends Component {
 
   tick = () => {
     const { seconds, endTime } = this.state;
+    const { music } = this.props;
     if (seconds >= endTime) {
       this.pauseMusic();
       this.setState({
-        seconds: 0
+        seconds: music.bmt ? music.bmt : 0
       });
     } else {
       this.setState({
