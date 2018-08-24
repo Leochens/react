@@ -7,7 +7,7 @@ export default class AudioBar extends Component {
   state = {
     du: 0,
     seconds: 0,
-    endTime: 1,
+    // endTime: 1,
     isPause: true
   };
   static defaultProps = {
@@ -25,7 +25,7 @@ export default class AudioBar extends Component {
   playMusic = () => {
     const { audio } = this;
     const { seconds } = this.state;
-    const { music, bmt, emt } = this.props;
+    const { music, bmt, emt, endTime } = this.props;
 
     console.log('props.music', music);
     if (!audio) return;
@@ -35,7 +35,7 @@ export default class AudioBar extends Component {
     audio.play();
     this.setState({
       seconds: bmt ? bmt : seconds,
-      endTime: emt ? emt : music.du,
+      endTime,
       du: music.du,
       isPause: false
     });
@@ -58,12 +58,6 @@ export default class AudioBar extends Component {
     if (_bmt !== bmt) {
       return;
     }
-    if (_emt !== emt) {
-      console.log('设置新的emt');
-      this.setState({
-        endTime: music.emt
-      })
-    }
     if (_music !== music) {
       this.setState({
         seconds: bmt ? bmt : this.state.seconds,
@@ -79,10 +73,10 @@ export default class AudioBar extends Component {
   }
   // 每秒执行 时钟函数
   tick = () => {
-    const { seconds, endTime } = this.state;
+    const { seconds } = this.state;
 
-    const { bmt, emt } = this.props;
-    if (seconds >= (emt ? emt : endTime)) {
+    const { bmt, emt, endTime } = this.props;
+    if (seconds >= endTime) {
       this.pauseMusic();
       this.setState({
         seconds: bmt ? bmt : 0

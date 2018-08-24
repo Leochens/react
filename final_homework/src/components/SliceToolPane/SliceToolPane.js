@@ -9,7 +9,7 @@ export default class SliceToolPane extends Component {
     timeString: '00:00 / 00:00',
     bmt: 0,
     emt: 0,
-    du: 0
+    endTime: 0
   };
   getAudioTime = timeString => {
     console.log('检测到时间串发生变化', timeString);
@@ -22,7 +22,7 @@ export default class SliceToolPane extends Component {
     this.setState({
       bmt: music.bmt,
       emt: music.emt,
-      du: music.du
+      endTime: music.du
     });
   }
 
@@ -30,7 +30,8 @@ export default class SliceToolPane extends Component {
     const { timeString } = this.state;
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
     this.setState({
-      emt: curSenconds
+      emt: curSenconds,
+      endTime: curSenconds
     })
   }
   setBmt = () => {
@@ -41,11 +42,12 @@ export default class SliceToolPane extends Component {
     })
   }
   clearSlice = () => {
-    const { music:{id}, SelectActions } = this.props;
+    const { music: { id, du }, SelectActions } = this.props;
 
     this.setState({
       emt: 0,
-      bmt: 0
+      bmt: 0,
+      endTime: du
     });
     SelectActions.actionClearSliceMusic(id);
   }
@@ -112,6 +114,7 @@ export default class SliceToolPane extends Component {
             onTimeChange={this.getAudioTime}
             bmt={this.state.bmt}
             emt={this.state.emt}
+            endTime={this.state.endTime}
           />
           <div className="slice-pane-audio-time">{this.state.timeString}</div>
         </div>
