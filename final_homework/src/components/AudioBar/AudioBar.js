@@ -124,6 +124,7 @@ export default class AudioBar extends Component {
     const { music, isAudioBarActive, bmt, emt } = this.props;
     const { isPause } = this.state;
     console.log('audio-bar', this.state);
+    console.log('endTime', this.props.endTime);
     if (!isAudioBarActive) {
       return null;
     }

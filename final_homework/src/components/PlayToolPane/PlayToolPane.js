@@ -6,14 +6,16 @@ export default class PlayToolPane extends Component {
   state = {
     timeString: '00:00 / 00:00',
     bmt: 0,
-    emt: 0
+    emt: 0,
+    endTime: 0
   };
   componentWillMount() {
     const { music } = this.props;
     console.log('托管组件componentWillMount');
     this.setState({
       bmt: music.bmt,
-      emt: music.emt
+      emt: music.emt,
+      endTime: music.emt ? music.emt : music.du
     });
   }
   getAudioTime = timeString => {
@@ -54,6 +56,7 @@ export default class PlayToolPane extends Component {
           onTimeChange={this.getAudioTime}
           bmt={this.state.bmt}
           emt={this.state.emt}
+          endTime={this.state.endTime}
         />
       </div >
     );

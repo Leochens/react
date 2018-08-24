@@ -22,7 +22,7 @@ export default class SliceToolPane extends Component {
     this.setState({
       bmt: music.bmt,
       emt: music.emt,
-      endTime: music.du
+      endTime: music.emt ? music.emt : music.du
     });
   }
 
