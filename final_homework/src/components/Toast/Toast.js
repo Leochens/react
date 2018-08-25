@@ -26,7 +26,6 @@ const notice = (content, type, icon, duration = 3000, onClose, mask = true) => {
       onClose && onClose();
     }
   })
-
 }
 
 export default {

@@ -32,12 +32,11 @@ export default class SliceToolPane extends Component {
   setEmt = () => {
     const { timeString } = this.state;
     if (!this.state.hasSetBmt) {
-      // window.alert('请先标记起点');
       Toast.info('请先标记起点');
       return;
     }
-    if(this.state.hasSetEmt) {
-      window.alert("请先点击清除");
+    if (this.state.hasSetEmt) {
+      Toast.info("请先点击清除");
       return;
     }
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
@@ -49,7 +48,7 @@ export default class SliceToolPane extends Component {
   }
   setBmt = () => {
     if (this.state.hasSetBmt) {
-      window.alert("请先点击清除");
+      Toast.info("请先点击清除");
       return;
     }
     const { timeString } = this.state;
@@ -61,7 +60,7 @@ export default class SliceToolPane extends Component {
   }
   clearSlice = () => {
     if (!this.state.hasSetBmt && !this.state.hasSetEmt) {
-      window.alert("你还没有选择起点和终点！");
+      Toast.info("你还没有选择起点和终点！");
       return;
     }
     const { music: { id, du }, ToolActions } = this.props;
@@ -147,7 +146,6 @@ export default class SliceToolPane extends Component {
           />
           <div className="slice-pane-audio-time">{this.state.timeString}</div>
         </div>
-
         <span
           className="slice-pane-ok"
           onClick={this.onClose}

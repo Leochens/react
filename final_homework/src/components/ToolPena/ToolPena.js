@@ -3,6 +3,7 @@ import './ToolPane.less';
 import PlayToolPane from '../PlayToolPane/PlayToolPane';
 import SliceToolPane from '../SliceToolPane/SliceToolPane';
 import Modal from '../Modal/Modal';
+import Toast from '../Toast/Toast';
 
 export default class ToolPane extends Component {
   // 交给AudioBar去回调 来改变当前时间串(播放事件/结束时间)
@@ -57,6 +58,7 @@ export default class ToolPane extends Component {
       
       case 'share':
         // ToolActions.actionShareMusic();
+        Toast.info('成功发送给朋友');
         return;
       case 'delete':
         return (
