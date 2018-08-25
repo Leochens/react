@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
+import Notification from './Notification/Notification';
 import './Toast.less';
-export default class Toast extends Component {
-  state = {
-    show: false
-  };
 
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      show: true
-    });
-    setTimeout(this.hideToast,1000);
-    return nextProps;
+let notification ;
+const getNotification = () => {
+  if (!notification) {
+    notification = Notification.config();
   }
-  
-  hideToast = () => {
-    this.setState({
-      show: false
-    })
-  }
+  return notification;
+}
 
-  getClass = () => {
-    if(this.state.show){
-      return 'toast show';
-    }else{
-      return 'toast hide';
-    }
-  }
-
-  render() {
-    const { msg } = this.props;
-
-    return (
-      <div className={this.getClass()}>
-        <div>{msg}</div>
+const notice = (content, type, icon, duration = 3000, onClose, mask = true) => {
+  const notificationInstance = getNotification();
+  notificationInstance.addNotice({
+    duration,
+    mask,
+    content: !!icon
+      ? <div className="toast-box">
+        <div>{content}</div>
       </div>
-    );
+      : <div className="toast-box">
+        <div>{content}</div>
+      </div>,
+    onClose: () => {
+      onClose && onClose();
+    }
+  })
+
+}
+
+export default {
+  info(content, duration, icon, mask, onClose) {
+    return notice(content, 'info', icon, duration, onClose, mask);
+  },
+  hide: () => {
+    if (notification) {
+      notification.destory();
+      notification = null;
+    }
   }
 }

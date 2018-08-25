@@ -4,7 +4,7 @@ import Images from '../../contants/Images';
 
 export default class Navigator extends Component {
   state = {};
-  
+
   render() {
     return (
       <div className="nav-wrapper">

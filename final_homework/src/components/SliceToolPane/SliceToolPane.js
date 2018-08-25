@@ -3,7 +3,7 @@ import './SliceToolPane.less';
 import AudioBar from '../AudioBar/AudioBar';
 import Images from '../../contants/Images';
 import { secondToMinutes, timeStringToSeconds } from '../../tools';
-
+import Toast from '../Toast/Toast';
 export default class SliceToolPane extends Component {
   state = {
     timeString: '00:00 / 00:00',
@@ -32,7 +32,8 @@ export default class SliceToolPane extends Component {
   setEmt = () => {
     const { timeString } = this.state;
     if (!this.state.hasSetBmt) {
-      window.alert('请先标记起点');
+      // window.alert('请先标记起点');
+      Toast.info('请先标记起点');
       return;
     }
     if(this.state.hasSetEmt) {

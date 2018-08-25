@@ -54,6 +54,7 @@ export default class ToolPane extends Component {
             UiActions={UiActions}
           />
         );
+      
       case 'share':
         // ToolActions.actionShareMusic();
         return;

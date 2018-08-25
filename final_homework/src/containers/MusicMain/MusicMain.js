@@ -47,7 +47,6 @@ export default class MusicMain extends Component {
         icon: Images.btnDelete,
         iconAc: Images.btnDeleteAc,
         isActive: ui.delete,
-        // action: UiActions.actionShowModal
         action: () => UiActions.actionSetCurrentTool('delete')
       },
     ];
@@ -65,6 +64,7 @@ export default class MusicMain extends Component {
       ui,
       audio
     } = this.props;
+
     return (
       <div className="wrapper">
         <SelectBar
