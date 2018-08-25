@@ -27,34 +27,5 @@ export const actionChangeToSingleSelect = () => {
   }
 }
 
-export const actionClearSliceMusic = id => {
-  return {
-    type: ActionTypes.CLEAR_SLICE_MUSIC,
-    id
-  }
-}
 
-export const actionSliceMusicStartPos = (id,startPos) => {
-  return {
-    type: ActionTypes.SLICE_MUSIC_START_POS,
-    startPos,
-    id
-  }
-}
 
-export const actionSliceMusicEndPos = (id,endPos) => {
-  return {
-    type: ActionTypes.SLICE_MUSIC_END_POS,
-    endPos,
-    id
-  }
-}
-
-export const actionSliceMusic = (id, startPos, endPos) => {
-  return {
-    type: ActionTypes.SLICE_MUSIC,
-    startPos,
-    endPos,
-    id
-  }
-}

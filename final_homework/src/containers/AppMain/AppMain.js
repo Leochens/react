@@ -11,7 +11,6 @@ import Images from '../../contants/Images';
 import MusicMain from '../MusicMain/MusicMain';
 import Modal from '../../components/Modal/Modal';
 
-import Slider from '../../components/Slider/Slider';
 
 class AppMain extends Component {
   state = {};
@@ -58,12 +57,7 @@ class AppMain extends Component {
             }}
           >上传音乐</TabItem>
         </Tabs >
-        <Modal
-          message={'确认删除歌曲吗？'}
-          isActive={this.props.ui.modalIsActive}
-          onOk={()=>this.props.ToolActions.actiondeleteMusic(this.props.ui.isMultipleSelect)}
-          onCancel={this.props.UiActions.actionHideModal}
-        />
+        
       </div >
     );
   }

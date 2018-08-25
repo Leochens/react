@@ -107,10 +107,8 @@ const musicManage = (state = {
         currentSingleSelectedId: flag ? sId : 0
       }
     }
-    case ActionTypes.SHARE_MUSIC: {
-      return state;
-    }
 
+    
     case ActionTypes.RENAME_MUSIC: {
       return state;
     }

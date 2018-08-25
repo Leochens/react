@@ -63,7 +63,7 @@ export default class SliceToolPane extends Component {
       window.alert("你还没有选择起点和终点！");
       return;
     }
-    const { music: { id, du }, SelectActions } = this.props;
+    const { music: { id, du }, ToolActions } = this.props;
 
     this.setState({
       emt: 0,
@@ -72,13 +72,13 @@ export default class SliceToolPane extends Component {
       hasSetBmt: false,
       hasSetEmt: false
     });
-    SelectActions.actionClearSliceMusic(id);
+    ToolActions.actionClearSliceMusic(id);
   }
 
   handleOk = () => {
-    const { music: { id }, SelectActions } = this.props;
+    const { music: { id }, ToolActions } = this.props;
     const { emt, bmt } = this.state;
-    SelectActions.actionSliceMusic(id, bmt, emt);
+    ToolActions.actionSliceMusic(id, bmt, emt);
   }
   onClose = () => {
     const { onClose } = this.props;

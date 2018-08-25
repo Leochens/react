@@ -1,8 +1,10 @@
 import * as ActionTypes from '../contants/ActionTypes';
 
-export const actionRenameMusic = () => {
+export const actionRenameMusic = (id, newName) => {
   return {
-    type: ActionTypes.RENAME_MUSIC
+    type: ActionTypes.RENAME_MUSIC,
+    id,
+    newName
   }
 }
 
@@ -25,8 +27,19 @@ export const actionShareMusic = () => {
   }
 }
 
-export const actionSliceMusic = () => {
+export const actionSliceMusic = (id, startPos, endPos) => {
   return {
-    type: ActionTypes.SLICE_MUSIC
+    type: ActionTypes.SLICE_MUSIC,
+    startPos,
+    endPos,
+    id
   }
 }
+export const actionClearSliceMusic = id => {
+  return {
+    type: ActionTypes.CLEAR_SLICE_MUSIC,
+    id
+  }
+}
+
+

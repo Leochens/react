@@ -5,14 +5,14 @@ import MusicList from '../../components/MusicList/MusicList';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
 import ToolPane from '../../components/ToolPena/ToolPena';
-import Toast from '../../components/Toast/Toast';
+// import Toast from '../../components/Toast/Toast';
 
 
 export default class MusicMain extends Component {
   state = {};
 
   getTools = () => {
-    const { ui, UiActions, ToolActions } = this.props;
+    const { ui, UiActions } = this.props;
     return [
       {
         title: '播放',
@@ -26,7 +26,7 @@ export default class MusicMain extends Component {
         icon: Images.btnRename,
         iconAc: Images.btnRenameAc,
         isActive: ui.rename,
-        action: () => { }
+        action: () => UiActions.actionSetCurrentTool('rename')
       },
       {
         title: '选取片段',
@@ -40,14 +40,15 @@ export default class MusicMain extends Component {
         icon: Images.btnShare,
         iconAc: Images.btnShareAc,
         isActive: ui.share,
-        action: () => { }
+        action: () => UiActions.actionSetCurrentTool('share')
       },
       {
         title: '删除',
         icon: Images.btnDelete,
         iconAc: Images.btnDeleteAc,
         isActive: ui.delete,
-        action: UiActions.actionShowModal
+        // action: UiActions.actionShowModal
+        action: () => UiActions.actionSetCurrentTool('delete')
       },
     ];
   }
@@ -59,6 +60,7 @@ export default class MusicMain extends Component {
       currentMultipleSelectedMusicIds,
       currentSingleSelectedId,
       SelectActions,
+      ToolActions,
       UiActions,
       ui,
       audio
@@ -95,8 +97,9 @@ export default class MusicMain extends Component {
           currentTool={ui.currentTool}
           music={audio}
           onClose={UiActions.actionCloseAudioBar}
-          SelectActions={SelectActions}
+          ToolActions={ToolActions}
           UiActions={UiActions}
+          ui={ui}
         />
 
       </div>
