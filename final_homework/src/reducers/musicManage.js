@@ -6,7 +6,7 @@ const initState = {
   myMusicIds: [],
   recommendMusicIds: [],
   currentMultipleSelectedMusicIds: [],
-  currentSingleSelectedId: 0,
+  currentSingleSelectedId: 1307092542,
 }
 
 const fetchMyMusicList = (state, action) => {
@@ -39,12 +39,12 @@ const setMultipleSelectedMusicIds = (state, action) => {
     }
     currentMultipleSelectedMusicIds.push(id);
   }
-
   return {
     ...state,
     currentMultipleSelectedMusicIds
   }
 }
+
 const setSingleSelectedMusicId = (state, action) => {
   const { id } = action;
   return {

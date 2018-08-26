@@ -44,7 +44,7 @@ const crossReducer = (state, action) => {
         }
       }
       ui.delete = true;
-    // 检测是否有推荐音乐 有的话 就不能显示删除
+      // 检测是否有推荐音乐 有的话 就不能显示删除
       for (let i = 0; i < cIds.length; i++) {
         if (rIds.includes(cIds[i])) {
           ui.delete = false;
@@ -88,7 +88,7 @@ const crossReducer = (state, action) => {
         }
       }
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`:
-      // case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`:
+    case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`:
       {
         if (sId) {
           const newToolPaneState = getToolPaneState(musics, sId);
@@ -125,7 +125,7 @@ const crossReducer = (state, action) => {
       return state;
     }
 
-    default:return state;
+    default: return state;
   }
 }
 
