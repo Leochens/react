@@ -1,8 +1,6 @@
 import * as ActionTypes from '../contants/ActionTypes';
 
-const audio = (state, action, extra) => {
-  console.log('audio', state);
-  console.log('extra', extra);
+const audio = (state, action) => {
   const {
     entities: {
       musics

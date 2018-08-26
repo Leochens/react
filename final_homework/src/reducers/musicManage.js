@@ -25,33 +25,33 @@ const fetchRecommendList = (state, action) => {
 }
 const setMultipleSelectedMusicIds = (state, action) => {
   const { id } = action;
-      const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice();
-      // 如果有就剔除 没有就添加
-      if (currentMultipleSelectedMusicIds.includes(id)) {
-        const index = currentMultipleSelectedMusicIds.indexOf(id);
-        currentMultipleSelectedMusicIds.splice(index, 1);
-      } else {
-        if (currentMultipleSelectedMusicIds.length === 5) {
-          // 最多选择5首
-          // TODO: 此时应该提示用户
-          Toast.info('最多选择5首');
-          return state;
-        }
-        currentMultipleSelectedMusicIds.push(id);
-      }
+  const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice();
+  // 如果有就剔除 没有就添加
+  if (currentMultipleSelectedMusicIds.includes(id)) {
+    const index = currentMultipleSelectedMusicIds.indexOf(id);
+    currentMultipleSelectedMusicIds.splice(index, 1);
+  } else {
+    if (currentMultipleSelectedMusicIds.length === 5) {
+      // 最多选择5首
+      // TODO: 此时应该提示用户
+      Toast.info('最多选择5首');
+      return state;
+    }
+    currentMultipleSelectedMusicIds.push(id);
+  }
 
-      return {
-        ...state,
-        currentMultipleSelectedMusicIds
-      }
- }
+  return {
+    ...state,
+    currentMultipleSelectedMusicIds
+  }
+}
 const setSingleSelectedMusicId = (state, action) => {
   const { id } = action;
   return {
     ...state,
     currentSingleSelectedId: id
   }
- }
+}
 const changeToSingleSelect = (state, action) => {
   return {
     ...state,
@@ -61,13 +61,13 @@ const changeToSingleSelect = (state, action) => {
 }
 const changeToMultipleSelect = (state, action) => {
   // 触发多选时要记得把单选时选中的那个加入到多选列表里
-      // 如果单选的那个元素已经被删了 那么此时多选数组就是一个空数组
-      return {
-        ...state,
-        currentMultipleSelectedMusicIds: state.currentSingleSelectedId ? [
-          state.currentSingleSelectedId
-        ] : []
-      }
+  // 如果单选的那个元素已经被删了 那么此时多选数组就是一个空数组
+  return {
+    ...state,
+    currentMultipleSelectedMusicIds: state.currentSingleSelectedId ? [
+      state.currentSingleSelectedId
+    ] : []
+  }
 }
 const deleteMusic = (state, action) => {
   const { isMultipleSelect } = action;
@@ -108,5 +108,5 @@ const musicManage = createReducer(initState, {
   [ActionTypes.DELETE_MUSIC]: deleteMusic,
   [ActionTypes.CHANGE_TO_MULTIPLE_SELECT]: changeToMultipleSelect,
   [ActionTypes.CHANGE_TO_SINGLE_SELECT]: changeToSingleSelect
-})
+});
 export default musicManage;

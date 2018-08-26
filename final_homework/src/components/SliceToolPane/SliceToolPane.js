@@ -39,7 +39,12 @@ export default class SliceToolPane extends Component {
       Toast.info("请先点击清除");
       return;
     }
+
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
+    if (curSenconds - this.state.bmt <= 10) {
+      Toast.info('间隔不能小于10秒');
+      return;
+    }
     this.setState({
       emt: curSenconds,
       endTime: curSenconds,
@@ -54,7 +59,7 @@ export default class SliceToolPane extends Component {
     const { timeString } = this.state;
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
     this.setState({
-      bmt: curSenconds,
+      bmt: curSenconds ? curSenconds : 1,
       hasSetBmt: true
     })
   }
@@ -78,6 +83,7 @@ export default class SliceToolPane extends Component {
   handleOk = () => {
     const { music: { id }, ToolActions } = this.props;
     const { emt, bmt } = this.state;
+
     ToolActions.actionSliceMusic(id, bmt, emt);
   }
   onClose = () => {
@@ -90,6 +96,7 @@ export default class SliceToolPane extends Component {
   }
   renderSliceTools = () => {
     const { hasSetBmt, hasSetEmt } = this.state;
+    console.log(this.state);
     return (
       <div className="slice-pane-tools">
         <span
