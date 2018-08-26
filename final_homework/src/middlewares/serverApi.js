@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_DOMAIN = 'http://xly-wkop.xiaoniangao.cn';
 
-
+const waitActionQueue = [];
 const callServerApi = (endpoint, params, normalizeFunc) => new Promise((resolve, reject) => {
   axios({
     method: 'POST',
@@ -29,8 +29,19 @@ export default store => next => action => {
     endpoint,
     params,
     normalizeFunc,
-    actionWaitQueue
+    afterLogin,
+    IS_LOGIN
   } = action.SERVER_API;
+  const token = store.getState().login.token;
+  
+  if (afterLogin) {
+    if (!token) {
+      waitActionQueue.push(action);
+      return;
+    } else {
+      params.token = token;
+    }
+  }
 
   if (typeof type !== 'string') {
     throw new Error('type shoudle be a string');
@@ -52,8 +63,14 @@ export default store => next => action => {
         type: `${type}_SUC`,
         response
       });
-      if (Array.isArray(actionWaitQueue) && actionWaitQueue.length !== 0) {
-        actionWaitQueue.forEach(action => store.dispatch(action(response.token)))
+      if (IS_LOGIN) {
+        console.log(waitActionQueue);
+        waitActionQueue.forEach(action => {
+          action.SERVER_API.params.token = response.token;
+          store.dispatch(action);
+        }
+        );
+        waitActionQueue.length = 0;
       }
     }).catch(err => {
       next({

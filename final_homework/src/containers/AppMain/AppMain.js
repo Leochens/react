@@ -9,7 +9,7 @@ import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
 import Images from '../../contants/Images';
 import MusicMain from '../MusicMain/MusicMain';
-import Modal from '../../components/Modal/Modal';
+
 
 
 class AppMain extends Component {
@@ -17,9 +17,8 @@ class AppMain extends Component {
   componentDidMount() {
     const { ServerActions } = this.props;
     // ServerActions.actionTestLogin(103);
-    ServerActions.actionUserLogin(103);
-    // ServerActions.actionFetchMyMusic('test81627');
-    // ServerActions.actionFetchRecommendMusic('test81627');
+    ServerActions.actionLoginAndFetchMusic(103)
+
   }
   render() {
     return (

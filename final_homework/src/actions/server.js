@@ -10,7 +10,7 @@ export const actionUserLogin = mid => {
       params: {
         mid
       },
-      actionWaitQueue: [actionFetchMyMusic, actionFetchRecommendMusic]
+      IS_LOGIN:true
     }
   };
 };
@@ -27,7 +27,8 @@ export const actionFetchMyMusic = token => {
         const myMusics = normalize(json.list, Schemas.musics);
         console.log(myMusics);
         return myMusics;
-      }
+      },
+      afterLogin:true
     }
   };
 };
@@ -44,13 +45,18 @@ export const actionFetchRecommendMusic = token => {
         const recommendMusics = normalize(json.list, Schemas.musics);
         console.log(recommendMusics);
         return recommendMusics;
-      }
+      },
+      afterLogin:true
+
     }
   };
 };
 
-export const actionTestLogin = (mid) => {
-  return (dispatch, getState) => {
-    dispatch(actionUserLogin(mid))
+
+export const actionLoginAndFetchMusic = mid => {
+  return (dispatch) => {
+    dispatch(actionUserLogin(mid));
+    dispatch(actionFetchMyMusic());
+    dispatch(actionFetchRecommendMusic());
   }
 }
