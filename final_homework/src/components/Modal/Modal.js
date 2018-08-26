@@ -73,7 +73,6 @@ export default class Modal extends Component {
     return (
       <div
         className={this.getClassName()}
-      // onClick={this.onCancel}
       >
         <div className="modal-wrapper">
           <div className="content">

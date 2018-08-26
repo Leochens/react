@@ -36,7 +36,6 @@ const closeAudioBar = (state, action) => {
     isToolPenaActive: false
   }
 }
-
 const setCurrentTool = (state, action) => {
   const { tool } = action;
   return {
@@ -51,7 +50,6 @@ const playMusic = (state, action) => {
     isToolPenaActive: true
   }
 }
-
 const ui = createReducer(initState, {
   [ActionTypes.CHANGE_TO_SINGLE_SELECT]: changeToSingleSelect,
   [ActionTypes.CHANGE_TO_MULTIPLE_SELECT]: changeToMultipleSelect,

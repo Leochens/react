@@ -5,8 +5,6 @@ import SliceToolPane from '../SliceToolPane/SliceToolPane';
 import Modal from '../Modal/Modal';
 
 export default class ToolPane extends Component {
-  // 交给AudioBar去回调 来改变当前时间串(播放事件/结束时间)
-
   getClassName = () => {
     const { isToolPenaActive } = this.props;
     return 'audio-bar-wrapper' + (isToolPenaActive ? ' ' : ' hide')

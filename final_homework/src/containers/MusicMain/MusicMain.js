@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import './MusicMain.less';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Actions from '../../actions';
+
 import SelectBar from '../../components/SelectBar/SelectBar';
 import MusicList from '../../components/MusicList/MusicList';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
 import ToolPane from '../../components/ToolPena/ToolPena';
-// import Toast from '../../components/Toast/Toast';
 
 
-export default class MusicMain extends Component {
+class MusicMain extends Component {
   state = {};
-
   getTools = () => {
     const { ui, UiActions } = this.props;
     return [
@@ -106,3 +108,41 @@ export default class MusicMain extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  const {
+    musicManage: {
+      myMusicIds,
+      recommendMusicIds,
+      currentMultipleSelectedMusicIds,
+      currentSingleSelectedId
+    },
+    ui,
+    login: userData,
+    entities: {
+      musics
+    },
+    audio
+  } = state;
+
+  const myMusics = myMusicIds.map(id => musics[id]);
+  const recommendMusics = recommendMusicIds.map(id => musics[id]);
+  return {
+    user: userData,
+    myMusics,
+    recommendMusics,
+    currentMultipleSelectedMusicIds,
+    currentSingleSelectedId,
+    ui,
+    audio
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    ServerActions: bindActionCreators(Actions.server, dispatch),
+    SelectActions: bindActionCreators(Actions.select, dispatch),
+    UiActions: bindActionCreators(Actions.ui, dispatch),
+    ToolActions: bindActionCreators(Actions.tools, dispatch),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MusicMain);

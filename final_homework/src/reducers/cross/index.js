@@ -1,6 +1,5 @@
 import *  as ActionTypes from '../../contants/ActionTypes';
 import audio from '../audio';
-import Toast from '../../components/Toast/Toast';
 const getToolPaneState = (musics, id) => {
   if (!musics || !id || !musics[id]) {  // 不传参数说明当前都没有选中
     return {
@@ -22,16 +21,19 @@ const getToolPaneState = (musics, id) => {
 };
 
 const crossReducer = (state, action) => {
-
+  const {
+    musicManage: {
+      currentMultipleSelectedMusicIds: cIds,
+      recommendMusicIds: rIds,
+      currentSingleSelectedId: sId
+    },
+    entities: {
+      musics
+    }
+  } = state;
   switch (action.type) {
 
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
-      const {
-        musicManage: {
-          currentMultipleSelectedMusicIds: cIds,
-          recommendMusicIds: rIds,
-        }
-      } = state;
       const ui = { ...state.ui };
       // 一个都没选 不能删除 或者是 当前没有单选选中的 也不能删除
       if (cIds.length === 0) {
@@ -57,11 +59,6 @@ const crossReducer = (state, action) => {
 
     case ActionTypes.SET_SINGLE_SELECTED_MUSIC_ID: {
       const { id } = action;
-      const {
-        entities: {
-          musics
-        }
-      } = state;
       const newToolPaneState = getToolPaneState(musics, id);
       return {
         ...state,
@@ -72,11 +69,7 @@ const crossReducer = (state, action) => {
       }
     }
     case ActionTypes.DELETE_MUSIC: {
-      const {
-        musicManage: {
-          currentSingleSelectedId: sId
-        },
-      } = state;
+
       if (!sId) {
         return {
           ...state,
@@ -97,14 +90,6 @@ const crossReducer = (state, action) => {
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`:
       // case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`:
       {
-        const {
-          musicManage: {
-            currentSingleSelectedId: sId
-          },
-          entities: {
-            musics
-          }
-        } = state;
         if (sId) {
           const newToolPaneState = getToolPaneState(musics, sId);
           return {
@@ -122,26 +107,12 @@ const crossReducer = (state, action) => {
         }
       }
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
-      const {
-        musicManage: {
-          currentSingleSelectedId: sId
-        },
-        entities: {
-          musics
-        }
-      } = state;
       return {
         ...state,
         ui: getToolPaneState(musics, sId)
       }
     }
     case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
-      const {
-        musicManage: {
-          currentSingleSelectedId: sId
-        }
-      } = state;
-
       if (!sId) {
         return {
           ...state,
@@ -154,11 +125,8 @@ const crossReducer = (state, action) => {
       return state;
     }
 
-    // 音频事件是后执行的
     default:return state;
   }
-
-
 }
 
 export default crossReducer;
