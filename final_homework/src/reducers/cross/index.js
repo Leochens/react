@@ -1,5 +1,6 @@
 import *  as ActionTypes from '../../contants/ActionTypes';
-import audio from './audio';
+import audio from '../audio';
+import Toast from '../../components/Toast/Toast';
 const getToolPaneState = (musics, id) => {
   if (!musics || !id || !musics[id]) {  // 不传参数说明当前都没有选中
     return {
@@ -22,10 +23,8 @@ const getToolPaneState = (musics, id) => {
 
 const crossReducer = (state, action) => {
 
-
   switch (action.type) {
 
-    // 检测是否有推荐音乐 有的话 就不能显示删除
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
       const {
         musicManage: {
@@ -43,6 +42,7 @@ const crossReducer = (state, action) => {
         }
       }
       ui.delete = true;
+    // 检测是否有推荐音乐 有的话 就不能显示删除
       for (let i = 0; i < cIds.length; i++) {
         if (rIds.includes(cIds[i])) {
           ui.delete = false;
@@ -88,8 +88,6 @@ const crossReducer = (state, action) => {
     }
     case ActionTypes.SET_CURRENT_TOOL:
     case ActionTypes.CLEAR_SLICE_MUSIC:
-    case ActionTypes.SLICE_MUSIC_END_POS:
-    case ActionTypes.SLICE_MUSIC_START_POS:
       {
         return {
           ...state,
@@ -99,7 +97,6 @@ const crossReducer = (state, action) => {
     case `${ActionTypes.FETCH_MY_MUSIC_LIST}_SUC`:
       // case `${ActionTypes.FETCH_RECOMMEND_MUSIC_LIST}_SUC`:
       {
-        console.log('default');
         const {
           musicManage: {
             currentSingleSelectedId: sId
@@ -108,7 +105,6 @@ const crossReducer = (state, action) => {
             musics
           }
         } = state;
-        console.log(state);
         if (sId) {
           const newToolPaneState = getToolPaneState(musics, sId);
           return {
@@ -158,27 +154,8 @@ const crossReducer = (state, action) => {
       return state;
     }
 
-    case ActionTypes.SHARE_MUSIC: {
-      const {
-        musicManage:{currentSingleSelectedId:sId},
-        entities:{musics}
-      } = state;
-      // let fun = () => {
-      //   window.alert(`送出 ${musics[sId].name} 音乐！`);
-      //   fun = null 
-      // } 
-      // fun();    
-      return state;
-    }
-
     // 音频事件是后执行的
-    default: {
-
-      return {
-        ...state,
-        audio: audio(state, action)
-      }
-    }
+    default:return state;
   }
 
 

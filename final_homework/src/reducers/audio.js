@@ -1,4 +1,4 @@
-import * as ActionTypes from '../../contants/ActionTypes';
+import * as ActionTypes from '../contants/ActionTypes';
 
 const audio = (state, action, extra) => {
   console.log('audio', state);

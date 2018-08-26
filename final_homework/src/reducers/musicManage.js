@@ -1,12 +1,12 @@
 import * as ActionTypes from '../contants/ActionTypes';
 import createReducer from './UTIL/createReducer';
-
+import Toast from '../components/Toast/Toast';
 import { deleteArrayItem } from '../tools';
 const initState = {
   myMusicIds: [],
   recommendMusicIds: [],
   currentMultipleSelectedMusicIds: [],
-  currentSingleSelectedId: 133482000,
+  currentSingleSelectedId: 0,
 }
 
 const fetchMyMusicList = (state, action) => {
@@ -23,7 +23,6 @@ const fetchRecommendList = (state, action) => {
     recommendMusicIds
   };
 }
-
 const setMultipleSelectedMusicIds = (state, action) => {
   const { id } = action;
       const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice();
@@ -35,6 +34,7 @@ const setMultipleSelectedMusicIds = (state, action) => {
         if (currentMultipleSelectedMusicIds.length === 5) {
           // 最多选择5首
           // TODO: 此时应该提示用户
+          Toast.info('最多选择5首');
           return state;
         }
         currentMultipleSelectedMusicIds.push(id);

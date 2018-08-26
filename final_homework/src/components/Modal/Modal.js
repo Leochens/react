@@ -53,16 +53,16 @@ export default class Modal extends Component {
     const { content, type, defaultValue, inputTip } = this.props;
     if (type === 'message') {
       return (
-        <span>{ content }</span>
+        <span>{content}</span>
       );
     } else if (type === 'input') {
       return (
         <div className="">
           <div className="input-tip">{inputTip}</div>
           <input
-          onFocus={e => e.stopPropagation()} 
-          defaultValue={defaultValue}
-           onChange={this.onInputChane}/>
+            onFocus={e => e.stopPropagation()}
+            defaultValue={defaultValue}
+            onChange={this.onInputChane} />
         </div>
       )
     }
@@ -73,7 +73,7 @@ export default class Modal extends Component {
     return (
       <div
         className={this.getClassName()}
-        // onClick={this.onCancel}
+      // onClick={this.onCancel}
       >
         <div className="modal-wrapper">
           <div className="content">
