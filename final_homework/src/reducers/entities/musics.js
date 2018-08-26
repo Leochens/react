@@ -1,5 +1,5 @@
 import * as ActionTypes from '../../contants/ActionTypes';
-
+// import { fromJS } from 'immutable'
 
 const musics = (state = {}, action) => {
   switch (action.type) {
@@ -36,7 +36,7 @@ const musics = (state = {}, action) => {
       const { id } = action;
       return {
         ...state,
-        [id]:{
+        [id]: {
           ...state[id],
           emt: 0,
           bmt: 0

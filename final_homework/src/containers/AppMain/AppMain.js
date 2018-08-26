@@ -16,9 +16,10 @@ class AppMain extends Component {
   state = {};
   componentDidMount() {
     const { ServerActions } = this.props;
+    // ServerActions.actionTestLogin(103);
     ServerActions.actionUserLogin(103);
-    ServerActions.actionFetchMyMusic('test81627');
-    ServerActions.actionFetchRecommendMusic('test81627');
+    // ServerActions.actionFetchMyMusic('test81627');
+    // ServerActions.actionFetchRecommendMusic('test81627');
   }
   render() {
     return (

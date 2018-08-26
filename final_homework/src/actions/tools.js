@@ -15,11 +15,6 @@ export const actiondeleteMusic = (isMultipleSelect) => {
   }
 }
 
-export const actionPlayMusic = () => {
-  return {
-    type: ActionTypes.PLAY_MUSIC
-  }
-}
 
 export const actionShareMusic = () => {
   return {

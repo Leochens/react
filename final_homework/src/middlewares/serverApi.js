@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_DOMAIN = 'http://xly-wkop.xiaoniangao.cn';
 
-const waitingActions = [];
 
 const callServerApi = (endpoint, params, normalizeFunc) => new Promise((resolve, reject) => {
   axios({
@@ -29,7 +28,8 @@ export default store => next => action => {
     type,
     endpoint,
     params,
-    normalizeFunc
+    normalizeFunc,
+    actionWaitQueue
   } = action.SERVER_API;
 
   if (typeof type !== 'string') {
@@ -52,6 +52,9 @@ export default store => next => action => {
         type: `${type}_SUC`,
         response
       });
+      if (Array.isArray(actionWaitQueue) && actionWaitQueue.length !== 0) {
+        actionWaitQueue.forEach(action => store.dispatch(action(response.token)))
+      }
     }).catch(err => {
       next({
         type: `${type}_FAI`,

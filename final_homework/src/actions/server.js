@@ -9,7 +9,8 @@ export const actionUserLogin = mid => {
       endpoint: '/login',
       params: {
         mid
-      }
+      },
+      actionWaitQueue: [actionFetchMyMusic, actionFetchRecommendMusic]
     }
   };
 };
@@ -47,3 +48,9 @@ export const actionFetchRecommendMusic = token => {
     }
   };
 };
+
+export const actionTestLogin = (mid) => {
+  return (dispatch, getState) => {
+    dispatch(actionUserLogin(mid))
+  }
+}
