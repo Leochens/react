@@ -23,6 +23,7 @@ const fetchRecommendList = (state, action) => {
     recommendMusicIds
   };
 }
+
 const setMultipleSelectedMusicIds = (state, action) => {
   const { id } = action;
   const currentMultipleSelectedMusicIds = state.currentMultipleSelectedMusicIds.slice();
