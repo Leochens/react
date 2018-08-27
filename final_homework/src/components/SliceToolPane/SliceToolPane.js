@@ -96,7 +96,6 @@ export default class SliceToolPane extends Component {
   }
   renderSliceTools = () => {
     const { hasSetBmt, hasSetEmt } = this.state;
-    console.log(this.state);
     return (
       <div className="slice-pane-tools">
         <span

@@ -20,7 +20,7 @@ class AppMain extends Component {
   render() {
     return (
       <div className="main">
-        <Navigator>{this.props.user.nick}</Navigator>
+        <Navigator ui={this.props.ui}>{this.props.user.nick}</Navigator>
         <Tabs defaultActiveId={1}>
           <TabItem id={1} title={'我的音乐'}
             icon={{
@@ -54,7 +54,8 @@ class AppMain extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.login
+    user: state.login,
+    ui: state.ui
   }
 };
 const mapDispatchToProps = dispatch => {

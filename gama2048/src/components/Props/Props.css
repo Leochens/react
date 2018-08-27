@@ -30,9 +30,14 @@
 }
 @media screen and (max-width: 500px) {
     .Props{
-        left: 50%;
-        top: 280px;
-        margin-left: -44px;
+        left: -10px;
+        top: 309px;
+        /* margin-left: -44px; */
     }
-
+    .props-box{
+      height: 50px;
+      width: 50px;
+      line-height: 50px;;
+      font-size: 11px;
+    }
 }

@@ -52,9 +52,9 @@ export default class AudioBar extends Component {
   }
 
   handleTimeUpdate = (e) => {
-    const { music: { du }, onTimeChange, endTime, bmt } = this.props;
+    const { music: { du }, onTimeChange, endTime, bmt, emt } = this.props;
     const curTime = e.target.currentTime;
-    if ((curTime >= endTime)) {
+    if (((emt ? curTime : curTime + 1) >= endTime || curTime <= bmt)) {
       e.target.currentTime = bmt ? bmt : 0;
       this.setState({
         seconds: bmt ? bmt : 0
@@ -68,7 +68,8 @@ export default class AudioBar extends Component {
     onTimeChange && onTimeChange(`${cur} / ${end}`);
     this.setState({
       seconds: curTime
-    })
+    });
+
   }
 
   componentDidMount() {
