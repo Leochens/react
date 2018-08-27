@@ -69,7 +69,6 @@ export default class SliceToolPane extends Component {
       return;
     }
     const { music: { id, du }, ToolActions } = this.props;
-    console.log('clear');
     this.setState({
       emt: 0,
       bmt: 0,
@@ -138,7 +137,6 @@ export default class SliceToolPane extends Component {
       music,
       isToolPenaActive,
     } = this.props;
-    console.log(this.state);
     return (
       <div className="slice-pane">
         <div className="slice-pane-audio-head">

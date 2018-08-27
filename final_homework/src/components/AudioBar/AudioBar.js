@@ -128,7 +128,7 @@ export default class AudioBar extends Component {
       })
     }
   }
-  
+
   // 等待音频加载结束后 能够获得音频时间 渲染slider
   renderSlider = () => {
     const { begin, end } = this.props;
@@ -163,7 +163,7 @@ export default class AudioBar extends Component {
     if (!isAudioBarActive) {
       return null;
     }
-    console.log(this.state);
+    // console.log(this.state);
 
     return (
       <div className="play-bar">
