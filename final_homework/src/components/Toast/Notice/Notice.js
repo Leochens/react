@@ -32,7 +32,7 @@ export default class Notice extends Component {
     this.timer = setTimeout(() => {
       onClose && onClose();
       clearTimeout(that.timer);
-    },300);
+    }, 300);
   }
 
   render() {

@@ -9,14 +9,12 @@ export default class PlayToolPane extends Component {
     timeString: initTimeString,
     bmt: 0,
     emt: 0,
-    endTime: 0
   };
   componentWillMount() {
     const { music } = this.props;
     this.setState({
       bmt: music.bmt,
       emt: music.emt,
-      endTime: music.emt ? music.emt : music.du
     });
   }
   getAudioTime = timeString => {
@@ -48,13 +46,12 @@ export default class PlayToolPane extends Component {
           <div className="audio-time">{this.state.timeString}</div>
         </div>
         <AudioBar
-          music={music}
+          src={music.m_url}
           isAudioBarActive={isToolPenaActive}
-          autoplay={false}
+          autoplay={true}
           onTimeChange={this.getAudioTime}
-          bmt={this.state.bmt}
-          emt={this.state.emt}
-          endTime={this.state.endTime}
+          begin={this.state.bmt}
+          end={this.state.emt}
         />
       </div >
     );

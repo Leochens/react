@@ -142,13 +142,12 @@ export default class SliceToolPane extends Component {
         <div className="slice-pane-audio-head">
           {this.renderSliceTools()}
           <AudioBar
-            music={music}
-            isAudioBarActive={isToolPenaActive}
-            autoplay={false}
-            onTimeChange={this.getAudioTime}
-            bmt={this.state.bmt}
-            emt={this.state.emt}
-            endTime={this.state.endTime}
+           src={music.m_url}
+           isAudioBarActive={isToolPenaActive}
+           autoplay={true}
+           onTimeChange={this.getAudioTime}
+           begin={this.state.bmt}
+           end={this.state.emt}
           />
           <div className="slice-pane-audio-time">{this.state.timeString}</div>
         </div>

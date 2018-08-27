@@ -2,6 +2,7 @@ import * as ActionTypes from '../contants/ActionTypes';
 import createReducer from './UTIL/createReducer';
 import Toast from '../components/Toast/Toast';
 import { deleteArrayItem } from '../tools';
+
 const getToolPaneState = curMusic => {
   return {
     play: true,

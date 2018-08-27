@@ -10,7 +10,6 @@ class Notification extends React.Component {
     super(props);
     this.state = {
       notices: [], // 存储当前有的notices
-      hasMask: true, // 是否显示蒙版
     }
   }
   addNotice = notice => {
@@ -18,7 +17,6 @@ class Notification extends React.Component {
     // 创造一个不重复的key
     const { notices } = this.state;
     const key = notice.key ? notice.key : notice.key = getUuid();
-    const mask = notice.mask ? notice.mask : false;
     const flag = notices.filter((item) => item.key === key).length;
 
     if (!flag) {
@@ -26,7 +24,6 @@ class Notification extends React.Component {
       notices.push(notice);
       this.setState({
         notices: notices,
-        hasMask: mask
       });
     }
   }
@@ -58,19 +55,10 @@ class Notification extends React.Component {
 
     return list;
   }
-  getMaskDOM() {
-    const { notices, hasMask } = this.state;
-    // notices为空的时候 不显示蒙版
-    // 始终只有一个蒙版
-    if (notices.length > 0 && hasMask === true) return <div className="notification-mask"></div>;
-  }
   render() {
     const noticesDOM = this.renderNotices();
-    const maskDOM = this.getMaskDOM();
-
     return (
       <div className="notification-box">
-        {maskDOM}
         {noticesDOM}
       </div>
     )

@@ -105,13 +105,14 @@ export default class Slider extends React.Component {
     );
   }
   render() {
+    const { disabled } = this.props;
     return (
       <div className="sliderWrapper" >
         <div className="slider">
           <div
             className="sliderInner"
             ref={self => this.slideInner = self}
-            onClick={this.handleClickSliderInner}
+            onClick={!disabled ? this.handleClickSliderInner : null}
           >
             <div
               ref={self => this.sliderTrack = self}
@@ -124,9 +125,9 @@ export default class Slider extends React.Component {
               ref={self => this.sliderHandler = self}
               style={{ left: this.props.defaultValue + '%' }}
               className="sliderHandler"
-              onTouchStart={this.handleTouchStart}
-              onTouchMove={this.handleTouchmove}
-              onTouchEnd={this.handleTouchEnd}
+              onTouchStart={!disabled ? this.handleTouchStart : null}
+              onTouchMove={!disabled ? this.handleTouchmove : null}
+              onTouchEnd={!disabled ? this.handleTouchEnd : null}
             >
             </div>
             {this.renderSlicer()}
