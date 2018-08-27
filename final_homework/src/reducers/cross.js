@@ -23,7 +23,7 @@ const crossReducer = (state, action) => {
       recommendMusicIds: rIds,
     },
     ui: {
-      currentMultipleSelectedMusicIds: cIds,
+      currentMultipleSelectedMusicIds: mIds,
       currentSingleSelectedId: sId
     },
     entities: {
@@ -34,10 +34,10 @@ const crossReducer = (state, action) => {
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
       const ui = { ...state.ui };
       // 一个都没选 不能删除 或者是 当前没有单选选中的 也不能删除
-      ui.delete = cIds.length ? true : false;
+      ui.delete = mIds.length ? true : false;
       // 检测是否有推荐音乐 有的话 就不能显示删除
-      for (let i = 0; i < cIds.length; i++) {
-        if (rIds.includes(cIds[i])) {
+      for (let i = 0; i < mIds.length; i++) {
+        if (rIds.includes(mIds[i])) {
           ui.delete = false;
           break;
         }
@@ -53,6 +53,18 @@ const crossReducer = (state, action) => {
         ui: {
           ...state.ui,
           ...(getToolPaneState(musics, sId))
+        }
+      }
+    }
+    case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
+
+      const flag = rIds.includes(sId);
+      console.log();
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          delete: flag ? false : true
         }
       }
     }
