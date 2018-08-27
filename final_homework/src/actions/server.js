@@ -25,7 +25,7 @@ export const actionFetchMyMusic = () => {
       },
       normalizeFunc: json => {
         const myMusics = normalize(json.list, Schemas.musics);
-        console.log(myMusics);
+        // console.log(myMusics);
         return myMusics;
       },
       afterLogin:true
@@ -43,7 +43,7 @@ export const actionFetchRecommendMusic = () => {
       },
       normalizeFunc: json => {
         const recommendMusics = normalize(json.list, Schemas.musics);
-        console.log(recommendMusics);
+        // console.log(recommendMusics);
         return recommendMusics;
       },
       afterLogin:true

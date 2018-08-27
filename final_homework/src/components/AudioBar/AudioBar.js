@@ -143,7 +143,7 @@ export default class AudioBar extends Component {
         defaultValue={~~((curentSeconds / duration) * 100)}
         onChange={this.setAudioPos}
         showSliceStartFlag={begin}
-        showSliceEndFlag={(end !== 0 && end.toFixed(0) !== duration.toFixed(0))}
+        showSliceEndFlag={(end !== 0 && Math.ceil(end) !== Math.ceil(duration))}
         disabled={false}
         begin={{
           icon: Images.cutMusicStart,
