@@ -64,7 +64,7 @@ export default store => next => action => {
         response
       });
       if (IS_LOGIN) {
-        console.log(waitActionQueue);
+        // console.log(waitActionQueue);
         waitActionQueue.forEach(action => {
           action.SERVER_API.params.token = response.token;
           store.dispatch(action);

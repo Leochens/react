@@ -1,17 +1,17 @@
 import * as ActionTypes from '../contants/ActionTypes';
 
 
-export const actionSetSingleSelectedMusicId = id => {
+export const actionSetSingleSelectedMusicId = music => {
   return{
     type: ActionTypes.SET_SINGLE_SELECTED_MUSIC_ID,
-    id
+    music
   }
 }
 
-export const actionSetMultipleSelectedMusicIds = id => {
+export const actionSetMultipleSelectedMusicIds = music => {
   return{
     type: ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS,
-    id
+    music
   }
 }
 

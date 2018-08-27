@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal';
 
 export default class ToolPane extends Component {
   getClassName = () => {
-    const { isToolPenaActive } = this.props;
+    const { ui: { isToolPenaActive } } = this.props;
     return 'audio-bar-wrapper' + (isToolPenaActive ? ' ' : ' hide')
   }
   handleInputDone = newName => {
@@ -16,9 +16,8 @@ export default class ToolPane extends Component {
   renderTool = () => {
     const {
       music,
-      isToolPenaActive,
       onClose,
-      currentTool,
+      ui: { currentTool, isToolPenaActive },
       ToolActions,
       UiActions,
     } = this.props;
@@ -52,33 +51,40 @@ export default class ToolPane extends Component {
             UiActions={UiActions}
           />
         );
-      
+
       case 'share':
         return (
           <Modal
             type="message"
-            content={'成功发送给朋友'}
+            content={`成功发送${music.name}给朋友`}
             isActive={isToolPenaActive}
             onOk={onClose}
             onCancel={onClose}
           />
         )
       case 'delete':
+        const {
+          ui: {
+            isMultipleSelect,
+            currentMultipleSelectedMusicIds: mIds,
+          }
+        } = this.props;
+
         return (
           <Modal
             type="message"
-            content={'确认删除歌曲吗？'}
+            content={`确认删除${isMultipleSelect ? mIds.length + '首' : music.name}音乐吗？`}
             isActive={isToolPenaActive}
-            onOk={() => this.props.ToolActions.actiondeleteMusic(this.props.ui.isMultipleSelect)}
+            onOk={() => this.props.ToolActions.actiondeleteMusic(isMultipleSelect ? mIds : music.id)}
             onCancel={onClose}
           />
-        )
+        );
       default: return null;
     }
   }
   render() {
 
-    if (!this.props.isToolPenaActive) {
+    if (!this.props.ui.isToolPenaActive) {
       return null;
     }
     return (

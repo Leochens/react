@@ -13,8 +13,6 @@ export const PLAY_MUSIC = 'PLAY_MUSIC';
 export const SHARE_MUSIC = 'SHARE_MUSIC';
 export const SLICE_MUSIC = 'SLICE_MUSIC';
 
-export const SHOW_MODAL = 'SHOW_MODAL';
-export const HIDE_MODAL = 'HIDE_MODAL';
 export const CLOSE_AUDIOBAR = 'CLOSE_AUDIOBAR';
 
 export const SET_AUDIO_DATA = 'SET_AUDIO_DATA';
@@ -22,8 +20,4 @@ export const SET_AUDIO_DATA = 'SET_AUDIO_DATA';
 export const SET_CURRENT_TOOL = 'SET_CURRENT_TOOL';
 
 export const CLEAR_SLICE_MUSIC = 'CLEAR_SLICE_MUSIC';
-export const SLICE_MUSIC_START_POS =  'SLICE_MUSIC_START_POS';
-export const SLICE_MUSIC_END_POS =  'SLICE_MUSIC_END_POS';
 
-export const SHOW_TOAST = "SHOW_TOAST";
-export const HIDE_TOAST = "HIDE_TOAST";

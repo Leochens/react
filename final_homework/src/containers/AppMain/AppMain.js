@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Actions from '../../actions';
 import './AppMain.less';
-
 import Navigator from '../../components/Navigator/Navigator';
 import Tabs from '../../components/Tabs/Tabs';
 import TabItem from '../../components/TabItem/TabItem';
 import Images from '../../contants/Images';
 import MusicMain from '../MusicMain/MusicMain';
+import SearchMusic from '../SearchMusic/SearchMusic';
+import UploadMusic from '../UploadMusic/UploadMusic';
 
 class AppMain extends Component {
   state = {};
@@ -35,7 +36,7 @@ class AppMain extends Component {
               normal: Images.search
             }}
           >
-            搜索音乐
+            <SearchMusic />
           </TabItem>
           <TabItem id={3} title={'上传音乐'}
             icon={{
@@ -43,7 +44,7 @@ class AppMain extends Component {
               normal: Images.upload
             }}
           >
-            上传音乐
+            <UploadMusic />
           </TabItem>
         </Tabs >
 
@@ -52,9 +53,9 @@ class AppMain extends Component {
   }
 }
 const mapStateToProps = state => {
-    return {
-      user: state.login
-    }
+  return {
+    user: state.login
+  }
 };
 const mapDispatchToProps = dispatch => {
   return {

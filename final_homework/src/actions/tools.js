@@ -8,14 +8,12 @@ export const actionRenameMusic = (id, newName) => {
   }
 }
 
-export const actiondeleteMusic = (isMultipleSelect) => {
+export const actiondeleteMusic = (ids) => {
   return {
     type: ActionTypes.DELETE_MUSIC,
-    isMultipleSelect
+    ids
   }
 }
-
-
 export const actionShareMusic = () => {
   return {
     type: ActionTypes.SHARE_MUSIC

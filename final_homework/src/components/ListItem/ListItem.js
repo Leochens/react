@@ -4,9 +4,9 @@ import CheckBox from '../CheckBox/CheckBox';
 
 export default class ListItem extends Component {
   handleClickMusic = () => {
-    const { onSelect, id } = this.props;
+    const { onSelect, data } = this.props;
 
-    onSelect && onSelect(id);
+    onSelect && onSelect(data);
   }
 
   render() {

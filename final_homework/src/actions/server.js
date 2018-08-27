@@ -15,13 +15,13 @@ export const actionUserLogin = mid => {
   };
 };
 
-export const actionFetchMyMusic = token => {
+export const actionFetchMyMusic = () => {
   return {
     SERVER_API: {
       type: ActionTypes.FETCH_MY_MUSIC_LIST,
       endpoint: '/music/my_list',
       params: {
-        token
+        // token
       },
       normalizeFunc: json => {
         const myMusics = normalize(json.list, Schemas.musics);
@@ -33,13 +33,13 @@ export const actionFetchMyMusic = token => {
   };
 };
 
-export const actionFetchRecommendMusic = token => {
+export const actionFetchRecommendMusic = () => {
   return {
     SERVER_API: {
       type: ActionTypes.FETCH_RECOMMEND_MUSIC_LIST,
       endpoint: '/music/recommend_list',
       params: {
-        token
+        // token
       },
       normalizeFunc: json => {
         const recommendMusics = normalize(json.list, Schemas.musics);

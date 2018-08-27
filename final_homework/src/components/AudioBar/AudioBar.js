@@ -55,9 +55,6 @@ export default class AudioBar extends Component {
     const { music: { du }, onTimeChange, endTime, bmt } = this.props;
     const curTime = e.target.currentTime;
     if ((curTime >= endTime)) {
-      console.log('????');
-      // this.pauseMusic();// stop ? no! 老子不停 老子要无限循环
-      // this.playMusic();
       e.target.currentTime = bmt ? bmt : 0;
       this.setState({
         seconds: bmt ? bmt : 0

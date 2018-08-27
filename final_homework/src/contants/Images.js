@@ -4,9 +4,7 @@ import upload from '../resource/images/upload.png';
 import uploadAc from '../resource/images/upload_ac.png';
 import search from '../resource/images/search.png';
 import searchAc from '../resource/images/search_ac.png';
-
 import btnReturn from '../resource/images/return.png';
-
 import btnPause from '../resource/images/btn_pause.png';
 import btnPlay from '../resource/images/btn_play.png';
 import btnCutAc from '../resource/images/button_cut.png';
@@ -27,8 +25,6 @@ import btnShareAc from '../resource/images/button_share.png';
 import btnShare from '../resource/images/button_share_gray.png';
 import cutMusicFinish from '../resource/images/cut_music_finish.png';
 import cutMusicStart from '../resource/images/cut_music_start.png';
-
-
 
 const Images = {
   music,

@@ -43,7 +43,6 @@ const musics = (state = {}, action) => {
     }
     case ActionTypes.SLICE_MUSIC: {
       const { id, startPos, endPos } = action;
-
       return {
         ...state,
         [id]: {

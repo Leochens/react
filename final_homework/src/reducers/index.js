@@ -4,14 +4,14 @@ import entities from './entities';
 import musicManage from './musicManage';
 import login from './login';
 import ui from './ui';
-
+import audio from './audio';
 
 const combineReducer = combineReducers({
   entities,
   musicManage,
   login,
   ui,
-  audio: () => { return {}}
+  audio
 });
 
 const RootReducer = (state, action) => {

@@ -58,8 +58,6 @@ class MusicMain extends Component {
     const {
       myMusics,
       recommendMusics,
-      currentMultipleSelectedMusicIds,
-      currentSingleSelectedId,
       SelectActions,
       ToolActions,
       UiActions,
@@ -76,34 +74,27 @@ class MusicMain extends Component {
         <MusicList
           title={"我的音乐"}
           musics={myMusics}
-          currentMultipleSelectedMusicIds={currentMultipleSelectedMusicIds}
-          currentSingleSelectedId={currentSingleSelectedId}
           SelectActions={SelectActions}
-          ui={ui}
           UiActions={UiActions}
+          ui={ui}
         />
         <MusicList
           title={"推荐音乐"}
           musics={recommendMusics}
-          currentMultipleSelectedMusicIds={currentMultipleSelectedMusicIds}
-          currentSingleSelectedId={currentSingleSelectedId}
           SelectActions={SelectActions}
-          ui={ui}
           UiActions={UiActions}
+          ui={ui}
         />
         <ToolBar
           tools={this.getTools()}
         />
         <ToolPane
-          isToolPenaActive={ui.isToolPenaActive}
-          currentTool={ui.currentTool}
           music={audio}
           onClose={UiActions.actionCloseAudioBar}
           ToolActions={ToolActions}
           UiActions={UiActions}
           ui={ui}
         />
-
       </div>
     );
   }
@@ -113,8 +104,6 @@ const mapStateToProps = state => {
     musicManage: {
       myMusicIds,
       recommendMusicIds,
-      currentMultipleSelectedMusicIds,
-      currentSingleSelectedId
     },
     ui,
     login: userData,
@@ -130,13 +119,10 @@ const mapStateToProps = state => {
     user: userData,
     myMusics,
     recommendMusics,
-    currentMultipleSelectedMusicIds,
-    currentSingleSelectedId,
     ui,
     audio
   };
 };
-
 const mapDispatchToProps = dispatch => {
   return {
     ServerActions: bindActionCreators(Actions.server, dispatch),

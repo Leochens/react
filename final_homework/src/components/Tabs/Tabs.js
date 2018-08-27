@@ -10,10 +10,10 @@ const Item = props => {
   const { icon, title, isActive } = props;
   return (
     <div
-      className={`tab-item${isActive? '-is-active' : ''}`}
+      className={`tab-item${isActive ? '-is-active' : ''}`}
       onClick={onClick}
     >
-      <img src={isActive? icon.active : icon.normal} />
+      <img src={isActive ? icon.active : icon.normal} alt="" />
       <span>{title}</span>
     </div>
   );

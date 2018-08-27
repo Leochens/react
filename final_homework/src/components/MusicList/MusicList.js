@@ -4,6 +4,23 @@ import ListItem from '../ListItem/ListItem';
 
 
 export default class MusicList extends Component {
+  handleSelect = (music) => {
+    const {
+      SelectActions: {
+        actionSetSingleSelectedMusicId,
+        actionSetMultipleSelectedMusicIds
+      },
+      ui: {
+        isMultipleSelect
+      }
+    } = this.props;
+
+    if(isMultipleSelect){
+      actionSetMultipleSelectedMusicIds(music)
+    }else{
+      actionSetSingleSelectedMusicId(music)
+    }
+  }
   renderListTitle = () => {
     const { title } = this.props;
     if (title) {
@@ -18,14 +35,10 @@ export default class MusicList extends Component {
   renderListItems = () => {
     const {
       musics,
-      currentSingleSelectedId,
-      currentMultipleSelectedMusicIds,
-      SelectActions: {
-        actionSetSingleSelectedMusicId,
-        actionSetMultipleSelectedMusicIds
-      },
       ui: {
-        isMultipleSelect
+        isMultipleSelect,
+        currentSingleSelectedId,
+        currentMultipleSelectedMusicIds,
       }
     } = this.props;
     return musics.map((music, idx) => (
@@ -33,9 +46,7 @@ export default class MusicList extends Component {
         key={`music_${idx}`}
         id={music.id}
         data={music}
-        onSelect={isMultipleSelect
-          ? actionSetMultipleSelectedMusicIds
-          : actionSetSingleSelectedMusicId}
+        onSelect={this.handleSelect}
 
         isSelected={isMultipleSelect
           ? currentMultipleSelectedMusicIds.includes(music.id)
