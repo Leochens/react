@@ -42,11 +42,16 @@ export default class Modal extends Component {
 
   onOk = (e) => {
     e.stopPropagation();
-    const { onOk, onCancel, type, onInputDone } = this.props;
+    let inputValue = this.state.inputValue;
+    const { onOk, onCancel, type, onInputDone,defaultValue } = this.props;
     if (type === 'message') {
       onOk && onOk();
     } else if (type === 'input') {
-      onInputDone && onInputDone(this.state.inputValue);
+      // 没有新值就置默认的值
+      if(!inputValue){
+        inputValue = defaultValue
+      }
+      onInputDone && onInputDone(inputValue);
     }
 
     onCancel && onCancel();
@@ -59,7 +64,7 @@ export default class Modal extends Component {
       );
     } else if (type === 'input') {
       return (
-        <div className="">
+        <div className="input-modal-wrap">
           <div className="input-tip">{inputTip}</div>
           <input
             onFocus={e => e.stopPropagation()}

@@ -58,14 +58,16 @@ const crossReducer = (state, action) => {
     }
     case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
 
-      const flag = rIds.includes(sId);
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          delete: flag ? false : true
+      if(rIds.includes(sId)){
+        return {
+          ...state,
+          ui: {
+            ...state.ui,
+            delete: false
+          }
         }
       }
+      return state;
     }
     default: return state;
   }

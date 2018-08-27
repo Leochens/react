@@ -39,7 +39,7 @@ export default class ToolPane extends Component {
             onInputDone={this.handleInputDone}
             onCancel={onClose}
             isActive={isToolPenaActive}
-            defaultValue={music.name}
+            defaultValue={music.name.split('.mp3')[0]}
           />
         )
       case 'slice':

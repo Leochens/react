@@ -1,4 +1,5 @@
 import * as ActionTypes from '../../contants/ActionTypes';
+import Toast from '../../components/Toast/Toast';
 // import { fromJS } from 'immutable'
 
 const musics = (state = {}, action) => {
@@ -20,7 +21,15 @@ const musics = (state = {}, action) => {
     }
 
     case ActionTypes.RENAME_MUSIC: {
-      const { id, newName } = action;
+      const { id } = action;
+      let newName = action.newName;
+      if (newName === '') {
+        Toast.info('音乐名不能为空!');
+        return state;
+      }
+      if (newName.indexOf('.mp3') === -1) {
+        newName += '.mp3';
+      }
       return {
         ...state,
         [id]: {
