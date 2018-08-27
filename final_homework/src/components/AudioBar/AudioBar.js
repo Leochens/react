@@ -3,7 +3,7 @@ import './AudioBar.less';
 import Slider from '../Slider/Slider';
 import Images from '../../contants/Images';
 import { secondToMinutes, addPreZero } from '../../tools';
-// 可复用
+
 
 const getTimeString = (cur, end) => {
   const curSecAndMin = secondToMinutes(cur).split(':');
@@ -121,6 +121,14 @@ export default class AudioBar extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.end !== nextProps.end) {
+      this.setState({
+        endTime: nextProps.end
+      })
+    }
+  }
+  
   // 等待音频加载结束后 能够获得音频时间 渲染slider
   renderSlider = () => {
     const { begin, end } = this.props;
@@ -135,7 +143,7 @@ export default class AudioBar extends Component {
         defaultValue={~~((curentSeconds / duration) * 100)}
         onChange={this.setAudioPos}
         showSliceStartFlag={begin}
-        showSliceEndFlag={end}
+        showSliceEndFlag={(end !== 0 && end.toFixed(0) !== duration.toFixed(0))}
         disabled={false}
         begin={{
           icon: Images.cutMusicStart,
@@ -155,6 +163,8 @@ export default class AudioBar extends Component {
     if (!isAudioBarActive) {
       return null;
     }
+    console.log(this.state);
+
     return (
       <div className="play-bar">
         <audio

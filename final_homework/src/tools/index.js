@@ -32,13 +32,16 @@ export const addPreZero = num => {
 }
 
 export const getFormatTime = seconds => {
-  return addPreZero(secondToMinutes(seconds));
+  const [min, sec] = secondToMinutes(seconds).split(':');
+  const _min = addPreZero(min);
+  const _sec = addPreZero(sec);
+  return `${_min}:${_sec}`;
 }
 
 /**
  * 01:25 => 85
  */
 export const timeStringToSeconds = timeString => {
-  const [minutes,seconds] = timeString.split(':');
-  return minutes*60 + seconds*1; 
+  const [minutes, seconds] = timeString.split(':');
+  return minutes * 60 + seconds * 1;
 } 

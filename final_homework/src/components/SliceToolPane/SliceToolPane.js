@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './SliceToolPane.less';
 import AudioBar from '../AudioBar/AudioBar';
 import Images from '../../contants/Images';
-import { secondToMinutes, timeStringToSeconds } from '../../tools';
+import { timeStringToSeconds, getFormatTime } from '../../tools';
 import Toast from '../Toast/Toast';
 export default class SliceToolPane extends Component {
   state = {
@@ -69,7 +69,7 @@ export default class SliceToolPane extends Component {
       return;
     }
     const { music: { id, du }, ToolActions } = this.props;
-
+    console.log('clear');
     this.setState({
       emt: 0,
       bmt: 0,
@@ -82,9 +82,10 @@ export default class SliceToolPane extends Component {
 
   handleOk = () => {
     const { music: { id }, ToolActions } = this.props;
-    const { emt, bmt } = this.state;
-
-    ToolActions.actionSliceMusic(id, bmt, emt);
+    const { hasSetBmt, hasSetEmt, emt, bmt } = this.state;
+    if (hasSetBmt && hasSetEmt) {
+      ToolActions.actionSliceMusic(id, bmt, emt);
+    }
   }
   onClose = () => {
     const { onClose } = this.props;
@@ -106,7 +107,7 @@ export default class SliceToolPane extends Component {
             ? Images.btnCutMusicStart
             : Images.btnCutMusicStartAc} alt="" />
           <div className="descript">标记起点</div>
-          <div className="time">{secondToMinutes(this.state.bmt)}</div>
+          <div className="time">{getFormatTime(this.state.bmt)}</div>
         </span>
         <span
           className="item"
@@ -126,7 +127,7 @@ export default class SliceToolPane extends Component {
             ? Images.btnCutMusicFinish
             : Images.btnCutMusicFinishAc} alt="" />
           <div className="descript">标记终点</div>
-          <div className="time">{secondToMinutes(this.state.emt)}</div>
+          <div className="time">{getFormatTime(this.state.emt)}</div>
         </span>
       </div>
     )
@@ -137,17 +138,18 @@ export default class SliceToolPane extends Component {
       music,
       isToolPenaActive,
     } = this.props;
+    console.log(this.state);
     return (
       <div className="slice-pane">
         <div className="slice-pane-audio-head">
           {this.renderSliceTools()}
           <AudioBar
-           src={music.m_url}
-           isAudioBarActive={isToolPenaActive}
-           autoplay={true}
-           onTimeChange={this.getAudioTime}
-           begin={this.state.bmt}
-           end={this.state.emt}
+            src={music.m_url}
+            isAudioBarActive={isToolPenaActive}
+            autoplay={true}
+            onTimeChange={this.getAudioTime}
+            begin={this.state.bmt}
+            end={this.state.endTime}
           />
           <div className="slice-pane-audio-time">{this.state.timeString}</div>
         </div>

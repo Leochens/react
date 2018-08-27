@@ -1,5 +1,5 @@
 import * as ActionTypes from '../contants/ActionTypes';
-import createReducer from './UTIL/createReducer';
+import createReducer from './util/createReducer';
 import Toast from '../components/Toast/Toast';
 import { deleteArrayItem } from '../tools';
 
