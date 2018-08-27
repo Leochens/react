@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './PlayToolPane.less';
 import AudioBar from '../AudioBar/AudioBar';
-
+import * as TEXT from '../../contants/Text';
 const initTimeString = '00:00 / 00:00';
 
 export default class PlayToolPane extends Component {
@@ -42,7 +42,9 @@ export default class PlayToolPane extends Component {
           <button
             className="close"
             onClick={this.onClose}
-          >关闭</button>
+          >
+            {TEXT.CLOSE}
+          </button>
           <div className="audio-time">{this.state.timeString}</div>
         </div>
         <AudioBar

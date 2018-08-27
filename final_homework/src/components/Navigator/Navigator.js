@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Navigator.less';
 import Images from '../../contants/Images';
+import * as TEXT from '../../contants/Text';
 import Toast from '../Toast/Toast';
-
 export default class Navigator extends Component {
   state = {};
   handelCompleted = () => {
@@ -14,11 +14,12 @@ export default class Navigator extends Component {
       }
     } = this.props;
     const num = isMultipleSelect ? mIds.toString() : sId;
-    Toast.info(`当前选中了${num}`);
-    
+
+    Toast.info(num ? `${TEXT.SELECT_MUSICS}${num}` : TEXT.SELECT_NONE);
+
   }
   handleBack = () => {
-    Toast.info('你点击了返回')
+    Toast.info(TEXT.BACK_INFO);
   }
   render() {
 
@@ -33,7 +34,7 @@ export default class Navigator extends Component {
           <div className="title">{this.props.children}</div>
           <div className="right"
             onClick={this.handelCompleted}>
-            <span>完成</span>
+            <span>{TEXT.COMPLETED}</span>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import './ToolPane.less';
 import PlayToolPane from '../PlayToolPane/PlayToolPane';
 import SliceToolPane from '../SliceToolPane/SliceToolPane';
 import Modal from '../Modal/Modal';
+import * as TEXT from '../../contants/Text';
 
 export default class ToolPane extends Component {
   getClassName = () => {
@@ -34,7 +35,7 @@ export default class ToolPane extends Component {
         return (
           <Modal
             type="input"
-            inputTip="请输入新的音乐名称"
+            inputTip={TEXT.RENAME_MUSIC_TIP}
             onInputDone={this.handleInputDone}
             onCancel={onClose}
             isActive={isToolPenaActive}
@@ -56,7 +57,7 @@ export default class ToolPane extends Component {
         return (
           <Modal
             type="message"
-            content={`成功发送${music.name}给朋友`}
+            content={TEXT.SHARE_MUSIC_INFO(music.name)}
             isActive={isToolPenaActive}
             onOk={onClose}
             onCancel={onClose}
@@ -73,7 +74,7 @@ export default class ToolPane extends Component {
         return (
           <Modal
             type="message"
-            content={`确认删除${isMultipleSelect ? mIds.length + '首' : music.name}音乐吗？`}
+            content={TEXT.DELETE_MUSIC_CONFIRM(isMultipleSelect ? mIds.length + '首' : music.name)}
             isActive={isToolPenaActive}
             onOk={() => this.props.ToolActions.actiondeleteMusic(isMultipleSelect ? mIds : music.id)}
             onCancel={onClose}

@@ -10,6 +10,7 @@ import Images from '../../contants/Images';
 import MusicMain from '../MusicMain/MusicMain';
 import SearchMusic from '../SearchMusic/SearchMusic';
 import UploadMusic from '../UploadMusic/UploadMusic';
+import * as TEXT from '../../contants/Text';
 
 class AppMain extends Component {
   state = {};
@@ -22,7 +23,7 @@ class AppMain extends Component {
       <div className="main">
         <Navigator ui={this.props.ui}>{this.props.user.nick}</Navigator>
         <Tabs defaultActiveId={1}>
-          <TabItem id={1} title={'我的音乐'}
+          <TabItem id={1} title={TEXT.MY_MUSIC}
             icon={{
               active: Images.musicAc,
               normal: Images.music
@@ -30,7 +31,7 @@ class AppMain extends Component {
           >
             <MusicMain />
           </TabItem  >
-          <TabItem id={2} title={'搜索音乐'}
+          <TabItem id={2} title={TEXT.SEARCH_MUSIC}
             icon={{
               active: Images.searchAc,
               normal: Images.search
@@ -38,7 +39,7 @@ class AppMain extends Component {
           >
             <SearchMusic />
           </TabItem>
-          <TabItem id={3} title={'上传音乐'}
+          <TabItem id={3} title={TEXT.UPLOAD_MUSIC}
             icon={{
               active: Images.uploadAc,
               normal: Images.upload

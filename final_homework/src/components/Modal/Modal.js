@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import './Modal.less';
+import * as TEXT from '../../contants/Text';
+
 export default class Modal extends Component {
   state = {};
 
   static defaultProps = {
     type: 'message',
-    content: '无描述',
+    content: TEXT.MODAL_DEFAULT_CONTENT,
     isActive: false,
     onOk: () => { },
     onCancel: () => { },
 
-    inputTip: '无描述',
+    inputTip: TEXT.MODAL_DEFAULT_CONTENT,
     onInputDone: () => { },
     defaultValue: '',
   }
@@ -81,11 +83,11 @@ export default class Modal extends Component {
           <div className="btns">
             <button
               className="btn btn-cancel"
-              onClick={this.onCancel}>取消</button>
+              onClick={this.onCancel}>{TEXT.CANCEL}</button>
             <button
               className="btn btn-ok"
               onClick={this.onOk}
-            >确定</button>
+            >{TEXT.OK}</button>
           </div>
         </div>
       </div>

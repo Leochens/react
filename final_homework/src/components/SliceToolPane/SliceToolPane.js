@@ -4,6 +4,8 @@ import AudioBar from '../AudioBar/AudioBar';
 import Images from '../../contants/Images';
 import { timeStringToSeconds, getFormatTime } from '../../tools';
 import Toast from '../Toast/Toast';
+import * as TEXT from '../../contants/Text';
+
 export default class SliceToolPane extends Component {
   state = {
     timeString: '00:00 / 00:00',
@@ -32,17 +34,17 @@ export default class SliceToolPane extends Component {
   setEmt = () => {
     const { timeString } = this.state;
     if (!this.state.hasSetBmt) {
-      Toast.info('请先标记起点');
+      Toast.info(TEXT.PLEASE_MARK_START_FIRST);
       return;
     }
     if (this.state.hasSetEmt) {
-      Toast.info("请先点击清除");
+      Toast.info(TEXT.PLEASE_CLEAR_SLICER_FIRST);
       return;
     }
 
     const curSenconds = timeStringToSeconds(timeString.split('/')[0]);
     if (curSenconds - this.state.bmt <= 10) {
-      Toast.info('间隔不能小于10秒');
+      Toast.info(TEXT.DURATION_ERROR);
       return;
     }
     this.setState({
@@ -53,7 +55,7 @@ export default class SliceToolPane extends Component {
   }
   setBmt = () => {
     if (this.state.hasSetBmt) {
-      Toast.info("请先点击清除");
+      Toast.info(TEXT.PLEASE_CLEAR_SLICER_FIRST);
       return;
     }
     const { timeString } = this.state;
@@ -65,7 +67,7 @@ export default class SliceToolPane extends Component {
   }
   clearSlice = () => {
     if (!this.state.hasSetBmt && !this.state.hasSetEmt) {
-      Toast.info("你还没有选择起点和终点！");
+      Toast.info(TEXT.CLEAR_WITHOUT_BEGIN_AND_START);
       return;
     }
     const { music: { id, du }, ToolActions } = this.props;
@@ -105,7 +107,7 @@ export default class SliceToolPane extends Component {
           <img src={hasSetBmt
             ? Images.btnCutMusicStart
             : Images.btnCutMusicStartAc} alt="" />
-          <div className="descript">标记起点</div>
+          <div className="descript">{TEXT.MARK_SLICE_START}</div>
           <div className="time">{getFormatTime(this.state.bmt)}</div>
         </span>
         <span
@@ -115,7 +117,7 @@ export default class SliceToolPane extends Component {
           <img src={(hasSetBmt || hasSetEmt)
             ? Images.btnClearAc
             : Images.btnClear} alt="" />
-          <div className="descript">清除</div>
+          <div className="descript">{TEXT.CLEAR_SLICER}</div>
           <div className="time">&nbsp;</div>
         </span>
         <span
@@ -125,7 +127,7 @@ export default class SliceToolPane extends Component {
           <img src={hasSetEmt
             ? Images.btnCutMusicFinish
             : Images.btnCutMusicFinishAc} alt="" />
-          <div className="descript">标记终点</div>
+          <div className="descript">{TEXT.MARK_SLICE_END}</div>
           <div className="time">{getFormatTime(this.state.emt)}</div>
         </span>
       </div>
@@ -154,7 +156,9 @@ export default class SliceToolPane extends Component {
         <span
           className="slice-pane-ok"
           onClick={this.onClose}
-        >确认</span>
+        >
+          {TEXT.OK}
+        </span>
 
       </div >
     );

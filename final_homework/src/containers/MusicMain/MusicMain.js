@@ -9,6 +9,7 @@ import MusicList from '../../components/MusicList/MusicList';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import Images from '../../contants/Images';
 import ToolPane from '../../components/ToolPena/ToolPena';
+import * as TEXT from '../../contants/Text';
 
 
 class MusicMain extends Component {
@@ -17,35 +18,35 @@ class MusicMain extends Component {
     const { ui, UiActions } = this.props;
     return [
       {
-        title: '播放',
+        title: TEXT.PLAY_MUSIC,
         icon: Images.btnNewPlay,
         iconAc: Images.btnNewPlayAc,
         isActive: ui.play,
         action: () => UiActions.actionSetCurrentTool('play')
       },
       {
-        title: '重命名',
+        title: TEXT.RENAME_MUSIC,
         icon: Images.btnRename,
         iconAc: Images.btnRenameAc,
         isActive: ui.rename,
         action: () => UiActions.actionSetCurrentTool('rename')
       },
       {
-        title: '选取片段',
+        title: TEXT.SLICE_MUSIC,
         icon: Images.btnCut,
         iconAc: Images.btnCutAc,
         isActive: ui.slice,
         action: () => UiActions.actionSetCurrentTool('slice')
       },
       {
-        title: '送给朋友',
+        title: TEXT.SHARE_MUSIC,
         icon: Images.btnShare,
         iconAc: Images.btnShareAc,
         isActive: ui.share,
         action: () => UiActions.actionSetCurrentTool('share')
       },
       {
-        title: '删除',
+        title: TEXT.DELETE_MUSIC,
         icon: Images.btnDelete,
         iconAc: Images.btnDeleteAc,
         isActive: ui.delete,
@@ -72,14 +73,14 @@ class MusicMain extends Component {
           isMultipleSelect={ui.isMultipleSelect}
         />
         <MusicList
-          title={"我的音乐"}
+          title={TEXT.MY_MUSIC}
           musics={myMusics}
           SelectActions={SelectActions}
           UiActions={UiActions}
           ui={ui}
         />
         <MusicList
-          title={"推荐音乐"}
+          title={TEXT.RECOMMENT_MUSIC}
           musics={recommendMusics}
           SelectActions={SelectActions}
           UiActions={UiActions}

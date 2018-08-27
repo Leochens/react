@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SelectBar.less';
 import SelectBox from '../SelectBox/SelectBox';
-
+import * as TEXT from '../../contants/Text';
 export default class SelectBar extends Component {
   state = {
     currentCheckedId: 0
@@ -23,12 +23,12 @@ export default class SelectBar extends Component {
     } = this.props;
     const data = [
       {
-        text: '单选',
+        text: TEXT.SINGLE_SELECT,
         action: actionChangeToSingleSelect,
         checked: !isMultipleSelect
       },
       {
-        text: '多选',
+        text: TEXT.MULTIPLE_SELECT,
         action: actionChangeToMultipleSelect,
         checked: isMultipleSelect
       }
