@@ -103,25 +103,24 @@ const deleteMusic = state => {
   const isMultipleSelect = state.get('isMultipleSelect');
   const sId = state.get('currentSingleSelectedId');
   let mIds = state.get('currentMultipleSelectedMusicIds');
-  let flag = true; // 判断是否把当前单选置0
+  let flag = true; 
   let newState = state;
 
   if (isMultipleSelect) { // 多选
-    if (mIds.has(sId)) {
-      flag = false; // 多选删除中包含当前的单选 单选要置零
+    if (mIds.toJS().includes(sId)) {
+      flag = false; 
     }
+    mIds.clear();
   } else { // 单选
     mIds = mIds.delete(mIds.indexOf(sId));
-    flag = false; // 删除当前单选 单选要置0
+    flag = false; 
   }
 
-  if (!flag || !mIds.size) {
-    newState = newState.set('toolState', disabled);
-  }
 
   return newState
     .set('currentMultipleSelectedMusicIds', isMultipleSelect ? Immutable.fromJS([]) : mIds)
-    .set('currentSingleSelectedId', flag ? sId : 0);
+    .set('currentSingleSelectedId', flag ? sId : 0)
+    .setIn(['toolState','delete'],false)
 };
 
 const ui = createReducer(initState, {

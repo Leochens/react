@@ -57,12 +57,15 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1"
+    "eslint-plugin-react": "^7.11.1",
+    "gh-pages": "^1.2.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "predeploy": "npm run build",
+      "deploy": "gh-pages -d build"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -105,5 +108,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "homepage": "./"
 }
