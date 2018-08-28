@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 
 const getToolPaneState = (musics, id) => {
   const _curMusic = musics.get(`${id}`);
-  
+
   if (!_curMusic) {
     return {
       play: false,
@@ -44,7 +44,9 @@ const crossReducer = (state, action) => {
 
     // 切换到单选
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
-      return state.setIn(['ui', 'toolState'], getToolPaneState(musics, sId));
+      return state
+        .setIn(['ui', 'toolState'], getToolPaneState(musics, sId))
+        .set('audio', musics.get(`${sId}`));
     }
 
     // 切换到多选
