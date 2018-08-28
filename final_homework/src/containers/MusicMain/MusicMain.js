@@ -16,41 +16,41 @@ class MusicMain extends Component {
   state = {};
 
   getTools = () => {
-    const { ui, UiActions } = this.props;
+    const { ui:{toolState}, UiActions } = this.props;
     return [
       {
         title: TEXT.PLAY_MUSIC,
         icon: Images.btnNewPlay,
         iconAc: Images.btnNewPlayAc,
-        isActive: ui.play,
+        isActive: toolState.play,
         action: () => UiActions.actionSetCurrentTool('play')
       },
       {
         title: TEXT.RENAME_MUSIC,
         icon: Images.btnRename,
         iconAc: Images.btnRenameAc,
-        isActive: ui.rename,
+        isActive: toolState.rename,
         action: () => UiActions.actionSetCurrentTool('rename')
       },
       {
         title: TEXT.SLICE_MUSIC,
         icon: Images.btnCut,
         iconAc: Images.btnCutAc,
-        isActive: ui.slice,
+        isActive: toolState.slice,
         action: () => UiActions.actionSetCurrentTool('slice')
       },
       {
         title: TEXT.SHARE_MUSIC,
         icon: Images.btnShare,
         iconAc: Images.btnShareAc,
-        isActive: ui.share,
+        isActive: toolState.share,
         action: () => UiActions.actionSetCurrentTool('share')
       },
       {
         title: TEXT.DELETE_MUSIC,
         icon: Images.btnDelete,
         iconAc: Images.btnDeleteAc,
-        isActive: ui.delete,
+        isActive: toolState.delete,
         action: () => UiActions.actionSetCurrentTool('delete')
       }
     ];

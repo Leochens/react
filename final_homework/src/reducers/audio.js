@@ -20,7 +20,7 @@ const audio = (state = initState, action) => {
       if (newName.indexOf('.mp3') === -1) {
         newName += '.mp3';
       }
-      return state.set('name', newName).toJS();
+      return state.set('name', newName);
     }
 
     case ActionTypes.CLEAR_SLICE_MUSIC: {

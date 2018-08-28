@@ -1,8 +1,9 @@
 import * as ActionTypes from '../contants/ActionTypes';
+import Immutable from 'immutable';
 
 const getToolPaneState = (musics, id) => {
-  const curMusic = musics[id];
-  if (!musics[id]) {
+  const curMusic = musics.get(`${id}`).toJS();
+  if (!curMusic) {
     return {
       play: false,
       rename: false,
@@ -21,54 +22,29 @@ const getToolPaneState = (musics, id) => {
 };
 
 const crossReducer = (state, action) => {
-  const _state = state.toJS(); 
-  const {
-    musicManage: {
-      recommendMusicIds: rIds
-    },
-    ui: {
-      currentMultipleSelectedMusicIds: mIds,
-      currentSingleSelectedId: sId
-    },
-    entities: {
-      musics
-    }
-  } = _state;
+  const rIds = state.getIn(['musicManage', 'recommendMusicIds']);
+  const mIds = state.getIn(['ui', 'currentMultipleSelectedMusicIds']);
+  const sId = state.getIn(['ui', 'currentSingleSelectedId']);
+  const musics = state.getIn(['entities', 'musics']);
+  const ui = state.get('ui');
   switch (action.type) {
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
-      const ui = { ...state.ui };
       // 一个都没选 不能删除 或者是 当前没有单选选中的 也不能删除
-      ui.delete = !!mIds.length;
+      // ui.delete = !!mIds.size;
       // 检测是否有推荐音乐 有的话 就不能显示删除
-      for (let i = 0; i < mIds.length; i++) {
-        if (rIds.includes(mIds[i])) {
-          ui.delete = false;
-          break;
+      for (let i = 0; i < mIds.size; i++) {
+        if (rIds.toJS().includes(mIds.get(i))) {
+          return state.setIn(['ui', 'toolState', 'delete'], false)
         }
       }
-      return {
-        ...state,
-        ui
-      };
+      return state.setIn(['ui', 'toolState', 'delete'], !!mIds.size)
     }
     case ActionTypes.CHANGE_TO_SINGLE_SELECT: {
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          ...(getToolPaneState(musics, sId))
-        }
-      };
+      return state.setIn(['ui', 'toolState'], Immutable.fromJS(getToolPaneState(musics, sId)));
     }
     case ActionTypes.CHANGE_TO_MULTIPLE_SELECT: {
-      if (rIds.includes(sId)) {
-        return {
-          ...state,
-          ui: {
-            ...state.ui,
-            delete: false
-          }
-        };
+      if (rIds.toJS().includes(sId)) {
+        return state.setIn(['ui', 'toolState', 'delete'], false)
       }
       return state;
     }
