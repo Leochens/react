@@ -14,24 +14,30 @@ import * as TEXT from '../../contants/Text';
 
 class AppMain extends Component {
   state = {};
+
   componentDidMount() {
     const { ServerActions } = this.props;
-    ServerActions.actionLoginAndFetchMusic(103)
+    ServerActions.actionLoginAndFetchMusic(103);
   }
+
   render() {
     return (
       <div className="main">
         <Navigator ui={this.props.ui}>{this.props.user.nick}</Navigator>
         <Tabs defaultActiveId={1}>
-          <TabItem id={1} title={TEXT.MY_MUSIC}
+          <TabItem
+            id={1}
+            title={TEXT.MY_MUSIC}
             icon={{
               active: Images.musicAc,
               normal: Images.music
             }}
           >
             <MusicMain />
-          </TabItem  >
-          <TabItem id={2} title={TEXT.SEARCH_MUSIC}
+          </TabItem>
+          <TabItem
+            id={2}
+            title={TEXT.SEARCH_MUSIC}
             icon={{
               active: Images.searchAc,
               normal: Images.search
@@ -39,7 +45,9 @@ class AppMain extends Component {
           >
             <SearchMusic />
           </TabItem>
-          <TabItem id={3} title={TEXT.UPLOAD_MUSIC}
+          <TabItem
+            id={3}
+            title={TEXT.UPLOAD_MUSIC}
             icon={{
               active: Images.uploadAc,
               normal: Images.upload
@@ -47,21 +55,21 @@ class AppMain extends Component {
           >
             <UploadMusic />
           </TabItem>
-        </Tabs >
+        </Tabs>
 
-      </div >
+      </div>
     );
   }
 }
 const mapStateToProps = state => {
   return {
-    user: state.login,
-    ui: state.ui
-  }
+    user: state.get('login').toJS(),
+    ui: state.get('ui').toJS()
+  };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    ServerActions: bindActionCreators(Actions.server, dispatch),
+    ServerActions: bindActionCreators(Actions.server, dispatch)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AppMain);

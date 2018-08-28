@@ -14,44 +14,45 @@ import * as TEXT from '../../contants/Text';
 
 class MusicMain extends Component {
   state = {};
+
   getTools = () => {
-    const { ui, UiActions } = this.props;
+    const { ui: { toolState }, UiActions } = this.props;
     return [
       {
         title: TEXT.PLAY_MUSIC,
         icon: Images.btnNewPlay,
         iconAc: Images.btnNewPlayAc,
-        isActive: ui.play,
+        isActive: toolState.play,
         action: () => UiActions.actionSetCurrentTool('play')
       },
       {
         title: TEXT.RENAME_MUSIC,
         icon: Images.btnRename,
         iconAc: Images.btnRenameAc,
-        isActive: ui.rename,
+        isActive: toolState.rename,
         action: () => UiActions.actionSetCurrentTool('rename')
       },
       {
         title: TEXT.SLICE_MUSIC,
         icon: Images.btnCut,
         iconAc: Images.btnCutAc,
-        isActive: ui.slice,
+        isActive: toolState.slice,
         action: () => UiActions.actionSetCurrentTool('slice')
       },
       {
         title: TEXT.SHARE_MUSIC,
         icon: Images.btnShare,
         iconAc: Images.btnShareAc,
-        isActive: ui.share,
+        isActive: toolState.share,
         action: () => UiActions.actionSetCurrentTool('share')
       },
       {
         title: TEXT.DELETE_MUSIC,
         icon: Images.btnDelete,
         iconAc: Images.btnDeleteAc,
-        isActive: ui.delete,
+        isActive: toolState.delete,
         action: () => UiActions.actionSetCurrentTool('delete')
-      },
+      }
     ];
   }
 
@@ -101,18 +102,20 @@ class MusicMain extends Component {
   }
 }
 const mapStateToProps = state => {
-  const {
-    musicManage: {
-      myMusicIds,
-      recommendMusicIds,
-    },
-    ui,
-    login: userData,
-    entities: {
-      musics
-    },
-    audio
-  } = state;
+  // const _state = state.toJS();
+  // const {
+  //   login: userData,
+  //   entities: {
+  //     musics
+  //   },
+  //   audio
+  // } = _state;
+  const myMusicIds = state.getIn(['musicManage', 'myMusicIds']).toJS();
+  const recommendMusicIds = state.getIn(['musicManage', 'recommendMusicIds']).toJS();
+  const ui = state.get('ui').toJS();
+  const userData = state.get('login').toJS();
+  const musics = state.getIn(['entities', 'musics']).toJS();
+  const audio = state.get('audio').toJS();
 
   const myMusics = myMusicIds.map(id => musics[id]);
   const recommendMusics = recommendMusicIds.map(id => musics[id]);
@@ -129,7 +132,7 @@ const mapDispatchToProps = dispatch => {
     ServerActions: bindActionCreators(Actions.server, dispatch),
     SelectActions: bindActionCreators(Actions.select, dispatch),
     UiActions: bindActionCreators(Actions.ui, dispatch),
-    ToolActions: bindActionCreators(Actions.tools, dispatch),
+    ToolActions: bindActionCreators(Actions.tools, dispatch)
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MusicMain);

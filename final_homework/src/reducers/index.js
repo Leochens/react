@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import crossReducer from './cross';
 import entities from './entities';
 import musicManage from './musicManage';
@@ -18,7 +18,7 @@ const RootReducer = (state, action) => {
   const tempState = combineReducer(state, action);
   const finalState = crossReducer(tempState, action);
   return finalState;
-}
+};
 
 
 export default RootReducer;

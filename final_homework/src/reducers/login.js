@@ -1,10 +1,11 @@
 import * as ActionTypes from '../contants/ActionTypes';
+import Immutable from 'immutable';
 
-
-const login = (state = {}, action) => {
+const initState = Immutable.fromJS({});
+const login = (state = initState, action) => {
   switch (action.type) {
     case `${ActionTypes.USER_LOGIN}_SUC`: {
-      return action.response;
+      return Immutable.fromJS(action.response);
     }
     default: return state;
   }
