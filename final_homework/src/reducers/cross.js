@@ -21,6 +21,7 @@ const getToolPaneState = (musics, id) => {
 };
 
 const crossReducer = (state, action) => {
+  const _state = state.toJS(); 
   const {
     musicManage: {
       recommendMusicIds: rIds
@@ -32,7 +33,7 @@ const crossReducer = (state, action) => {
     entities: {
       musics
     }
-  } = state;
+  } = _state;
   switch (action.type) {
     case ActionTypes.SET_MULTIPLE_SELECTED_MUSIC_IDS: {
       const ui = { ...state.ui };

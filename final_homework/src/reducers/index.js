@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import crossReducer from './cross';
 import entities from './entities';
 import musicManage from './musicManage';

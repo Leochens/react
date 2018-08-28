@@ -62,9 +62,10 @@ class AppMain extends Component {
   }
 }
 const mapStateToProps = state => {
+  const _state = state.toJS();
   return {
-    user: state.login,
-    ui: state.ui
+    user: _state.login,
+    ui: _state.ui
   };
 };
 const mapDispatchToProps = dispatch => {

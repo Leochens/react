@@ -102,6 +102,7 @@ class MusicMain extends Component {
   }
 }
 const mapStateToProps = state => {
+  const _state = state.toJS();
   const {
     musicManage: {
       myMusicIds,
@@ -113,7 +114,7 @@ const mapStateToProps = state => {
       musics
     },
     audio
-  } = state;
+  } = _state;
 
   const myMusics = myMusicIds.map(id => musics[id]);
   const recommendMusics = recommendMusicIds.map(id => musics[id]);

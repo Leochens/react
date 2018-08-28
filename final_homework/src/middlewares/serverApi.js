@@ -38,7 +38,7 @@ export default store => next => action => {
     afterLogin,
     IS_LOGIN
   } = action.SERVER_API;
-  const { token } = store.getState().login;
+  const { token } = store.getState().toJS().login;
 
   if (afterLogin) {
     if (!token) {
