@@ -103,7 +103,7 @@ const deleteMusic = state => {
   const isMultipleSelect = state.get('isMultipleSelect');
   const sId = state.get('currentSingleSelectedId');
   let mIds = state.get('currentMultipleSelectedMusicIds');
-  let flag = true; 
+  let flag = true;
   let newState = state;
 
   if (isMultipleSelect) { // 多选
