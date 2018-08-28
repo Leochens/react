@@ -1,0 +1,28 @@
+.comment-list-item{
+    font-weight: 500;
+    overflow: hidden;
+    min-height: 60px;
+    padding: 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+}
+.comment-list{
+    height: 405px;
+
+    overflow-y: scroll;
+}
+.comment-time{
+    float: right;
+}
+.reject-reason{
+    color: red;
+}
+.comment-content{
+    margin-top: 10px;
+    font-weight: 500;
+    overflow: hidden;
+}
+.reject-comment{
+    color: red;
+    float: right;
+}

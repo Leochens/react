@@ -1,0 +1,21 @@
+.studentInfo{
+    height: 50px;
+    font-size: 12px;
+    overflow: hidden;
+    padding: 0 10px;
+    /* background-color: #ddd; */
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.homework-info{
+    display: inline-block;
+    flex: 1;
+}
+.excellent{
+    
+}

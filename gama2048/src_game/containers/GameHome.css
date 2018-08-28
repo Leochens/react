@@ -1,0 +1,22 @@
+
+.game-wraper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFCCB8;
+    display: flex;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 500px) {
+    .game-wraper {
+        background-color:lightblue;
+    }
+    .game-main{
+        width: 300px;
+
+    }
+}

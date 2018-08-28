@@ -1,0 +1,19 @@
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 278px;
+    /* line-height: 160px; */
+    /* background: #ddd; */
+    overflow: hidden;
+  }
+  
+.photo-wraper{
+    height: 278px;
+    }
+.photo-item{ 
+    height: 100%;
+    margin: 0 auto;
+}
+.homework-photos{
+    margin: 15px;
+    text-align: center;
+}

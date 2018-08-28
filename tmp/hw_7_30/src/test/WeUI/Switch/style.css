@@ -1,0 +1,27 @@
+.switch-box{
+    margin: 15px;
+    position: relative;
+    height: 32px;
+    width: 52px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    transition: background-color .2s ease-in;
+}
+.switch-ball{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    transition: left .2s ease-in;
+}
+.checked{
+    background-color: #32CD32;
+}
+.switch-box.checked .switch-ball{
+    left: 21px;
+}

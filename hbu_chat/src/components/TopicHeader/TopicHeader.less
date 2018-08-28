@@ -1,0 +1,43 @@
+@msg-item-padding: 0 15px;
+
+
+.topic-header{ 
+   background-color: #fff;
+    font-size: 15px;
+    height: .93333rem;
+    padding: 5px 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    padding: @msg-item-padding;
+    .user-photo{
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        background-color: #ccc;
+        border-radius: 4px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .header-content{
+        display: inline-block;
+        flex: 1;
+        padding: 0 8px;
+        color: #999;
+        .user-nick{
+            color: #000;
+        }
+        .public-time{
+            margin-top: 4px;;
+            font-size: 13px;
+        }
+    }
+    .more{
+        width: 32px;
+        height: 32px;
+        color: #000;
+        border-radius: 4px;
+    }
+}

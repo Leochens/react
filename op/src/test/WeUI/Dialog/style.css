@@ -1,0 +1,124 @@
+.show-dialog{
+    opacity: 1;
+    transform: translateY(0);
+}
+.hide-dialog{
+    transform: translateY(100%);
+    opacity: 0;
+}
+.dialog-mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .6);
+    transition: opacity .3s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+
+}
+.ios-dialog-content,
+.android-dialog-content{
+    width: 300px;
+    margin: auto;
+    border-radius: 3px;
+    background-color: #fff;
+
+    font-size: 17px;
+}
+.ios-dialog-title{
+    font-weight: 600;
+    font-size: 18px;
+    padding: 1.3em 1.6em 0.5em;
+    background-color: #fff;
+    text-align: center
+}
+.android-dialog-title{
+    font-weight: 600;
+    font-size: 18px;
+    padding: 1.3em 1.6em 0.5em;
+    background-color: #fff;
+}
+.ios-dialog-content .render-body{
+    color: #808080;
+    padding: 0.25em 1.6em 2em;
+    font-size: 17px;
+    text-align: left;
+}
+.android-dialog-content .render-body{
+
+    color: #808080;
+    padding: 0.25em 1.6em 2em;
+    font-size: 17px;
+    text-align: left;
+}
+.ios-dialog-btns {
+    display: flex;
+    width: 100%;
+}   
+.ios-dialog-btns .dialog-btn-cancel,
+.ios-dialog-btns .dialog-btn-ok{
+    background-color: #fff;
+    flex: 1;
+    border: none;
+    font-size: 18px;
+    line-height: 48px;
+    outline: none;
+    font-size: 18px;
+
+}
+.ios-dialog-btns .dialog-btn-ok{
+    background-color: #fff;
+    color: #32CD32;
+    border-right:1px solid #ddd;
+}
+
+
+.android-dialog-btns{
+    display: block;
+    text-align: right;
+    line-height: 42px;
+    font-size: 16px;
+    padding: 0 1.6em 0.7em;
+}
+
+.android-dialog-btns .dialog-btn-ok,
+.android-dialog-btns .dialog-btn-cancel{
+    background-color: #fff;
+    border: none;
+    outline: none;
+}
+.android-dialog-btns .dialog-btn-ok{
+    color: #32CD32;
+}
+.ios-dialog-content .divider-left,
+.ios-dialog-content .divider-top ,
+.ios-dialog-content .divider-right{
+    position: relative;
+}
+.ios-dialog-content .divider-top::after,
+.ios-dialog-content .divider-left::after,
+.ios-dialog-content .divider-right::after{ 
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #D5D5D6;
+    color: #D5D5D6;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+.ios-dialog-content .divider-left::after{
+    border-left: 1px solid #D5D5D6;
+}
+.ios-dialog-content .divider-right::after{
+    border-right: 1px solid #D5D5D6;
+
+}

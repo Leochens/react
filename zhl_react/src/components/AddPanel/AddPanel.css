@@ -1,0 +1,61 @@
+.panel{
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 101;
+
+}
+
+.add-panel-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
+    margin-top: -200px;
+    background-color: #fff;
+    border-radius: 6px;
+
+}
+.panel-input{
+  margin: 10px 10px;
+  width: 280px;
+  height: 60px;
+  border: 1px solid #ddd;
+  padding: 0;
+  border-radius: 6px;
+}
+.panel-input :focus{
+  border: 1px solid #FF4500;
+}
+
+  .btn{
+    border: 0;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    background-color: #eee;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .btn-close{
+    position: absolute;
+    bottom: 20%;
+    margin-right: 50%;
+    right: -100px;
+    width: 200px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: #eee;
+    color: #000;
+  }
+  .panel-btn{
+    width: 80%;
+    height: 20%;
+    margin-top: 5%;
+    margin-left: 10%;
+    color: #303030;
+  }
