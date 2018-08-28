@@ -116,11 +116,11 @@ const deleteMusic = state => {
     flag = false; 
   }
 
-
+  // 删除完都置灰
   return newState
     .set('currentMultipleSelectedMusicIds', isMultipleSelect ? Immutable.fromJS([]) : mIds)
     .set('currentSingleSelectedId', flag ? sId : 0)
-    .setIn(['toolState','delete'],false)
+    .set('toolState',disabled)
 };
 
 const ui = createReducer(initState, {
