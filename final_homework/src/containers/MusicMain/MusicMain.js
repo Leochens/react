@@ -16,7 +16,7 @@ class MusicMain extends Component {
   state = {};
 
   getTools = () => {
-    const { ui:{toolState}, UiActions } = this.props;
+    const { ui: { toolState }, UiActions } = this.props;
     return [
       {
         title: TEXT.PLAY_MUSIC,
@@ -102,19 +102,20 @@ class MusicMain extends Component {
   }
 }
 const mapStateToProps = state => {
-  const _state = state.toJS();
-  const {
-    musicManage: {
-      myMusicIds,
-      recommendMusicIds
-    },
-    ui,
-    login: userData,
-    entities: {
-      musics
-    },
-    audio
-  } = _state;
+  // const _state = state.toJS();
+  // const {
+  //   login: userData,
+  //   entities: {
+  //     musics
+  //   },
+  //   audio
+  // } = _state;
+  const myMusicIds = state.getIn(['musicManage', 'myMusicIds']).toJS();
+  const recommendMusicIds = state.getIn(['musicManage', 'recommendMusicIds']).toJS();
+  const ui = state.get('ui').toJS();
+  const userData = state.get('login').toJS();
+  const musics = state.getIn(['entities', 'musics']).toJS();
+  const audio = state.get('audio').toJS();
 
   const myMusics = myMusicIds.map(id => musics[id]);
   const recommendMusics = recommendMusicIds.map(id => musics[id]);

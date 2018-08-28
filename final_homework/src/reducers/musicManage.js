@@ -10,12 +10,14 @@ const initState = Immutable.fromJS({
 
 const fetchMyMusicList = (state, action) => {
   const { result: myMusicIds } = action.response;
-  return state.set('myMusicIds', Immutable.fromJS(myMusicIds));
+  return state
+    .set('myMusicIds', Immutable.fromJS(myMusicIds));
 };
 
 const fetchRecommendList = (state, action) => {
   const { result: recommendMusicIds } = action.response;
-  return state.set('recommendMusicIds', Immutable.fromJS(recommendMusicIds));
+  return state
+    .set('recommendMusicIds', Immutable.fromJS(recommendMusicIds));
 };
 
 const deleteMusic = (state, action) => {

@@ -16,10 +16,19 @@ export default class Modal extends Component {
     onInputDone: () => { },
     defaultValue: '',
   }
+  componentWillMount(){
+    const { defaultValue } = this.props;
+    if (this.props.type === 'input') {
+      this.setState({
+        inputValue: defaultValue
+      })
+    }
+  }
   componentWillReceiveProps(nextProps) {
+    const { defaultValue } = nextProps;
     if (nextProps.type === 'input') {
       this.setState({
-        inputValue: ''
+        inputValue: defaultValue
       })
     }
   }
@@ -42,15 +51,11 @@ export default class Modal extends Component {
 
   onOk = (e) => {
     e.stopPropagation();
-    let inputValue = this.state.inputValue;
-    const { onOk, onCancel, type, onInputDone,defaultValue } = this.props;
+    const { inputValue } = this.state;
+    const { onOk, onCancel, type, onInputDone } = this.props;
     if (type === 'message') {
       onOk && onOk();
     } else if (type === 'input') {
-      // 没有新值就置默认的值
-      if(!inputValue){
-        inputValue = defaultValue
-      }
       onInputDone && onInputDone(inputValue);
     }
 

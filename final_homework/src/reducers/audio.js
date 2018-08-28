@@ -10,7 +10,7 @@ const audio = (state = initState, action) => {
       const { music } = action;
       return Immutable.fromJS(music);
     }
-    
+
     case ActionTypes.RENAME_MUSIC: {
       let newName = action.newName;
       if (newName === '') {
@@ -24,12 +24,16 @@ const audio = (state = initState, action) => {
     }
 
     case ActionTypes.CLEAR_SLICE_MUSIC: {
-      return state.set('emt', 0).set('bmt', 0);
+      return state
+        .set('emt', 0)
+        .set('bmt', 0);
     }
 
     case ActionTypes.SLICE_MUSIC: {
       const { startPos, endPos } = action;
-      return state.set('emt', endPos).set('bmt', startPos);
+      return state
+        .set('emt', endPos)
+        .set('bmt', startPos);
     }
     default: return state;
   }
