@@ -55,7 +55,7 @@ const setMultipleSelectedMusicIds = (state, action) => {
   }
   return state
     .set('currentMultipleSelectedMusicIds', mIds)
-    .set('delete', !!mIds.size)
+    .setIn(['toolState','delete'], !!mIds.size)
 };
 
 // 设置单选 
@@ -115,9 +115,10 @@ const deleteMusic = state => {
     flag = false; // 删除当前单选 单选要置0
   }
 
-  if (!flag) {
+  if (!flag || !mIds.size) {
     newState = newState.set('toolState', disabled);
   }
+
   return newState
     .set('currentMultipleSelectedMusicIds', isMultipleSelect ? Immutable.fromJS([]) : mIds)
     .set('currentSingleSelectedId', flag ? sId : 0);
