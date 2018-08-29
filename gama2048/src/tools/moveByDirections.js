@@ -1,6 +1,4 @@
 import transformPosToNum from './transformPosToNum';
-
-
 const moveLeft = oldMap => {
   const newMap = [...oldMap];
   let willGenerateNew = 0;

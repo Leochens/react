@@ -31,6 +31,23 @@ export default class AudioBar extends Component {
     loop: true // 是否循环播放
   }
 
+  componentDidMount() {
+    const { autoplay } = this.props;
+    if (autoplay) this.playMusic();
+    this.setState({
+      isLoading: true
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.end !== nextProps.end) {
+      this.setState({
+        endTime: nextProps.end
+      });
+    }
+  }
+
+
   // 暂停
   pauseMusic = () => {
     const { audio } = this;
@@ -104,13 +121,6 @@ export default class AudioBar extends Component {
     });
   }
 
-  componentDidMount() {
-    const { autoplay } = this.props;
-    if (autoplay) this.playMusic();
-    this.setState({
-      isLoading: true
-    });
-  }
 
   // 初始化 包括拿到音乐时长 和确定结束地点
   handleAudioCanPlay = () => {
@@ -124,13 +134,6 @@ export default class AudioBar extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.end !== nextProps.end) {
-      this.setState({
-        endTime: nextProps.end
-      });
-    }
-  }
 
   // 等待音频加载结束后 能够获得音频时间 渲染slider
   renderSlider = () => {
