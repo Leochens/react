@@ -5,9 +5,10 @@ export default class TabItem extends Component {
   state = {};
 
   render() {
+    const { children } = this.props;
     return (
       <div className="item">
-        {this.props.children}
+        {children}
       </div>
     );
   }

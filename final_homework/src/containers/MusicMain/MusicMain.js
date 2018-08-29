@@ -102,7 +102,6 @@ class MusicMain extends Component {
   }
 }
 const mapStateToProps = state => {
-
   const myMusicIds = state.getIn(['musicManage', 'myMusicIds']).toJS();
   const recommendMusicIds = state.getIn(['musicManage', 'recommendMusicIds']).toJS();
   const ui = state.get('ui').toJS();

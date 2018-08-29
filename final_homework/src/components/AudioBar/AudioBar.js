@@ -8,10 +8,10 @@ import { secondToMinutes, addPreZero } from '../../tools';
 const getTimeString = (cur, end) => {
   const curSecAndMin = secondToMinutes(cur).split(':');
   const endSecAndMin = secondToMinutes(end).split(':');
-  const _cur = addPreZero(curSecAndMin[0]) + ':' + addPreZero(curSecAndMin[1]);
-  const _end = addPreZero(endSecAndMin[0]) + ':' + addPreZero(endSecAndMin[1]);
-  return `${_cur} / ${_end}`
-}
+  const _cur = `${addPreZero(curSecAndMin[0])}:${addPreZero(curSecAndMin[1])}`;
+  const _end = `${addPreZero(endSecAndMin[0])}:${addPreZero(endSecAndMin[1])}`;
+  return `${_cur} / ${_end}`;
+};
 
 export default class AudioBar extends Component {
   state = {
@@ -19,13 +19,13 @@ export default class AudioBar extends Component {
     curentSeconds: 0,
     isPause: true,
     isLoading: false,
-    endTime: 0,
+    endTime: 0
   };
 
   static defaultProps = {
     isAudioBarActive: true, // 是否显示音乐播放器
-    autoplay: false,  // 是否自动播放
-    src: '',  // 音频源
+    autoplay: false, // 是否自动播放
+    src: '', // 音频源
     begin: 0, // 开始时间
     end: 0, // 结束时间
     loop: true // 是否循环播放
@@ -37,25 +37,27 @@ export default class AudioBar extends Component {
     if (!audio) return;
     audio.pause();
     this.setState({
-      isPause: true,
+      isPause: true
     });
   }
+
   // 播放
   playMusic = () => {
     const { audio } = this;
     const { curentSeconds, duration } = this.state;
     const { begin, end } = this.props;
     if (!audio || this.isLoading) return;
-    audio.currentTime = curentSeconds ? curentSeconds : begin;
+    audio.currentTime = curentSeconds || begin;
     audio.play();
     this.setState({
-      curentSeconds: begin ? begin : curentSeconds,
-      endTime: end ? end : duration,
+      curentSeconds: begin || curentSeconds,
+      endTime: end || duration,
       duration: audio.duration,
       isPause: false,
       sliderIsDisabled: false
     });
   }
+
   // 切换暂停播放
   handelTogglePlay = () => {
     if (this.state.isPause) {
@@ -64,22 +66,23 @@ export default class AudioBar extends Component {
       this.pauseMusic();
     }
   }
+
   // 交给slider去回调的api 当slider进度改变 那么当前的播放时间也要改变
   setAudioPos = pos => {
     const { audio } = this;
-    const curTime = this.state.duration * (pos / 100).toFixed(2) * 1
+    const curTime = this.state.duration * (pos / 100).toFixed(2) * 1;
     audio.currentTime = curTime;
     this.setState({
       curentSeconds: curTime,
       isPause: false
     });
     if (audio.paused) {
-      audio.play()
+      audio.play();
     }
   }
 
   // 更新函数 回调父级的监听函数onChange
-  handleTimeUpdate = (e) => {
+  handleTimeUpdate = e => {
     const { onTimeChange, begin, loop } = this.props;
     const { endTime } = this.state;
     const duration = this.audio.duration;
@@ -89,9 +92,9 @@ export default class AudioBar extends Component {
         this.pauseMusic();
         return;
       }
-      e.target.currentTime = begin ? begin : 0;
+      e.target.currentTime = begin || 0;
       this.setState({
-        curentSeconds: begin ? begin : 0
+        curentSeconds: begin || 0
       });
     }
     const timeString = getTimeString(curTime, duration);
@@ -105,8 +108,8 @@ export default class AudioBar extends Component {
     const { autoplay } = this.props;
     if (autoplay) this.playMusic();
     this.setState({
-      isLoading: true,
-    })
+      isLoading: true
+    });
   }
 
   // 初始化 包括拿到音乐时长 和确定结束地点
@@ -116,16 +119,16 @@ export default class AudioBar extends Component {
     this.setState({
       isLoading: false,
       duration: this.audio.duration,
-      curentSeconds: begin ? begin : curentSeconds,
-      endTime: end ? end : this.audio.duration
-    })
+      curentSeconds: begin || curentSeconds,
+      endTime: end || this.audio.duration
+    });
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.end !== nextProps.end) {
       this.setState({
         endTime: nextProps.end
-      })
+      });
     }
   }
 
@@ -134,7 +137,7 @@ export default class AudioBar extends Component {
     const { begin, end } = this.props;
     const { isLoading, curentSeconds } = this.state;
     if (!this.audio || isLoading) {
-      return null
+      return null;
     }
     const duration = this.audio.duration;
 
