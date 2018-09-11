@@ -1,6 +1,6 @@
 const config = {
-  projectName: 'taro_empty_project',
-  date: '2018-8-21',
+  projectName: 'taro_test',
+  date: '2018-9-9',
   designWidth: 750,
   sourceRoot: 'src',
   outputRoot: 'dist',

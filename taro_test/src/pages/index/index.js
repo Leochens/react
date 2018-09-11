@@ -23,7 +23,13 @@ class Index extends Component {
   config = {
     navigationBarTitleText: '首页'
   }
-
+  constructor () {
+    super(...arguments)
+    this.state = {
+      title: '首页',
+      list: [1, 2, 3]
+    }
+  }
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
@@ -42,6 +48,11 @@ class Index extends Component {
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
         <View>{this.props.counter.num}</View>
         <View>Hello, World</View>
+        {this.state.list.map(item => {
+            return (
+              <View className='item'>{item}</View>
+            )
+          })}
       </View>
     )
   }

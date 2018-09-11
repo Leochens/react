@@ -1,19 +1,20 @@
-import axios from 'axios';
+import Taro from '@tarojs/taro'
+
 // import url from 'url'
 //sna
 const callServerApi = (url, param, normalizeFunc) => {
     return new Promise((resolve, reject) => {
-        axios({
+      Taro.request({
             method: "POST",
             // method:"GET",
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             url: url,
             data: param
-        }).then(res => {
-            console.log('网络请求结束的最原始数据',res);
-            const json = res.data.data;
-            if (res.data.ret === 1 ){
-                return resolve( normalizeFunc ? normalizeFunc(json) : json);
+        }).then(data => {
+            console.log('网络请求结束的最原始数据',data);
+            const json = data;
+            if (json.data.ret === 1 ){
+                return resolve( normalizeFunc ? normalizeFunc(json.data) : json.data);
             }
             return reject(res);
         }).catch(err => {

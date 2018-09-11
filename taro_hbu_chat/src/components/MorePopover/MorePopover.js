@@ -2,8 +2,6 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { Icon, Popover } from 'antd-mobile';
 import './MorePopover.less';
-const Item = Popover.Item;
-const myImg = src => <img src={`https://gw.alipayobjects.com/zos/rmsportal/${src}.svg`} className="am-icon am-icon-xs" alt="" />;
 
 export default class MorePopover extends Component {
 

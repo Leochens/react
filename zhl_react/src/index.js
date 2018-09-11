@@ -5,10 +5,11 @@ import ReactDOM from 'react-dom';
 import App from './container/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
-import {  } from 'react-router'
+import Test from './container/Test/Test';
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Test />
   </Provider>,
   document.getElementById('root')
 );

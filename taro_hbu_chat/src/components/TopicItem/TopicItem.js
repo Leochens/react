@@ -1,12 +1,13 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import './TopicItem.less';
+import './TopicItem.css';
 import TopicHeader from '../TopicHeader/TopicHeader';
 import TopicContent from '../TopicContent/TopicContent';
 import TopicComment from '../TopicComment/TopicComment';
 import TopicHits from '../TopicHits/TopicHits';
 import TopicTabs from '../TopicTabs/TopicTabs';
+
 export default class TopicItem extends Component {
     render() {
         const {

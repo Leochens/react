@@ -7,7 +7,6 @@ import Index from './pages/index'
 import configStore from './store'
 
 import './app.less'
-
 const store = configStore()
 
 class App extends Component {
@@ -23,15 +22,16 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount() {
+  }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentCatchError () {}
+  componentCatchError() { }
 
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <Index />

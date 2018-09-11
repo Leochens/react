@@ -7,8 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var todos = require('./routes/todos');
-
+var chats = require('./routes/chats');
 var app = express();
 
 // 设置views文件夹为存放视图文件的目录，即存放模板文件的地方
@@ -37,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 路由控制器
 app.use('/', index);
-app.use('/todos', todos);
+app.use('/chats', chats);
 
 // 捕获404错误，并转发到错误处理器
 app.use(function(req, res, next) {

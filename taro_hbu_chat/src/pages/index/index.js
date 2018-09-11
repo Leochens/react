@@ -13,76 +13,81 @@ import TopicItem from '../../components/TopicItem/TopicItem';
 
 
 class MessageList extends Component {
+  
+  componentDidMount() {
+    const { ServerActions } = this.props;
+    ServerActions.actionFetchTopics();
+  }
 
-    componentDidMount() {
-        const { ServerActions } = this.props;
-        ServerActions.actionFetchTopics();
-    }
-    renderTopicList = () => {
-        const { topicList } = this.props;
-        return topicList.map((item, id) => <TopicItem
-            key={id}
-            TopicActions={this.props.TopicActions}
-            data={item} />)
-    }
-    render() {
-        console.log('组装后数据：', this.props.topicList);
-        return (
-            <View className="msg-list">
-                {this.renderTopicList()}
+  render() {
+    console.log('组装后数据：', this.props.topicList);
+    const { topicList } = this.props;
+
+    return (
+      <View className="msg-list">
+        { topicList.map((item, id) =>
+            <View key={id}>
+              <TopicItem
+                key={id}
+                TopicActions={this.props.TopicActions}
+                data={item} />
             </View>
         )
-    }
+      }
+
+      </View>
+    )
+  }
 }
 const mapStateToProps = state => {
 
-    const {
-        topicList: topicIds,
-        entities: {
-            users,
-            comments,
-            topics
-        }
-    } = state;
-
-    const topicList = topicIds.map(id => {
-        const {
-            user_info: userId,
-            comments: commentIds,
-            hits: hitsUserIds
-        } = topics[id];
-        const commentList = commentIds.map(id => {
-            const {
-                commentator: commentatorId,
-                to: receiverId
-            } = comments[id];
-            return {
-                ...comments[id],
-                commentator: users[commentatorId],
-                to: users[receiverId]
-            }
-        })
-        const hitsUserList = hitsUserIds.map(userId => users[userId]);
-        return {
-            ...topics[id],
-            user_info: users[userId],
-            comments: commentList,
-            hits: hitsUserList
-        }
-    })
-    return {
-        topicList,
-        users
+  const {
+    topicList: topicIds,
+    entities: {
+      users,
+      comments,
+      topics
     }
+  } = state;
+
+  const topicList = topicIds.map(id => {
+    const {
+      user_info: userId,
+      comments: commentIds,
+      hits: hitsUserIds
+    } = topics[id];
+    const commentList = commentIds.map(id => {
+      const {
+        commentator: commentatorId,
+        to: receiverId
+      } = comments[id];
+      return {
+        ...comments[id],
+        commentator: users[commentatorId],
+        to: users[receiverId]
+      }
+    })
+    const hitsUserList = hitsUserIds.map(userId => users[userId]);
+    return {
+      ...topics[id],
+      user_info: users[userId],
+      comments: commentList,
+      hits: hitsUserList
+    }
+  })
+  return {
+    topicList,
+    users
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        ServerActions: bindActionCreators(Actions.ServerActions, dispatch),
-        TopicActions: bindActionCreators(Actions.TopicActions, dispatch),
-        UIActions: bindActionCreators(Actions.UIActions, dispatch ),
+  return {
+    ServerActions: bindActionCreators(Actions.ServerActions, dispatch),
+    TopicActions: bindActionCreators(Actions.TopicActions, dispatch),
+    UIActions: bindActionCreators(Actions.UIActions, dispatch),
 
-    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageList);

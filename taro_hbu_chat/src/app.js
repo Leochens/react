@@ -11,7 +11,6 @@ import './app.less'
  * 把组件的div变成View了 其他还没做
  */
 const store = configStore()
-
 class App extends Component {
   config = {
     pages: [

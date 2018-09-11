@@ -16,6 +16,7 @@ export default class Modal extends Component {
     onInputDone: () => { },
     defaultValue: '',
   }
+
   componentWillMount(){
     const { defaultValue } = this.props;
     if (this.props.type === 'input') {
@@ -24,6 +25,7 @@ export default class Modal extends Component {
       })
     }
   }
+
   componentWillReceiveProps(nextProps) {
     const { defaultValue } = nextProps;
     if (nextProps.type === 'input') {
@@ -32,6 +34,7 @@ export default class Modal extends Component {
       })
     }
   }
+
   onInputChane = (e) => {
     this.setState({
       inputValue: e.target.value
@@ -61,6 +64,7 @@ export default class Modal extends Component {
 
     onCancel && onCancel();
   }
+
   renderContent = () => {
     const { content, type, defaultValue, inputTip } = this.props;
     if (type === 'message') {
@@ -80,6 +84,7 @@ export default class Modal extends Component {
     }
     return null;
   }
+  
   render() {
 
     return (
